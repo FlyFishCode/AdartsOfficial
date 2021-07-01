@@ -2,15 +2,19 @@ import { useState, useEffect } from 'react';
 import { Button, Modal, Form, Input, message, Row, Col, Select, Radio, DatePicker } from 'antd';
 import { indexLoginHttp } from '@/api/index.ts'
 import { useTranslation } from 'react-i18next';
+import { countryListHttp } from '@/api'
 import './index.css'
 const LoginBox = (props) => {
   const { loginBoxEmit } = props;
   const [SMS, setSMS] = useState('1')
   const [day, setDay] = useState('')
   const [agree, setagree] = useState('')
-  const [phone, setPhone] = useState()
+  const [phone, setPhone] = useState('')
   const [gender, setGender] = useState('1')
+  const [country, setCountry] = useState()
+  const [language, setLanguage] = useState()
   const [userName, setUserName] = useState('')
+  const [countryList, setCountryList] = useState([])
   const [registerUserName, setRegisterUserName] = useState('')
   const [loginVisible, setloginVisible] = useState(false);
   const [lossIDVisible, setLossIDVisible] = useState(false);
@@ -18,17 +22,25 @@ const LoginBox = (props) => {
   const [registerVisible, setRegisterVisible] = useState(false);
   const currentUserName = sessionStorage.getItem('websiteUserName')
   const [form] = Form.useForm()
+  const [loseId] = Form.useForm()
   const [registerForm] = Form.useForm()
+  const [losePassword] = Form.useForm()
   const { Option } = Select;
   const { t } = useTranslation();
   useEffect(() => {
     if (currentUserName) {
       setUserName(currentUserName)
     }
+    getCountryList()
     // indexNewsListHttp().then(res => {
     //     console.log((res));
     // })
   }, [currentUserName])
+  const getCountryList = () => {
+    countryListHttp().then(res => {
+      setCountryList(res.data.data)
+    })
+  }
   const [loginFormData] = useState({
     username: null,
     password: null,
@@ -95,9 +107,29 @@ const LoginBox = (props) => {
   const dateChange = (date, dateString) => {
     setDay(dateString)
   }
+  const handleCancel = (type) => {
+    switch (type) {
+      case 1:
+        form.resetFields()
+        setloginVisible(false)
+        break;
+      case 2:
+        registerForm.resetFields()
+        setRegisterVisible(false)
+        break;
+      case 3:
+        loseId.resetFields()
+        setLossIDVisible(false)
+        break;
+      default:
+        losePassword.resetFields()
+        setLossPassWordVisible(false)
+        break;
+    }
+  }
   const subitFrom = () => {
     registerForm.validateFields().then(values => {
-      const data = { ...values, gender, SMS, phone, day, registerUserName }
+      const data = { ...values, gender, SMS, phone, day, registerUserName, country, language }
       console.log(data);
       message.info(3)
     })
@@ -109,7 +141,7 @@ const LoginBox = (props) => {
         <div>{userName ? <Button type="primary" danger onClick={handleLoginOut}>{t(18)}</Button> : <Button type="primary" onClick={() => setloginVisible(true)}>{t(4)}</Button>}</div>
       </div>
       {/* 登录弹框 */}
-      <Modal title={t(4)} visible={loginVisible} onCancel={() => setloginVisible(false)} centered footer={null}>
+      <Modal title={t(4)} visible={loginVisible} onCancel={() => handleCancel(1)} centered footer={null}>
         <Form
           {...layout}
           form={form}
@@ -157,20 +189,24 @@ const LoginBox = (props) => {
         </Form>
       </Modal>
       {/* 注册会员弹框 */}
-      <Modal title={t(30)} visible={registerVisible} onCancel={() => setRegisterVisible(false)} centered footer={null} width='50%'>
+      <Modal title={t(30)} visible={registerVisible} onCancel={() => handleCancel(2)} centered footer={null} width='50%'>
         <Row className='registerHead'>
           <Col span='2' className='labelTitle'>{t(31)}</Col>
           <Col span='10' className='selectBox'>
-            <Select defaultValue="lucy" >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
+            <Select onChange={(value) => setCountry(value)}>
+              {countryList.map(i => {
+                return (
+                  <Option value={i.countryId} key={i.countryId}>{i.countryName}</Option>
+                )
+              })}
             </Select>
           </Col>
           <Col span='2' className='labelTitle'>{t(32)}</Col>
           <Col span='10' className='selectBox'>
-            <Select defaultValue="lucy" >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
+            <Select defaultValue="zh-jt" onChange={(value) => setLanguage(value)}>
+              <Option value="zh-jt">{t(1)}</Option>
+              <Option value="zh-ft">{t(2)}</Option>
+              <Option value="zh-en">{t(3)}</Option>
             </Select>
           </Col>
         </Row>
@@ -319,8 +355,9 @@ const LoginBox = (props) => {
         </Row>
       </Modal>
       {/* 忘记账号弹框 */}
-      <Modal title={t(58)} visible={lossIDVisible} onCancel={() => setLossIDVisible(false)} centered footer={null} width='40%'>
+      <Modal title={t(58)} visible={lossIDVisible} onCancel={() => handleCancel(3)} centered footer={null} width='40%'>
         <Form
+          form={loseId}
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
           initialValues={lossIDFormData}
@@ -365,8 +402,9 @@ const LoginBox = (props) => {
         </Form>
       </Modal>
       {/* 忘记密码弹框 */}
-      <Modal title={t(29)} visible={lossPassWordVisible} onCancel={() => setLossPassWordVisible(false)} centered footer={null} width='40%'>
+      <Modal title={t(29)} visible={lossPassWordVisible} onCancel={() => handleCancel(4)} centered footer={null} width='40%'>
         <Form
+          form={losePassword}
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
           initialValues={lossPassWordFormData}

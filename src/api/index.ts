@@ -6,7 +6,8 @@ const baseWebsite = '/rpi/';
 
 // 登录
 const indexLogin = `${baseWeb}login`
-
+// 国家列表
+const countryList = `${baseWeb}countrylist`
 // 首页新闻列表
 const indexNewsList = `${baseWebsite}websitenews/officialNewsList`
 // 首页店铺列表
@@ -17,22 +18,23 @@ const indexBannerList = `${baseWebsite}banner/bannerShow`
 const indexLoginHttp = (data:any) =>{
     return axios.post(getNewUrl(indexLogin, data))
 }
-
 const indexNewsListHttp = (data:any) => {
     return axios.post(getNewUrl(indexNewsList, data))
 }
-
 const indexShopListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexShopList, data))
 }
 const indexBannerListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexBannerList, data))
 }
+const countryListHttp = ()=>{
+	return axios.get(countryList)
+}
 
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
 		let flag = false
-		const NotLoginServer = ['login','newShop','officialNewsList','bannerShow']
+		const NotLoginServer = ['login','newShop','officialNewsList','bannerShow','countrylist']
 		NotLoginServer.forEach(i =>{
 			if(config.url?.includes(i)){
 				flag = true
@@ -73,5 +75,6 @@ export {
     indexLoginHttp,
     indexNewsListHttp,
 		indexShopListHttp,
-		indexBannerListHttp
+		indexBannerListHttp,
+		countryListHttp
 }
