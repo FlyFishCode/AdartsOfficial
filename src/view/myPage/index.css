@@ -1,0 +1,41 @@
+.myPage {
+    margin: 20px 0;
+}
+
+.myPageLeft {
+    display: flex;
+    flex-direction: column;
+}
+
+.myPageLink {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.myPageLeft div:hover {
+    color: red;
+}
+
+#myPageRight {
+    height: 600px;
+    background: #eee;
+    overflow-y: scroll;
+    /* scroll-behavior: smooth; */
+}
+
+#myPageRight div div:first-child {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#myPageRight div div:first-child::before {
+    display: block;
+    content: '';
+    width: 2px;
+    height: 30px;
+    left: 1px;
+    position: absolute;
+    background: #1890ff;
+}
