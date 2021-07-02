@@ -1,169 +1,68 @@
 import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Row, Col, Anchor } from 'antd'
+import { Row, Col, Menu } from 'antd'
+
+import MyPageIndex from './MyPageIndex'
+import AnyWhere from './AnyWhere'
+import GameInfo from './GameInfo'
+import FriendsChat from './FriendsChat'
+import OtherSetting from './OtherSetting'
+
 import './index.css'
+
+const { SubMenu } = Menu
+
+
 const MyPage = () => {
-  const { Link } = Anchor;
   const { t } = useTranslation()
   const Location = useLocation();
-  const handleClick = (e, link) => {
-    e.preventDefault()
-    const ele = document.getElementById(link.href.substring(1))
-    ele && ele.scrollIntoView(true);
+  const handleClick = (e) => {
+    const ele = document.getElementById(e.key)
+    ele && ele.scrollIntoView({
+      behavior: "smooth", // 默认 auto
+      block: "start", // 默认 center
+      inline: "nearest", // 默认 nearest
+    })
   }
   console.log(Location.state);
   return (
-    <Row className='myPage'>
-      <Col span={4} offset={1} className='myPageLeft'>
-        <Anchor onClick={handleClick}>
-          <div className='myPageLink'><Link href="#1" title={t(20)} /></div>
-          <div className='myPageLink'><Link href="#2" title='WHERE ARE YOU' /></div>
-          <div className='myPageLink'><Link href="#3" title={t(21)} /></div>
-          <div className='myPageLink'><Link href="#4" title={t(22)} /></div>
-          <div className='myPageLink'><Link href="#5" title={t(23)} /></div>
-          <div className='myPageLink'><Link href="#6" title={t(24)} /></div>
-          <div className='myPageLink'><Link href="#7" title={t(25)} /></div>
-        </Anchor>
+    <Row id='myPage'>
+      <Col span={4} offset={1}>
+        <Menu
+          onClick={handleClick}
+          // defaultSelectedKeys={['1']}
+          // defaultOpenKeys={['sub1']}
+          mode="inline"
+        >
+          <Menu.Item key="myPageIndex">{t(20)}</Menu.Item>
+          <Menu.Item key="anyWhere">Any Where</Menu.Item>
+          <SubMenu key="sub1" title={t(22)}>
+            <Menu.Item key="AllGameData">{t(21)}</Menu.Item>
+            <Menu.Item key="About30Game">{t(64)}</Menu.Item>
+            <Menu.Item key="AwardHistory">{t(65)}</Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub2" title={t(24)}>
+            <Menu.Item key="6">{t(66)}</Menu.Item>
+            <Menu.Item key="FriendsList">{t(67)}</Menu.Item>
+            <Menu.Item key="AddFriends">{t(68)}</Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub3" title={t(25)}>
+            <Menu.Item key="9">{t(69)}</Menu.Item>
+            <Menu.Item key="10">{t(70)}</Menu.Item>
+            <Menu.Item key="11">{t(71)}</Menu.Item>
+            <Menu.Item key="12">{t(72)}</Menu.Item>
+            <Menu.Item key="13">{t(73)}</Menu.Item>
+          </SubMenu>
+        </Menu>
       </Col>
       <Col span={18} offset={1} id='myPageRight'>
-        <div>
-          <div id='1'>{t(20)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='2'>WHERE ARE YOU</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='3'>{t(21)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='4'>{t(22)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='5'>{t(23)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='6'>{t(24)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-        <div>
-          <div id='7'>{t(25)}</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
+        <MyPageIndex />
+        <AnyWhere />
+        <GameInfo />
+        <FriendsChat />
+        <OtherSetting />
       </Col>
-    </Row>
+    </Row >
   )
 }
 export default MyPage

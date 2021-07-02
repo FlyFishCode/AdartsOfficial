@@ -8,18 +8,18 @@ const LoginBox = (props) => {
   const { loginBoxEmit } = props;
   const [SMS, setSMS] = useState('1')
   const [day, setDay] = useState('')
-  const [agree, setagree] = useState('')
+  const [agree, setAgree] = useState('')
   const [phone, setPhone] = useState('')
   const [gender, setGender] = useState('1')
   const [country, setCountry] = useState()
-  const [language, setLanguage] = useState()
+  const [language, setLanguage] = useState('')
   const [userName, setUserName] = useState('')
   const [countryList, setCountryList] = useState([])
   const [registerUserName, setRegisterUserName] = useState('')
   const [loginVisible, setloginVisible] = useState(false);
   const [lossIDVisible, setLossIDVisible] = useState(false);
-  const [lossPassWordVisible, setLossPassWordVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
+  const [lossPassWordVisible, setLossPassWordVisible] = useState(false);
   const currentUserName = sessionStorage.getItem('websiteUserName')
   const [form] = Form.useForm()
   const [loseId] = Form.useForm()
@@ -302,7 +302,7 @@ const LoginBox = (props) => {
             <Input placeholder={t(42)} />
           </Form.Item>
           <Form.Item name='agree' label={t(55)}>
-            <Radio.Group onChange={(e) => setagree(e.target.value)} value={agree}>
+            <Radio.Group onChange={(e) => setAgree(e.target.value)} value={agree}>
               <Radio value='1'>{t(51)}</Radio>
               <Radio value='0'>{t(52)}</Radio>
             </Radio.Group>

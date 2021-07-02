@@ -1,0 +1,307 @@
+.AllGameDataDefault {
+    margin: 15px 0;
+    border: 1px solid #888;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.AllGameDataInfoBox {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.AllGameDataGameBox {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.AllGameDataGame:nth-child(2) {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.AllGameDataGame:nth-child(4) {
+    border-left: 1px solid #000;
+}
+
+.AllGameDataGame {
+    flex: 1;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.AllGameDataGame div {
+    flex: 1;
+    line-height: 40px;
+}
+
+.AllGameDataGame :first-child {
+    background: #F6F6F6;
+}
+
+.AllGameDataImgBox {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.AllGameDataImgBox img {
+    width: 100%;
+    height: 100%;
+}
+
+.AllGameDataUserBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.AllGameDataChance {
+    display: flex;
+}
+
+.AllGameDataGameRateBox {
+    display: flex;
+}
+
+.AllGameDataGameRate:nth-child(1) {
+    flex: 3;
+    padding: 0 0 0 10px;
+    border-right: 1px solid #000;
+}
+
+.AllGameDataGameRate:nth-child(2) {
+    text-align: center;
+    flex: 1;
+}
+
+.AllGameDataGameRate div:nth-child(2) {
+    background: #F6F6F6;
+}
+
+.AllGameDataGameRate div:nth-child(4) {
+    background: #F6F6F6;
+}
+
+.AllGameDataCountBox {
+    display: flex;
+    text-align: center;
+}
+
+.AllGameDataCount {
+    flex: 1;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.AllGameDataCount div {
+    flex: 1;
+    line-height: 40px;
+}
+
+.AllGameDataCount:nth-child(1) {
+    border-right: 1px solid #000;
+}
+
+.AllGameDataCount>div:first-child {
+    background: #F6F6F6;
+}
+
+.AllGameDataMax {
+    text-align: center;
+    background: #F6F6F6;
+    padding: 5px 0;
+}
+
+.AllGameDataMaxBox {
+    display: flex;
+}
+
+.AllGameDataMaxEle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.AllGameDataMaxEle div {
+    flex: 1;
+    height: 40px;
+    line-height: 40px;
+}
+
+.AllGameDataMaxEle div:nth-child(even) {
+    background: #F6F6F6;
+}
+
+.AllGameDataMaxEle:nth-child(2) {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.AllGameDataMaxEle:nth-child(4) {
+    border-left: 1px solid #000;
+}
+
+.AllGameDataTotalBox {
+    display: flex;
+}
+
+.AllGameDataTotalData:nth-child(2) {
+    flex: 2;
+    text-indent: 10px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.AllGameDataTotalData:nth-child(3) {
+    flex: 1;
+    text-align: center;
+}
+
+.AllGameDataTotalName {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #F6F6F6;
+}
+
+.AllGameDataTotalData div:nth-child(1) {
+    background: #F6F6F6;
+}
+
+.AllGameDataTotalData div:nth-child(3) {
+    background: #F6F6F6;
+}
+
+.AllGameDataTotalName div:first-child {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.AllGameDataTotalName div:last-child {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AllGameDataTotalData {
+    display: flex;
+    flex-direction: column;
+}
+
+.AllGameDataTotalData div {
+    height: 40px;
+    line-height: 40px;
+}
+
+.Game30Box {
+    border: 2px solid #F6F6F6;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.About30GamePersonalBox {
+    display: flex;
+}
+
+.About30GamePersonalBox div:nth-child(2) {
+    flex: 2;
+}
+
+.About30GamePersonalBox div:nth-child(3) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.About30GameInfo {
+    margin: 0 20px;
+}
+
+.About30GameResult {
+    display: flex;
+}
+
+.About30GameResult>div:nth-child(1) {
+    border-right: 1px solid #000;
+    padding: 0 20px;
+}
+
+.About30GameResult>div:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20px;
+}
+
+.About30GameResult>div:nth-child(2) div {
+    margin: 0 20px;
+}
+
+.About30GamePlayerBox {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.About30GamePlayerBox:nth-child(1) {
+    background: #F6F6F6;
+}
+
+.About30GamePlayer {
+    border-bottom: 1px solid #888;
+}
+
+.About30GamePlayerBox div:nth-child(1) {
+    flex: 2;
+}
+
+.About30GamePlayerBox div:nth-child(2) {
+    flex: 1;
+}
+
+.About30GamePlayerBox div:nth-child(3) {
+    flex: 1;
+}
+
+.AwardHistoryDataList {
+    display: flex;
+    text-align: center;
+}
+
+.AwardHistoryDataList div {
+    flex: 1;
+    height: 40px;
+    line-height: 40px;
+}
+
+.AwardHistoryDataList div:nth-child(2) {
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+}
+
+.AwardHistoryDataList:nth-child(2) {
+    background: #F6F6F6;
+}
+
+.AwardHistoryDataList {
+    border-bottom: 1px solid #999;
+}
