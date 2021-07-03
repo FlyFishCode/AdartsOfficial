@@ -22,12 +22,12 @@ const ForgetID = () => {
     setDownNum(60)
   }
   const handleLogin = () => {
-    if (!email) {
-      message.warning(t(90))
-      return false
-    }
     if (!password) {
       message.warning(t(87))
+      return false
+    }
+    if (!email) {
+      message.warning(t(90))
       return false
     }
     if (!code) {

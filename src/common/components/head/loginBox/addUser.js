@@ -1,7 +1,9 @@
 import { Row, Col, Form, Button, Select, Radio, DatePicker, Input, message } from 'antd'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import { countryListHttp } from '@/api'
+import { LeftOutlined } from '@ant-design/icons'
 const AddUser = () => {
   const [country, setCountry] = useState()
   const [countryList, setCountryList] = useState([])
@@ -14,6 +16,7 @@ const AddUser = () => {
   const [registerUserName, setRegisterUserName] = useState('')
   const [form] = Form.useForm()
   const { t } = useTranslation()
+  const history = useHistory()
   const [registerFormData] = useState({
     id: null,
     cardId: null,
@@ -52,7 +55,11 @@ const AddUser = () => {
   }, [])
   return (
     <div className='loginBox'>
-      <Row className='registerHead'>
+      <div className='loginTitle'>
+        <div onClick={() => history.go(-1)}><LeftOutlined /></div>
+        <div>{t(30)}</div>
+      </div>
+      <Row className='registerHead loginBoxRow'>
         <Col span='2' className='labelTitle'>{t(31)}</Col>
         <Col span='10' className='selectBox'>
           <Select onChange={(value) => setCountry(value)}>

@@ -13,12 +13,10 @@ const LoginBtn = (props) => {
     loginOut('')
   }
   return (
-    <>
-      <div className='loginInfoBox'>
-        <div>{userName}</div>
-        <div>{userName ? <Button type="primary" danger onClick={handleLoginOut}>{t(18)}</Button> : <Button type="primary" onClick={() => history.push('login')}>{t(4)}</Button>}</div>
-      </div>
-    </>
+    <div className='loginInfoBox'>
+      <div>{userName}</div>
+      <div>{userName ? <Button type="primary" danger onClick={handleLoginOut}>{t(18)}</Button> : <Button type="primary" onClick={() => history.push('login')}>{t(4)}</Button>}</div>
+    </div>
   )
 }
 export default LoginBtn;
