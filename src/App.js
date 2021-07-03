@@ -18,6 +18,10 @@ import MyPage from './view/myPage'
 import MatchPage from './view/match';
 import Head from './common/components/head/Head.js'
 import UserCard from './common/components/UserCard'
+import LoginBox from './common/components/head/loginBox/login.js'
+import ForgetID from './common/components/head/loginBox/forgetID.js'
+import ForgetPW from './common/components/head/loginBox/forgetPW.js'
+import AddUser from './common/components/head/loginBox/addUser.js'
 
 
 const App = () => {
@@ -34,7 +38,7 @@ const App = () => {
     return (
         <BrowserRouter >
             <div className='containerBox'>
-                <Head changeUserName={handleUserName} />
+                <Head userName={userName} loginOut={handleUserName} />
                 <Switch>
                     <Route path='/' exact>
                         <Container userName={userName} />
@@ -47,6 +51,18 @@ const App = () => {
                     </Route>
                     <Route path='/Match'>
                         <MatchPage />
+                    </Route>
+                    <Route path='/Login'>
+                        <LoginBox changeUserName={handleUserName} />
+                    </Route>
+                    <Route path='/ForgetID'>
+                        <ForgetID />
+                    </Route>
+                    <Route path='/ForgetPW'>
+                        <ForgetPW />
+                    </Route>
+                    <Route path='/AddUser'>
+                        <AddUser />
                     </Route>
                 </Switch>
                 <Footer />

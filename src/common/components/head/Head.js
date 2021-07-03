@@ -4,12 +4,12 @@ import { UnorderedListOutlined, GlobalOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 // import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png'
-import LoginBox from './loginBox'
+import LoginBtn from './LoginBtn'
 const { SubMenu } = Menu;
 
 
-const Head = (props) => {
-  const { changeUserName } = props
+const Head = (prop) => {
+  const { userName, loginOut } = prop;
   const history = useHistory();
   // const { t } = useTranslation();
 
@@ -59,7 +59,7 @@ const Head = (props) => {
         <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
       </div>
       <div className='loginAndGlobalBox'>
-        <LoginBox loginBoxEmit={(value) => changeUserName(value)} />
+        <LoginBtn userName={userName} loginOut={loginOut} />
         <div className='globalBox'><GlobalOutlined /></div>
       </div>
     </div >
