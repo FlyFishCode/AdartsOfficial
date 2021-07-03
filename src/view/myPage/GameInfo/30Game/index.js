@@ -99,12 +99,12 @@ const About30Game = () => {
               <div className='Game30Box'>
                 <div className='About30GamePlayerBox'>
                   <div>PLAYER</div>
-                  <div>RT</div>
+                  <div>RATING</div>
                   <div>MPR</div>
                 </div>
                 {i.playerList.map((j, jndex) => {
                   return (
-                    <div className='About30GamePlayerBox About30GamePlayer'>
+                    <div className='About30GamePlayerBox About30GamePlayer' key={jndex}>
                       <div>{j.name}</div>
                       <div>{j.rt}</div>
                       <div>{j.mpr}</div>

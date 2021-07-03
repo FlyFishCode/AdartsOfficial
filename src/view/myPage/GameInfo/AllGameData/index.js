@@ -23,7 +23,7 @@ const AllGameData = () => {
     gggg: 4620,
   })
   useEffect(() => {
-    console.log(AllGameData);
+    console.log('AllGameData');
   }, [])
   return (
     <div>
@@ -121,7 +121,7 @@ const AllGameData = () => {
       <div className='AllGameDataDefault'>
         <div className='AllGameDataMax'>{t(85)}</div>
         <div className='AllGameDataMaxBox'>
-          <div className='AllGameDataMaxEle'>
+          <div className='AllGameDataFast'>
             <div>301</div>
             <div>501</div>
             <div>701</div>
@@ -129,7 +129,7 @@ const AllGameData = () => {
             <div>1101</div>
             <div>1501</div>
           </div>
-          <div className='AllGameDataMaxEle'>
+          <div className='AllGameDataFast'>
             <div>{data.gg}</div>
             <div>{data.gg}</div>
             <div>{data.gg}</div>

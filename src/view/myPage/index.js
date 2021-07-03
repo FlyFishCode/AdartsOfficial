@@ -47,11 +47,11 @@ const MyPage = () => {
             <Menu.Item key="AddFriends">{t(68)}</Menu.Item>
           </SubMenu>
           <SubMenu key="sub3" title={t(25)}>
-            <Menu.Item key="9">{t(69)}</Menu.Item>
-            <Menu.Item key="10">{t(70)}</Menu.Item>
-            <Menu.Item key="11">{t(71)}</Menu.Item>
-            <Menu.Item key="12">{t(72)}</Menu.Item>
-            <Menu.Item key="13">{t(73)}</Menu.Item>
+            <Menu.Item key="AdartsCardSetting">{t(69)}</Menu.Item>
+            <Menu.Item key="AccountInfoSetting">{t(70)}</Menu.Item>
+            <Menu.Item key="AdartsMsgSetting">{t(71)}</Menu.Item>
+            <Menu.Item key="PropSetting">{t(72)}</Menu.Item>
+            <Menu.Item key="PasswordSetting">{t(73)}</Menu.Item>
           </SubMenu>
         </Menu>
       </Col>

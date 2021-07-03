@@ -1,7 +1,16 @@
+import AdartsCardSetting from './AdartsCradSetting'
+import AccountInfoSetting from './AccountInfoSetting'
+import AdartsMsgSetting from './AdartsMsgSetting'
+import PropSetting from './PropSetting'
+import PasswordSetting from './PasswordSetting'
 const OtherSetting = () => {
   return (
-    <div>
-      <div className='myPageTitle'>OtherSetting</div>
+    <div className='box'>
+      <AdartsCardSetting />
+      <AccountInfoSetting />
+      <AdartsMsgSetting />
+      <PropSetting />
+      <PasswordSetting />
     </div>
   )
 }
