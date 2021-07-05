@@ -14,6 +14,8 @@ const indexNewsList = `${baseWebsite}websitenews/officialNewsList`
 const indexShopList = `${baseWebsite}websiteshop/newShop`
 // 首页轮播图列表
 const indexBannerList = `${baseWebsite}banner/bannerShow`
+// 首页用户卡列表
+const indexUserCardList = `${baseWebsite}websitsMember/memberCardALL`
 
 const indexLoginHttp = (data:any) =>{
     return axios.post(getNewUrl(indexLogin, data))
@@ -30,7 +32,9 @@ const indexBannerListHttp = (data:any) =>{
 const countryListHttp = ()=>{
 	return axios.get(countryList)
 }
-
+const indexUserCardListHttp = (data:any) =>{
+	return axios.post(getNewUrl(indexUserCardList, data))
+}
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
 		let flag = false
@@ -76,5 +80,6 @@ export {
     indexNewsListHttp,
 		indexShopListHttp,
 		indexBannerListHttp,
+		indexUserCardListHttp,
 		countryListHttp
 }

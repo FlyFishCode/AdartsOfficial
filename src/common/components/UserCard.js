@@ -2,69 +2,14 @@ import { useState, useEffect } from 'react'
 import { Row, Col, Button, Progress } from 'antd'
 import { LeftOutlined, RightOutlined, UserAddOutlined, GiftOutlined, MessageOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import m from '@/assets/img/m.png'
-const UserCard = () => {
+import { indexUserCardListHttp } from '@/api'
+const UserCard = (props) => {
   const [userCard, setUserCard] = useState([]);
   const [friend, setFriend] = useState(0)
   const [gift, setGift] = useState(0)
   const [position, setPosition] = useState(0)
   const [positionIndex, setPositionIndex] = useState(0)
-  const num = userCard.length
-  useEffect(() => {
-    setFriend(1)
-    setGift(1)
-    setUserCard([
-      {
-        id: 1,
-        countryImg: m,
-        userImg: m,
-        userName: 'Alvin',
-        rating: '14.90',
-        '01Game': "27.12",
-        cricket: '7.12',
-        countup: "1111",
-        win: 1234,
-        lose: 5678,
-        maxWinCount: 905,
-        winP: 39,
-        adartsId: 'Alvin19999999'
-      },
-      {
-        id: 2,
-        countryImg: m,
-        userImg: m,
-        userName: '李逍遥',
-        rating: '65.02',
-        '01Game': "20.52",
-        cricket: '15.90',
-        countup: "2501",
-        win: 301,
-        lose: 571,
-        maxWinCount: 25,
-        winP: 67,
-        adartsId: '李逍遥19999999'
-      },
-      {
-        id: 3,
-        countryImg: m,
-        userImg: m,
-        userName: '刘长安',
-        rating: '62.19',
-        '01Game': "52",
-        cricket: '16.48',
-        countup: "304",
-        win: 926,
-        lose: 45,
-        maxWinCount: 1,
-        winP: 63,
-        adartsId: '刘长安19999999'
-      }
-    ])
-  }, [])
-  useEffect(() => {
-    const dom = document.querySelector('.userCardListBox');
-    dom.style.left = `${position}px`
-  }, [position])
+  const num = userCard.length;
   const { t } = useTranslation();
   const handleUserCardClick = (direction) => {
     if (direction === 'left') {
@@ -79,6 +24,21 @@ const UserCard = () => {
       }
     }
   }
+  const getUserCardList = () => {
+    // const memberId = sessionStorage.getItem('websiteMemberId')
+    indexUserCardListHttp({ memberId: 4082 }).then(res => {
+      setUserCard(res.data.data)
+    })
+  }
+  useEffect(() => {
+    getUserCardList()
+    setFriend(1)
+    setGift(1)
+  }, [])
+  useEffect(() => {
+    const dom = document.querySelector('.userCardListBox');
+    dom.style.left = `${position}px`
+  }, [position])
   return (
     <Row className='userCardBox'>
       <Col span='1' offset='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col>
@@ -95,24 +55,24 @@ const UserCard = () => {
                       </div>
                       <div className='userInfoBox'>
                         <div className='userCardImg'>
-                          <img src={i.userImg} alt="" />
+                          <img src={i.portrait} alt="" />
                         </div>
-                        <div className='userName'>{i.userName}</div>
+                        <div className='userName'>{i.name}</div>
                       </div>
                     </div>
                     <div className='userInfoGameBox'>
                       <div><Progress type="circle" percent={i.rating} status="exception" format={percent => `${percent} RATING`} /></div>
                       <div className='userInfoGame'>
                         <div>
-                          <div>{i['01Game']}</div>
+                          <div>{i.ppd}</div>
                           <div className='fontStyle'>01 GAME</div>
                         </div>
                         <div>
-                          <div>{i.cricket}</div>
+                          <div>{i.mpr}</div>
                           <div className='fontStyle'>CRICKET</div>
                         </div>
                         <div>
-                          <div>{i.countup}</div>
+                          <div>{i.countUpPoint}</div>
                           <div className='fontStyle'>COUNTUP</div>
                         </div>
                       </div>
@@ -120,7 +80,7 @@ const UserCard = () => {
                   </div>
                   <div className='userCardInfo'>
                     <div className='fontStyle'>Adarts ID：</div>
-                    <div>{i.adartsId}</div>
+                    <div>{i.cardId}</div>
                   </div>
                 </div>
                 <div className='userCardRightBox'>
@@ -134,11 +94,11 @@ const UserCard = () => {
                   </div>
                   <div className='userGameTotal'>
                     <div className='fontStyle'>最高连胜记录</div>
-                    <div>{i.maxWinCount}</div>
+                    <div>{i.winContinued}</div>
                   </div>
                   <div>
                     <div className='fontStyle'>WIN%</div>
-                    <div className='userWinsBox'><Progress type="circle" width={60} percent={i.winP} status="exception" format={percent => `${percent} %`} /></div>
+                    <div className='userWinsBox'><Progress type="circle" width={60} percent={i.winProbability} status="exception" format={percent => `${percent} %`} /></div>
                   </div>
                 </div>
               </div>
