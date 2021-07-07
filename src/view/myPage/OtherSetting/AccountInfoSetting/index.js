@@ -1,14 +1,51 @@
 import { useState, useEffect } from 'react'
-import { Row, Col, Input, Button, Radio } from 'antd'
+import { Row, Col, Input, Button, Radio, Upload, Modal } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { PlusOutlined } from '@ant-design/icons'
+import { upLoadImg } from '@/common/Utlis.js'
 const AccountInfoSetting = () => {
   const { t } = useTranslation()
   const [cardInfo, setCardInfo] = useState({});
+  const [fileList, setFileList] = useState([])
+  const [previewTitle, setPreviewTitle] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
+  const [previewVisible, setPreviewVisible] = useState(false)
   const [agree, setAgree] = useState(1);
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+  const handlePreview = (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = getBase64(file.originFileObj);
+    }
+    setPreviewVisible(true)
+    setPreviewImage(file.url || file.preview)
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1))
+  };
+  const handleChange = ({ fileList }) => {
+    debugger
+    setFileList(fileList)
+  }
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+  const handleRequset = ({ file }) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(upLoadImg(formData));
+  }
   const getCardInfo = () => {
     setCardInfo({
-      country: 1,
-      language: 1,
+      country: 'HONGKONG',
+      language: '简体中文',
       ID: 1,
       userName: 1,
       gender: 1,
@@ -28,8 +65,8 @@ const AccountInfoSetting = () => {
       <div className='myPageTitle' id='AccountInfoSetting'>{t(70)}</div>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(99)}</Col>
-        <Col span='2'>{cardInfo.country}</Col>
-        <Col span='2'>{cardInfo.language}</Col>
+        <Button type="dashed">{cardInfo.country}</Button>
+        <div className='AccountInfoBtn'><Button type="dashed">{cardInfo.language}</Button></div>
       </Row>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(34)}</Col>
@@ -54,6 +91,28 @@ const AccountInfoSetting = () => {
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(23)}</Col>
         <Col span='20'>{cardInfo.homeShop}</Col>
+      </Row>
+      <Row className='rowBox'>
+        <Col span='4' className='AccountInfoLabel'>{t(102)}</Col>
+        <Col span='20'>
+          <Upload
+            customRequest={handleRequset}
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={() => handlePreview}
+            onChange={handleChange}
+          >
+            {fileList.length >= 1 ? null : uploadButton}
+          </Upload>
+          <Modal
+            visible={previewVisible}
+            title={previewTitle}
+            footer={null}
+            onCancel={() => setPreviewVisible(false)}
+          >
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          </Modal>
+        </Col>
       </Row>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(47)}</Col>

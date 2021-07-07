@@ -1,29 +1,26 @@
 
 import { useState, useEffect } from 'react'
 import { Progress } from 'antd'
+import { myPageIndexUserCardInfoHttp } from '@/api'
 
-import m from '@/assets/img/m.png'
-const MyPageIndex = () => {
-  const [data] = useState({
-    id: 1,
-    countryImg: m,
-    userImg: m,
-    userName: 'Alvin',
-    rating: '14.90',
-    '01Game': "27.12",
-    cricket: '7.12',
-    countup: "1111",
-    win: 1234,
-    lose: 5678,
-    maxWinCount: 905,
-    winP: 39,
-    adartsId: 'Alvin19999999'
-  })
+const MyPageIndex = (props) => {
+  const { changeCardId } = props;
+  const [card, setCard] = useState({});
+  const [cardId, setCardId] = useState('');
+  const requsetData = {
+    cardId,
+    memberId: sessionStorage.getItem('websiteMemberId')
+  }
   const getData = () => {
-    // setData()
+    myPageIndexUserCardInfoHttp(requsetData).then(res => {
+      setCard(res.data.data)
+      setCardId(res.data.data.cardId)
+      changeCardId(res.data.data.cardId)
+    })
   }
   useEffect(() => {
     getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
@@ -34,28 +31,28 @@ const MyPageIndex = () => {
             <div className='userInfo'>
               <div>
                 <div className='userCountryImg'>
-                  <img src={data.countryImg} alt="" />
+                  {/* <img src={card.countryImg} alt="" /> */}
                 </div>
                 <div className='userInfoBox'>
                   <div className='userCardImg'>
-                    <img src={data.userImg} alt="" />
+                    <img src={card.portrait} alt="" />
                   </div>
-                  <div className='userName'>{data.userName}</div>
+                  <div className='userName'>{card.name}</div>
                 </div>
               </div>
               <div className='userInfoGameBox'>
-                <div><Progress type="circle" percent={data.rating} status="exception" format={percent => `${percent} RATING`} /></div>
+                <div><Progress type="circle" percent={card.rating} status="exception" format={percent => `${percent} RATING`} /></div>
                 <div className='userInfoGame'>
                   <div>
-                    <div>{data['01Game']}</div>
+                    <div>{card.ppd}</div>
                     <div className='fontStyle'>01 GAME</div>
                   </div>
                   <div>
-                    <div>{data.cricket}</div>
+                    <div>{card.mpr}</div>
                     <div className='fontStyle'>CRICKET</div>
                   </div>
                   <div>
-                    <div>{data.countup}</div>
+                    <div>{card.countUpPoint}</div>
                     <div className='fontStyle'>COUNTUP</div>
                   </div>
                 </div>
@@ -63,25 +60,25 @@ const MyPageIndex = () => {
             </div>
             <div className='userCardInfo'>
               <div className='fontStyle'>Adarts ID：</div>
-              <div>{data.adartsId}</div>
+              <div>{card.cardNo}</div>
             </div>
           </div>
           <div className='userCardRightBox'>
             <div className='userGameTotal'>
               <div className='fontStyle'>WIN</div>
-              <div>{data.win}</div>
+              <div>{card.win}</div>
             </div>
             <div className='userGameTotal'>
               <div className='fontStyle'>LOSE</div>
-              <div>{data.lose}</div>
+              <div>{card.lose}</div>
             </div>
             <div className='userGameTotal'>
               <div className='fontStyle'>最高连胜记录</div>
-              <div>{data.maxWinCount}</div>
+              <div>{card.winContinued}</div>
             </div>
             <div>
               <div className='fontStyle'>WIN%</div>
-              <div className='userWinsBox'><Progress type="circle" width={60} percent={data.winP} status="exception" format={percent => `${percent} %`} /></div>
+              <div className='userWinsBox'><Progress type="circle" width={60} percent={card.winProbability} status="exception" format={percent => `${percent} %`} /></div>
             </div>
           </div>
         </div>

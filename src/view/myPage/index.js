@@ -1,4 +1,5 @@
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from 'react'
+// import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Row, Col, Menu } from 'antd'
 
@@ -15,7 +16,11 @@ const { SubMenu } = Menu
 
 const MyPage = () => {
   const { t } = useTranslation()
-  const Location = useLocation();
+  // const Location = useLocation();
+  const [cardId, setCardId] = useState();
+  const handleChangeCardId = (value) => {
+    setCardId(value)
+  }
   const handleClick = (e) => {
     const ele = document.getElementById(e.key)
     ele && ele.scrollIntoView({
@@ -24,7 +29,10 @@ const MyPage = () => {
       inline: "nearest", // 默认 nearest
     })
   }
-  console.log(Location.state);
+  // console.log(Location.state);
+  useEffect(() => {
+    handleChangeCardId()
+  }, [cardId])
   return (
     <Row id='myPage'>
       <Col span={4} offset={1}>
@@ -49,16 +57,16 @@ const MyPage = () => {
           <SubMenu key="sub3" title={t(25)}>
             <Menu.Item key="AdartsCardSetting">{t(69)}</Menu.Item>
             <Menu.Item key="AccountInfoSetting">{t(70)}</Menu.Item>
-            <Menu.Item key="AdartsMsgSetting">{t(71)}</Menu.Item>
+            <Menu.Item key="AwardMsgSetting">{t(71)}</Menu.Item>
             <Menu.Item key="PropSetting">{t(72)}</Menu.Item>
             <Menu.Item key="PasswordSetting">{t(73)}</Menu.Item>
           </SubMenu>
         </Menu>
       </Col>
       <Col span={18} offset={1} id='myPageRight'>
-        <MyPageIndex />
+        <MyPageIndex changeCardId={handleChangeCardId} />
         <AnyWhere />
-        <GameInfo />
+        <GameInfo cardId={cardId ? cardId : ''} />
         <FriendsChat />
         <OtherSetting />
       </Col>

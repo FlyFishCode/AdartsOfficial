@@ -1,99 +1,124 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Collapse } from 'antd';
-import m from '@/assets/img/m.png'
+import { about30GameListHttp } from '@/api'
 import '../index.css'
 
 const { Panel } = Collapse;
 
-const About30Game = () => {
+const About30Game = (props) => {
+  const { cardId } = props
   const { t } = useTranslation();
-  const [dataList, setDataList] = useState([
-  ]);
+  const [dataList, setDataList] = useState([]);
+  const getDateTime = (date) => {
+    const [year, month, day, hour, minute, second] = [
+      new Date(Number(date)).getFullYear(),
+      new Date(Number(date)).getMonth() + 1,
+      new Date(Number(date)).getDate(),
+      new Date(Number(date)).getHours(),
+      new Date(Number(date)).getMinutes(),
+      new Date(Number(date)).getSeconds()
+    ]
+
+    return `${year}/${month}/${day}  ${hour}:${minute}:${second} `
+  }
+  const getGameName = (type) => {
+    let str = '';
+    switch (type) {
+      case 1:
+        str = '301'
+        break;
+      case 2:
+        str = '501'
+        break;
+      case 3:
+        str = '701'
+        break;
+      case 4:
+        str = '901'
+        break;
+      case 5:
+        str = 'STANDARDCRICKET'
+        break;
+      case 6:
+        str = 'AWARDCRICKET'
+        break;
+      case 7:
+        str = 'COUNTUP;'
+        break;
+      case 8:
+        str = 'TIMECOUNTUP'
+        break;
+      case 9:
+        str = 'HALFIT'
+        break;
+      case 10:
+        str = 'TEAMCRICKET'
+        break;
+      case 11:
+        str = 'SNOW301'
+        break;
+      case 12:
+        str = 'SNOW501'
+        break;
+      case 13:
+        str = 'SNOW701'
+        break;
+      case 14:
+        str = 'SNOW901'
+        break;
+      case 20:
+        str = 'EAGLEEYE'
+        break;
+      case 21:
+        str = 'BIGBULL'
+        break;
+      // case 22:
+      //   str = 'CRICKETCOUNTUP'
+      //   break;
+      default:
+        str = 'CRICKETCOUNTUP'
+        break;
+    }
+    return str
+  }
+  const getDataList = () => {
+    about30GameListHttp({ cardId: 5241 }).then(res => {
+      setDataList(res.data.data)
+    })
+  }
   useEffect(() => {
-    setDataList([
-      {
-        id: 1,
-        date: '2021/6/20 12:26:38',
-        type: 'Standard Cricket',
-        img: m,
-        mpr: '5.30',
-        userName: 'Alvin',
-        rating: 17.01,
-        location: 'ABCD shop',
-        hatTrick: 10,
-        '3inBed': 10,
-        '3inBlack': 10,
-        ton80: 10,
-        '5Marks': 10,
-        '6Marks': 10,
-        '7Marks': 10,
-        '8Marks': 10,
-        '9Marks': 10,
-        win: true,
-        playerList: [
-          { name: 'Eric', rt: 15.00, mpr: 48.25 },
-          { name: 'Alion', rt: 21.20, mpr: 2.95 },
-          { name: 'Edioter', rt: 45.94, mpr: 213.95 },
-          { name: 'Crocket', rt: 485.26, mpr: 18.23 }
-        ]
-      },
-      {
-        id: 2,
-        date: '2021/6/20 12:26:38',
-        type: 'Standard Cricket',
-        img: m,
-        mpr: '5.30',
-        userName: 'Alvin',
-        rating: 17.01,
-        location: 'ABCD shop',
-        hatTrick: 10,
-        '3inBed': 10,
-        '3inBlack': 10,
-        ton80: 10,
-        '5Marks': 10,
-        '6Marks': 10,
-        '7Marks': 10,
-        '8Marks': 10,
-        '9Marks': 10,
-        win: true,
-        playerList: [
-          { name: 'Eric', rt: 15.00, mpr: 48.25 },
-          { name: 'Alion', rt: 21.20, mpr: 2.95 },
-          { name: 'Edioter', rt: 45.94, mpr: 213.95 },
-          { name: 'Crocket', rt: 485.26, mpr: 18.23 }
-        ]
-      }
-    ])
-  }, [])
+    getDataList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardId])
   return (
     <div>
       <div className='myPageTitle' id='About30Game'>{t(64)}</div>
       <Collapse accordion>
-        {dataList.map(i => {
+        {dataList && dataList.map(i => {
           return (
-            <Panel header={`${i.date}   |   ${i.type}   |   MPR：${i.mpr}`} key={i.id}>
+            <Panel header={`${getDateTime(i.dateTime)}   |   ${getGameName(i.gameName)}   |   MPR：${i.mpr}`} key={i.dateTime}>
               <div className='Game30Box About30GamePersonalBox'>
-                <div className='AllGameDataImgBox'><img src={i.img} alt="" /></div>
+                <div className='AllGameDataImgBox'><img src={i.portrait} alt="" /></div>
                 <div className='About30GameInfo'>
                   <div>{i.userName}</div>
                   <div>{`Rating：${i.rating}  MPR：${i.mpr}`}</div>
-                  <div>{`Location：${i.location}`}</div>
+                  <div>{`Location：${i.shopName}`}</div>
                 </div>
-                <div>{i.win ? 'WIN' : 'LOSE'}</div>
+                <div className='About30GameResultBox'>{i.result ? 'WIN' : 'LOSE'}</div>
               </div>
               <div className='Game30Box About30GameResult'>
                 <div>Awards</div>
                 <div>
                   <div>{`HAT TRICK：${i.hatTrick}`}</div>
-                  <div>{`3 IN A BED：${i['3inBed']}`}</div>
-                  <div>{`3 IN THE BLACK：${i['3inBlack']}`}</div>
+                  <div>{`3 IN A BED：${i.threeInABed}`}</div>
+                  <div>{`3 IN THE BLACK：${i.threeInABlack}`}</div>
                   <div>{`TON80：${i.ton80}`}</div>
-                  <div>{`5MARKS：${i['5Marks']}`}</div>
-                  <div>{`6MARKS：${i['6Marks']}`}</div>
-                  <div>{`7MARKS：${i['7Marks']}`}</div>
-                  <div>{`8MARKS：${i['8Marks']}`}</div>
-                  <div>{`9MARKS：${i['9Marks']}`}</div>
+                  <div>{`5MARKS：${i.fiveMark}`}</div>
+                  <div>{`6MARKS：${i.sixMark}`}</div>
+                  <div>{`7MARKS：${i.sevenMark}`}</div>
+                  <div>{`8MARKS：${i.eightMark}`}</div>
+                  <div>{`9MARKS：${i.nineMark}`}</div>
                 </div>
               </div>
               <div className='Game30Box'>
@@ -102,11 +127,11 @@ const About30Game = () => {
                   <div>RATING</div>
                   <div>MPR</div>
                 </div>
-                {i.playerList.map((j, jndex) => {
+                {i.teammateList.map((j, jndex) => {
                   return (
                     <div className='About30GamePlayerBox About30GamePlayer' key={jndex}>
-                      <div>{j.name}</div>
-                      <div>{j.rt}</div>
+                      <div>{j.memberName}</div>
+                      <div>{j.rating}</div>
                       <div>{j.mpr}</div>
                     </div>
                   )

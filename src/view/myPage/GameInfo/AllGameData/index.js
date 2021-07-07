@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next'
 import m from '@/assets/img/m.png'
 import '../index.css'
@@ -22,9 +22,6 @@ const AllGameData = () => {
     ggg: 23424,
     gggg: 4620,
   })
-  useEffect(() => {
-    console.log('AllGameData');
-  }, [])
   return (
     <div>
       <div className='myPageTitle' id='AllGameData'>{t(21)}</div>

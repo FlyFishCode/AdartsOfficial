@@ -1,8 +1,17 @@
 import axios from 'axios'
 import { message } from 'antd'
 
+
+// 我的页面
+import {myPageIndexUserCardInfo,about30GameList} from './Mypage'
+
+
+
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
+
+const qs = require('qs')
+
 
 // 登录
 const indexLogin = `${baseWeb}login`
@@ -16,6 +25,8 @@ const indexShopList = `${baseWebsite}websiteshop/newShop`
 const indexBannerList = `${baseWebsite}banner/bannerShow`
 // 首页用户卡列表
 const indexUserCardList = `${baseWebsite}websitsMember/memberCardALL`
+// 上传图片接口
+const upLoadImg = `${baseWebsite}news/uploadAbsolutelyPictures`
 
 const indexLoginHttp = (data:any) =>{
     return axios.post(getNewUrl(indexLogin, data))
@@ -35,6 +46,18 @@ const countryListHttp = ()=>{
 const indexUserCardListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexUserCardList, data))
 }
+const upLoadImgHttp = (data:any) =>{
+	return axios.post(upLoadImg, data);
+}
+
+// 我的页面
+const myPageIndexUserCardInfoHttp = (data:any) =>{
+	return axios.post(myPageIndexUserCardInfo, qs.stringify(data));
+}
+const about30GameListHttp = (data:any) =>{
+	return axios.post(about30GameList, qs.stringify(data));
+}
+
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
 		let flag = false
@@ -81,5 +104,8 @@ export {
 		indexShopListHttp,
 		indexBannerListHttp,
 		indexUserCardListHttp,
-		countryListHttp
+		countryListHttp,
+		upLoadImgHttp,
+		myPageIndexUserCardInfoHttp,
+		about30GameListHttp
 }
