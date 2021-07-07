@@ -304,3 +304,8 @@
     font-weight: bold;
     padding: 10px 0;
 }
+
+.PasswordSettingBox {
+    background: #eee;
+    padding: 20px 0;
+}
