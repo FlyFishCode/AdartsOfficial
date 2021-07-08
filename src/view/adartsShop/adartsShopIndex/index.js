@@ -40,7 +40,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 2,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -59,7 +59,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 3,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -78,7 +78,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 4,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -97,7 +97,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 5,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -140,7 +140,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 2,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -160,7 +160,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 3,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -180,7 +180,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 4,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
@@ -200,7 +200,7 @@ const AdartsShopIndex = () => {
       },
       {
         icon: m,
-        shopId: 1,
+        shopId: 5,
         shopImg: m,
         shopName: 'Adarts Shop',
         shopAddress: '上海市黄浦区西藏中路160号',
