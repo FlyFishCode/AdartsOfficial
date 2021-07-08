@@ -20,9 +20,13 @@ const PasswordSetting = () => {
             label={t(108)}
             name="oldPassword"
             rules={[
+              {
+                required: true,
+                message: 'Please input your old password!'
+              },
               ({ getFieldValue }) => ({
                 validator (_, value) {
-                  if (/^\d{6,20}$/.test(value)) {
+                  if (/^[a-z]{6,20}$/.test(value)) {
                     return Promise.resolve();
                   }
                   return Promise.reject(new Error(t(41)));
@@ -37,6 +41,10 @@ const PasswordSetting = () => {
             name="newPassword"
             dependencies={['oldPassword']}
             rules={[
+              {
+                required: true,
+                message: 'Please input your password!'
+              },
               ({ getFieldValue }) => ({
                 validator (_, value) {
                   if (!value || getFieldValue('oldPassword') === value) {
@@ -52,14 +60,19 @@ const PasswordSetting = () => {
           <Form.Item
             label={t(37)}
             name="confirmPassword"
-            rules={[({ getFieldValue }) => ({
-              validator (_, value) {
-                if (/^\d{6,20}$/.test(value)) {
-                  return Promise.resolve();
+            rules={[
+              {
+                required: true,
+                message: 'Please input your old password!'
+              },
+              ({ getFieldValue }) => ({
+                validator (_, value) {
+                  if (/^[a-z]{6,20}$/.test(value)) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t(41)));
                 }
-                return Promise.reject(new Error(t(41)));
-              }
-            })]}
+              })]}
           >
             <Input.Password placeholder={t(41)} allowClear />
           </Form.Item>

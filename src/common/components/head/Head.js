@@ -24,14 +24,17 @@ const Head = (prop) => {
             <Menu.Item key="/News">
               <Link to='/News'>道具商城</Link>
             </Menu.Item>
-            <SubMenu key="2" title="Adarts店铺">
+            <Menu.Item key="/AdartsShop">
+              <Link to='/AdartsShop'>Adarts店铺</Link>
+            </Menu.Item>
+            {/* <SubMenu key="2" title="Adarts店铺">
               <Menu.Item key="/GameTalks">
                 <Link to='/GameTalks'>游戏交流</Link>
               </Menu.Item>
               <Menu.Item key="/GameRanking">
                 <Link to='/GameRanking'>游戏排名</Link>
               </Menu.Item>
-            </SubMenu>
+            </SubMenu> */}
             <SubMenu key="3" title="Adarts活动">
               <Menu.Item key="/TaskReward">
                 <Link to='/TaskReward'>任务奖励</Link>

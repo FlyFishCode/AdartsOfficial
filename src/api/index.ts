@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { message } from 'antd'
+// import { message } from 'antd'
 
 
 // 我的页面
@@ -15,6 +15,8 @@ const qs = require('qs')
 
 // 登录
 const indexLogin = `${baseWeb}login`
+// 注册
+const indexRegister = `${baseWebsite}websitsMember/register`;
 // 国家列表
 const countryList = `${baseWeb}countrylist`
 // 首页新闻列表
@@ -43,6 +45,9 @@ const indexBannerListHttp = (data:any) =>{
 const countryListHttp = ()=>{
 	return axios.get(countryList)
 }
+const indexRegisterHttp = (data:any) =>{
+	return axios.post(indexRegister, data)
+}
 const indexUserCardListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexUserCardList, data))
 }
@@ -60,18 +65,18 @@ const about30GameListHttp = (data:any) =>{
 
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
-		let flag = false
-		const NotLoginServer = ['login','newShop','officialNewsList','bannerShow','countrylist']
-		NotLoginServer.forEach(i =>{
-			if(config.url?.includes(i)){
-				flag = true
-			}
-		})
-		if(!flag && !token){
-				message.info('未登录');
-		}else{
+		// let flag = false
+		// const NotLoginServer = ['login','newShop','officialNewsList','bannerShow','countrylist']
+		// NotLoginServer.forEach(i =>{
+		// 	if(config.url?.includes(i)){
+		// 		flag = true
+		// 	}
+		// })
+		// if(flag && !token){
+		// 		message.info('未登录');
+		// }else{
 			config.headers.common['Authorization'] = token;
-		}
+		// }
     return config;
 }, function(error) {
 
@@ -106,6 +111,7 @@ export {
 		indexUserCardListHttp,
 		countryListHttp,
 		upLoadImgHttp,
+		indexRegisterHttp,
 		myPageIndexUserCardInfoHttp,
 		about30GameListHttp
 }

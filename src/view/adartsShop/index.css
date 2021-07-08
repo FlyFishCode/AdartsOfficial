@@ -1,0 +1,43 @@
+.adartsShopIndexSearchBox {
+    background: #E2E2E2;
+    padding: 10px;
+}
+
+.adartsShopIndexTitleBox {
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #E2E2E2;
+}
+
+.adartsShopIndex {
+    padding: 5px;
+}
+
+.adartsShopIndex .AllRightBox {
+    margin: 10px 0;
+}
+
+.shopActivityBox .AllRightBox {
+    margin: 10px 0;
+}
+
+.shopActivityBox {
+    padding: 5px;
+}
+
+.adartsShopIndex .iconImg {
+    display: flex;
+}
+
+.adartsShopIndex .iconImg img {
+    margin: 0 5px 0 0;
+}
+
+.adartsShopIndex .shopMachineType {
+    display: flex;
+}
+
+.adartsShopIndex .shopMachineType div {
+    margin: 0 5px 0 0;
+}

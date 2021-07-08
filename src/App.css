@@ -193,23 +193,28 @@
     box-shadow: 0px 0px 1px 1px #EBEFF0;
 }
 
+.shopActivityBox .AllImgContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .AllRightBox {
     width: 100%;
     display: flex;
     border: 1px solid #eee;
     box-shadow: 0 0 5px 1px;
     cursor: pointer;
+    padding: 5px;
 }
 
 .AllRightBox:hover {
     border: 1px solid #1890ff;
 }
 
-
-/* .AllImgBox {
-    width: 100px;
-    height: 120px;
-} */
+.AllImgBox {
+    margin-right: 10px;
+}
 
 .AllImgBox img {
     width: 140px;
@@ -218,12 +223,14 @@
 
 .shopIconBox {
     width: 30px;
-    height: 25px;
+    height: 30px;
+    margin-right: 5px;
 }
 
 .shopIconBox img {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 .shopBox {
@@ -649,6 +656,10 @@
     display: flex;
 }
 
-.loginBoxRow {
+.RowBox {
     margin: 20px 0;
+}
+
+.selectBox div {
+    width: 100%;
 }

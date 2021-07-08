@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 import NewsPage from './view/news';
 import MyPage from './view/myPage'
+import AdartsShop from './view/adartsShop'
 import MatchPage from './view/match';
 import Head from './common/components/head/Head.js'
 import UserCard from './common/components/UserCard'
@@ -48,6 +49,9 @@ const App = () => {
                     </Route>
                     <Route path='/Mypage'>
                         <MyPage />
+                    </Route>
+                    <Route path='/AdartsShop'>
+                        <AdartsShop />
                     </Route>
                     <Route path='/Match'>
                         <MatchPage />

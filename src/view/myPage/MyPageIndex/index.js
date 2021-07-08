@@ -13,9 +13,11 @@ const MyPageIndex = (props) => {
   }
   const getData = () => {
     myPageIndexUserCardInfoHttp(requsetData).then(res => {
-      setCard(res.data.data)
-      setCardId(res.data.data.cardId)
-      changeCardId(res.data.data.cardId)
+      if (res.data.data) {
+        setCard(res.data.data)
+        setCardId(res.data.data.cardId)
+        changeCardId(res.data.data.cardId)
+      }
     })
   }
   useEffect(() => {
