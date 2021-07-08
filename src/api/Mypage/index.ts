@@ -4,7 +4,9 @@ const baseWebsite = '/rpi/';
 
 const myPageIndexUserCardInfo = `${baseWebsite}websitsMember/memberCard`
 
+const myPageIndexGameInfo = `${baseWebsite}websitsMember/gameInformation`
+
 const about30GameList = `${baseWebsite}websitsMember/latelyAchievement`
 
 
-export {myPageIndexUserCardInfo,about30GameList}
+export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo}

@@ -2,7 +2,7 @@
 import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined, GlobalOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png'
 import LoginBtn from './LoginBtn'
 const { SubMenu } = Menu;
@@ -11,7 +11,7 @@ const { SubMenu } = Menu;
 const Head = (prop) => {
   const { userName, loginOut } = prop;
   const history = useHistory();
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className='headBox'>
@@ -53,7 +53,7 @@ const Head = (prop) => {
               <Link to='/Player'>选手介绍</Link>
             </Menu.Item>
             <Menu.Item key="/ServiceEr">
-              <Link to='/ServiceEr'>客服支援</Link>
+              <Link to='/ServiceEr'>{t(121)}</Link>
             </Menu.Item>
           </SubMenu>
         </Menu>

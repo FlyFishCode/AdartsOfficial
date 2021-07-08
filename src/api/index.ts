@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 // 我的页面
-import {myPageIndexUserCardInfo,about30GameList} from './Mypage'
+import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo} from './Mypage'
 
 
 
@@ -55,9 +55,13 @@ const upLoadImgHttp = (data:any) =>{
 	return axios.post(upLoadImg, data);
 }
 
-// 我的页面
+// 我的页面首页卡
 const myPageIndexUserCardInfoHttp = (data:any) =>{
 	return axios.post(myPageIndexUserCardInfo, qs.stringify(data));
+}
+// 我的页面首页游戏资料
+const myPageIndexGameInfoHttp = (data:any) =>{
+	return axios.post(myPageIndexGameInfo, qs.stringify(data));
 }
 const about30GameListHttp = (data:any) =>{
 	return axios.post(about30GameList, qs.stringify(data));
@@ -113,5 +117,6 @@ export {
 		upLoadImgHttp,
 		indexRegisterHttp,
 		myPageIndexUserCardInfoHttp,
+		myPageIndexGameInfoHttp,
 		about30GameListHttp
 }

@@ -309,3 +309,215 @@
     background: #eee;
     padding: 20px 0;
 }
+
+.myPageIndexBox {
+    display: flex;
+    border: 2px solid #D3D3D3;
+}
+
+.myPageIndexGameBox {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    border: 2px solid #D3D3D3;
+    font-weight: bold;
+}
+
+.myPageIndexIcon {
+    font-size: 25px;
+    margin: 0 10px;
+}
+
+.myPageIndexGameRating {
+    display: flex;
+    border: 2px solid #D3D3D3;
+    margin: 5px 0;
+}
+
+.myPageIndexGameRating div {
+    flex: 1;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.myPageIndexGameRating div:nth-child(1) {
+    border-right: 1px solid #d3d3d3;
+}
+
+.myPageIndexItemBox {
+    flex: 1;
+    padding: 10px;
+    background: #EFF3F4;
+    border-right: 1px solid #d3d3d3;
+}
+
+.myPageIndexItemBox>div:nth-child(1) {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.myPageIndexItemBox>div:nth-child(2) {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.myPageIndexIconBox {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background: #fff;
+    margin: 0 5px 0 0;
+}
+
+.myPageIndexIconBox>div:nth-child(1) {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.myPageIndexIconBox img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.myPageIndexHomeShop {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+    background: #EFF3F4;
+    flex-direction: column;
+}
+
+.myPageIndexHomeShop>div:nth-child(1) {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.myPageIndexHomeShop>div:nth-child(3) {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 2px solid #d3d3d3;
+}
+
+.myPageIndexHomeShop>div:nth-child(3)>div {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.myPageIndexHomeShop>div:nth-child(3)>div div:nth-child(2) {
+    display: flex;
+    align-items: center;
+}
+
+.myPageIndexStyleBox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.myPageIndexStyleIcon {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+}
+
+.myPageIndexStyleIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.myPageIndexStyleBox>div>div:nth-child(1) {
+    font-weight: bold;
+}
+
+.myPageIndexRMDStyle>div:nth-child(1) {
+    font-weight: bold;
+}
+
+.myPageIndexRMDStyle>div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+}
+
+.myPageIndexRMDStyle div:nth-child(2) div:nth-child(1) {
+    margin-right: 10px;
+}
+
+.myPageIndexOtherBox {
+    display: flex;
+    margin: 5px 0;
+    font-size: 20px;
+    border: 2px solid #D3D3D3;
+}
+
+.myPageIndexOtherBox div {
+    flex: 1;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.myPageIndexOtherBox div span {
+    margin: 0 10px;
+}
+
+.myPageIndexOtherBox div:hover {
+    background: #D3D3D3;
+    color: #fff;
+}
+
+.myPageIndexOtherBox div:nth-child(2) {
+    border-left: 1px solid #D3D3D3;
+    border-right: 1px solid #D3D3D3;
+}
+
+.myPageIndexOtherBox div:nth-child(3) {
+    border-right: 1px solid #D3D3D3;
+}
+
+.myPageIndexPlayerBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.myPageIndexPlayerBox>div {
+    display: flex;
+    width: 48%;
+    justify-content: space-around;
+    border: 2px solid #D3D3D3;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.myPageIndexPlayerBox>div:hover {
+    border: 2px solid #1890ff;
+}
+
+.myPageIndexPlayerIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.myPageIndexPlayerIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.myPageIndexPlayerMsg {
+    font-size: 30px;
+}

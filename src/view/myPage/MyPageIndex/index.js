@@ -1,32 +1,93 @@
 
 import { useState, useEffect } from 'react'
-import { Progress } from 'antd'
-import { myPageIndexUserCardInfoHttp } from '@/api'
+import { Progress, Button } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { myPageIndexUserCardInfoHttp, myPageIndexGameInfoHttp } from '@/api'
+import { createFromIconfontCN } from '@ant-design/icons';
+import { MessageOutlined, HomeFilled, UserOutlined, PlusOutlined, BulbOutlined } from '@ant-design/icons'
+
+import m from '@/assets/img/m.png'
 
 const MyPageIndex = (props) => {
   const { changeCardId } = props;
+  const { t } = useTranslation()
   const [card, setCard] = useState({});
-  const [cardId, setCardId] = useState('');
+  const [ganeInfo, setGaneInfo] = useState(
+    {
+      adartsRating: 20.73,
+      leagueRating: 45.7,
+      gameIcon: m,
+      gameA: 1520,
+      gameB: 189152,
+      shopName: 'Office Vbar',
+      playerList: [
+        {
+          name: '张三',
+        },
+        {
+          name: '李四',
+        },
+        {
+          name: '王五',
+        }
+      ],
+      friendsList: [
+        {
+          id: 1,
+          img: m,
+          name: 'AAAAAAA',
+          rating: 52,
+          ppd: 51.3,
+          mpr: 19
+        },
+        {
+          id: 2,
+          img: m,
+          name: 'AAAAAAA',
+          rating: 52,
+          ppd: 51.3,
+          mpr: 19
+        },
+        {
+          id: 3,
+          img: m,
+          name: 'AAAAAAA',
+          rating: 52,
+          ppd: 51.3,
+          mpr: 19
+        }
+      ]
+    }
+  );
+  const MyIcon = createFromIconfontCN({
+    scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
+  })
   const requsetData = {
-    cardId,
+    cardId: sessionStorage.getItem('websiteCardId'),
     memberId: sessionStorage.getItem('websiteMemberId')
   }
   const getData = () => {
     myPageIndexUserCardInfoHttp(requsetData).then(res => {
       if (res.data.data) {
         setCard(res.data.data)
-        setCardId(res.data.data.cardId)
         changeCardId(res.data.data.cardId)
+        sessionStorage.setItem('websiteCardId', res.data.data.cardId)
       }
+    })
+  }
+  const getGameInfoData = () => {
+    myPageIndexGameInfoHttp({ cardId: sessionStorage.getItem('websiteCardId') }).then(res => {
+      setGaneInfo(res.data.data)
     })
   }
   useEffect(() => {
     getData()
+    getGameInfoData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
-      <div className='myPageTitle' id='myPageIndex'>我的页面首页</div>
+      <div className='myPageTitle' id='myPageIndex'>{t(20)}</div>
       <div className='MyPageIndex'>
         <div className='userCard'>
           <div className='userCardLeftBox' >
@@ -85,49 +146,80 @@ const MyPageIndex = (props) => {
           </div>
         </div>
       </div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
+      <div className='myPageIndexGameBox'><span className='myPageIndexIcon'><MessageOutlined /></span>{t(116)}</div>
+      <div className='myPageIndexGameRating'>
+        <div>Adarts Rating：{ganeInfo.adartsRating}</div>
+        <div>League Rating：{ganeInfo.leagueRating}</div>
+      </div>
+      <div className='myPageIndexBox'>
+        <div className='myPageIndexItemBox'>
+          <div>ITEM</div>
+          <div>
+            <div className='myPageIndexIconBox'>
+              <div><img src={ganeInfo.gameIcon} alt="" /></div>
+              <div>{ganeInfo.coin}</div>
+            </div>
+            <div className='myPageIndexIconBox'>
+              <div><img src={ganeInfo.gameIcon} alt="" /></div>
+              <div>{ganeInfo.coin}</div>
+            </div>
+          </div>
+          <div className='myPageIndexStyleBox'>
+            <div>
+              <div>My Style</div>
+              <div className='myPageIndexStyleIcon'><img src={ganeInfo.gameIcon} alt="" /></div>
+            </div>
+            <div className='myPageIndexRMDStyle'>
+              <div>{t(117)}</div>
+              <div>
+                <div className='myPageIndexStyleIcon'><img src={ganeInfo.gameIcon} alt="" /></div>
+                <div className='myPageIndexStyleIcon'><img src={ganeInfo.gameIcon} alt="" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='myPageIndexHomeShop'>
+          <div><span><HomeFilled /></span>{t(23)}</div>
+          <div>{ganeInfo.homeShop}</div>
+          <div>
+            <div>
+              <div>「 <UserOutlined />[ANYWHERE] 」{t(118)}</div>
+              <div><Button shape="circle" size='small' icon={<PlusOutlined />} /></div>
+            </div>
+            {ganeInfo.playerList && ganeInfo.playerList.map((i, index) => {
+              return (
+                <div key={index}>
+                  <div>{i.name}</div>
+                  <div><BulbOutlined /></div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>{t(67)}</div>
+        <div className='myPageIndexPlayerBox'>
+          {ganeInfo.friendsList && ganeInfo.friendsList.map((i, index) => {
+            return (
+              <div key={index}>
+                <div className='myPageIndexPlayerIcon'><img src={i.img} alt="" /></div>
+                <div>
+                  <div>{i.name}</div>
+                  <div><span>PPD {i.ppd}</span><span>MPR {i.mpr}</span></div>
+                </div>
+                <div className='myPageIndexPlayerMsg'><MessageOutlined /></div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <div className='myPageIndexOtherBox'>
+        <div><MyIcon type="el-icon-gonggao1-copy" />{t(8)}</div>
+        <div><MyIcon type="el-icon-hangyepaiming-copy-copy" />{t(119)}</div>
+        <div><MyIcon type="el-icon-ditu1-copy" />{t(120)}</div>
+        <div><MyIcon type="el-icon-kefu-copy" />{t(121)}</div>
+      </div>
     </div>
   )
 }

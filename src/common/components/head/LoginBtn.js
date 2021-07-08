@@ -10,6 +10,7 @@ const LoginBtn = (props) => {
     sessionStorage.removeItem('websiteToken')
     sessionStorage.removeItem('websiteUserName')
     sessionStorage.removeItem('websiteMemberId')
+    sessionStorage.removeItem('websiteCardId')
     loginOut('')
   }
   return (

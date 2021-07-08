@@ -52,7 +52,7 @@ const AddUser = () => {
                     message.info(res.data.msg)
                     history.push('login')
                 } else {
-                    message.warning(res.data.msg)
+                    message.warning(res.data.data)
                 }
             })
         })

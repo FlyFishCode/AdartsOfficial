@@ -28,6 +28,7 @@ const LoginBox = (props) => {
                 changeUserName(res.data.data.username)
                 sessionStorage.setItem('websiteUserName', res.data.data.username)
                 sessionStorage.setItem('websiteMemberId', res.data.data.memberId)
+                sessionStorage.setItem('websiteCardId', res.data.data.cardNoList[0])
                 sessionStorage.setItem('websiteToken', res.data.data.token)
             } else {
                 message.warning(res.data.msg)
