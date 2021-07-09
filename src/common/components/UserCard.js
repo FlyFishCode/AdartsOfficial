@@ -25,8 +25,7 @@ const UserCard = (props) => {
     }
   }
   const getUserCardList = () => {
-    // const memberId = sessionStorage.getItem('websiteMemberId')
-    indexUserCardListHttp({ memberId: 4082 }).then(res => {
+    indexUserCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
       setUserCard(res.data.data)
     })
   }

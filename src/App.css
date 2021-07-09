@@ -663,3 +663,13 @@
 .selectBox div {
     width: 100%;
 }
+
+.AddFriendLabel {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.AddFriendBtn button {
+    margin: 0 5px;
+}

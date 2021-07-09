@@ -45,7 +45,10 @@ const FriendsList = () => {
       key: 'value',
       render: (text, row, index) => {
         return (
-          <div className='handleBox'><Rate count='1' value={dataList[index].value} onChange={() => handleRateChange(index)} /><div><Button size='small' icon={<CloseOutlined />} /></div></div>
+          <div className='handleBox'>
+            <Rate count='1' value={dataList[index].value} onChange={() => handleRateChange(index)} />
+            <div><Button size='small' icon={<CloseOutlined />} /></div>
+          </div>
         )
       }
     }
@@ -62,6 +65,14 @@ const FriendsList = () => {
   }
   const handleChange = () => {
     console.log(1);
+  }
+  const handleClick = () => {
+    const ele = document.getElementById('AddFriends')
+    ele && ele.scrollIntoView({
+      behavior: "smooth", // 默认 auto
+      block: "start", // 默认 center
+      inline: "nearest", // 默认 nearest
+    })
   }
   const pageIndexChange = (index) => {
     console.log(index);
@@ -158,7 +169,7 @@ const FriendsList = () => {
             <Option value="3">{t(94)}</Option>
           </Select>
           <Search placeholder="input search text" allowClear onSearch={handleSearch} style={{ width: 200 }} />
-          <Button type="primary">{t(68)}</Button>
+          <Button type="primary" onClick={handleClick}>{t(68)}</Button>
         </Col>
       </Row>
       <div>
