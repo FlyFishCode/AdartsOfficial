@@ -9,7 +9,7 @@ const UserCard = (props) => {
   const [gift, setGift] = useState(0)
   const [position, setPosition] = useState(0)
   const [positionIndex, setPositionIndex] = useState(0)
-  const num = userCard.length;
+  const num = userCard && userCard.length;
   const { t } = useTranslation();
   const handleUserCardClick = (direction) => {
     if (direction === 'left') {
@@ -25,7 +25,7 @@ const UserCard = (props) => {
     }
   }
   const getUserCardList = () => {
-    indexUserCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
+    indexUserCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') || '' }).then(res => {
       setUserCard(res.data.data)
     })
   }
@@ -43,7 +43,7 @@ const UserCard = (props) => {
       <Col span='1' offset='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col>
       <Col span='8' offset='1' className='userCardListBg'>
         <div className='userCardListBox animate__animated animate__fadeInRight'>
-          {userCard.map((i, index) => {
+          {userCard && userCard.map((i, index) => {
             return (
               <div className='userCard' key={index}>
                 <div className='userCardLeftBox' >
@@ -105,7 +105,7 @@ const UserCard = (props) => {
           })}
         </div>
         <div className='positionIndexBox'>
-          {userCard.map((i, index) => {
+          {userCard && userCard.map((i, index) => {
             return (
               <div className={index === positionIndex ? 'isActive' : 'positionIndex'} key={index}></div>
             )

@@ -67,7 +67,7 @@ const AdartsCardSetting = () => {
             <div className='AdartsCardInfoBox'>
               <div className='AdartsCardInfo'>
                 <div className='AdartsCardIconBox'>{i.icon ? <img src={A} alt="" /> : <img src={L} alt="" />}</div>
-                <div>卡号：{i.cardNo}</div>
+                <div>{t(35)}：{i.cardNo}</div>
               </div>
               <div className='AdartsCardLine'></div>
               <div className='AdartsCardResultBox'>

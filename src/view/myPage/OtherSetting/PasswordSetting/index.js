@@ -63,7 +63,7 @@ const PasswordSetting = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input your old password!'
+                message: 'Please input your password!'
               },
               ({ getFieldValue }) => ({
                 validator (_, value) {

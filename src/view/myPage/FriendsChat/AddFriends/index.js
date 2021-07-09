@@ -62,6 +62,7 @@ const AddFriends = () => {
     console.log(value);
   }
   const pageIndexChange = (index) => {
+    console.log(pageIndex);
     setPageIndex(index)
     if (flag) {
       getPlayerList()
