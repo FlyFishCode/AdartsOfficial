@@ -1,36 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next'
-import m from '@/assets/img/m.png'
+import { allGameDataHttp } from '@/api'
 import '../index.css'
 const AllGameData = () => {
   const { t } = useTranslation()
-  const [data] = useState({
-    cardNo: '9999999999999',
-    userName: 'Alive',
-    rating: 100,
-    ppd: 90,
-    ppr: 80,
-    mpr: 70,
-    a: 10,
-    b: 20,
-    c: 30,
-    d: 40,
-    e: 700,
-    f: 1502,
-    g: 123,
-    gg: 324,
-    ggg: 23424,
-    gggg: 4620,
-  })
+  const [data, setData] = useState({})
+  const getData = () => {
+    allGameDataHttp({ cardId: sessionStorage.getItem('websiteCardId') || '' }).then(res => {
+      setData(res.data.data)
+    })
+  }
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <div>
       <div className='myPageTitle' id='AllGameData'>{t(21)}</div>
       <div className='AllGameDataDefault AllGameDataInfoBox'>
         <div className='AllGameDataImgBox'>
-          <img src={m} alt="" />
+          <img src={data.portrait} alt="" />
         </div>
         <div className='AllGameDataUserBox'>
-          <div>{data.userName}</div>
+          <div>{data.memberName}</div>
           <div>Card No：{data.cardNo}</div>
         </div>
       </div>
@@ -60,20 +51,20 @@ const AllGameData = () => {
           <div>{t(77)}</div>
         </div>
         <div className='AllGameDataGameRate'>
-          <div>{data.a}</div>
-          <div>{data.b}</div>
-          <div>{data.c}</div>
-          <div>{data.d}</div>
+          <div>{`${data.quantity01} / ${data.quantity01}%`} </div>
+          <div>{`${data.quantity01} / ${data.winProbability01}%`}</div>
+          <div>{`${data.quantityCricket} / ${data.winProbabilityCricket}%`}</div>
+          <div>{`${data.allQuantity} / ${data.allWinProbability}%`}</div>
         </div>
       </div>
       <div className='AllGameDataDefault AllGameDataCountBox'>
         <div className='AllGameDataCount'>
           <div>{t(78)}</div>
-          <div>{data.e}</div>
+          <div>{data.countUpAverage}</div>
         </div>
         <div className='AllGameDataCount'>
           <div>{t(79)}</div>
-          <div>{data.f}</div>
+          <div>{data.countUpMax}</div>
         </div>
       </div>
       <div className='AllGameDataDefault'>
@@ -81,19 +72,19 @@ const AllGameData = () => {
         <div className='AllGameDataMaxBox'>
           <div className='AllGameDataMaxEle'>
             <div>Half it</div>
-            <div>{data.g}</div>
+            <div>{data.quantity01}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Big Bull</div>
-            <div>{data.gg}</div>
+            <div>{data.quantity01}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Eagle Eyes</div>
-            <div>{data.ggg}</div>
+            <div>{data.quantity01}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Cricket Count Up</div>
-            <div>{data.gggg}</div>
+            <div>{data.quantity01}</div>
           </div>
         </div>
       </div>
@@ -109,10 +100,10 @@ const AllGameData = () => {
           <div>{t(84)}</div>
         </div>
         <div className='AllGameDataTotalData'>
-          <div>{data.gg}</div>
-          <div>{data.gg}</div>
-          <div>{data.gg}</div>
-          <div>{data.gg}</div>
+          <div>{data.quantity01}</div>
+          <div>{data.quantity01}</div>
+          <div>{data.quantity01}</div>
+          <div>{data.quantity01}</div>
         </div>
       </div>
       <div className='AllGameDataDefault'>
@@ -127,12 +118,12 @@ const AllGameData = () => {
             <div>1501</div>
           </div>
           <div className='AllGameDataFast'>
-            <div>{data.gg}</div>
-            <div>{data.gg}</div>
-            <div>{data.gg}</div>
-            <div>{data.gg}</div>
-            <div>{data.gg}</div>
-            <div>{data.gg}</div>
+            <div>{data.quantity01}</div>
+            <div>{data.quantity01}</div>
+            <div>{data.quantity01}</div>
+            <div>{data.quantity01}</div>
+            <div>{data.quantity01}</div>
+            <div>{data.quantity01}</div>
           </div>
         </div>
       </div>

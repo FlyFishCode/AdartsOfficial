@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 // 我的页面
-import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo} from './Mypage'
+import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData} from './Mypage'
 
 
 
@@ -66,6 +66,10 @@ const myPageIndexGameInfoHttp = (data:any) =>{
 const about30GameListHttp = (data:any) =>{
 	return axios.post(about30GameList, qs.stringify(data));
 }
+// 我的页面整体数据
+const allGameDataHttp = (data:any) =>{
+	return axios.post(allGameData, qs.stringify(data));
+}
 
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
@@ -118,5 +122,6 @@ export {
 		indexRegisterHttp,
 		myPageIndexUserCardInfoHttp,
 		myPageIndexGameInfoHttp,
-		about30GameListHttp
+		about30GameListHttp,
+		allGameDataHttp
 }

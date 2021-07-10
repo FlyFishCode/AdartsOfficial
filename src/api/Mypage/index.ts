@@ -8,5 +8,12 @@ const myPageIndexGameInfo = `${baseWebsite}websitsMember/gameInformation`
 
 const about30GameList = `${baseWebsite}websitsMember/latelyAchievement`
 
+// 我的页面整体数据
+const allGameData = `${baseWebsite}websitsMember/gameData`;
 
-export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo}
+
+
+
+
+
+export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData}
