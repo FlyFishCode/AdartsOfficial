@@ -23,13 +23,13 @@ const LoginBox = (props) => {
         }
         indexLoginHttp({ username, password }).then((res) => {
             if (res.data.code === 100) {
-                history.push('/')
                 setUserName(res.data.data.username)
                 changeUserName(res.data.data.username)
                 sessionStorage.setItem('websiteUserName', res.data.data.username)
                 sessionStorage.setItem('websiteMemberId', res.data.data.memberId)
                 sessionStorage.setItem('websiteCardId', res.data.data.cardNoList[0])
                 sessionStorage.setItem('websiteToken', res.data.data.token)
+                history.push('/')
             } else {
                 message.warning(res.data.msg)
             }

@@ -9,7 +9,7 @@ import { MessageOutlined, HomeFilled, UserOutlined, PlusOutlined, BulbOutlined }
 import m from '@/assets/img/m.png'
 
 const MyPageIndex = (props) => {
-  const { changeCardId } = props;
+  // const { changeCardId } = props;
   const { t } = useTranslation()
   const [card, setCard] = useState({});
   const [ganeInfo, setGaneInfo] = useState(
@@ -71,8 +71,8 @@ const MyPageIndex = (props) => {
     myPageIndexUserCardInfoHttp(requsetData).then(res => {
       if (res.data.data) {
         setCard(res.data.data)
-        changeCardId(res.data.data.cardId)
-        sessionStorage.setItem('websiteCardId', res.data.data.cardId)
+        // changeCardId(res.data.data.cardId)
+        // sessionStorage.setItem('websiteCardId', res.data.data.cardId)
       }
     })
   }
