@@ -7,6 +7,8 @@ const AccountInfoSetting = () => {
   const { t } = useTranslation()
   const [cardInfo, setCardInfo] = useState({});
   const [fileList, setFileList] = useState([])
+  const [disabled, setDisabled] = useState(false)
+  const [countDown, setCountDown] = useState(59)
   const [previewTitle, setPreviewTitle] = useState('')
   const [previewImage, setPreviewImage] = useState('')
   const [previewVisible, setPreviewVisible] = useState(false)
@@ -57,6 +59,22 @@ const AccountInfoSetting = () => {
       cardReDay: 1,
     })
   }
+  const handleBtnClick = () => {
+    setDisabled(true)
+  }
+  useEffect(() => {
+    let time = null
+    console.log(countDown);
+    if (disabled && countDown) {
+      time = setTimeout(() => {
+        setCountDown(count => count - 1)
+      }, 1000)
+    } else {
+      setCountDown(59)
+      setDisabled(false)
+      clearTimeout(time)
+    }
+  }, [disabled, countDown])
   useEffect(() => {
     getCardInfo()
   }, [])
@@ -127,7 +145,7 @@ const AccountInfoSetting = () => {
         <Col span='20'>
           <div><Input placeholder="Basic usage" /></div>
           <div className='AccountInfoEmailBox'>
-            <div><Button type="primary">{t(59)}</Button></div>
+            <div><Button type="primary" onClick={handleBtnClick} disabled={disabled}>{disabled ? countDown : t(59)}</Button></div>
             <div className='label'>{t(88)}</div>
             <div><Input placeholder="Basic usage" /></div>
             <div className='AccountInfoRadio'>

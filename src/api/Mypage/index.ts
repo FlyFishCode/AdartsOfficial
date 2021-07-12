@@ -11,9 +11,10 @@ const about30GameList = `${baseWebsite}websitsMember/latelyAchievement`
 // 我的页面整体数据
 const allGameData = `${baseWebsite}websitsMember/gameData`;
 
+// Award记录
+const awardHistoryData = `${baseWebsite}websitsMember/awardRecord`;
 
 
 
 
-
-export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData}
+export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData}
