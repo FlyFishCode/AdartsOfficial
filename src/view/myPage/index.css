@@ -247,9 +247,10 @@
     border-top: 2px solid #eee;
 }
 
-.rowBox+div:last-child {
+
+/* .rowBox+div:last-child {
     border-bottom: 2px solid #eee;
-}
+} */
 
 .label {
     display: flex;

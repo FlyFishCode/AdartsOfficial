@@ -673,3 +673,12 @@
 .AddFriendBtn button {
     margin: 0 5px;
 }
+
+
+/* 全局按钮样式设定 */
+
+.btnBox {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
