@@ -1,7 +1,7 @@
 // import { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined, GlobalOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png'
 import LoginBtn from './LoginBtn'
@@ -13,13 +13,22 @@ const Head = (prop) => {
   const history = useHistory();
   const { t } = useTranslation();
 
+  const handlePushClick = (value) => {
+    const userId = sessionStorage.getItem('websiteMemberId')
+    if (userId) {
+      history.push(value)
+    } else {
+      message.info(t(130));
+      history.push('login')
+    }
+  }
   return (
     <div className='headBox'>
       <div className='iconMenu'>
         <Menu mode="horizontal">
           <SubMenu key="1" icon={<UnorderedListOutlined />}>
             <Menu.Item key="/MyPage">
-              <Link to='/MyPage'>我的页面</Link>
+              <div onClick={() => handlePushClick('MyPage')}>我的页面</div>
             </Menu.Item>
             <Menu.Item key="/News">
               <Link to='/News'>道具商城</Link>

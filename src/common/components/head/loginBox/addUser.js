@@ -6,13 +6,16 @@ import { countryListHttp } from '@/api'
 import { LeftOutlined } from '@ant-design/icons'
 import { indexRegisterHttp } from '@/api'
 const AddUser = () => {
-    const [countryId, setCountry] = useState()
+    const [countryId, setCountryId] = useState()
     const [countryList, setCountryList] = useState([])
     const [languageId, setLanguage] = useState('')
     const [acceptSMS, setAcceptSMS] = useState(0)
-    const [birth, setBirth] = useState('')
     const [acceptMail, setAcceptMail] = useState(0)
+    const [birth, setBirth] = useState('')
+    const [type, setType] = useState('phone')
     const [phone, setPhone] = useState('')
+    const [phoneCode, setPhoneCode] = useState('+86')
+    const [display, setDisplay] = useState('inline-block')
     const [gender, setGender] = useState(1)
     const [name, setName] = useState('')
     const [form] = Form.useForm()
@@ -26,6 +29,9 @@ const AddUser = () => {
         nickname: null,
         password: null,
         confirmPassword: null,
+        phone: 'phone',
+        phoneCode: '+86',
+        typeValue: null
     });
     const { Option } = Select;
     const layout = {
@@ -42,7 +48,16 @@ const AddUser = () => {
     const getCountryList = () => {
         countryListHttp().then(res => {
             setCountryList(res.data.data)
+            setCountryId(res.data.data[0].countryId)
         })
+    }
+    const handleTypeChange = (value) => {
+        setType(value)
+        if (value === 'phone') {
+            setDisplay('inline-block')
+        } else {
+            setDisplay('none')
+        }
     }
     const subitFrom = () => {
         form.validateFields().then(values => {
@@ -52,7 +67,7 @@ const AddUser = () => {
                     message.info(res.data.msg)
                     history.push('login')
                 } else {
-                    message.warning(res.data.data)
+                    message.warning(res.data.msg)
                 }
             })
         })
@@ -69,7 +84,8 @@ const AddUser = () => {
             <Row className='registerHead RowBox'>
                 <Col span='2' className='labelTitle'>{t(31)}</Col>
                 <Col span='10' className='selectBox'>
-                    <Select onChange={(value) => setCountry(value)}>
+                    <Select onChange={(value) => setCountryId(value)
+                    }>
                         {countryList.map(i => {
                             return (
                                 <Option value={i.countryId} key={i.countryId}>{i.countryName}</Option>
@@ -165,17 +181,17 @@ const AddUser = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label={t(39)}
-                    name="email"
+                    name="typeValue"
+                    label={t(131)}
                     rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email!',
-                        },
+                        { required: true, message: 'Please input your value' },
                         ({ getFieldValue }) => ({
                             validator (_, value) {
-                                const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                if (!value || reg.test(value)) {
+                                console.log(type);
+                                console.log(phoneCode);
+                                const regPhone = /^(?:(?:\+|00)86)?1\d{10}$/;
+                                const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                if (!value || type === 'phone' ? regPhone.test(value) : regEmail.test(value)) {
                                     return Promise.resolve();
                                 }
                                 return Promise.reject(new Error(t(63)));
@@ -183,7 +199,22 @@ const AddUser = () => {
                         })
                     ]}
                 >
-                    <Input placeholder={t(42)} />
+                    <Input addonBefore={
+                        <>
+                            <Form.Item name="phone" noStyle>
+                                <Select style={{ width: 120 }} onChange={(value) => handleTypeChange(value)}>
+                                    <Option value="phone">{t(48)}</Option>
+                                    <Option value="email">{t(39)}</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="phoneCode" noStyle>
+                                <Select style={{ width: 100, display: display }} onChange={(value) => setPhoneCode(value)}>
+                                    <Option value="+86">+86</Option>
+                                    <Option value="+666">+666</Option>
+                                </Select>
+                            </Form.Item>
+                        </>
+                    } style={{ width: '100%' }} />
                 </Form.Item>
                 <Form.Item name='acceptMail' label={t(55)}>
                     <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>

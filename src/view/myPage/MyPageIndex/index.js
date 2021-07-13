@@ -62,13 +62,12 @@ const MyPageIndex = (props) => {
   const MyIcon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
   })
-  const cardId = sessionStorage.getItem('websiteCardId')
-  const requsetData = {
-    cardId: cardId,
-    memberId: sessionStorage.getItem('websiteMemberId')
-  }
-  const getData = () => {
-    myPageIndexUserCardInfoHttp(requsetData).then(res => {
+  const cardId = Number(sessionStorage.getItem('websiteCardId'));
+  const getData = (cardId) => {
+    myPageIndexUserCardInfoHttp({
+      cardId: cardId,
+      memberId: sessionStorage.getItem('websiteMemberId')
+    }).then(res => {
       if (res.data.data) {
         setCard(res.data.data)
         // changeCardId(res.data.data.cardId)
@@ -76,18 +75,17 @@ const MyPageIndex = (props) => {
       }
     })
   }
-  const getGameInfoData = () => {
+  const getGameInfoData = (cardId) => {
     myPageIndexGameInfoHttp({ cardId: cardId }).then(res => {
       setGaneInfo(res.data.data)
     })
   }
   useEffect(() => {
     if (cardId) {
-      getData()
-      getGameInfoData()
+      getData(cardId)
+      getGameInfoData(cardId)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [cardId])
   return (
     <div>
       <div className='myPageTitle' id='myPageIndex'>{t(20)}</div>

@@ -3,16 +3,19 @@ import { useTranslation } from 'react-i18next'
 import { allGameDataHttp } from '@/api'
 import '../index.css'
 const AllGameData = () => {
-  const { t } = useTranslation()
-  const [data, setData] = useState({})
-  const getData = () => {
-    allGameDataHttp({ cardId: sessionStorage.getItem('websiteCardId') || '' }).then(res => {
+  const { t } = useTranslation();
+  const [data, setData] = useState({});
+  const cardId = Number(sessionStorage.getItem('websiteCardId'))
+  const getData = (cardId) => {
+    allGameDataHttp({ cardId }).then(res => {
       setData(res.data.data)
     })
   }
   useEffect(() => {
-    getData()
-  }, [])
+    if (cardId) {
+      getData(cardId)
+    }
+  }, [cardId])
   return (
     <div>
       <div className='myPageTitle' id='AllGameData'>{t(21)}</div>

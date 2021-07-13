@@ -6,30 +6,33 @@ import '../index.css'
 const AwardHistory = () => {
   const { t } = useTranslation()
   const [dataList, setDataList] = useState([]);
-  const getData = () => {
-    awardHistoryDataHttp({ cardId: sessionStorage.getItem('websiteCardId') || '' }).then(res => {
+  const cardId = Number(sessionStorage.getItem('websiteCardId'));
+  const getData = (cardId) => {
+    awardHistoryDataHttp({ cardId }).then(res => {
       const data = res.data.data
-      setDataList([
-        { name: 'S-Bull', count: 0, total: 0 },
-        { name: 'D-Bull', count: 0, total: 0 },
-        { name: 'LOW TON', count: data.lowTonMonth, total: data.lowTonTotal },
-        { name: 'HAT TRICK', count: data.hatTrickMonth, total: data.hatTrickTotal },
-        { name: '9MARK', count: data.nineMarkMonth, total: data.nineMarkTotal },
-        { name: '8MARK', count: data.eightMarkMonth, total: data.eightMarkTotal },
-        { name: '7MARK', count: data.sevenMarkMonth, total: data.sevenMarkTotal },
-        { name: '6MARK', count: data.sixMarkMonth, total: data.sixMarkTotal },
-        { name: '5MARK', count: data.fiveMarkMonth, total: data.fiveMarkTotal },
-        { name: '3 IN A BED', count: data.threeInAbedMonth, total: data.threeInAbedTotal },
-        { name: 'HIGT TON', count: data.highTonMonth, total: data.highTonTotal },
-        { name: 'TON 80', count: data.ton80Month, total: data.ton80Total },
-        { name: 'WHITE HORSE', count: data.whiteHorseMonth, total: data.whiteHorseTotal },
-        { name: '3 IN THE BLACK', count: data.threeInABlackMonth, total: data.threeInABlackTotal },
-      ])
+      if (data) {
+        setDataList([
+          { name: 'S-Bull', count: 0, total: 0 },
+          { name: 'D-Bull', count: 0, total: 0 },
+          { name: 'LOW TON', count: data.lowTonMonth, total: data.lowTonTotal },
+          { name: 'HAT TRICK', count: data.hatTrickMonth, total: data.hatTrickTotal },
+          { name: '9MARK', count: data.nineMarkMonth, total: data.nineMarkTotal },
+          { name: '8MARK', count: data.eightMarkMonth, total: data.eightMarkTotal },
+          { name: '7MARK', count: data.sevenMarkMonth, total: data.sevenMarkTotal },
+          { name: '6MARK', count: data.sixMarkMonth, total: data.sixMarkTotal },
+          { name: '5MARK', count: data.fiveMarkMonth, total: data.fiveMarkTotal },
+          { name: '3 IN A BED', count: data.threeInAbedMonth, total: data.threeInAbedTotal },
+          { name: 'HIGT TON', count: data.highTonMonth, total: data.highTonTotal },
+          { name: 'TON 80', count: data.ton80Month, total: data.ton80Total },
+          { name: 'WHITE HORSE', count: data.whiteHorseMonth, total: data.whiteHorseTotal },
+          { name: '3 IN THE BLACK', count: data.threeInABlackMonth, total: data.threeInABlackTotal },
+        ])
+      }
     })
   }
   useEffect(() => {
-    getData()
-  }, [])
+    getData(cardId)
+  }, [cardId])
   return (
     <div>
       <div className='myPageTitle' id='AwardHistory'>{t(65)}</div>
