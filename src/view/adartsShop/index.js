@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 // import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Row, Col, Menu } from 'antd'
+import { Row, Col, Anchor } from 'antd'
 
 import AdartsShopIndex from './adartsShopIndex'
 import AdartsShopSearch from './adartsShopSearch'
@@ -9,6 +9,8 @@ import AdartsShopThemeSet from './adartsShopThemeSet'
 import AdartsShopNew from './adartsShopNew'
 
 import './index.css'
+
+const { Link } = Anchor;
 
 
 const AdartsShop = () => {
@@ -19,29 +21,28 @@ const AdartsShop = () => {
     setCardId(value)
   }
   const handleClick = (e) => {
-    const ele = document.getElementById(e.key)
-    ele && ele.scrollIntoView({
-      behavior: "smooth", // 默认 auto
-      block: "start", // 默认 center
-      inline: "nearest", // 默认 nearest
-    })
+    // const ele = document.getElementById(e.key || e)
+    // ele && ele.scrollIntoView({
+    //   behavior: "smooth", // 默认 auto
+    //   block: "start", // 默认 center
+    //   inline: "nearest", // 默认 nearest
+    // })
+    e.preventDefault();
   }
-  // console.log(Location.state);
   useEffect(() => {
     handleChangeCardId()
   }, [cardId])
   return (
     <Row id='myPage'>
       <Col span={4} offset={1}>
-        <Menu
-          onClick={handleClick}
-          mode="inline"
-        >
-          <Menu.Item key="adartsShopIndex">{t(111)}</Menu.Item>
-          <Menu.Item key="adartsShopSearch">{t(112)}</Menu.Item>
-          <Menu.Item key="adartsShopThemeSet">{t(113)}</Menu.Item>
-          <Menu.Item key="adartsShopNew">{t(10)}</Menu.Item>
-        </Menu>
+        <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={handleClick}>
+          <Link href="#adartsShopIndex" title={t(111)} />
+          <Link href="#adartsShopSearch" title={t(112)} />
+          {/* <Link href="#API" title="API"> */}
+          <Link href="#adartsShopThemeSet" title={t(113)} />
+          <Link href="#adartsShopNew" title={t(10)} />
+          {/* </Link> */}
+        </Anchor>
       </Col>
       <Col span={18} offset={1} id='myPageRight'>
         <AdartsShopIndex />

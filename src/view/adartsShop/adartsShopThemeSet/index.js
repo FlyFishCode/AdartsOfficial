@@ -82,7 +82,7 @@ const AdartsShopThemeSet = () => {
         getShopList()
     }, [])
     return (
-        <div>
+        <div className='AnchorBox'>
             <div className='myPageTitle' id='adartsShopThemeSet'>{t(113)}</div>
             <Row className='adartsShopIndexSearchBox'>
                 <Col span='20' offset='1' className='selectBox'>

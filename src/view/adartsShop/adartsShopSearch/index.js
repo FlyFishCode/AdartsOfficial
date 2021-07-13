@@ -122,7 +122,7 @@ const AdartsShopSearch = () => {
     getShopList()
   }, [])
   return (
-    <div>
+    <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopSearch'>{t(112)}</div>
       <Row className='adartsShopIndexSearchBox'>
         <Col span='4' className='selectBox'>

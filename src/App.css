@@ -682,3 +682,31 @@
     justify-content: center;
     margin: 20px 0;
 }
+
+#myPageRight {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    overflow-y: scroll;
+    /* scroll-behavior: smooth; */
+}
+
+#myPageRight .myPageTitle {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#myPageRight .myPageTitle::before {
+    display: block;
+    content: '';
+    width: 2px;
+    height: 30px;
+    left: 1px;
+    position: absolute;
+    background: #1890ff;
+}
+
+.ant-anchor-link-title {
+    font-size: 16px;
+}

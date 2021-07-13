@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 // import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Row, Col, Menu } from 'antd'
+import { Row, Col, Anchor } from 'antd'
 
 import MyPageIndex from './MyPageIndex'
 import AnyWhere from './AnyWhere'
@@ -11,8 +11,7 @@ import OtherSetting from './OtherSetting'
 
 import './index.css'
 
-const { SubMenu } = Menu
-
+const { Link } = Anchor;
 
 const MyPage = () => {
   const { t } = useTranslation()
@@ -22,12 +21,13 @@ const MyPage = () => {
     setCardId(value)
   }
   const handleClick = (e) => {
-    const ele = document.getElementById(e.key)
-    ele && ele.scrollIntoView({
-      behavior: "smooth", // 默认 auto
-      block: "start", // 默认 center
-      inline: "nearest", // 默认 nearest
-    })
+    // const ele = document.getElementById(e.key)
+    // ele && ele.scrollIntoView({
+    //   behavior: "smooth", // 默认 auto
+    //   block: "start", // 默认 center
+    //   inline: "nearest", // 默认 nearest
+    // })
+    e.preventDefault();
   }
   // console.log(Location.state);
   useEffect(() => {
@@ -36,32 +36,27 @@ const MyPage = () => {
   return (
     <Row id='myPage'>
       <Col span={4} offset={1}>
-        <Menu
-          onClick={handleClick}
-          // defaultSelectedKeys={['1']}
-          // defaultOpenKeys={['sub1']}
-          mode="inline"
-        >
-          <Menu.Item key="myPageIndex">{t(20)}</Menu.Item>
-          <Menu.Item key="anyWhere">Any Where</Menu.Item>
-          <SubMenu key="sub1" title={t(22)}>
-            <Menu.Item key="AllGameData">{t(21)}</Menu.Item>
-            <Menu.Item key="About30Game">{t(64)}</Menu.Item>
-            <Menu.Item key="AwardHistory">{t(65)}</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" title={t(24)}>
-            <Menu.Item key="6">{t(66)}</Menu.Item>
-            <Menu.Item key="FriendsList">{t(67)}</Menu.Item>
-            <Menu.Item key="AddFriends">{t(68)}</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" title={t(25)}>
-            <Menu.Item key="AdartsCardSetting">{t(69)}</Menu.Item>
-            <Menu.Item key="AccountInfoSetting">{t(70)}</Menu.Item>
-            <Menu.Item key="AwardMsgSetting">{t(71)}</Menu.Item>
-            <Menu.Item key="PropSetting">{t(72)}</Menu.Item>
-            <Menu.Item key="PasswordSetting">{t(73)}</Menu.Item>
-          </SubMenu>
-        </Menu>
+        <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={handleClick}>
+          <Link href="#myPageIndex" title={t(20)} />
+          <Link href="#anyWhere" title='Any Where' />
+          <Link href='1' title={t(22)}>
+            <Link href="#AllGameData" title={t(21)} />
+            <Link href="#About30Game" title={t(64)} />
+            <Link href="#AwardHistory" title={t(65)} />
+          </Link>
+          <Link href='2' title={t(24)}>
+            <Link href="#6" title={t(66)} />
+            <Link href="#FriendsList" title={t(67)} />
+            <Link href="#AddFriends" title={t(68)} />
+          </Link>
+          <Link href='3' title={t(25)}>
+            <Link href="#AdartsCardSetting" title={t(69)} />
+            <Link href="#AccountInfoSetting" title={t(70)} />
+            <Link href="#AwardMsgSetting" title={t(71)} />
+            <Link href="#PropSetting" title={t(72)} />
+            <Link href="#PasswordSetting" title={t(73)} />
+          </Link>
+        </Anchor>
       </Col>
       <Col span={18} offset={1} id='myPageRight'>
         <MyPageIndex changeCardId={handleChangeCardId} />

@@ -225,7 +225,7 @@ const AdartsShopIndex = () => {
     getShopActivityList()
   }, [])
   return (
-    <div>
+    <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopIndex'>{t(111)}</div>
       <Row className='adartsShopIndexSearchBox'>
         <Col span='4' className='selectBox'>

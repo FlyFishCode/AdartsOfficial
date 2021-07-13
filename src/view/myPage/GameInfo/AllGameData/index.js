@@ -54,10 +54,10 @@ const AllGameData = () => {
           <div>{t(77)}</div>
         </div>
         <div className='AllGameDataGameRate'>
-          <div>{`${data.quantity01} / ${data.quantity01}%`} </div>
-          <div>{`${data.quantity01} / ${data.winProbability01}%`}</div>
-          <div>{`${data.quantityCricket} / ${data.winProbabilityCricket}%`}</div>
-          <div>{`${data.allQuantity} / ${data.allWinProbability}%`}</div>
+          <div>{`${data.quantity01 || '-'} / ${data.quantity01 || '-'}%`} </div>
+          <div>{`${data.quantity01 || '-'} / ${data.winProbability01 || '-'}%`}</div>
+          <div>{`${data.quantityCricket || '-'} / ${data.winProbabilityCricket || '-'}%`}</div>
+          <div>{`${data.allQuantity || '-'} / ${data.allWinProbability || '-'}%`}</div>
         </div>
       </div>
       <div className='AllGameDataDefault AllGameDataCountBox'>

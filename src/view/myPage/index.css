@@ -8,30 +8,6 @@
     font-weight: bold;
 }
 
-#myPageRight {
-    display: flex;
-    flex-direction: column;
-    height: 900px;
-    overflow-y: scroll;
-    /* scroll-behavior: smooth; */
-}
-
-#myPageRight .myPageTitle {
-    font-size: 20px;
-    padding: 10px;
-    font-weight: bold;
-}
-
-#myPageRight .myPageTitle::before {
-    display: block;
-    content: '';
-    width: 2px;
-    height: 30px;
-    left: 1px;
-    position: absolute;
-    background: #1890ff;
-}
-
 #myPage .ant-menu-submenu-title .ant-menu-title-content {
     flex: none
 }
