@@ -498,3 +498,17 @@
 .myPageIndexPlayerMsg {
     font-size: 30px;
 }
+
+.noDataBox {
+    color: #000;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #d9d9d9;
+}
+
+.noDataIcon>span {
+    font-size: 50px;
+}

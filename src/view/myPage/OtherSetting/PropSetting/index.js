@@ -1,9 +1,11 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
+import NoData from '@/common/components/noData'
 const PropSetting = () => {
   const { t } = useTranslation()
   return (
     <div>
       <div className='myPageTitle' id='PropSetting'>{t(72)}</div>
+      <NoData />
     </div>
   )
 }

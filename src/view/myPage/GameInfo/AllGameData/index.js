@@ -31,19 +31,19 @@ const AllGameData = () => {
       <div className='AllGameDataDefault AllGameDataGameBox'>
         <div className='AllGameDataGame'>
           <div>Rating</div>
-          <div>{data.rating}</div>
+          <div>{data.rating || '-'}</div>
         </div>
         <div className='AllGameDataGame'>
           <div>PPD</div>
-          <div>{data.ppd}</div>
+          <div>{data.ppd || '-'}</div>
         </div>
         <div className='AllGameDataGame'>
           <div>PPR</div>
-          <div>{data.ppr}</div>
+          <div>{data.ppr || '-'}</div>
         </div>
         <div className='AllGameDataGame'>
           <div>MPR</div>
-          <div>{data.mpr}</div>
+          <div>{data.mpr || '-'}</div>
         </div>
       </div>
       <div className='AllGameDataDefault AllGameDataGameRateBox'>
@@ -63,11 +63,11 @@ const AllGameData = () => {
       <div className='AllGameDataDefault AllGameDataCountBox'>
         <div className='AllGameDataCount'>
           <div>{t(78)}</div>
-          <div>{data.countUpAverage}</div>
+          <div>{data.countUpAverage || '-'}</div>
         </div>
         <div className='AllGameDataCount'>
           <div>{t(79)}</div>
-          <div>{data.countUpMax}</div>
+          <div>{data.countUpMax || '-'}</div>
         </div>
       </div>
       <div className='AllGameDataDefault'>
@@ -75,19 +75,19 @@ const AllGameData = () => {
         <div className='AllGameDataMaxBox'>
           <div className='AllGameDataMaxEle'>
             <div>Half it</div>
-            <div>{data.quantity01}</div>
+            <div>{data.quantity01 || '-'}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Big Bull</div>
-            <div>{data.quantity01}</div>
+            <div>{data.quantity01 || '-'}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Eagle Eyes</div>
-            <div>{data.quantity01}</div>
+            <div>{data.quantity01 || '-'}</div>
           </div>
           <div className='AllGameDataMaxEle'>
             <div>Cricket Count Up</div>
-            <div>{data.quantity01}</div>
+            <div>{data.quantity01 || '-'}</div>
           </div>
         </div>
       </div>
@@ -103,10 +103,10 @@ const AllGameData = () => {
           <div>{t(84)}</div>
         </div>
         <div className='AllGameDataTotalData'>
-          <div>{data.quantity01}</div>
-          <div>{data.quantity01}</div>
-          <div>{data.quantity01}</div>
-          <div>{data.quantity01}</div>
+          <div>{data.quantity01 || '-'}</div>
+          <div>{data.quantity01 || '-'}</div>
+          <div>{data.quantity01 || '-'}</div>
+          <div>{data.quantity01 || '-'}</div>
         </div>
       </div>
       <div className='AllGameDataDefault'>
@@ -121,12 +121,12 @@ const AllGameData = () => {
             <div>1501</div>
           </div>
           <div className='AllGameDataFast'>
-            <div>{data.quantity01}</div>
-            <div>{data.quantity01}</div>
-            <div>{data.quantity01}</div>
-            <div>{data.quantity01}</div>
-            <div>{data.quantity01}</div>
-            <div>{data.quantity01}</div>
+            <div>{data.quantity01 || '-'}</div>
+            <div>{data.quantity01 || '-'}</div>
+            <div>{data.quantity01 || '-'}</div>
+            <div>{data.quantity01 || '-'}</div>
+            <div>{data.quantity01 || '-'}</div>
+            <div>{data.quantity01 || '-'}</div>
           </div>
         </div>
       </div>

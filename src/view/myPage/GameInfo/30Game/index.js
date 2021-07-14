@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Collapse } from 'antd';
 import { about30GameListHttp } from '@/api'
+import NoData from '@/common/components/noData'
 import '../index.css'
 
 const { Panel } = Collapse;
@@ -97,7 +98,7 @@ const About30Game = (props) => {
     <div>
       <div className='myPageTitle' id='About30Game'>{t(64)}</div>
       <Collapse accordion>
-        {dataList && dataList.map(i => {
+        {dataList.length ? dataList.map(i => {
           return (
             <Panel header={`${getDateTime(i.dateTime)}   |   ${getGameName(i.gameName)}   |   MPR：${i.mpr}`} key={i.dateTime}>
               <div className='Game30Box About30GamePersonalBox'>
@@ -141,11 +142,13 @@ const About30Game = (props) => {
               </div>
             </Panel>
           )
-        })}
+        }) :
+          <NoData />
+        }
         {/* <Panel header="This is panel header 1" key="1">
           <p>{text}</p>
         </Panel> */}
-      </Collapse>,
+      </Collapse>
     </div>
   )
 }

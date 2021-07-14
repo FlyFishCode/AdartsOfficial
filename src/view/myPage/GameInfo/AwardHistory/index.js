@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { awardHistoryDataHttp } from '@/api'
+import NoData from '@/common/components/noData'
 import '../index.css'
 const AwardHistory = () => {
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ const AwardHistory = () => {
         <div>{t(128)}</div>
         <div>TOTAL</div>
       </div>
-      {dataList.map((i, index) => {
+      {dataList.length ? dataList.map((i, index) => {
         return (
           <div key={index} className='AwardHistoryDataList'>
             <div>{i.name}</div>
@@ -49,7 +50,9 @@ const AwardHistory = () => {
             <div>{`${i.total} ${t(129)}`}</div>
           </div>
         )
-      })}
+      }) :
+        <NoData />
+      }
     </div>
   )
 }
