@@ -77,7 +77,9 @@ const MyPageIndex = (props) => {
   }
   const getGameInfoData = (cardId) => {
     myPageIndexGameInfoHttp({ cardId: cardId }).then(res => {
-      setGaneInfo(res.data.data)
+      if (res.data.code === 100) {
+        setGaneInfo(res.data.data)
+      }
     })
   }
   useEffect(() => {

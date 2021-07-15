@@ -1,9 +1,17 @@
-import { Input, Button, Form } from 'antd'
+import { Input, Button, Form, message } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { passwordChangeHttp } from '@/api'
 const PasswordSetting = () => {
   const { t } = useTranslation()
   const handleFinish = (values) => {
-    console.log(values);
+    const data = { ...values, memberId: sessionStorage.getItem('websiteMemberId') }
+    passwordChangeHttp(data).then(res => {
+      if (res.data.code === 100) {
+        message.info(res.data.msg)
+      } else {
+        message.warning(res.data.msg)
+      }
+    })
   }
   return (
     <div>
@@ -59,7 +67,6 @@ const PasswordSetting = () => {
           </Form.Item>
           <Form.Item
             label={t(37)}
-            name="confirmPassword"
             rules={[
               {
                 required: true,

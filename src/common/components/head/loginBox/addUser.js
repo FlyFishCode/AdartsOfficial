@@ -4,17 +4,20 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { countryListHttp } from '@/api'
 import { LeftOutlined } from '@ant-design/icons'
-import { indexRegisterHttp } from '@/api'
+import { indexRegisterHttp, sendEmailHttp } from '@/api'
 const AddUser = () => {
     const [countryId, setCountryId] = useState()
     const [countryList, setCountryList] = useState([])
     const [languageId, setLanguage] = useState('')
     const [acceptSMS, setAcceptSMS] = useState(0)
     const [acceptMail, setAcceptMail] = useState(0)
+    const [btnDisabled, setBtnDisabled] = useState(false)
+    const [countDown, setCountDown] = useState(5)
     const [birth, setBirth] = useState('')
     const [type, setType] = useState('phone')
     const [phone, setPhone] = useState('')
     const [phoneCode, setPhoneCode] = useState('+86')
+    const [code, setCode] = useState('')
     const [display, setDisplay] = useState('inline-block')
     const [gender, setGender] = useState(1)
     const [name, setName] = useState('')
@@ -53,15 +56,43 @@ const AddUser = () => {
     }
     const handleTypeChange = (value) => {
         setType(value)
+        form.setFieldsValue({ typeValue: '' })
         if (value === 'phone') {
             setDisplay('inline-block')
         } else {
             setDisplay('none')
         }
     }
+    const sendCode = () => {
+        let flag = false
+        let value = form.getFieldValue('typeValue');
+        if (value) {
+            const regPhone = /^(?:(?:\+|00)86)?1\d{10}$/;
+            const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (type === 'email' && regEmail.test(value)) {
+                flag = true
+            }
+            if (type === 'phone' && regPhone.test(value)) {
+                flag = true
+                value = `${phoneCode}-${value}`;
+
+            }
+            if (flag) {
+                sendEmailHttp({ email: value }).then(res => {
+                    message.info(res.data.msg)
+                })
+                setBtnDisabled(true)
+            }
+        }
+    }
     const subitFrom = () => {
         form.validateFields().then(values => {
             const data = { ...values, gender, acceptSMS, phone, birth, name, countryId, languageId }
+            if (type === 'email') {
+                data.emailCode = code
+            } else {
+                data.phoneCode = code
+            }
             indexRegisterHttp(data).then(res => {
                 if (res.data.code === 100) {
                     message.info(res.data.msg)
@@ -72,6 +103,18 @@ const AddUser = () => {
             })
         })
     }
+    useEffect(() => {
+        let time = null
+        if (btnDisabled && countDown) {
+            time = setTimeout(() => {
+                setCountDown(x => x - 1)
+            }, 1000);
+        } else {
+            setBtnDisabled(false)
+            setCountDown(5)
+        }
+        return () => clearTimeout(time)
+    }, [btnDisabled, countDown])
     useEffect(() => {
         getCountryList()
     }, [])
@@ -187,8 +230,6 @@ const AddUser = () => {
                         { required: true, message: 'Please input your value' },
                         ({ getFieldValue }) => ({
                             validator (_, value) {
-                                console.log(type);
-                                console.log(phoneCode);
                                 const regPhone = /^(?:(?:\+|00)86)?1\d{10}$/;
                                 const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                                 if (!value || type === 'phone' ? regPhone.test(value) : regEmail.test(value)) {
@@ -202,7 +243,7 @@ const AddUser = () => {
                     <Input addonBefore={
                         <>
                             <Form.Item name="phone" noStyle>
-                                <Select style={{ width: 120 }} onChange={(value) => handleTypeChange(value)}>
+                                <Select style={{ width: 100 }} onChange={(value) => handleTypeChange(value)}>
                                     <Option value="phone">{t(48)}</Option>
                                     <Option value="email">{t(39)}</Option>
                                 </Select>
@@ -216,10 +257,18 @@ const AddUser = () => {
                         </>
                     } style={{ width: '100%' }} />
                 </Form.Item>
+                <Form.Item colon={false} label=" " style={{ marginBottom: 0 }}>
+                    <Form.Item style={{ display: 'inline-block', width: 100 }}>
+                        <Button type="primary" disabled={btnDisabled} onClick={sendCode}>{btnDisabled ? `${t(133)}${countDown}` : t(59)}</Button>
+                    </Form.Item>
+                    <Form.Item style={{ display: 'inline-block', width: 200, margin: '0 8px' }} >
+                        <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} />
+                    </Form.Item>
+                </Form.Item>
                 <Form.Item name='acceptMail' label={t(55)}>
                     <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
-                        <Radio value={0}>{t(51)}</Radio>
-                        <Radio value={1}>{t(52)}</Radio>
+                        <Radio value={1}>{t(51)}</Radio>
+                        <Radio value={0}>{t(52)}</Radio>
                     </Radio.Group>
                 </Form.Item>
             </Form>
@@ -247,8 +296,8 @@ const AddUser = () => {
                 <Col span='4' className='registerLabel'>{t(46)}</Col>
                 <Col span='8' className='radioBox'>
                     <Radio.Group onChange={(e) => setAcceptSMS(e.target.value)} value={acceptSMS}>
-                        <Radio value={0}>{t(51)}</Radio>
-                        <Radio value={1}>{t(52)}</Radio>
+                        <Radio value={1}>{t(51)}</Radio>
+                        <Radio value={0}>{t(52)}</Radio>
                     </Radio.Group>
                 </Col>
             </Row>

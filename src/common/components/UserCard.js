@@ -26,7 +26,10 @@ const UserCard = (props) => {
   }
   const getUserCardList = () => {
     indexUserCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') || '' }).then(res => {
-      setUserCard(res.data.data)
+      if (res.data.code === 100) {
+        setUserCard(res.data.data)
+        sessionStorage.setItem('websiteCardId', res.data.data[0].cardId)
+      }
     })
   }
   useEffect(() => {

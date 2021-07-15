@@ -1,9 +1,13 @@
 import axios from 'axios'
 // import { message } from 'antd'
 
+// 公共
+import { sendEmail,upLoadImg } from './common/index'
+
 
 // 我的页面
-import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData,accountInfo} from './Mypage'
+import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData,accountInfo,passwordChange,accountInfoUpdate} from './Mypage'
+
 
 
 
@@ -27,8 +31,6 @@ const indexShopList = `${baseWebsite}websiteshop/newShop`
 const indexBannerList = `${baseWebsite}banner/bannerShow`
 // 首页用户卡列表
 const indexUserCardList = `${baseWebsite}websitsMember/memberCardALL`
-// 上传图片接口
-const upLoadImg = `${baseWebsite}news/uploadAbsolutelyPictures`
 
 const indexLoginHttp = (data:any) =>{
     return axios.post(getNewUrl(indexLogin, data))
@@ -54,29 +56,42 @@ const indexUserCardListHttp = (data:any) =>{
 const upLoadImgHttp = (data:any) =>{
 	return axios.post(upLoadImg, data);
 }
+// 发送邮箱
+const sendEmailHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${sendEmail}`, qs.stringify(data));
+}
 
 // 我的页面首页卡
 const myPageIndexUserCardInfoHttp = (data:any) =>{
-	return axios.post(myPageIndexUserCardInfo, qs.stringify(data));
+	return axios.post(`${baseWebsite}${myPageIndexUserCardInfo}`, qs.stringify(data));
 }
 // 我的页面首页游戏资料
 const myPageIndexGameInfoHttp = (data:any) =>{
-	return axios.post(myPageIndexGameInfo, qs.stringify(data));
+	return axios.post(`${baseWebsite}${myPageIndexGameInfo}`, qs.stringify(data));
 }
 const about30GameListHttp = (data:any) =>{
-	return axios.post(about30GameList, qs.stringify(data));
+	return axios.post(`${baseWebsite}${about30GameList}`, qs.stringify(data));
 }
 // 我的页面整体数据
 const allGameDataHttp = (data:any) =>{
-	return axios.post(allGameData, qs.stringify(data));
+	return axios.post(`${baseWebsite}${allGameData}`, qs.stringify(data));
 }
 // Award记录数据
 const awardHistoryDataHttp = (data:any) =>{
-	return axios.post(awardHistoryData, qs.stringify(data));
+	return axios.post(`${baseWebsite}${awardHistoryData}`, qs.stringify(data));
 }
 // 我的页面 账号信息
 const accountInfoHttp = (data:any) =>{
-	return axios.post(accountInfo, qs.stringify(data));
+	return axios.post(`${baseWebsite}${accountInfo}`, qs.stringify(data));
+}
+// 我的页面 账号信息修改
+const accountInfoUpdateHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${accountInfoUpdate}`, data);
+}
+// 我的页面 修改密码
+
+const passwordChangeHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${passwordChange}`, qs.stringify(data));
 }
 
 axios.interceptors.request.use(function(config) {
@@ -133,5 +148,9 @@ export {
 		about30GameListHttp,
 		allGameDataHttp,
 		awardHistoryDataHttp,
-		accountInfoHttp
+		accountInfoHttp,
+		accountInfoUpdateHttp,
+		sendEmailHttp,
+		passwordChangeHttp
+
 }
