@@ -136,7 +136,7 @@ const News = () => {
             setNewsList(res.data.data.list)
         })
         indexShopListHttp(ShopData).then(res => {
-            setshopList(res.data.data)
+            setshopList(res.data.data.list)
         })
     }
     const getTypeStr = (type) => {

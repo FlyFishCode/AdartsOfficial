@@ -58,8 +58,9 @@ const AccountInfoSetting = () => {
   const handleRequset = ({ file }) => {
     const formData = new FormData();
     formData.append("image", file);
-    debugger
-    console.log(upLoadImgHttp(formData));
+    upLoadImgHttp(formData).then(res => {
+      setFileList([{ url: res.data.data }])
+    })
   }
   const getCardInfo = (memberId) => {
     accountInfoHttp({ memberId }).then(res => {
@@ -219,7 +220,7 @@ const AccountInfoSetting = () => {
             customRequest={handleRequset}
             listType="picture-card"
             fileList={fileList}
-            onPreview={() => handlePreview}
+            onPreview={handlePreview}
             onChange={handleChange}
           >
             {fileList.length >= 1 ? null : uploadButton}

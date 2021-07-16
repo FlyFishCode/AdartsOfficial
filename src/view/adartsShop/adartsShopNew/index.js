@@ -1,121 +1,77 @@
 import { useState, useEffect } from 'react'
 import { Row, Col, Select, Pagination } from 'antd'
 import { useTranslation } from 'react-i18next'
-import m from '@/assets/img/m.png'
+import { newShopListHttp } from '@/api'
+import NoData from '@/common/components/noData'
 
 const { Option } = Select;
 const AdartsShopNew = () => {
   const { t } = useTranslation();
   const [total, setTotal] = useState(1);
+  const [countryId, setCountryId] = useState('');
   const [shopList, setShopList] = useState([]);
   const handleChange = (value) => {
-    console.log(value);
+    setCountryId(value)
   }
   const getShopList = () => {
-    setShopList([
-      {
-        icon: m,
-        shopId: 1,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 2,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 3,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 4,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 5,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
+    const data = {
+      countryId,
+      pageNum: 1,
+      pageSize: 5
+    }
+    newShopListHttp(data).then(res => {
+      if (res.data.code === 100) {
+        setShopList(res.data.data)
+        setTotal(50)
       }
-    ])
-    setTotal(500)
+    })
+    // setShopList([
+    //   {
+    //     icon: m,
+    //     shopId: 1,
+    //     shopImg: m,
+    //     shopName: 'Adarts Shop',
+    //     shopAddress: '上海市黄浦区西藏中路160号',
+    //     machineList: [
+    //       {
+    //         machineType: 'VSS',
+    //         machineNum: 1,
+    //         img: m
+    //       },
+    //       {
+    //         machineType: 'A1',
+    //         machineNum: 3,
+    //         img: m
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     icon: m,
+    //     shopId: 2,
+    //     shopImg: m,
+    //     shopName: 'Adarts Shop',
+    //     shopAddress: '上海市黄浦区西藏中路160号',
+    //     machineList: [
+    //       {
+    //         machineType: 'VSS',
+    //         machineNum: 1,
+    //         img: m
+    //       },
+    //       {
+    //         machineType: 'A1',
+    //         machineNum: 3,
+    //         img: m
+    //       }
+    //     ]
+    //   },
+    // ])
   }
   const handlePageChange = (index) => {
     console.log(index);
   }
   useEffect(() => {
     getShopList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div className='AnchorBox'>
@@ -130,7 +86,7 @@ const AdartsShopNew = () => {
         </Col>
       </Row>
       <div className='adartsShopIndex'>
-        {shopList.map(item => {
+        {shopList.lengtn ? shopList.map(item => {
           return (
             <div className='AllRightBox' key={item.shopId}>
               <div className='AllImgBox'>
@@ -164,7 +120,9 @@ const AdartsShopNew = () => {
               </div>
             </div>
           )
-        })}
+        }) :
+          <NoData />
+        }
       </div>
       <Row justify="center"><Pagination total={total} showSizeChanger={false} onChange={handlePageChange} /></Row>
     </div>

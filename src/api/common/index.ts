@@ -2,7 +2,7 @@
 const sendEmail = 'sendEmail'
 
 // 上传图片接口
-const upLoadImg = `news/uploadAbsolutelyPictures`
+const upLoadImg = `picture/uploadAbsolutelyPictures`
 
 
 

@@ -6,7 +6,10 @@ import { sendEmail,upLoadImg } from './common/index'
 
 
 // 我的页面
-import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData,accountInfo,passwordChange,accountInfoUpdate} from './Mypage'
+import {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData,accountInfo,passwordChange,accountInfoUpdate} from './Mypage';
+
+// adarts店铺
+import { newShopList } from './adartsShop'
 
 
 
@@ -54,7 +57,7 @@ const indexUserCardListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexUserCardList, data))
 }
 const upLoadImgHttp = (data:any) =>{
-	return axios.post(upLoadImg, data);
+	return axios.post(`${baseWebsite}${upLoadImg}`, data);
 }
 // 发送邮箱
 const sendEmailHttp = (data:any) =>{
@@ -89,9 +92,13 @@ const accountInfoUpdateHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${accountInfoUpdate}`, data);
 }
 // 我的页面 修改密码
-
 const passwordChangeHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${passwordChange}`, qs.stringify(data));
+}
+
+// adarts店铺
+const newShopListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${newShopList}`, data);
 }
 
 axios.interceptors.request.use(function(config) {
@@ -151,6 +158,7 @@ export {
 		accountInfoHttp,
 		accountInfoUpdateHttp,
 		sendEmailHttp,
-		passwordChangeHttp
+		passwordChangeHttp,
+		newShopListHttp
 
 }
