@@ -2,7 +2,7 @@ import axios from 'axios'
 // import { message } from 'antd'
 
 // 公共
-import { sendEmail,upLoadImg } from './common/index'
+import { sendEmail,upLoadImg,shopList } from './common/index'
 
 
 // 我的页面
@@ -62,6 +62,10 @@ const upLoadImgHttp = (data:any) =>{
 // 发送邮箱
 const sendEmailHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${sendEmail}`, qs.stringify(data));
+}
+// 店铺列表
+const shopListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopList}`, qs.stringify(data));
 }
 
 // 我的页面首页卡
@@ -159,6 +163,7 @@ export {
 		accountInfoUpdateHttp,
 		sendEmailHttp,
 		passwordChangeHttp,
-		newShopListHttp
+		newShopListHttp,
+		shopListHttp
 
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Row, Col, Input, Button, Radio, Upload, Modal, Select, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusOutlined } from '@ant-design/icons'
-import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp } from '@/api'
+import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp, shopListHttp, countryListHttp } from '@/api'
 import { REG_EMAIL } from '@/common/Utlis'
 
 
@@ -11,7 +11,10 @@ const { Option } = Select;
 const AccountInfoSetting = () => {
   const { t } = useTranslation()
   const [cardInfo, setCardInfo] = useState({});
-  const [countryId, setCountry] = useState('jack');
+  const [homeShopId, setHomeShopId] = useState('');
+  const [shopList, setShopList] = useState([]);
+  const [countryId, setCountryId] = useState();
+  const [countryList, setCountryList] = useState([]);
   const [languageId, setLanguage] = useState('lucy');
   const [fileList, setFileList] = useState([])
   const [emailBtnDisabled, setEmailBtnDisabled] = useState(false)
@@ -22,7 +25,6 @@ const AccountInfoSetting = () => {
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [phoneCode, setPhoneCode] = useState('+86')
-  const [homeShop, setHomeShop] = useState('jack')
   const [nickname, setNickname] = useState('')
   const [previewTitle, setPreviewTitle] = useState('')
   const [previewImage, setPreviewImage] = useState('')
@@ -36,6 +38,18 @@ const AccountInfoSetting = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+  const getCountryList = () => {
+    countryListHttp().then(res => {
+      setCountryList(res.data.data)
+    })
+  }
+  const getShopList = () => {
+    shopListHttp({ countryId: sessionStorage.getItem('') }).then(res => {
+      if (res.data.code === 100) {
+        setShopList(res.data.data)
+      }
+    })
+  }
   const handlePreview = (file) => {
     if (!file.url && !file.preview) {
       file.preview = getBase64(file.originFileObj);
@@ -70,10 +84,10 @@ const AccountInfoSetting = () => {
         setPhoneCode(data.phone.split('-')[0])
         setPhone(data.phone.split('-')[1])
         setEmail(data.email)
-        setCountry(data.countryId)
+        setHomeShopId(data.homeShop)
+        setCountryId(data.countryId)
         setLanguage(data.languageId)
         setNickname(data.nickname)
-        setHomeShop(data.homeShop)
         setAcceptMail(data.acceptMail)
         setFileList([{ url: data.portrait }])
       }
@@ -84,10 +98,10 @@ const AccountInfoSetting = () => {
       memberId,
       phone: `${phoneCode}-${phone}`,
       portrait: fileList[0].url,
+      homeShopId,
       countryId,
       languageId,
       nickname,
-      homeShop,
       email,
       code,
       acceptMail,
@@ -133,6 +147,8 @@ const AccountInfoSetting = () => {
   }, [emailBtnDisabled, emailCountDown])
   useEffect(() => {
     if (memberId) {
+      getShopList()
+      getCountryList()
       getCardInfo(memberId)
     }
   }, [memberId])
@@ -144,28 +160,24 @@ const AccountInfoSetting = () => {
         <Col span='5' className='selectBox'>
           <Select
             showSearch
-            placeholder="Select a person"
+            placeholder="Select country"
             optionFilterProp="children"
-            onChange={(value) => setCountry(value)}
-            defaultValue={countryId}
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
+            onChange={(value) => setCountryId(value)}
+            value={countryId}
+            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
+            {countryList.map(i => <Option key={i.countryId} value={i.countryId}>{i.countryName}</Option>)}
           </Select>
         </Col>
         <Col span='5' offset='1' className='selectBox'>
           <Select
             showSearch
-            placeholder="Select a person"
+            placeholder="Select language"
             optionFilterProp="children"
             onChange={(value) => setLanguage(value)}
-            defaultValue={languageId}
+            value={languageId}
             filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              option.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
             <Option value="jack">Jack</Option>
@@ -201,15 +213,13 @@ const AccountInfoSetting = () => {
             showSearch
             placeholder="Select a person"
             optionFilterProp="children"
-            onChange={(value) => setHomeShop(value)}
-            defaultValue={homeShop}
+            onChange={(value) => setHomeShopId(value)}
+            value={homeShopId}
             filterOption={(input, option) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
+            {shopList.map(i => <Option key={i.shopId} value={i.shopId}>{i.shopName}</Option>)}
           </Select>
         </Col>
       </Row>

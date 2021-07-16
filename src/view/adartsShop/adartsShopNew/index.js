@@ -9,11 +9,11 @@ const AdartsShopNew = () => {
   const { t } = useTranslation();
   const [total, setTotal] = useState(1);
   const [countryId, setCountryId] = useState('');
-  const [shopList, setShopList] = useState([]);
+  const [newShopList, setNewShopList] = useState([]);
   const handleChange = (value) => {
     setCountryId(value)
   }
-  const getShopList = () => {
+  const getNewShopList = () => {
     const data = {
       countryId,
       pageNum: 1,
@@ -21,11 +21,11 @@ const AdartsShopNew = () => {
     }
     newShopListHttp(data).then(res => {
       if (res.data.code === 100) {
-        setShopList(res.data.data)
+        setNewShopList(res.data.data)
         setTotal(50)
       }
     })
-    // setShopList([
+    // setNewShopList([
     //   {
     //     icon: m,
     //     shopId: 1,
@@ -70,7 +70,7 @@ const AdartsShopNew = () => {
     console.log(index);
   }
   useEffect(() => {
-    getShopList()
+    getNewShopList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
@@ -86,7 +86,7 @@ const AdartsShopNew = () => {
         </Col>
       </Row>
       <div className='adartsShopIndex'>
-        {shopList.lengtn ? shopList.map(item => {
+        {newShopList.lengtn ? newShopList.map(item => {
           return (
             <div className='AllRightBox' key={item.shopId}>
               <div className='AllImgBox'>
