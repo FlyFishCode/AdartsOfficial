@@ -3,6 +3,8 @@ import { Row, Col, Input, Button, Radio, Upload, Modal, Select, message } from '
 import { useTranslation } from 'react-i18next'
 import { PlusOutlined } from '@ant-design/icons'
 import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp } from '@/api'
+import { REG_EMAIL } from '@/common/Utlis'
+
 
 const { Option } = Select;
 
@@ -19,7 +21,7 @@ const AccountInfoSetting = () => {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
-  const [areaPhoneCode, setAreaPhoneCode] = useState('+86')
+  const [phoneCode, setPhoneCode] = useState('+86')
   const [homeShop, setHomeShop] = useState('jack')
   const [nickname, setNickname] = useState('')
   const [previewTitle, setPreviewTitle] = useState('')
@@ -27,6 +29,7 @@ const AccountInfoSetting = () => {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [acceptMail, setAcceptMail] = useState(1);
   const memberId = sessionStorage.getItem('websiteMemberId')
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -63,7 +66,7 @@ const AccountInfoSetting = () => {
       if (res.data.code === 100) {
         const data = res.data.data
         setCardInfo(res.data.data)
-        setAreaPhoneCode(data.phone.split('-')[0])
+        setPhoneCode(data.phone.split('-')[0])
         setPhone(data.phone.split('-')[1])
         setEmail(data.email)
         setCountry(data.countryId)
@@ -78,7 +81,7 @@ const AccountInfoSetting = () => {
   const handleOk = () => {
     const data = {
       memberId,
-      phone: `${areaPhoneCode}-${phone}`,
+      phone: `${phoneCode}-${phone}`,
       portrait: fileList[0].url,
       countryId,
       languageId,
@@ -97,8 +100,7 @@ const AccountInfoSetting = () => {
     })
   }
   const handleEmailBtnClick = () => {
-    const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (regEmail.test(email)) {
+    if (REG_EMAIL.test(email)) {
       setEmailBtnDisabled(true)
     } else {
       message.warning(t(63))
@@ -240,7 +242,7 @@ const AccountInfoSetting = () => {
         <Col span='4' className='AccountInfoLabel'>{t(48)}</Col>
         <Col span='10'>
           <Input.Group compact>
-            <Select defaultValue={areaPhoneCode} style={{ width: '30%' }} onChange={(value) => setAreaPhoneCode(value)} >
+            <Select defaultValue={phoneCode} style={{ width: '30%' }} onChange={(value) => setPhoneCode(value)} >
               <Option value="+81">+81</Option>
               <Option value="000">+000</Option>
             </Select>

@@ -6,17 +6,19 @@ import { LeftOutlined } from '@ant-design/icons'
 import { REG_PHONE, REG_EMAIL } from '@/common/Utlis'
 
 const { Option } = Select;
+
 const ForgetPW = () => {
     const { t } = useTranslation();
-    const history = useHistory()
-    const [account, setAccount] = useState('')
-    const [type, setType] = useState('email')
-    const [display, setDisplay] = useState('none')
-    const [phoneCode, setPhoneCode] = useState('+86')
-    const [inputValue, setInputValue] = useState('')
-    const [code, setCode] = useState('')
-    const [downNum, setDownNum] = useState(0)
-    const [disabled, setDisabled] = useState(false)
+    const history = useHistory();
+    const [account, setAccount] = useState('');
+    const [type, setType] = useState('email');
+    const [display, setDisplay] = useState('none');
+    const [phoneCode, setPhoneCode] = useState('+86');
+    const [inputValue, setInputValue] = useState('');
+    const [code, setCode] = useState('');
+    const [downNum, setDownNum] = useState(59);
+    const [disabled, setDisabled] = useState(false);
+
     const handleTypeChange = (value) => {
         setType(value)
         if (value === 'phone') {
@@ -39,7 +41,6 @@ const ForgetPW = () => {
         if (flag) {
             console.log(value);
             setDisabled(true)
-            setDownNum(60)
         }
         else {
             message.warning(t(63))
@@ -76,14 +77,14 @@ const ForgetPW = () => {
     return (
         <div className='loginBox'>
             <div className='loginTitle'>
-                <div onClick={() => history.go(-1)} > < LeftOutlined /> </div>
-                <div > {t(29)} </div>
+                <div onClick={() => history.go(-1)} > <LeftOutlined /> </div>
+                <div> {t(29)} </div>
             </div>
             <Row className='RowBox'>
                 <Col className='labelTitle' span='4'> {t(26)} </Col>
                 <Col span='20'>
                     < Input placeholder="Please input your password!" value={account} onChange={(e) => setAccount(e.target.value)} />
-                </Col >
+                </Col>
             </Row>
             <Row className='RowBox'>
                 <Col className='labelTitle' span='4'> {t(131)} </Col>
@@ -99,16 +100,16 @@ const ForgetPW = () => {
                         </Select>
                         <Input style={{ width: '75%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
                     </Input.Group>
-                </Col >
+                </Col>
                 <Col span='2'>
                     < Button type="primary" block onClick={handleSend} disabled={disabled} > {disabled ? downNum : t(59)} </Button>
-                </Col >
+                </Col>
             </Row>
             <Row className='RowBox'>
                 <Col className='labelTitle' span='4'> {t(88)} </Col>
                 <Col span='4'>
                     < Input placeholder="Please input your code!" value={code} onChange={(e) => setCode(e.target.value)} allowClear />
-                </Col >
+                </Col>
             </Row>
             <Row className='RowBox'>
                 <Button type="primary" size='large' block onClick={handleOK}> {t(19)} </Button>
