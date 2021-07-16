@@ -89,13 +89,20 @@ const AccountInfoSetting = () => {
       acceptMail,
     }
     accountInfoUpdateHttp(data).then(res => {
-      debugger
       if (res.data.code === 100) {
         message.info(res.data.msg)
       } else {
         message.warning(res.data.msg)
       }
     })
+  }
+  const handleEmailBtnClick = () => {
+    const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (regEmail.test(email)) {
+      setEmailBtnDisabled(true)
+    } else {
+      message.warning(t(63))
+    }
   }
   useEffect(() => {
     let time = null
@@ -252,7 +259,7 @@ const AccountInfoSetting = () => {
         <Col span='20'>
           <div><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></div>
           <div className='AccountInfoEmailBox'>
-            <div><Button type="primary" onClick={() => setEmailBtnDisabled(true)} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></div>
+            <div><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></div>
             <div><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></div>
             <div className='AccountInfoRadio'>
               <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>

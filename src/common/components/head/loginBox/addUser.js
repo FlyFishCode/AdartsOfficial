@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { countryListHttp } from '@/api'
 import { LeftOutlined } from '@ant-design/icons'
 import { indexRegisterHttp, sendEmailHttp } from '@/api'
+import { REG_PHONE, REG_EMAIL } from '@/common/Utlis'
 const AddUser = () => {
     const [countryId, setCountryId] = useState()
     const [countryList, setCountryList] = useState([])
@@ -67,12 +68,10 @@ const AddUser = () => {
         let flag = false
         let value = form.getFieldValue('typeValue');
         if (value) {
-            const regPhone = /^(?:(?:\+|00)86)?1\d{10}$/;
-            const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (type === 'email' && regEmail.test(value)) {
+            if (type === 'email' && REG_EMAIL.test(value)) {
                 flag = true
             }
-            if (type === 'phone' && regPhone.test(value)) {
+            if (type === 'phone' && REG_PHONE.test(value)) {
                 flag = true
                 value = `${phoneCode}-${value}`;
 
@@ -230,9 +229,7 @@ const AddUser = () => {
                         { required: true, message: 'Please input your value' },
                         ({ getFieldValue }) => ({
                             validator (_, value) {
-                                const regPhone = /^(?:(?:\+|00)86)?1\d{10}$/;
-                                const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                if (!value || type === 'phone' ? regPhone.test(value) : regEmail.test(value)) {
+                                if (!value || type === 'phone' ? REG_PHONE.test(value) : REG_EMAIL.test(value)) {
                                     return Promise.resolve();
                                 }
                                 return Promise.reject(new Error(t(63)));
