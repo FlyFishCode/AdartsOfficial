@@ -603,6 +603,7 @@
 .userName {
     text-align: center;
     font-size: 20px;
+    width: 100px;
 }
 
 .fontStyle {
@@ -709,4 +710,10 @@
 
 .ant-anchor-link-title {
     font-size: 16px;
+}
+
+.textOverFlow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }

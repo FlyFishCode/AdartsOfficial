@@ -52,6 +52,7 @@
 .userCardImg {
     width: 70px;
     height: 70px;
+    margin: 0 auto;
     overflow: hidden;
     border-radius: 50%;
 }
@@ -64,6 +65,7 @@
 .userName {
     text-align: center;
     font-size: 20px;
+    width: 100px;
 }
 
 .userInfoGameBox {

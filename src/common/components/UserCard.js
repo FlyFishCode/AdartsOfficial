@@ -59,7 +59,7 @@ const UserCard = (props) => {
                         <div className='userCardImg'>
                           <img src={i.portrait} alt="" />
                         </div>
-                        <div className='userName'>{i.name}</div>
+                        <div className='userName textOverFlow' title={i.name}>{i.name}</div>
                       </div>
                     </div>
                     <div className='userInfoGameBox'>

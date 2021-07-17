@@ -103,7 +103,7 @@ const MyPageIndex = (props) => {
                   <div className='userCardImg'>
                     <img src={card.portrait} alt="" />
                   </div>
-                  <div className='userName'>{card.name}</div>
+                  <div className='userName textOverFlow' title={card.name}>{card.name}</div>
                 </div>
               </div>
               <div className='userInfoGameBox'>

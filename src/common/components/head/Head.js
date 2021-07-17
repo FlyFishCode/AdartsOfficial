@@ -12,7 +12,10 @@ const Head = (prop) => {
   const { userName, loginOut } = prop;
   const history = useHistory();
   const { t } = useTranslation();
-
+  const handleLoginOut = () => {
+    history.push('/')
+    loginOut()
+  }
   const handlePushClick = (value) => {
     const userId = sessionStorage.getItem('websiteMemberId')
     if (userId) {
@@ -71,7 +74,7 @@ const Head = (prop) => {
         <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
       </div>
       <div className='loginAndGlobalBox'>
-        <LoginBtn userName={userName} loginOut={loginOut} />
+        <LoginBtn userName={userName} loginOut={handleLoginOut} />
         <div className='globalBox'><GlobalOutlined /></div>
       </div>
     </div >

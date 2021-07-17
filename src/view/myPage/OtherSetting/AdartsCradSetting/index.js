@@ -10,11 +10,16 @@ import A from '@/assets/img/Adarts.png'
 import L from '@/assets/img/League.png'
 
 const AdartsCardSetting = () => {
-  const { show, CustomModal } = useDeleteBox();
   const { t } = useTranslation();
+  const { show, CustomModal } = useDeleteBox();
   const [cardList, setCardList] = useState([]);
   const [cardNo, setCardNo] = useState('');
+  const [cardId, setCardId] = useState('');
   const memberId = sessionStorage.getItem('websiteMemberId');
+  const handleDeleteBtn = (cardId) => {
+    setCardId(cardId)
+    show()
+  }
   const getCardList = () => {
     adartsCardListHttp({ memberId }).then(res => {
       if (res.data.code === 100) {
@@ -43,8 +48,8 @@ const AdartsCardSetting = () => {
       }
     })
   }
-  const handleBtnClick = (cardId) => {
-    if (cardId) {
+  const handleBtnClick = (bool) => {
+    if (bool) {
       adartsCardDeleteHttp({ cardId }).then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg)
@@ -69,7 +74,7 @@ const AdartsCardSetting = () => {
             </div>
             <div className='AdartsCardInfoBox'>
               <div className='AdartsCardInfo'>
-                <div className='AdartsCardIconBox'>{i.icon ? <img src={A} alt="" /> : <img src={L} alt="" />}</div>
+                <div className='AdartsCardIconBox'>{i.cardType === 1 ? <img src={A} alt="" /> : <img src={L} alt="" />}</div>
                 <div>{t(35)}：{i.cardNo}</div>
               </div>
               <div className='AdartsCardLine'></div>
@@ -81,7 +86,7 @@ const AdartsCardSetting = () => {
             </div>
             <div className='AdartsCardBtnBox'>
               <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button>
-              <Button type="primary" danger onClick={() => show()}>{t(97)}</Button>
+              <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button>
             </div>
           </div>
         )
