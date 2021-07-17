@@ -125,7 +125,7 @@ const MyPageIndex = (props) => {
               </div>
             </div>
             <div className='userCardInfo'>
-              <div className='fontStyle'>Adarts ID：</div>
+              <div className='fontStyle'>Adarts NO：</div>
               <div>{card.cardNo}</div>
             </div>
           </div>

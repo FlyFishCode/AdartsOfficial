@@ -36,6 +36,8 @@ const qs = require('qs')
 const indexLogin = `${baseWeb}login`
 // 注册
 const indexRegister = `${baseWebsite}websitsMember/register`;
+// 找回密码
+const findPassWord = `${baseWebsite}websitsMember/forgetPassword`;
 // 国家列表
 const countryList = `${baseWeb}countrylist`
 // 首页新闻列表
@@ -55,6 +57,9 @@ const indexNewsListHttp = (data:any) => {
 }
 const indexShopListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexShopList, data))
+}
+const findPassWordHttp = (data:any) =>{
+	return axios.post(findPassWord, data);
 }
 const indexBannerListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexBannerList, data))
@@ -191,5 +196,6 @@ export {
 		shopListHttp,
 		adartsCardListHttp,
 		adartsCardDeleteHttp,
-		adartsBindHttp
+		adartsBindHttp,
+		findPassWordHttp
 }
