@@ -160,7 +160,7 @@
     margin: 10px;
     padding: 10px;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
     cursor: pointer;
 }
 
@@ -203,13 +203,13 @@
     width: 100%;
     display: flex;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
     cursor: pointer;
     padding: 5px;
 }
 
 .AllRightBox:hover {
-    border: 1px solid #1890ff;
+    border: 1px solid #999;
 }
 
 .AllImgBox {
@@ -267,7 +267,8 @@
     font-weight: 500;
     display: flex;
     cursor: pointer;
-    box-shadow: 0 0 5px 1px;
+    border: 1px solid #eee;
+    /* box-shadow: 0 0 5px 1px; */
 }
 
 .footerText {
@@ -285,7 +286,7 @@
 .product h1 {
     text-align: center;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
 }
 
 .activity {
@@ -297,7 +298,7 @@
 .activity h1 {
     text-align: center;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
 }
 
 .activity .ant-picker-calendar-header {
@@ -328,7 +329,7 @@
     font-weight: 500;
     text-align: right;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
 }
 
 .footerBox {
@@ -337,7 +338,7 @@
     font-size: 30px;
     font-weight: 500;
     border: 1px solid #eee;
-    box-shadow: 0 0 5px 1px;
+    /* box-shadow: 0 0 5px 1px; */
 }
 
 .tvBox div:nth-child(1) {
@@ -359,7 +360,6 @@
 
 .videoContainer video {
     height: 400px;
-    margin: 10px 0;
 }
 
 .iconMenu {
@@ -470,7 +470,7 @@
 .otherMoreBox button {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     font-weight: bold;
 }
 

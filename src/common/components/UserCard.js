@@ -81,8 +81,8 @@ const UserCard = (props) => {
                     </div>
                   </div>
                   <div className='userCardInfo'>
-                    <div className='fontStyle'>Adarts ID：</div>
-                    <div>{i.cardId}</div>
+                    <div className='fontStyle'>Adarts NO：</div>
+                    <div>{i.cardNo}</div>
                   </div>
                 </div>
                 <div className='userCardRightBox'>

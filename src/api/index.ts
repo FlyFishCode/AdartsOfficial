@@ -16,7 +16,8 @@ import {
 	passwordChange,
 	accountInfoUpdate,
 	adartsCardList,
-	adartsCardDelete
+	adartsCardDelete,
+	adartsBind
 } from './Mypage';
 
 // adarts店铺
@@ -114,6 +115,10 @@ const passwordChangeHttp = (data:any) =>{
 const adartsCardListHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${adartsCardList}`, qs.stringify(data));
 }
+// adats卡绑定
+const adartsBindHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${adartsBind}`, qs.stringify(data));
+}
 // adarts卡删除
 const adartsCardDeleteHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${adartsCardDelete}`, qs.stringify(data));
@@ -185,6 +190,6 @@ export {
 		newShopListHttp,
 		shopListHttp,
 		adartsCardListHttp,
-		adartsCardDeleteHttp
-
+		adartsCardDeleteHttp,
+		adartsBindHttp
 }

@@ -26,6 +26,8 @@ const passwordChange = 'websitsMember/updatePassword'
 // 其他设定
 // adarts卡信息
 const adartsCardList = 'websitsMember/cardList';
+// 绑定卡
+const adartsBind = 'websitsMember/cardBundling';
 // 删除卡
 const adartsCardDelete = 'websitsMember/cardUnbundling'
 
@@ -40,5 +42,6 @@ export {
   passwordChange,
   accountInfoUpdate,
   adartsCardList,
-  adartsCardDelete
+  adartsCardDelete,
+  adartsBind
 }

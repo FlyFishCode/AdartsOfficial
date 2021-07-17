@@ -5,7 +5,6 @@ import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, Use
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts'
 import icon1 from '@/assets/img/icon1.jpeg'
 import icon2 from '@/assets/img/icon2.jpeg'
-import video from '@/assets/img/video.mp4'
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -357,7 +356,7 @@ const Video = () => {
     }, [])
     const getTVData = () => {
         setTVData({
-            src: video,
+            src: 'http://static.adarts-cn.com/static/bulletin/advert/20191227/advert_2.mp4',
             title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
             text: '2222222222222222'
         })

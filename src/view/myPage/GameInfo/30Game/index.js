@@ -83,16 +83,13 @@ const About30Game = (props) => {
     }
     return str
   }
-  const getDataList = () => {
+  const getDataList = (cardId) => {
     about30GameListHttp({ cardId }).then(res => {
       setDataList(res.data.data)
     })
   }
   useEffect(() => {
-    if (cardId) {
-      getDataList();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getDataList(cardId || sessionStorage.getItem('websiteCardId'));
   }, [cardId])
   return (
     <div>

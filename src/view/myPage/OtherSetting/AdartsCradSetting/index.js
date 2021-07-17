@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, Input, message } from 'antd'
 import useDeleteBox from '@/common/components/deleteBox.js'
 
-import { adartsCardListHttp, adartsCardDeleteHttp } from '@/api'
+import { adartsCardListHttp, adartsCardDeleteHttp, adartsBindHttp } from '@/api'
 
 import m from '@/assets/img/m.png'
 import A from '@/assets/img/Adarts.png'
@@ -13,8 +13,10 @@ const AdartsCardSetting = () => {
   const { show, CustomModal } = useDeleteBox();
   const { t } = useTranslation();
   const [cardList, setCardList] = useState([]);
+  const [cardNo, setCardNo] = useState('');
+  const memberId = sessionStorage.getItem('websiteMemberId');
   const getCardList = () => {
-    adartsCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
+    adartsCardListHttp({ memberId }).then(res => {
       if (res.data.code === 100) {
         setCardList(res.data.data)
       }
@@ -30,8 +32,16 @@ const AdartsCardSetting = () => {
     document.body.removeChild(selectDom)
     message.info(t(125))
   }
+
   const handleAddCrad = () => {
-    console.log(1);
+    adartsBindHttp({ cardNo, memberId }).then(res => {
+      if (res.data.code === 100) {
+        message.info(res.data.msg)
+        getCardList()
+      } else {
+        message.warning(res.data.msg)
+      }
+    })
   }
   const handleBtnClick = (cardId) => {
     if (cardId) {
@@ -45,6 +55,7 @@ const AdartsCardSetting = () => {
   }
   useEffect(() => {
     getCardList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
@@ -78,7 +89,7 @@ const AdartsCardSetting = () => {
       {cardList.length < 3 ?
         <div className='AdartsCardBox'>
           <div className='AdartsCardName'>卡号：</div>
-          <div className='AdartsCardAddCard'><Input /></div>
+          <div className='AdartsCardAddCard'><Input onChange={(e) => setCardNo(e.target.value)} /></div>
           <div className='AdartsCardBtnBox'><Button type="primary" onClick={handleAddCrad}>{t(98)}</Button></div>
         </div>
         : ''}
