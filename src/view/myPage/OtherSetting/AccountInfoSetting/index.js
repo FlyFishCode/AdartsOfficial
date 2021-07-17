@@ -84,7 +84,7 @@ const AccountInfoSetting = () => {
         setPhoneCode(data.phone.split('-')[0])
         setPhone(data.phone.split('-')[1])
         setEmail(data.email)
-        setHomeShopId(data.homeShop)
+        setHomeShopId(data.homeShopId)
         setCountryId(data.countryId)
         setLanguage(data.languageId)
         setNickname(data.nickname)

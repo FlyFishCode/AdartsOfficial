@@ -36,18 +36,20 @@ const qs = require('qs')
 const indexLogin = `${baseWeb}login`
 // 注册
 const indexRegister = `${baseWebsite}websitsMember/register`;
+// 找回账号
+const findAccount  = `${baseWebsite}websitsMember/forgetAccount`;
 // 找回密码
 const findPassWord = `${baseWebsite}websitsMember/forgetPassword`;
 // 国家列表
-const countryList = `${baseWeb}countrylist`
+const countryList = `${baseWeb}countrylist`;
 // 首页新闻列表
-const indexNewsList = `${baseWebsite}websitenews/officialNewsList`
+const indexNewsList = `${baseWebsite}websitenews/officialNewsList`;
 // 首页店铺列表
-const indexShopList = `${baseWebsite}websiteshop/newShop`
+const indexShopList = `${baseWebsite}websiteshop/newShop`;
 // 首页轮播图列表
-const indexBannerList = `${baseWebsite}banner/bannerShow`
+const indexBannerList = `${baseWebsite}banner/bannerShow`;
 // 首页用户卡列表
-const indexUserCardList = `${baseWebsite}websitsMember/memberCardALL`
+const indexUserCardList = `${baseWebsite}websitsMember/memberCardALL`;
 
 const indexLoginHttp = (data:any) =>{
     return axios.post(getNewUrl(indexLogin, data))
@@ -57,6 +59,9 @@ const indexNewsListHttp = (data:any) => {
 }
 const indexShopListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexShopList, data))
+}
+const findAccountHttp = (data:any) =>{
+	return axios.post(findAccount, qs.stringify(data));
 }
 const findPassWordHttp = (data:any) =>{
 	return axios.post(findPassWord, data);
@@ -197,5 +202,6 @@ export {
 		adartsCardListHttp,
 		adartsCardDeleteHttp,
 		adartsBindHttp,
-		findPassWordHttp
+		findPassWordHttp,
+		findAccountHttp
 }

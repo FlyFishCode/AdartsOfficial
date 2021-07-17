@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom'
 import { LeftOutlined } from '@ant-design/icons'
 import { REG_PHONE, REG_EMAIL } from '@/common/Utlis'
+import { sendEmailHttp, findAccountHttp } from '@/api'
 
 const { Option } = Select;
 const ForgetID = () => {
@@ -13,7 +14,6 @@ const ForgetID = () => {
     const [display, setDisplay] = useState('none')
     const [phoneCode, setPhoneCode] = useState('+86')
     const [inputValue, setInputValue] = useState('')
-    const [password, setPassword] = useState('')
     const [code, setCode] = useState('')
     const [downNum, setDownNum] = useState(59)
     const [disabled, setDisabled] = useState(false)
@@ -38,18 +38,18 @@ const ForgetID = () => {
             value += `${phoneCode}-${inputValue}`
         }
         if (flag) {
-            console.log(value);
             setDisabled(true)
+            sendEmailHttp({ email: value }).then(res => {
+                if (res.data.code === 100) {
+                    message.info(res.data.msg)
+                }
+            })
         }
         else {
             message.warning(t(63))
         }
     }
-    const handleLogin = () => {
-        if (!password) {
-            message.warning(t(87))
-            return false
-        }
+    const handleOK = () => {
         if (!inputValue) {
             message.warning(t(63))
             return false
@@ -58,6 +58,20 @@ const ForgetID = () => {
             message.warning(t(89))
             return false
         }
+        let value = ''
+        if (type === 'email') {
+            value = inputValue
+        }
+        if (type === 'phone') {
+            value += `${phoneCode}-${inputValue}`
+        }
+        findAccountHttp({ email: value }).then(res => {
+            if (res.data.code === 100) {
+                message.info(res.data.msg)
+            } else {
+                message.warning(res.data.msg)
+            }
+        })
     }
     useEffect(() => {
         let timer = null;
@@ -66,6 +80,7 @@ const ForgetID = () => {
                 setDownNum(n => {
                     if (n === 1) {
                         setDisabled(false)
+                        setDownNum(59)
                     }
                     return n - 1
                 })
@@ -80,38 +95,29 @@ const ForgetID = () => {
                 <div> {t(28)} </div>
             </div>
             <Row className='RowBox' >
-                <Col className='labelTitle' span='4'> {t(60)}</Col>
-                <Col span='20' >
-                    < Input.Password placeholder="Please input your password!" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </Col >
-            </Row>
-            <Row className='RowBox' >
                 <Col className='labelTitle' span='4'> {t(131)} </Col>
-                <Col span='18'>
+                <Col span='13'>
                     <Input.Group compact>
-                        <Select defaultValue={type} style={{ width: '15%' }} onChange={(value) => handleTypeChange(value)}>
+                        <Select defaultValue={type} style={{ width: '20%' }} onChange={(value) => handleTypeChange(value)}>
                             <Option value="email">{t(39)}</Option>
                             <Option value="phone">{t(48)}</Option>
                         </Select>
-                        <Select defaultValue={phoneCode} style={{ width: '10%', display: display }} onChange={(value) => setPhoneCode(value)}>
+                        <Select defaultValue={phoneCode} style={{ width: '15%', display: display }} onChange={(value) => setPhoneCode(value)}>
                             <Option value="+86">+86</Option>
                             <Option value="+87">+87</Option>
                         </Select>
-                        <Input style={{ width: '75%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
+                        <Input style={{ width: '65%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
                     </Input.Group>
                 </Col>
                 <Col span='2'>
                     < Button type="primary" block onClick={handleSend} disabled={disabled} > {disabled ? downNum : t(59)} </Button>
                 </Col>
-            </Row>
-            <Row className='RowBox' >
-                <Col className='labelTitle' span='4'> {t(88)} </Col>
-                <Col span='4' >
+                <Col span='4' offset='1'>
                     <Input placeholder="Please input your code!" value={code} onChange={(e) => setCode(e.target.value)} />
                 </Col>
             </Row>
             <Row className='RowBox' >
-                <Button type="primary" size='large' block onClick={handleLogin} > {t(4)} </Button>
+                <Button type="primary" size='large' block onClick={handleOK} > {t(4)} </Button>
             </Row>
         </div>
     )
