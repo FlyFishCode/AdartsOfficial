@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Button, Input, message } from 'antd'
 import useDeleteBox from '@/common/components/deleteBox.js'
 
+import { adartsCardListHttp, adartsCardDeleteHttp } from '@/api'
+
 import m from '@/assets/img/m.png'
 import A from '@/assets/img/Adarts.png'
 import L from '@/assets/img/League.png'
@@ -12,26 +14,11 @@ const AdartsCardSetting = () => {
   const { t } = useTranslation();
   const [cardList, setCardList] = useState([]);
   const getCardList = () => {
-    setCardList([
-      {
-        id: 1,
-        userName: 'Alvin',
-        icon: 0,
-        cardNo: '0254 9625 1289 3509 657',
-        ranting: '14.95',
-        ppd: '27.12',
-        mpr: '2.64',
-      },
-      {
-        id: 2,
-        userName: 'Alvin',
-        icon: 1,
-        cardNo: '0254 9625 1289 3509 657',
-        ranting: '14.95',
-        ppd: '27.12',
-        mpr: '2.64',
+    adartsCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
+      if (res.data.code === 100) {
+        setCardList(res.data.data)
       }
-    ])
+    })
   };
   const handleCopy = (value) => {
     const selectDom = document.createElement('input');
@@ -46,9 +33,14 @@ const AdartsCardSetting = () => {
   const handleAddCrad = () => {
     console.log(1);
   }
-  const handleBtnClick = (value) => {
-    if (value) {
-      console.log(value);
+  const handleBtnClick = (cardId) => {
+    if (cardId) {
+      adartsCardDeleteHttp({ cardId }).then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg)
+          getCardList()
+        }
+      })
     }
   }
   useEffect(() => {
@@ -59,10 +51,10 @@ const AdartsCardSetting = () => {
       <div className='myPageTitle' id='AdartsCardSetting'>{t(69)}</div>
       {cardList.map(i => {
         return (
-          <div key={i.id} className='AdartsCardBox'>
-            <div className='AdartsCardImgBox'>
-              <div><img src={m} alt="" /></div>
-              <div>{i.userName}</div>
+          <div key={i.cardId} className='AdartsCardBox'>
+            <div>
+              <div className='AdartsCardImgBox'><img src={m} alt="" /></div>
+              <div className='AdartsCardUserName'>{i.name}</div>
             </div>
             <div className='AdartsCardInfoBox'>
               <div className='AdartsCardInfo'>
@@ -71,7 +63,7 @@ const AdartsCardSetting = () => {
               </div>
               <div className='AdartsCardLine'></div>
               <div className='AdartsCardResultBox'>
-                <div>{`Rating | ${i.ranting}`}</div>
+                <div>{`Rating | ${i.rating}`}</div>
                 <div>{`PPD | ${i.ppd}`}</div>
                 <div>{`MPR | ${i.mpr}`}</div>
               </div>

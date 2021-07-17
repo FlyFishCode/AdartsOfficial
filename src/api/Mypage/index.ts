@@ -21,4 +21,24 @@ const accountInfoUpdate = 'websitsMember/updateAccountInfo'
 // 修改密码
 const passwordChange = 'websitsMember/updatePassword'
 
-export {myPageIndexUserCardInfo,about30GameList,myPageIndexGameInfo,allGameData,awardHistoryData,accountInfo,passwordChange,accountInfoUpdate}
+
+
+// 其他设定
+// adarts卡信息
+const adartsCardList = 'websitsMember/cardList';
+// 删除卡
+const adartsCardDelete = 'websitsMember/cardUnbundling'
+
+
+export {
+  myPageIndexUserCardInfo,
+  about30GameList,
+  myPageIndexGameInfo,
+  allGameData,
+  awardHistoryData,
+  accountInfo,
+  passwordChange,
+  accountInfoUpdate,
+  adartsCardList,
+  adartsCardDelete
+}
