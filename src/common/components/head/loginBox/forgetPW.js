@@ -6,6 +6,8 @@ import { LeftOutlined } from '@ant-design/icons';
 import { REG_PHONE, REG_EMAIL } from '@/common/Utlis';
 import { sendEmailHttp, findPassWordHttp } from '@/api';
 
+import md5 from 'blueimp-md5'
+
 const { Option } = Select;
 
 const ForgetPW = () => {
@@ -80,7 +82,7 @@ const ForgetPW = () => {
             account,
             email: value,
             emailCode: code,
-            newPassword
+            newPassword: md5(newPassword)
         }
         findPassWordHttp(data).then(res => {
             if (res.data.code === 100) {

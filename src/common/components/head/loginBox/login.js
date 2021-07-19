@@ -5,13 +5,14 @@ import { useHistory } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons'
 import { indexLoginHttp } from '@/api/index'
 
+import md5 from 'blueimp-md5'
 
 const LoginBox = (props) => {
     const { changeUserName } = props
     const { t } = useTranslation();
-    const history = useHistory()
-    const [username, setUserName] = useState('')
-    const [password, setPassword] = useState('')
+    const history = useHistory();
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
     const handleLogin = () => {
         if (!username) {
             message.warning(t(86))
@@ -21,13 +22,14 @@ const LoginBox = (props) => {
             message.warning(t(87))
             return false
         }
-        indexLoginHttp({ username, password }).then((res) => {
+        indexLoginHttp({ username, password: md5(password) }).then((res) => {
             if (res.data.code === 100) {
-                setUserName(res.data.data.username)
-                changeUserName(res.data.data.username)
-                sessionStorage.setItem('websiteUserName', res.data.data.username)
-                sessionStorage.setItem('websiteMemberId', res.data.data.memberId)
-                sessionStorage.setItem('websiteToken', res.data.data.token)
+                const data = res.data.data
+                setUserName(data.username)
+                changeUserName(data.username)
+                sessionStorage.setItem('websiteUserName', data.username)
+                sessionStorage.setItem('websiteMemberId', data.memberId)
+                sessionStorage.setItem('websiteToken', data.token)
                 history.push('/')
             } else {
                 message.warning(res.data.msg)

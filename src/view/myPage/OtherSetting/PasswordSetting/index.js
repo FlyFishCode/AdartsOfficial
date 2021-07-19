@@ -1,10 +1,17 @@
-import { Input, Button, Form, message } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { passwordChangeHttp } from '@/api'
+import { Input, Button, Form, message } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { passwordChangeHttp } from '@/api';
+
+import md5 from 'blueimp-md5'
+
 const PasswordSetting = () => {
   const { t } = useTranslation()
   const handleFinish = (values) => {
-    const data = { ...values, memberId: sessionStorage.getItem('websiteMemberId') }
+    const data = {
+      oldPassword: md5(values.oldPassword),
+      newPassword: md5(values.newPassword),
+      memberId: sessionStorage.getItem('websiteMemberId')
+    }
     passwordChangeHttp(data).then(res => {
       if (res.data.code === 100) {
         message.info(res.data.msg)
@@ -31,15 +38,7 @@ const PasswordSetting = () => {
               {
                 required: true,
                 message: 'Please input your old password!'
-              },
-              ({ getFieldValue }) => ({
-                validator (_, value) {
-                  if (/^[a-z]{6,20}$/.test(value)) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error(t(41)));
-                }
-              })
+              }
             ]}
           >
             <Input.Password placeholder={t(41)} allowClear />
@@ -47,26 +46,19 @@ const PasswordSetting = () => {
           <Form.Item
             label={t(109)}
             name="newPassword"
-            dependencies={['oldPassword']}
             rules={[
               {
                 required: true,
                 message: 'Please input your password!'
-              },
-              ({ getFieldValue }) => ({
-                validator (_, value) {
-                  if (!value || getFieldValue('oldPassword') === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error(t(110)));
-                }
-              })
+              }
             ]}
           >
             <Input.Password placeholder={t(41)} allowClear />
           </Form.Item>
           <Form.Item
             label={t(37)}
+            name="confirmPassword"
+            dependencies={['newPassword']}
             rules={[
               {
                 required: true,
@@ -74,12 +66,13 @@ const PasswordSetting = () => {
               },
               ({ getFieldValue }) => ({
                 validator (_, value) {
-                  if (/^[a-z]{6,20}$/.test(value)) {
+                  if (!value || getFieldValue('newPassword') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error(t(41)));
+                  return Promise.reject(new Error(t(110)));
                 }
-              })]}
+              })
+            ]}
           >
             <Input.Password placeholder={t(41)} allowClear />
           </Form.Item>
