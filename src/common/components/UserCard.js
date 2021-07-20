@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react'
 import { Row, Col, Button, Progress } from 'antd'
 import { LeftOutlined, RightOutlined, UserAddOutlined, GiftOutlined, MessageOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { indexUserCardListHttp } from '@/api'
+import { indexUserCardListHttp } from '@/api';
+import { useHistory } from 'react-router-dom'
 const UserCard = (props) => {
   const [userCard, setUserCard] = useState([]);
-  const [friend, setFriend] = useState(0)
-  const [gift, setGift] = useState(0)
-  const [position, setPosition] = useState(0)
-  const [positionIndex, setPositionIndex] = useState(0)
+  const [friend, setFriend] = useState(0);
+  const [gift, setGift] = useState(0);
+  const [position, setPosition] = useState(0);
+  const [positionIndex, setPositionIndex] = useState(0);
+  const history = useHistory();
   const num = userCard && userCard.length;
   const { t } = useTranslation();
   const handleUserCardClick = (direction) => {
@@ -29,6 +31,14 @@ const UserCard = (props) => {
       if (res.data.code === 100) {
         setUserCard(res.data.data)
         sessionStorage.setItem('websiteCardId', res.data.data[0].cardId)
+      }
+    })
+  }
+  const handleBtnPush = (name) => {
+    history.push({
+      pathname: '/MyPage',
+      state: {
+        name
       }
     })
   }
@@ -119,8 +129,8 @@ const UserCard = (props) => {
       <Col span='8' offset='1' className='userCardOther'>
         <div className='otherMoreBox'>
           {/* <Button block >{t('1')}<RightOutlined /></Button> */}
-          <Button block >{t(16)}<RightOutlined /></Button>
-          <Button block >{t(17)}<RightOutlined /></Button>
+          <Button block onClick={() => handleBtnPush('About30Game')}>{t(16)}<RightOutlined /></Button>
+          <Button block onClick={() => handleBtnPush('PropSetting')}>{t(17)}<RightOutlined /></Button>
           <hr />
         </div>
         <div className='otherInfoBox'>

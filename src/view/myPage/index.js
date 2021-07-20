@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Row, Col, Anchor } from 'antd'
 
@@ -15,21 +15,27 @@ const { Link } = Anchor;
 
 const MyPage = () => {
   const { t } = useTranslation()
-  // const Location = useLocation();
+  const Location = useLocation();
   const [cardId, setCardId] = useState();
   const handleChangeCardId = (value) => {
     setCardId(value)
   }
   const handleClick = (e) => {
-    // const ele = document.getElementById(e.key)
-    // ele && ele.scrollIntoView({
-    //   behavior: "smooth", // 默认 auto
-    //   block: "start", // 默认 center
-    //   inline: "nearest", // 默认 nearest
-    // })
     e.preventDefault();
   }
-  // console.log(Location.state);
+  const handleLinkClick = (e) => {
+    const ele = document.getElementById(e)
+    ele && ele.scrollIntoView({
+      behavior: "smooth", // 默认 auto
+      block: "start", // 默认 center
+      inline: "nearest", // 默认 nearest
+    })
+  }
+  useEffect(() => {
+    if (Location?.state?.name) {
+      handleLinkClick(Location.state.name)
+    }
+  }, [Location])
   useEffect(() => {
     handleChangeCardId()
   }, [cardId])
@@ -41,11 +47,11 @@ const MyPage = () => {
           <Link href="#anyWhere" title='Any Where' />
           <Link href='1' title={t(22)}>
             <Link href="#AllGameData" title={t(21)} />
-            <Link href="#About30Game" title={t(64)} />
+            <Link href="#About30Game" onClick={() => handleLinkClick} title={t(64)} />
             <Link href="#AwardHistory" title={t(65)} />
           </Link>
           <Link href='2' title={t(24)}>
-            <Link href="#6" title={t(66)} />
+            {/* <Link href="#6" title={t(66)} /> */}
             <Link href="#FriendsList" title={t(67)} />
             <Link href="#AddFriends" title={t(68)} />
           </Link>

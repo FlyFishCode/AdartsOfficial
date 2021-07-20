@@ -33,7 +33,7 @@ const Head = (prop) => {
             <Menu.Item key="/MyPage">
               <div onClick={() => handlePushClick('MyPage')}>我的页面</div>
             </Menu.Item>
-            <Menu.Item key="/News">
+            <Menu.Item key="/News" disabled>
               <Link to='/News'>道具商城</Link>
             </Menu.Item>
             <Menu.Item key="/AdartsShop">
@@ -47,24 +47,24 @@ const Head = (prop) => {
                 <Link to='/GameRanking'>游戏排名</Link>
               </Menu.Item>
             </SubMenu> */}
-            <SubMenu key="3" title="Adarts活动">
+            <SubMenu key="3" title="Adarts活动" disabled>
               <Menu.Item key="/TaskReward">
                 <Link to='/TaskReward'>任务奖励</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="/MatchRanking">
+            <Menu.Item key="/MatchRanking" disabled>
               <Link to='/MatchRanking'>比赛排名</Link>
             </Menu.Item>
-            <Menu.Item key="/ShopPrps">
+            <Menu.Item key="/ShopPrps" disabled>
               <Link to='/ShopPrps'>道具商店</Link>
             </Menu.Item>
             <Menu.Item key="/Darts">
               <Link to='/Darts'>飞镖专栏</Link>
             </Menu.Item>
-            <Menu.Item key="/Player">
+            <Menu.Item key="/Player" disabled>
               <Link to='/Player'>选手介绍</Link>
             </Menu.Item>
-            <Menu.Item key="/ServiceEr">
+            <Menu.Item key="/ServiceEr" disabled>
               <Link to='/ServiceEr'>{t(121)}</Link>
             </Menu.Item>
           </SubMenu>
