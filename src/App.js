@@ -13,15 +13,18 @@ import '@/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 
 import NewsPage from './view/news';
-import MyPage from './view/myPage'
-import AdartsShop from './view/adartsShop'
+import MyPage from './view/myPage';
+import AdartsShop from './view/adartsShop';
 import MatchPage from './view/match';
-import Head from './common/components/head/Head.js'
-import UserCard from './common/components/UserCard'
-import LoginBox from './common/components/head/loginBox/login.js'
-import ForgetID from './common/components/head/loginBox/forgetID.js'
-import ForgetPW from './common/components/head/loginBox/forgetPW.js'
-import AddUser from './common/components/head/loginBox/addUser.js'
+import Darts from './view/darts';
+
+
+import Head from './common/components/head/Head.js';
+import UserCard from './common/components/UserCard';
+import LoginBox from './common/components/head/loginBox/login.js';
+import ForgetID from './common/components/head/loginBox/forgetID.js';
+import ForgetPW from './common/components/head/loginBox/forgetPW.js';
+import AddUser from './common/components/head/loginBox/addUser.js';
 
 
 const App = () => {
@@ -55,6 +58,9 @@ const App = () => {
                     <Route path='/Match'>
                         <MatchPage />
                     </Route>
+                    <Route path='/Darts'>
+                        <Darts />
+                    </Route>
                     <Route path='/Login'>
                         <LoginBox changeUserName={handleUserName} />
                     </Route>
@@ -87,7 +93,7 @@ const Container = ({ userName }) => {
     )
 }
 const Banner = () => {
-    let [bannerList, setBannerList] = useState([])
+    let [bannerList, setBannerList] = useState([]);
     const getData = () => {
         indexBannerListHttp({ countryId: 208 }).then(res => {
             setBannerList(res.data.data)
@@ -97,7 +103,7 @@ const Banner = () => {
         console.log(id)
     }
     useEffect(() => {
-        getData()
+        getData();
     }, [])
     return (
         <Carousel autoplay effect="fade" className='bannerBox'>
@@ -118,7 +124,7 @@ const News = () => {
     const { t } = useTranslation();
     useEffect(() => {
         getDate()
-    }, [])
+    }, []);
     const getDate = () => {
         const NewsData = {
             category: 0,
@@ -137,7 +143,7 @@ const News = () => {
         indexShopListHttp(ShopData).then(res => {
             setshopList(res.data.data.list)
         })
-    }
+    };
     const getTypeStr = (type) => {
         let str = ''
         switch (type) {
@@ -152,7 +158,7 @@ const News = () => {
                 break;
         }
         return str
-    }
+    };
     const handleLink = (link) => {
         history.push({
             pathname: '/News',
@@ -160,7 +166,7 @@ const News = () => {
                 type: link
             }
         })
-    }
+    };
     return (
         <div className='All'>
             <div className='AllLeft'>
@@ -193,7 +199,7 @@ const News = () => {
                 </div>
                 <div className='AllFooter'>
                     <div className='footerText'><DesktopOutlined />{t(11)}</div>
-                    <div className='footerMore'>{'》'}</div>
+                    <div className='footerMore'>{'>'}</div>
                 </div>
             </div>
             <div className='AllRight'>
@@ -240,7 +246,7 @@ const News = () => {
                 </div>
                 <div className='AllFooter'>
                     <div className='footerText'><BankOutlined />{t(12)}</div>
-                    <div className='footerMore'>{'》'}</div>
+                    <div className='footerMore'>{'>'}</div>
                 </div>
             </div>
         </div>
@@ -294,8 +300,8 @@ const Activity = () => {
         getDate()
     }, [])
     const getListData = (date) => {
-        const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()]
-        const today = `${year}-${month}-${day}`
+        const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
+        const today = `${year}-${month}-${day}`;
         return list.filter(i => i.date === today)
     }
     const handleDayClick = (count) => {
@@ -305,7 +311,7 @@ const Activity = () => {
         const obj = {
             year: date._d.getFullYear(),
             month: date._d.getMonth() + 1
-        }
+        };
         console.log(obj);
     }
     const dateCellRender = (value) => {
@@ -349,18 +355,19 @@ const Activity = () => {
         </div>
     )
 }
+
 const Video = () => {
-    const [TVData, setTVData] = useState({})
+    const [TVData, setTVData] = useState({});
     useEffect(() => {
         getTVData()
-    }, [])
+    }, []);
     const getTVData = () => {
         setTVData({
             src: 'http://static.adarts-cn.com/static/bulletin/advert/20191227/advert_2.mp4',
             title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
             text: '2222222222222222'
         })
-    }
+    };
     return (
         <div className='video'>
             <div className='tvBox'>

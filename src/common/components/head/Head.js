@@ -58,8 +58,8 @@ const Head = (prop) => {
             <Menu.Item key="/ShopPrps">
               <Link to='/ShopPrps'>道具商店</Link>
             </Menu.Item>
-            <Menu.Item key="/Adarts">
-              <Link to='/Adarts'>飞镖专栏</Link>
+            <Menu.Item key="/Darts">
+              <Link to='/Darts'>飞镖专栏</Link>
             </Menu.Item>
             <Menu.Item key="/Player">
               <Link to='/Player'>选手介绍</Link>
