@@ -29,13 +29,13 @@ const AdartsCardSetting = () => {
   };
   const handleCopy = (value) => {
     const selectDom = document.createElement('input');
-    selectDom.setAttribute('style', 'position:absolute;top:0;left:0px;opacity:0;zIndex:--10')
-    selectDom.value = value
-    document.body.appendChild(selectDom)
-    selectDom.select()
-    document.execCommand('copy')
-    document.body.removeChild(selectDom)
-    message.info(t(125))
+    selectDom.setAttribute('style', 'position:absolute;top:0;left:0px;opacity:0;zIndex:--10');
+    selectDom.value = value;
+    document.body.appendChild(selectDom);
+    selectDom.select();
+    document.execCommand('copy');
+    document.body.removeChild(selectDom);
+    message.info(t(125));
   }
 
   const handleAddCrad = () => {
@@ -53,7 +53,7 @@ const AdartsCardSetting = () => {
       adartsCardDeleteHttp({ cardId }).then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg)
-          getCardList()
+          getCardList();
         }
       })
     }
