@@ -123,12 +123,16 @@ const Banner = () => {
     )
 }
 const News = () => {
-    const [newsList, setNewsList] = useState([])
-    const [shopList, setshopList] = useState([])
+    const [newsList, setNewsList] = useState([]);
+    const [shopList, setshopList] = useState([]);
     const history = useHistory();
     const { t } = useTranslation();
     useEffect(() => {
-        getDate()
+        getDate();
+        return () => {
+            setNewsList([]);
+            setshopList([]);
+        }
     }, []);
     const getDate = () => {
         const NewsData = {
