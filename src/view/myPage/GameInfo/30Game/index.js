@@ -90,6 +90,7 @@ const About30Game = (props) => {
   }
   useEffect(() => {
     getDataList(cardId || sessionStorage.getItem('websiteCardId'));
+    return () => setDataList([]);
   }, [cardId])
   return (
     <div>

@@ -62,7 +62,6 @@ const MyPageIndex = (props) => {
   const MyIcon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
   })
-  const cardId = Number(sessionStorage.getItem('websiteCardId'));
   const getData = (cardId) => {
     myPageIndexUserCardInfoHttp({
       cardId: cardId,
@@ -83,11 +82,16 @@ const MyPageIndex = (props) => {
     })
   }
   useEffect(() => {
+    const cardId = Number(sessionStorage.getItem('websiteCardId'));
     if (cardId) {
       getData(cardId)
       getGameInfoData(cardId)
     }
-  }, [cardId])
+    return () => {
+      setCard({});
+      setGaneInfo({});
+    }
+  }, [])
   return (
     <div>
       <div className='myPageTitle' id='myPageIndex'>{t(20)}</div>

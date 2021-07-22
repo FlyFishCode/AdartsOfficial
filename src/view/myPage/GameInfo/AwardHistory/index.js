@@ -7,7 +7,6 @@ import '../index.css'
 const AwardHistory = () => {
   const { t } = useTranslation()
   const [dataList, setDataList] = useState([]);
-  const cardId = Number(sessionStorage.getItem('websiteCardId'));
   const getData = (cardId) => {
     awardHistoryDataHttp({ cardId }).then(res => {
       const data = res.data.data
@@ -32,8 +31,10 @@ const AwardHistory = () => {
     })
   }
   useEffect(() => {
-    getData(cardId)
-  }, [cardId])
+    const cardId = Number(sessionStorage.getItem('websiteCardId'));
+    getData(cardId);
+    return () => setDataList([]);
+  }, [])
   return (
     <div>
       <div className='myPageTitle' id='AwardHistory'>{t(65)}</div>

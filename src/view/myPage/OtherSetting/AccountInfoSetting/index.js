@@ -9,28 +9,28 @@ import { REG_EMAIL } from '@/common/Utlis'
 const { Option } = Select;
 
 const AccountInfoSetting = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [cardInfo, setCardInfo] = useState({});
   const [homeShopId, setHomeShopId] = useState('');
   const [shopList, setShopList] = useState([]);
   const [countryId, setCountryId] = useState();
   const [countryList, setCountryList] = useState([]);
   const [languageId, setLanguage] = useState('lucy');
-  const [fileList, setFileList] = useState([])
-  const [emailBtnDisabled, setEmailBtnDisabled] = useState(false)
-  const [phoneBtnDisabled, setPhoneBtnDisabled] = useState(false)
-  const [emailCountDown, setEmailCountDown] = useState(59)
-  const [phoneCountDown, setPhoneCountDown] = useState(59)
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [code, setCode] = useState('')
-  const [phoneCode, setPhoneCode] = useState('+86')
-  const [nickname, setNickname] = useState('')
-  const [previewTitle, setPreviewTitle] = useState('')
-  const [previewImage, setPreviewImage] = useState('')
-  const [previewVisible, setPreviewVisible] = useState(false)
+  const [fileList, setFileList] = useState([]);
+  const [emailBtnDisabled, setEmailBtnDisabled] = useState(false);
+  const [phoneBtnDisabled, setPhoneBtnDisabled] = useState(false);
+  const [emailCountDown, setEmailCountDown] = useState(59);
+  const [phoneCountDown, setPhoneCountDown] = useState(59);
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [phoneCode, setPhoneCode] = useState('+86');
+  const [nickname, setNickname] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewVisible, setPreviewVisible] = useState(false);
   const [acceptMail, setAcceptMail] = useState(1);
-  const memberId = sessionStorage.getItem('websiteMemberId')
+  const memberId = sessionStorage.getItem('websiteMemberId');
 
   const uploadButton = (
     <div>
@@ -150,6 +150,10 @@ const AccountInfoSetting = () => {
       getShopList()
       getCountryList()
       getCardInfo(memberId)
+    }
+    return () => {
+      setShopList([]);
+      setCountryList([]);
     }
   }, [memberId])
   return (

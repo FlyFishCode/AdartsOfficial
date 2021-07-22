@@ -31,13 +31,13 @@ const Head = (prop) => {
         <Menu mode="horizontal">
           <SubMenu key="1" icon={<UnorderedListOutlined />}>
             <Menu.Item key="/MyPage">
-              <div onClick={() => handlePushClick('MyPage')}>我的页面</div>
+              <div onClick={() => handlePushClick('MyPage')}>{t(135)}</div>
             </Menu.Item>
             <Menu.Item key="/News" disabled>
-              <Link to='/News'>道具商城</Link>
+              <Link to='/News'>{t(136)}</Link>
             </Menu.Item>
             <Menu.Item key="/AdartsShop">
-              <Link to='/AdartsShop'>Adarts店铺</Link>
+              <Link to='/AdartsShop'>{t(137)}</Link>
             </Menu.Item>
             {/* <SubMenu key="2" title="Adarts店铺">
               <Menu.Item key="/GameTalks">
@@ -49,7 +49,7 @@ const Head = (prop) => {
             </SubMenu> */}
             <SubMenu key="3" title="Adarts活动" disabled>
               <Menu.Item key="/TaskReward">
-                <Link to='/TaskReward'>任务奖励</Link>
+                <Link to='/TaskReward'>{t(138)}</Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="/MatchRanking" disabled>
@@ -61,8 +61,8 @@ const Head = (prop) => {
             <Menu.Item key="/Darts">
               <Link to='/Darts'>飞镖专栏</Link>
             </Menu.Item>
-            <Menu.Item key="/Player" disabled>
-              <Link to='/Player'>选手介绍</Link>
+            <Menu.Item key="/PlayerInfo">
+              <Link to='/PlayerInfo'>{t(139)}</Link>
             </Menu.Item>
             <Menu.Item key="/ServiceEr" disabled>
               <Link to='/ServiceEr'>{t(121)}</Link>

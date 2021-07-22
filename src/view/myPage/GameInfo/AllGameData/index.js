@@ -5,17 +5,18 @@ import '../index.css'
 const AllGameData = () => {
   const { t } = useTranslation();
   const [data, setData] = useState({});
-  const cardId = Number(sessionStorage.getItem('websiteCardId'))
   const getData = (cardId) => {
     allGameDataHttp({ cardId }).then(res => {
       setData(res.data.data)
     })
   }
   useEffect(() => {
+    const cardId = Number(sessionStorage.getItem('websiteCardId'));
     if (cardId) {
       getData(cardId)
     }
-  }, [cardId])
+    return () => setData({})
+  }, [])
   return (
     <div>
       <div className='myPageTitle' id='AllGameData'>{t(21)}</div>

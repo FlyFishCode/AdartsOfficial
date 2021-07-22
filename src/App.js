@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
-import { Carousel, Button, Calendar, Badge } from 'antd';
-import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, UserOutlined } from '@ant-design/icons';
+import { Row, Col, Carousel, Button, Calendar, Badge } from 'antd';
+import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, UserOutlined, TeamOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts'
 import icon1 from '@/assets/img/icon1.jpeg'
 import icon2 from '@/assets/img/icon2.jpeg'
@@ -17,6 +17,7 @@ import MyPage from './view/myPage';
 import AdartsShop from './view/adartsShop';
 import MatchPage from './view/match';
 import Darts from './view/darts';
+import PlayerInfo from './view/playerInfo';
 
 
 import Head from './common/components/head/Head.js';
@@ -58,6 +59,9 @@ const App = () => {
                     <Route path='/Match'>
                         <MatchPage />
                     </Route>
+                    <Route path='/PlayerInfo'>
+                        <PlayerInfo />
+                    </Route>
                     <Route path='/Darts'>
                         <Darts />
                     </Route>
@@ -86,6 +90,7 @@ const Container = ({ userName }) => {
             <Banner />
             {userName ? <UserCard /> : ''}
             <News />
+            <PlayerDes />
             <Activity />
             <Video />
             <Product />
@@ -249,6 +254,48 @@ const News = () => {
                     <div className='footerMore'>{'>'}</div>
                 </div>
             </div>
+        </div>
+    )
+}
+const PlayerDes = () => {
+    const { t } = useTranslation();
+    const history = useHistory();
+    const [playerList, setPlayerList] = useState([]);
+    const handlePlayerClick = (id) => {
+        history.push({
+            pathname: '/PlayerInfo',
+            state: { id }
+        })
+    }
+    useEffect(() => {
+        setPlayerList([
+            { id: 1, src: icon1, playerName: 'AAA' },
+            { id: 2, src: icon1, playerName: 'BBB' },
+            { id: 3, src: icon1, playerName: 'CCC' },
+            { id: 4, src: icon1, playerName: 'DDD' },
+            { id: 5, src: icon1, playerName: 'EEE' },
+            { id: 6, src: icon1, playerName: 'FFF' },
+            { id: 7, src: icon1, playerName: 'GGG' },
+            { id: 8, src: icon1, playerName: 'HHH' },
+            { id: 9, src: icon1, playerName: 'III' },
+            { id: 10, src: icon1, playerName: 'III' },
+        ])
+    }, [])
+    return (
+        <div className='playerDes'>
+            <h1><TeamOutlined />{t(139)}</h1>
+            <Row className='playerDesBox' justify="space-around">
+                {playerList.map(i => {
+                    return (
+                        <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
+                            <div className='playerBox'>
+                                <div><img src={i.src} alt="" /></div>
+                                <div className='playerName'>{i.playerName}</div>
+                            </div>
+                        </Col>
+                    )
+                })}
+            </Row>
         </div>
     )
 }

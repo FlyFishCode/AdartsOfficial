@@ -20,7 +20,7 @@ const AdartsCardSetting = () => {
     setCardId(cardId)
     show()
   }
-  const getCardList = () => {
+  const getCardList = (memberId) => {
     adartsCardListHttp({ memberId }).then(res => {
       if (res.data.code === 100) {
         setCardList(res.data.data)
@@ -59,9 +59,9 @@ const AdartsCardSetting = () => {
     }
   }
   useEffect(() => {
-    getCardList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    getCardList(memberId)
+    return () => setCardList([]);
+  }, [memberId])
   return (
     <div>
       <div className='myPageTitle' id='AdartsCardSetting'>{t(69)}</div>

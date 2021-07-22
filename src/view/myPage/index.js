@@ -1,27 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Row, Col, Anchor } from 'antd'
+import { Row, Col, Anchor } from 'antd';
 
-import MyPageIndex from './MyPageIndex'
-import AnyWhere from './AnyWhere'
-import GameInfo from './GameInfo'
-import FriendsChat from './FriendsChat'
-import OtherSetting from './OtherSetting'
+import MyPageIndex from './MyPageIndex';
+import AnyWhere from './AnyWhere';
+import GameInfo from './GameInfo';
+import FriendsChat from './FriendsChat';
+import OtherSetting from './OtherSetting';
 
-import './index.css'
+import './index.css';
 
 const { Link } = Anchor;
 
 const MyPage = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const Location = useLocation();
   const [cardId, setCardId] = useState();
   const handleChangeCardId = (value) => {
     setCardId(value)
-  }
-  const handleClick = (e) => {
-    e.preventDefault();
   }
   const handleLinkClick = (e) => {
     const ele = document.getElementById(e)
@@ -37,12 +34,12 @@ const MyPage = () => {
     }
   }, [Location])
   useEffect(() => {
-    handleChangeCardId()
+    handleChangeCardId();
   }, [cardId])
   return (
     <Row id='myPage'>
       <Col span={4} offset={1}>
-        <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={handleClick}>
+        <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={(e) => e.preventDefault()}>
           <Link href="#myPageIndex" title={t(20)} />
           <Link href="#anyWhere" title='Any Where' />
           <Link href='1' title={t(22)}>
@@ -74,4 +71,4 @@ const MyPage = () => {
     </Row >
   )
 }
-export default MyPage
+export default MyPage;
