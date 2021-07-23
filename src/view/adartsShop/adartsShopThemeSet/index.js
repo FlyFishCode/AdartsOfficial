@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Select, Tooltip, Pagination } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { QuestionOutlined } from '@ant-design/icons'
+import { useState, useEffect } from 'react';
+import { Row, Col, Select, Tooltip, Pagination } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { QuestionOutlined } from '@ant-design/icons';
+import { countryListHttp } from '@/api'
 
 import m from '@/assets/img/m.png'
 
@@ -11,6 +12,7 @@ const AdartsShopThemeSet = () => {
     const { t } = useTranslation();
     const [total, setTotal] = useState(1);
     const [shopList, setShopList] = useState([]);
+    const [countryList, setCountryList] = useState([]);
     const getShopList = () => {
         setShopList([
             {
@@ -78,8 +80,14 @@ const AdartsShopThemeSet = () => {
     const handlePageChange = (index) => {
         console.log(index);
     }
+    const getCountryList = () => {
+        countryListHttp().then(res => {
+            setCountryList(res.data.data)
+        })
+    }
     useEffect(() => {
-        getShopList()
+        getShopList();
+        getCountryList();
     }, [])
     return (
         <div className='AnchorBox'>
@@ -87,9 +95,11 @@ const AdartsShopThemeSet = () => {
             <Row className='adartsShopIndexSearchBox'>
                 <Col span='20' offset='1' className='selectBox'>
                     <Select placeholder={t(115)} onChange={handleChange}>
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="Yiminghe">yiminghe</Option>
+                        {countryList.map(i => {
+                            return (
+                                <Option value={i.countryId} key={i.countryId}>{i.countryName}</Option>
+                            )
+                        })}
                     </Select>
                 </Col>
                 <Col span='1' offset='1' className='tips'>

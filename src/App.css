@@ -834,3 +834,88 @@
     width: 100%;
     height: 100%;
 }
+
+.playerName {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #C00020;
+    color: #fff;
+    text-indent: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.playerIconBox {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.playerIconBox img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.dartsBox {
+    height: 250px;
+}
+
+.dartsBox img {
+    height: 100%;
+}
+
+.playerInfo video {
+    width: 100%;
+    height: 450px;
+}
+
+.playerProductBox {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: 240px;
+    padding: 10px;
+}
+
+.playerProductBox div {
+    margin: 5px;
+}
+
+.playerProductBox img {
+    width: 100%;
+    height: 100%;
+}
+
+.datrtsTitleBox {
+    display: flex;
+    width: 100%;
+}
+
+.datrtsTitleBox div {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dartsTitleStyle div {
+    color: #fff;
+    background: #505050;
+}
+
+.dartsContentStyle div {
+    color: #000;
+    background: #ECECEC;
+}
+
+.datrtsTitleBox div:nth-child(2) {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.datrtsTitleBox div:nth-child(3) {
+    border-right: 1px solid #fff;
+}

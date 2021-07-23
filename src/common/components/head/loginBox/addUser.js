@@ -126,8 +126,7 @@ const AddUser = () => {
             <Row className='registerHead RowBox'>
                 <Col span='2' className='labelTitle'>{t(31)}</Col>
                 <Col span='10' className='selectBox'>
-                    <Select onChange={(value) => setCountryId(value)
-                    }>
+                    <Select onChange={(value) => setCountryId(value)}>
                         {countryList.map(i => {
                             return (
                                 <Option value={i.countryId} key={i.countryId}>{i.countryName}</Option>
