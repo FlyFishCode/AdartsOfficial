@@ -301,7 +301,7 @@
     cursor: pointer;
 }
 
-.playerName {
+.playerDesName {
     height: 50px;
     line-height: 50px;
     font-size: 20px;
@@ -877,7 +877,6 @@
     display: grid;
     grid-template-columns: repeat(5, 20%);
     grid-template-rows: 240px;
-    padding: 10px;
 }
 
 .playerProductBox div {
@@ -918,4 +917,13 @@
 
 .datrtsTitleBox div:nth-child(3) {
     border-right: 1px solid #fff;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+    font-size: inherit;
+    color: currentColor;
+    font-size: 20px;
 }

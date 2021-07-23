@@ -23,7 +23,7 @@ const AccountInfoSetting = () => {
   const [phoneCountDown, setPhoneCountDown] = useState(59);
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
+  const [emailCode, setCode] = useState('');
   const [phoneCode, setPhoneCode] = useState('+86');
   const [nickname, setNickname] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -103,7 +103,7 @@ const AccountInfoSetting = () => {
       languageId,
       nickname,
       email,
-      code,
+      emailCode,
       acceptMail,
     }
     accountInfoUpdateHttp(data).then(res => {

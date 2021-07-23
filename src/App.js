@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { Row, Col, Carousel, Button, Calendar, Badge } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, UserOutlined, TeamOutlined } from '@ant-design/icons';
-import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts'
-import icon1 from '@/assets/img/icon1.jpeg'
-import icon2 from '@/assets/img/icon2.jpeg'
+import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
+import icon1 from '@/assets/img/icon1.jpeg';
+import icon2 from '@/assets/img/icon2.jpeg';
+import a from '@/assets/img/a.jpg';
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -267,22 +268,22 @@ const PlayerDes = () => {
     const [playerList, setPlayerList] = useState([]);
     const handlePlayerClick = (id) => {
         history.push({
-            pathname: '/PlayerInfo',
-            state: { id }
+            pathname: 'PlayerInfo',
+            // state: { id }
         })
     }
     useEffect(() => {
         setPlayerList([
-            { id: 1, src: icon1, playerName: 'AAA' },
-            { id: 2, src: icon1, playerName: 'BBB' },
-            { id: 3, src: icon1, playerName: 'CCC' },
-            { id: 4, src: icon1, playerName: 'DDD' },
-            { id: 5, src: icon1, playerName: 'EEE' },
-            { id: 6, src: icon1, playerName: 'FFF' },
-            { id: 7, src: icon1, playerName: 'GGG' },
-            { id: 8, src: icon1, playerName: 'HHH' },
-            { id: 9, src: icon1, playerName: 'III' },
-            { id: 10, src: icon1, playerName: 'III' },
+            { id: 1, src: a, playerName: 'AAA' },
+            { id: 2, src: a, playerName: 'BBB' },
+            { id: 3, src: a, playerName: 'CCC' },
+            { id: 4, src: a, playerName: 'DDD' },
+            { id: 5, src: a, playerName: 'EEE' },
+            { id: 6, src: a, playerName: 'FFF' },
+            { id: 7, src: a, playerName: 'GGG' },
+            { id: 8, src: a, playerName: 'HHH' },
+            { id: 9, src: a, playerName: 'III' },
+            { id: 10, src: a, playerName: 'III' },
         ])
     }, [])
     return (
@@ -294,7 +295,7 @@ const PlayerDes = () => {
                         <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
                             <div className='playerBox'>
                                 <div><img src={i.src} alt="" /></div>
-                                <div className='playerName'>{i.playerName}</div>
+                                <div className='playerDesName'>{i.playerName}</div>
                             </div>
                         </Col>
                     )
