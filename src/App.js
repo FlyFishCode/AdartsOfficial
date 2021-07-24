@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
-import { Row, Col, Carousel, Button, Calendar, Badge } from 'antd';
+import { Row, Col, Button, Calendar, Badge } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, UserOutlined, TeamOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import icon1 from '@/assets/img/icon1.jpeg';
 import icon2 from '@/assets/img/icon2.jpeg';
 import a from '@/assets/img/a.jpg';
@@ -108,11 +112,17 @@ const Banner = () => {
     const handleClick = (id) => {
         console.log(id)
     }
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+    }
     useEffect(() => {
         getData();
     }, [])
     return (
-        <Carousel autoplay effect="fade" className='bannerBox'>
+        <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
             {bannerList.map((item, index) => {
                 return (
                     <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
@@ -120,7 +130,7 @@ const Banner = () => {
                     </div>
                 )
             })}
-        </Carousel>
+        </Slider>
     )
 }
 const News = () => {
@@ -229,7 +239,8 @@ const News = () => {
                                             <div className='shopIconBox'>
                                                 <img src={item.icon} alt="" />
                                             </div>
-                                            <div> <span style={{ color: 'red', fontWeight: 'bold' }}>[{item.countryName}]</span> {item.shopName}</div>
+                                            <div style={{ color: 'red', fontWeight: 'bold' }}>[{item.countryName}]</div>
+                                            <div className='textOverFlow' style={{ width: '60%' }}>{item.shopName}</div>
                                         </div>
                                         <div>{item.shopAddress}</div>
                                         <div>{item.machineList && item.machineList.map((i, index) => {

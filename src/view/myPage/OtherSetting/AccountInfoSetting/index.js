@@ -81,8 +81,8 @@ const AccountInfoSetting = () => {
       if (res.data.code === 100) {
         const data = res.data.data
         setCardInfo(res.data.data)
-        setPhoneCode(data.phone.split('-')[0])
-        setPhone(data.phone.split('-')[1])
+        setPhoneCode(data.phone && data.phone.split('-')[0])
+        setPhone(data.phone && data.phone.split('-')[1])
         setEmail(data.email)
         setHomeShopId(data.homeShopId)
         setCountryId(data.countryId)
@@ -231,7 +231,7 @@ const AccountInfoSetting = () => {
         <Col span='4' className='AccountInfoLabel'>{t(102)}</Col>
         <Col span='20'>
           <Upload
-            customRequest={handleRequset}
+            customRequest={() => handleRequset}
             listType="picture-card"
             fileList={fileList}
             onPreview={handlePreview}

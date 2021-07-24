@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons'
 import { indexLoginHttp } from '@/api/index'
-
-import md5 from 'blueimp-md5'
+import { MD5 } from '@/common/Utlis'
 
 const LoginBox = (props) => {
     const { changeUserName } = props
@@ -22,7 +21,7 @@ const LoginBox = (props) => {
             message.warning(t(87))
             return false
         }
-        indexLoginHttp({ username, password: md5(password) }).then((res) => {
+        indexLoginHttp({ username, password: MD5(password) }).then((res) => {
             if (res.data.code === 100) {
                 const data = res.data.data
                 setUserName(data.username)

@@ -125,7 +125,6 @@
     font-size: 20px;
     height: 30px;
     line-height: 30px;
-    margin: 0 5px;
 }
 
 .newsOther {
@@ -143,12 +142,14 @@
 .newsOther div:hover {
     color: #444;
     background: #fff;
-    box-shadow: 0px 0px 2px 2px #1890ff;
+    /* box-shadow: 0px 0px 2px 2px #1890ff; */
 }
 
 .AllLeft .Allcontainer {
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid #eee;
+    background: #EBEFF0;
 }
 
 .AllLeft .Allcontainer .container {
@@ -157,11 +158,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 10px;
+    margin: 9px;
     padding: 10px;
-    border: 1px solid #eee;
-    /* box-shadow: 0 0 5px 1px; */
     cursor: pointer;
+    background: #fff;
 }
 
 .AllRight {
@@ -173,7 +173,8 @@
     flex-direction: column;
     justify-content: space-between;
     height: 600px;
-    padding: 10px 0;
+    border: 1px solid #eee;
+    padding: 15px;
 }
 
 .AllRight .AllHead div {
@@ -202,15 +203,16 @@
 .AllRightBox {
     width: 100%;
     display: flex;
-    border: 1px solid #eee;
-    /* box-shadow: 0 0 5px 1px; */
     cursor: pointer;
     padding: 5px;
+    overflow: hidden;
 }
 
+
+/*
 .AllRightBox:hover {
     border: 1px solid #999;
-}
+} */
 
 .AllImgBox {
     margin-right: 10px;
@@ -224,7 +226,6 @@
 .shopIconBox {
     width: 30px;
     height: 30px;
-    margin-right: 5px;
 }
 
 .shopIconBox img {
@@ -238,9 +239,11 @@
     line-height: 30px;
 }
 
+
+/*
 .shopBox div:nth-child(2) {
     display: flex;
-}
+} */
 
 .iconBox {
     display: flex;
@@ -284,7 +287,7 @@
 }
 
 .playerDesBox {
-    background: #EFEFF2;
+    background: #f9f9f9;
 }
 
 .playerDes h1 {
@@ -514,7 +517,9 @@
 
 .userCardBox {
     height: 300px;
-    margin: 10px 0;
+    margin: 35px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .otherMoreBox {
@@ -562,7 +567,7 @@
     border: 1px solid #1890ff;
     border-radius: 10px;
     padding: 10px;
-    width: 400px;
+    width: 450px;
     height: 100%;
     /* background-image: url('@/assets/img/ready.png'); */
 }
@@ -672,13 +677,15 @@
     margin: 0 0 5px 0;
 }
 
-.userCountryImg {
-    width: 30px;
+.userCardCountryImg {
+    width: 70px;
+    height: 40px;
 }
 
-.userCountryImg img {
+.userCardCountryImg div {
     width: 100%;
     height: 100%;
+    background: url('./assets/img/country.png');
 }
 
 .userInfoBox {
@@ -919,11 +926,12 @@
     border-right: 1px solid #fff;
 }
 
-.ant-carousel .slick-prev,
-.ant-carousel .slick-next,
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-next:hover {
-    font-size: inherit;
-    color: currentColor;
-    font-size: 20px;
+.slick-prev:before {
+    content: "\2190";
+    color: #000;
+}
+
+.slick-next:before {
+    content: '→';
+    color: #000;
 }

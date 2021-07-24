@@ -1,28 +1,30 @@
 import { useState, useEffect } from 'react'
-import { Row, Col, Button, Progress } from 'antd'
-import { LeftOutlined, RightOutlined, UserAddOutlined, GiftOutlined, MessageOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
+import { Row, Col, Progress } from 'antd'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { indexUserCardListHttp } from '@/api';
-import { useHistory } from 'react-router-dom'
+// import { useTranslation } from 'react-i18next';
+// import { useHistory } from 'react-router-dom'
+
+import { COUNTRYICONS } from '@/common/Utlis'
 const UserCard = (props) => {
+  // const history = useHistory();
+  // const { t } = useTranslation();
+  // const [friend, setFriend] = useState(0);
+  // const [gift, setGift] = useState(0);
   const [userCard, setUserCard] = useState([]);
-  const [friend, setFriend] = useState(0);
-  const [gift, setGift] = useState(0);
   const [position, setPosition] = useState(0);
   const [positionIndex, setPositionIndex] = useState(0);
-  const history = useHistory();
   const num = userCard && userCard.length;
-  const { t } = useTranslation();
   const handleUserCardClick = (direction) => {
     if (direction === 'left') {
       if (positionIndex > 0) {
         setPositionIndex(positionIndex - 1)
-        setPosition(position + 400)
+        setPosition(position + 450)
       }
     } else {
       if (positionIndex < num - 1) {
         setPositionIndex(positionIndex + 1)
-        setPosition(position - 400)
+        setPosition(position - 450)
       }
     }
   }
@@ -34,18 +36,22 @@ const UserCard = (props) => {
       }
     })
   }
-  const handleBtnPush = (name) => {
-    history.push({
-      pathname: '/MyPage',
-      state: {
-        name
-      }
-    })
+  // const handleBtnPush = (name) => {
+  //   history.push({
+  //     pathname: '/MyPage',
+  //     state: {
+  //       name
+  //     }
+  //   })
+  // }
+  const handleIconPosition = (code) => {
+    return `${0}% ${0}%`
+    // return `${COUNTRYICONS.indexOf(code) % 14 / 13 * 100 + '%'} ${Math.floor(COUNTRYICONS.indexOf(code) / 14) / 13 * 100 + '%'}`
   }
   useEffect(() => {
     getUserCardList()
-    setFriend(1)
-    setGift(1)
+    // setFriend(1)
+    // setGift(1)
   }, [])
   useEffect(() => {
     const dom = document.querySelector('.userCardListBox');
@@ -53,8 +59,8 @@ const UserCard = (props) => {
   }, [position])
   return (
     <Row className='userCardBox'>
-      <Col span='1' offset='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col>
-      <Col span='8' offset='1' className='userCardListBg'>
+      {userCard.length > 0 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col> : null}
+      <Col span='9' className='userCardListBg'>
         <div className='userCardListBox animate__animated animate__fadeInRight'>
           {userCard && userCard.map((i, index) => {
             return (
@@ -62,8 +68,8 @@ const UserCard = (props) => {
                 <div className='userCardLeftBox' >
                   <div className='userInfo'>
                     <div>
-                      <div className='userCountryImg'>
-                        <img src={i.countryImg} alt="" />
+                      <div className='userCardCountryImg'>
+                        <div style={{ backgroundPosition: handleIconPosition(i.countryCode) }} />
                       </div>
                       <div className='userInfoBox'>
                         <div className='userCardImg'>
@@ -125,10 +131,9 @@ const UserCard = (props) => {
           })}
         </div>
       </Col>
-      <Col span='1' offset='1' className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col>
-      <Col span='8' offset='1' className='userCardOther'>
+      {userCard.length > 0 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col> : null}
+      {/* <Col span='8' offset='1' className='userCardOther'>
         <div className='otherMoreBox'>
-          {/* <Button block >{t('1')}<RightOutlined /></Button> */}
           <Button block onClick={() => handleBtnPush('About30Game')}>{t(16)}<RightOutlined /></Button>
           <Button block onClick={() => handleBtnPush('PropSetting')}>{t(17)}<RightOutlined /></Button>
           <hr />
@@ -148,7 +153,7 @@ const UserCard = (props) => {
             <div className='awardChangeBox'>【更改】</div>
           </div>
         </div>
-      </Col>
+      </Col> */}
     </Row>
   )
 }

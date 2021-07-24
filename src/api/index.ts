@@ -1,8 +1,9 @@
-import axios from 'axios'
+import axios from 'axios';
 // import { message } from 'antd'
+// import { useHistory } from 'react-router-dom';
 
 // 公共
-import { sendEmail,upLoadImg,shopList } from './common/index'
+import { sendEmail,upLoadImg,shopList } from './common/index';
 
 
 // 我的页面
@@ -22,7 +23,6 @@ import {
 
 // adarts店铺
 import { newShopList } from './adartsShop'
-
 
 
 
@@ -161,6 +161,10 @@ axios.interceptors.request.use(function(config) {
 
 
 axios.interceptors.response.use(function(response) {
+	// if(!sessionStorage.getItem('websiteMemberId')){
+	// 	const history  = useHistory();
+	// 	history.push('/')
+	// }
     return response;
 }, function(error) {
 

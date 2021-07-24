@@ -1,15 +1,14 @@
 import { Input, Button, Form, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { passwordChangeHttp } from '@/api';
-
-import md5 from 'blueimp-md5'
+import { MD5 } from '@/common/Utlis'
 
 const PasswordSetting = () => {
   const { t } = useTranslation()
   const handleFinish = (values) => {
     const data = {
-      oldPassword: md5(values.oldPassword),
-      newPassword: md5(values.newPassword),
+      oldPassword: MD5(values.oldPassword),
+      newPassword: MD5(values.newPassword),
       memberId: sessionStorage.getItem('websiteMemberId')
     }
     passwordChangeHttp(data).then(res => {
