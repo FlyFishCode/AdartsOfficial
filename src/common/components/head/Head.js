@@ -1,6 +1,6 @@
 // import { useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import { UnorderedListOutlined, GlobalOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined } from '@ant-design/icons';
 import { Menu, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png'
@@ -61,8 +61,8 @@ const Head = (prop) => {
             <Menu.Item key="/Darts">
               <Link to='/Darts'>飞镖专栏</Link>
             </Menu.Item>
-            <Menu.Item key="/PlayerInfo">
-              <Link to='/PlayerInfo'>{t(139)}</Link>
+            <Menu.Item key="/Players">
+              <Link to='/Players'>{t(139)}</Link>
             </Menu.Item>
             <Menu.Item key="/ServiceEr" disabled>
               <Link to='/ServiceEr'>{t(121)}</Link>
@@ -75,7 +75,7 @@ const Head = (prop) => {
       </div>
       <div className='loginAndGlobalBox'>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
-        <div className='globalBox'><GlobalOutlined /></div>
+        {/* <div className='globalBox'><GlobalOutlined /></div> */}
       </div>
     </div >
   )

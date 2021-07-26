@@ -71,7 +71,7 @@ const AllGameData = () => {
           <div>{data.countUpMax || '-'}</div>
         </div>
       </div>
-      <div className='AllGameDataDefault'>
+      {/* <div className='AllGameDataDefault'>
         <div className='AllGameDataMax'>{t(80)}</div>
         <div className='AllGameDataMaxBox'>
           <div className='AllGameDataMaxEle'>
@@ -130,7 +130,7 @@ const AllGameData = () => {
             <div>{data.quantity01 || '-'}</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

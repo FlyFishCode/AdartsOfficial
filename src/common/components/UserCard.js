@@ -5,7 +5,7 @@ import { indexUserCardListHttp } from '@/api';
 // import { useTranslation } from 'react-i18next';
 // import { useHistory } from 'react-router-dom'
 
-import { COUNTRYICONS } from '@/common/Utlis'
+import { setCountryIconPosition } from '@/common/Utlis';
 const UserCard = (props) => {
   // const history = useHistory();
   // const { t } = useTranslation();
@@ -44,10 +44,6 @@ const UserCard = (props) => {
   //     }
   //   })
   // }
-  const handleIconPosition = (code) => {
-    return `${0}% ${0}%`
-    // return `${COUNTRYICONS.indexOf(code) % 14 / 13 * 100 + '%'} ${Math.floor(COUNTRYICONS.indexOf(code) / 14) / 13 * 100 + '%'}`
-  }
   useEffect(() => {
     getUserCardList()
     // setFriend(1)
@@ -68,8 +64,8 @@ const UserCard = (props) => {
                 <div className='userCardLeftBox' >
                   <div className='userInfo'>
                     <div>
-                      <div className='userCardCountryImg'>
-                        <div style={{ backgroundPosition: handleIconPosition(i.countryCode) }} />
+                      <div className='countryIconPosition'>
+                        <div style={{ backgroundPosition: setCountryIconPosition(i.countryCode) }} />
                       </div>
                       <div className='userInfoBox'>
                         <div className='userCardImg'>

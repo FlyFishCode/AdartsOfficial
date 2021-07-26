@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Select, Pagination } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { newShopListHttp, countryListHttp } from '@/api'
-import NoData from '@/common/components/noData'
+import { useState, useEffect } from 'react';
+import { Row, Col, Select, Pagination } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { newShopListHttp, countryListHttp } from '@/api';
+import { setCountryIconPosition } from '@/common/Utlis'
+import NoData from '@/common/components/noData';
 
 const { Option } = Select;
 const AdartsShopNew = () => {
@@ -63,8 +64,8 @@ const AdartsShopNew = () => {
               <div className='AllImgContent'>
                 <div>
                   <div className='shopBox'>
-                    <div className='shopIconBox'>
-                      <img src={item.icon} alt="" />
+                    <div className='countryIconPosition'>
+                      <div style={{ backgroundPosition: setCountryIconPosition(item.countryCode) }} />
                     </div>
                     <div style={{ color: 'red', fontWeight: 'bold' }}> {item.shopName}</div>
                   </div>

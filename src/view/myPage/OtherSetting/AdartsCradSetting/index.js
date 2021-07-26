@@ -37,7 +37,9 @@ const AdartsCardSetting = () => {
     document.body.removeChild(selectDom);
     message.info(t(125));
   }
-
+  const handleSetMainCard = (value) => {
+    console.log(value);
+  }
   const handleAddCrad = () => {
     adartsBindHttp({ cardNo, memberId }).then(res => {
       if (res.data.code === 100) {
@@ -86,6 +88,7 @@ const AdartsCardSetting = () => {
               </div>
             </div>
             <div className='AdartsCardBtnBox'>
+              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardNo)}>{t(144)}</Button> : null}
               <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button>
               <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button>
             </div>

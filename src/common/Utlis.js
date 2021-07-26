@@ -29,9 +29,18 @@ const COUNTRYICONS = [
     "MU", "MR", "ML", "MW", "MG", "LY", "LR", "LS", "KE", "GN",
     "GW", "GH", "GM", "GA", "ET", "ER", "CI", "NP"
 ];
+
+const setCountryIconPosition = (code) => {
+    if (code) {
+        return `${COUNTRYICONS.indexOf(code) % 14 / 13 * 100 + '%'} ${Math.floor(COUNTRYICONS.indexOf(code) / 14) / 13 * 100 + '%'}`
+    } else {
+        return `${0}% ${0}%`
+    }
+}
+
 export {
     REG_PHONE,
     REG_EMAIL,
     MD5,
-    COUNTRYICONS
+    setCountryIconPosition
 }

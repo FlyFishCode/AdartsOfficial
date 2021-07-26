@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
-import { Row, Col, Button, Calendar, Badge } from 'antd';
-import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, UserOutlined, TeamOutlined } from '@ant-design/icons';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+// import { Row, Col } from 'antd';
+import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
+import { setCountryIconPosition } from '@/common/Utlis';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import icon1 from '@/assets/img/icon1.jpeg';
-import icon2 from '@/assets/img/icon2.jpeg';
-import a from '@/assets/img/a.jpg';
+// import icon1 from '@/assets/img/icon1.jpeg';
+// import icon2 from '@/assets/img/icon2.jpeg';
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -22,7 +22,8 @@ import MyPage from './view/myPage';
 import AdartsShop from './view/adartsShop';
 import MatchPage from './view/match';
 import Darts from './view/darts';
-import PlayerInfo from './view/playerInfo';
+import Players from './view/players';
+import PlayerInfo from './view/players/playerInfo';
 
 
 import Head from './common/components/head/Head.js';
@@ -64,6 +65,9 @@ const App = () => {
                     <Route path='/Match'>
                         <MatchPage />
                     </Route>
+                    <Route path='/Players'>
+                        <Players />
+                    </Route>
                     <Route path='/PlayerInfo'>
                         <PlayerInfo />
                     </Route>
@@ -95,8 +99,8 @@ const Container = ({ userName }) => {
             <Banner />
             {userName ? <UserCard /> : ''}
             <News />
-            <PlayerDes />
-            <Activity />
+            {/* <PlayerDes /> */}
+            {/* <Activity /> */}
             <Video />
             <Product />
         </div>
@@ -136,34 +140,37 @@ const Banner = () => {
 const News = () => {
     const [newsList, setNewsList] = useState([]);
     const [shopList, setshopList] = useState([]);
-    const history = useHistory();
+    const [type, setType] = useState(0);
     const { t } = useTranslation();
-    useEffect(() => {
-        getDate();
-        return () => {
-            setNewsList([]);
-            setshopList([]);
-        }
-    }, []);
-    const getDate = () => {
-        const NewsData = {
-            category: 0,
-            countryId: 208,
-            pageNum: 1,
-            pageSize: 4
-        }
+    const getShopList = () => {
         const ShopData = {
             countryId: 208,
             pageNum: 1,
             pageSize: 5
         }
-        indexNewsListHttp(NewsData).then(res => {
-            setNewsList(res.data.data.list)
-        })
         indexShopListHttp(ShopData).then(res => {
             setshopList(res.data.data.list)
         })
+    }
+    const getNewsList = (type) => {
+        const NewsData = {
+            category: type,
+            countryId: 208,
+            pageNum: 1,
+            pageSize: 4
+        }
+        indexNewsListHttp(NewsData).then(res => {
+            setNewsList(res.data.data.list)
+        })
     };
+    useEffect(() => {
+        getShopList();
+        return () => setshopList([]);
+    }, [])
+    useEffect(() => {
+        getNewsList(type);
+        return () => setNewsList([]);
+    }, [type]);
     const getTypeStr = (type) => {
         let str = ''
         switch (type) {
@@ -179,24 +186,16 @@ const News = () => {
         }
         return str
     };
-    const handleLink = (link) => {
-        history.push({
-            pathname: '/News',
-            state: {
-                type: link
-            }
-        })
-    };
     return (
         <div className='All'>
             <div className='AllLeft'>
                 <div className='AllHead'>
                     <div className='new'>{t(6)}</div>
                     <div className='newsOther'>
-                        <div onClick={() => handleLink('News')}>{t(5)}</div>
-                        <div onClick={() => handleLink('Match')}>{t(7)}</div>
-                        <div onClick={() => handleLink('Activity')}>{t(8)}</div>
-                        <div onClick={() => handleLink('Info')}>{t(9)}</div>
+                        <div className={type === 0 ? 'newsActiveClass' : 'newsDefaultClass'} onClick={() => setType(0)}>{t(5)}</div>
+                        <div className={type === 4 ? 'newsActiveClass' : 'newsDefaultClass'} onClick={() => setType(4)}>{t(7)}</div>
+                        <div className={type === 3 ? 'newsActiveClass' : 'newsDefaultClass'} onClick={() => setType(3)}>{t(8)}</div>
+                        <div className={type === 6 ? 'newsActiveClass' : 'newsDefaultClass'} onClick={() => setType(6)}>{t(9)}</div>
                     </div>
                 </div>
                 <div className='Allcontainer'>
@@ -236,11 +235,11 @@ const News = () => {
                                 <div className='AllImgContent'>
                                     <div>
                                         <div className='shopBox'>
-                                            <div className='shopIconBox'>
-                                                <img src={item.icon} alt="" />
+                                            <div className='countryIconPosition'>
+                                                <div style={{ backgroundPosition: setCountryIconPosition(item.countryCode) }} />
                                             </div>
                                             <div style={{ color: 'red', fontWeight: 'bold' }}>[{item.countryName}]</div>
-                                            <div className='textOverFlow' style={{ width: '60%' }}>{item.shopName}</div>
+                                            <div className='textOverFlow' title={item.shopName} style={{ width: '90px' }}>{item.shopName}</div>
                                         </div>
                                         <div>{item.shopAddress}</div>
                                         <div>{item.machineList && item.machineList.map((i, index) => {
@@ -273,48 +272,6 @@ const News = () => {
         </div>
     )
 }
-const PlayerDes = () => {
-    const { t } = useTranslation();
-    const history = useHistory();
-    const [playerList, setPlayerList] = useState([]);
-    const handlePlayerClick = (id) => {
-        history.push({
-            pathname: 'PlayerInfo',
-            // state: { id }
-        })
-    }
-    useEffect(() => {
-        setPlayerList([
-            { id: 1, src: a, playerName: 'AAA' },
-            { id: 2, src: a, playerName: 'BBB' },
-            { id: 3, src: a, playerName: 'CCC' },
-            { id: 4, src: a, playerName: 'DDD' },
-            { id: 5, src: a, playerName: 'EEE' },
-            { id: 6, src: a, playerName: 'FFF' },
-            { id: 7, src: a, playerName: 'GGG' },
-            { id: 8, src: a, playerName: 'HHH' },
-            { id: 9, src: a, playerName: 'III' },
-            { id: 10, src: a, playerName: 'III' },
-        ])
-    }, [])
-    return (
-        <div className='playerDes'>
-            <h1><TeamOutlined />{t(139)}</h1>
-            <Row className='playerDesBox' justify="space-around">
-                {playerList.map(i => {
-                    return (
-                        <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
-                            <div className='playerBox'>
-                                <div><img src={i.src} alt="" /></div>
-                                <div className='playerDesName'>{i.playerName}</div>
-                            </div>
-                        </Col>
-                    )
-                })}
-            </Row>
-        </div>
-    )
-}
 const Product = () => {
     const { t } = useTranslation();
     return (
@@ -323,101 +280,101 @@ const Product = () => {
         </div>
     )
 }
-const Activity = () => {
-    const { t } = useTranslation();
-    const [list, setList] = useState([])
-    const getDate = () => {
-        // indexNewsListHttp().then(res => {
-        //     console.log((res));
-        // })
-        setList(
-            [
-                {
-                    id: 1, count: 99, date: '2021-6-3', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 2, count: 4, date: '2021-6-4', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 3, count: 5, date: '2021-6-5', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 6, count: 5, date: '2021-6-17', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-            ]
-        )
-    }
-    useEffect(() => {
-        getDate()
-    }, [])
-    const getListData = (date) => {
-        const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
-        const today = `${year}-${month}-${day}`;
-        return list.filter(i => i.date === today)
-    }
-    const handleDayClick = (count) => {
-        console.log(count);
-    }
-    const dateChange = (date) => {
-        const obj = {
-            year: date._d.getFullYear(),
-            month: date._d.getMonth() + 1
-        };
-        console.log(obj);
-    }
-    const dateCellRender = (value) => {
-        const list = getListData(value)
-        return (
-            <div>
-                {list.map((item, index) => {
-                    return (
-                        <div key={index} className='badgeBox'>
-                            {item.matchList.map((ele, jndex) => {
-                                return (
-                                    <div key={jndex} onClick={() => handleDayClick(item.count)}>
-                                        <Badge count={item.count} >
-                                            {ele.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
-                                        </Badge>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
-    return (
-        <div className='activity'>
-            <h1><GlobalOutlined />{t(13)}</h1>
-            <div className='activityContainer'>
-                <div className='activityOtherBox'>
-                    <div className='iconBtnBox'>
-                        <img src={icon1} alt="" />
-                        <div className='activityBtnBox'><Button type="primary" block>{t(7)}</Button></div>
-                    </div>
-                    <div className='iconBtnBox'>
-                        <img src={icon2} alt="" />
-                        <div className='activityBtnBox'><Button type="primary" block>{t(8)}</Button></div>
-                    </div>
-                </div>
-                <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />
-            </div>
-        </div>
-    )
-}
+// const Activity = () => {
+//     const { t } = useTranslation();
+//     const [list, setList] = useState([])
+//     const getDate = () => {
+//         // indexNewsListHttp().then(res => {
+//         //     console.log((res));
+//         // })
+//         setList(
+//             [
+//                 {
+//                     id: 1, count: 99, date: '2021-6-3', matchList: [
+//                         { type: 1, count: 2 },
+//                         { type: 2, count: 5 }
+//                     ]
+//                 },
+//                 {
+//                     id: 2, count: 4, date: '2021-6-4', matchList: [
+//                         { type: 1, count: 2 },
+//                         { type: 2, count: 5 }
+//                     ]
+//                 },
+//                 {
+//                     id: 3, count: 5, date: '2021-6-5', matchList: [
+//                         { type: 1, count: 2 },
+//                         { type: 2, count: 5 }
+//                     ]
+//                 },
+//                 {
+//                     id: 6, count: 5, date: '2021-6-17', matchList: [
+//                         { type: 1, count: 2 },
+//                         { type: 2, count: 5 }
+//                     ]
+//                 },
+//             ]
+//         )
+//     }
+//     useEffect(() => {
+//         getDate()
+//     }, [])
+//     const getListData = (date) => {
+//         const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
+//         const today = `${year}-${month}-${day}`;
+//         return list.filter(i => i.date === today)
+//     }
+//     const handleDayClick = (count) => {
+//         console.log(count);
+//     }
+//     const dateChange = (date) => {
+//         const obj = {
+//             year: date._d.getFullYear(),
+//             month: date._d.getMonth() + 1
+//         };
+//         console.log(obj);
+//     }
+//     const dateCellRender = (value) => {
+//         const list = getListData(value)
+//         return (
+//             <div>
+//                 {list.map((item, index) => {
+//                     return (
+//                         <div key={index} className='badgeBox'>
+//                             {item.matchList.map((ele, jndex) => {
+//                                 return (
+//                                     <div key={jndex} onClick={() => handleDayClick(item.count)}>
+//                                         <Badge count={item.count} >
+//                                             {ele.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
+//                                         </Badge>
+//                                     </div>
+//                                 )
+//                             })}
+//                         </div>
+//                     )
+//                 })}
+//             </div>
+//         )
+//     }
+//     return (
+//         <div className='activity'>
+//             <h1><GlobalOutlined />{t(13)}</h1>
+//             <div className='activityContainer'>
+//                 <div className='activityOtherBox'>
+//                     <div className='iconBtnBox'>
+//                         <img src={icon1} alt="" />
+//                         <div className='activityBtnBox'><Button type="primary" block>{t(7)}</Button></div>
+//                     </div>
+//                     <div className='iconBtnBox'>
+//                         <img src={icon2} alt="" />
+//                         <div className='activityBtnBox'><Button type="primary" block>{t(8)}</Button></div>
+//                     </div>
+//                 </div>
+//                 <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />
+//             </div>
+//         </div>
+//     )
+// }
 
 const Video = () => {
     const [TVData, setTVData] = useState({});
@@ -435,7 +392,7 @@ const Video = () => {
         <div className='video'>
             <div className='tvBox'>
                 <div><VideoCameraOutlined />Adarts.TV</div>
-                <div>MORE</div>
+                {/* <div>MORE</div> */}
             </div>
             <div className='videoBG'>
                 <div className='videoContainer'>
@@ -450,12 +407,8 @@ const Video = () => {
     )
 }
 const Footer = () => {
-    const { t } = useTranslation();
     return (
         <div className='footer'>
-            <div className='footerBox'>
-                <div><UserOutlined /> {t(15)}</div>
-            </div>
             <div className='footerContainer'>
                 <div className='footerLeft'>
                     <h1>联系我们</h1>

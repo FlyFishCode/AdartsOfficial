@@ -1,10 +1,11 @@
 
-import { useState, useEffect } from 'react'
-import { Progress, Button } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { myPageIndexUserCardInfoHttp, myPageIndexGameInfoHttp } from '@/api'
-import { createFromIconfontCN } from '@ant-design/icons';
-import { MessageOutlined, HomeFilled, UserOutlined, PlusOutlined, BulbOutlined } from '@ant-design/icons'
+import { useState, useEffect } from 'react';
+import { Progress } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { myPageIndexUserCardInfoHttp, myPageIndexGameInfoHttp } from '@/api';
+// import { createFromIconfontCN } from '@ant-design/icons';
+import { MessageOutlined } from '@ant-design/icons';
+import { setCountryIconPosition } from '@/common/Utlis';
 
 import m from '@/assets/img/m.png'
 
@@ -59,9 +60,9 @@ const MyPageIndex = (props) => {
       ]
     }
   );
-  const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
-  })
+  // const MyIcon = createFromIconfontCN({
+  //   scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
+  // })
   const getData = (cardId) => {
     myPageIndexUserCardInfoHttp({
       cardId: cardId,
@@ -100,8 +101,8 @@ const MyPageIndex = (props) => {
           <div className='userCardLeftBox' >
             <div className='userInfo'>
               <div>
-                <div className='userCountryImg'>
-                  {/* <img src={card.countryImg} alt="" /> */}
+                <div className='countryIconPosition'>
+                  <div style={{ backgroundPosition: setCountryIconPosition(card.countryCode) }} />
                 </div>
                 <div className='userInfoBox'>
                   <div className='userCardImg'>
@@ -171,7 +172,7 @@ const MyPageIndex = (props) => {
               <div>{ganeInfo.coin}</div>
             </div>
           </div>
-          <div className='myPageIndexStyleBox'>
+          {/* <div className='myPageIndexStyleBox'>
             <div>
               <div>My Style</div>
               <div className='myPageIndexStyleIcon'><img src={ganeInfo.gameIcon} alt="" /></div>
@@ -183,9 +184,9 @@ const MyPageIndex = (props) => {
                 <div className='myPageIndexStyleIcon'><img src={ganeInfo.gameIcon} alt="" /></div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className='myPageIndexHomeShop'>
+        {/* <div className='myPageIndexHomeShop'>
           <div><span><HomeFilled /></span>{t(23)}</div>
           <div>{ganeInfo.homeShop}</div>
           <div>
@@ -202,9 +203,9 @@ const MyPageIndex = (props) => {
               )
             })}
           </div>
-        </div>
+        </div> */}
       </div>
-      <div>
+      {/* <div>
         <div>{t(67)}</div>
         <div className='myPageIndexPlayerBox'>
           {ganeInfo.friendsList && ganeInfo.friendsList.map((i, index) => {
@@ -220,13 +221,13 @@ const MyPageIndex = (props) => {
             )
           })}
         </div>
-      </div>
-      <div className='myPageIndexOtherBox'>
+      </div> */}
+      {/* <div className='myPageIndexOtherBox'>
         <div><MyIcon type="el-icon-gonggao1-copy" />{t(8)}</div>
         <div><MyIcon type="el-icon-hangyepaiming-copy-copy" />{t(119)}</div>
         <div><MyIcon type="el-icon-ditu1-copy" />{t(120)}</div>
         <div><MyIcon type="el-icon-kefu-copy" />{t(121)}</div>
-      </div>
+      </div> */}
     </div>
   )
 }
