@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 // import { Row, Col } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
@@ -142,6 +142,7 @@ const News = () => {
     const [shopList, setshopList] = useState([]);
     const [type, setType] = useState(0);
     const { t } = useTranslation();
+    const history = useHistory();
     const getShopList = () => {
         const ShopData = {
             countryId: 208,
@@ -216,7 +217,7 @@ const News = () => {
                         )
                     })}
                 </div>
-                <div className='AllFooter'>
+                <div className='AllFooter' onClick={() => history.push('/News')}>
                     <div className='footerText'><DesktopOutlined />{t(11)}</div>
                     <div className='footerMore'>{'>'}</div>
                 </div>

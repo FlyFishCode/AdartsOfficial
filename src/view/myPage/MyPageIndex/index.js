@@ -8,6 +8,8 @@ import { MessageOutlined } from '@ant-design/icons';
 import { setCountryIconPosition } from '@/common/Utlis';
 
 import m from '@/assets/img/m.png'
+import adartsCard from '@/assets/img/adartsCard.png'
+
 
 const MyPageIndex = (props) => {
   // const { changeCardId } = props;
@@ -115,15 +117,15 @@ const MyPageIndex = (props) => {
                 <div><Progress type="circle" percent={card.rating} status="exception" format={percent => `${percent} RATING`} /></div>
                 <div className='userInfoGame'>
                   <div>
-                    <div>{card.ppd}</div>
+                    <div className='userCardFont'>{card.ppd}</div>
                     <div className='fontStyle'>01 GAME</div>
                   </div>
                   <div>
-                    <div>{card.mpr}</div>
+                    <div className='userCardFont'>{card.mpr}</div>
                     <div className='fontStyle'>CRICKET</div>
                   </div>
                   <div>
-                    <div>{card.countUpPoint}</div>
+                    <div className='userCardFont'>{card.countUpPoint}</div>
                     <div className='fontStyle'>COUNTUP</div>
                   </div>
                 </div>
@@ -131,7 +133,7 @@ const MyPageIndex = (props) => {
             </div>
             <div className='userCardInfo'>
               <div className='fontStyle'>Adarts NO：</div>
-              <div>{card.cardNo}</div>
+              <div className='userCardFont'>{card.cardNo}</div>
             </div>
           </div>
           <div className='userCardRightBox'>
@@ -151,6 +153,9 @@ const MyPageIndex = (props) => {
               <div className='fontStyle'>WIN%</div>
               <div className='userWinsBox'><Progress type="circle" width={60} percent={card.winProbability} status="exception" format={percent => `${percent} %`} /></div>
             </div>
+          </div>
+          <div className='cardStyleBox'>
+            <img src={adartsCard} alt="" />
           </div>
         </div>
       </div>

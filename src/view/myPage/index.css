@@ -13,28 +13,24 @@
 }
 
 .MyPageIndex .userCard {
-    display: flex;
-    border: 1px solid #1890ff;
-    border-radius: 10px;
-    padding: 10px;
-    width: 50%;
-    height: 300px;
+    height: 285px;
     margin: 0 auto;
-    /* background-image: url('@/assets/img/ready.png'); */
 }
 
-.userCardLeftBox {
+
+/* .userCardLeftBox {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex: 3;
-}
+} */
 
-.userInfo {
+
+/* .userInfo {
     flex: 2;
     display: flex;
     justify-content: space-around;
-}
+} */
 
 .userCountryImg {
     width: 30px;
@@ -45,9 +41,10 @@
     height: 100%;
 }
 
-.userInfoBox {
+
+/* .userInfoBox {
     margin: 15px 0 0 0;
-}
+} */
 
 .userCardImg {
     width: 70px;
@@ -68,7 +65,8 @@
     width: 100px;
 }
 
-.userInfoGameBox {
+
+/* .userInfoGameBox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,9 +76,10 @@
 
 .userInfoGameBox .ant-progress-text {
     width: 75px;
-}
+} */
 
-.userInfoGame {
+
+/* .userInfoGame {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -88,16 +87,18 @@
 
 .userInfoGame div {
     text-align: center;
-}
+} */
 
-.fontStyle {
+
+/* .fontStyle {
     color: #888;
     font-weight: bold;
-}
+} */
 
-.userCardInfo {
+
+/* .userCardInfo {
     display: flex;
-}
+} */
 
 .userCardRightBox {
     text-align: right;
@@ -106,9 +107,10 @@
     justify-content: space-around;
 }
 
-.userGameTotal {
+
+/* .userGameTotal {
     margin: 0 0 5px 0;
-}
+} */
 
 .ant-menu-inline,
 .ant-menu-vertical,

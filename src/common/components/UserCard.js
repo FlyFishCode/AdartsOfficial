@@ -6,6 +6,9 @@ import { indexUserCardListHttp } from '@/api';
 // import { useHistory } from 'react-router-dom'
 
 import { setCountryIconPosition } from '@/common/Utlis';
+
+import adartsCard from '@/assets/img/adartsCard.png'
+
 const UserCard = (props) => {
   // const history = useHistory();
   // const { t } = useTranslation();
@@ -78,15 +81,15 @@ const UserCard = (props) => {
                       <div><Progress type="circle" percent={i.rating} status="exception" format={percent => `${percent} RATING`} /></div>
                       <div className='userInfoGame'>
                         <div>
-                          <div>{i.ppd}</div>
+                          <div className='userCardFont'>{i.ppd}</div>
                           <div className='fontStyle'>01 GAME</div>
                         </div>
                         <div>
-                          <div>{i.mpr}</div>
+                          <div className='userCardFont'>{i.mpr}</div>
                           <div className='fontStyle'>CRICKET</div>
                         </div>
                         <div>
-                          <div>{i.countUpPoint}</div>
+                          <div className='userCardFont'>{i.countUpPoint}</div>
                           <div className='fontStyle'>COUNTUP</div>
                         </div>
                       </div>
@@ -94,26 +97,29 @@ const UserCard = (props) => {
                   </div>
                   <div className='userCardInfo'>
                     <div className='fontStyle'>Adarts NO：</div>
-                    <div>{i.cardNo}</div>
+                    <div className='userCardFont'>{i.cardNo}</div>
                   </div>
                 </div>
                 <div className='userCardRightBox'>
                   <div className='userGameTotal'>
                     <div className='fontStyle'>WIN</div>
-                    <div>{i.win}</div>
+                    <div className='userCardFont'>{i.win}</div>
                   </div>
                   <div className='userGameTotal'>
                     <div className='fontStyle'>LOSE</div>
-                    <div>{i.lose}</div>
+                    <div className='userCardFont'>{i.lose}</div>
                   </div>
                   <div className='userGameTotal'>
                     <div className='fontStyle'>最高连胜记录</div>
-                    <div>{i.winContinued}</div>
+                    <div className='userCardFont'>{i.winContinued}</div>
                   </div>
                   <div>
                     <div className='fontStyle'>WIN%</div>
                     <div className='userWinsBox'><Progress type="circle" width={60} percent={i.winProbability} status="exception" format={percent => `${percent} %`} /></div>
                   </div>
+                </div>
+                <div className='cardStyleBox'>
+                  <img src={adartsCard} alt="" />
                 </div>
               </div>
             )
