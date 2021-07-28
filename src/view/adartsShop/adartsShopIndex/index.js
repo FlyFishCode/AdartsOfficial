@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Row, Col, Input, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { RightOutlined } from '@ant-design/icons'
+import { RightOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 import m from '@/assets/img/m.png'
 
@@ -9,6 +10,7 @@ const { Option } = Select;
 const { Search } = Input;
 const AdartsShopIndex = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [newShop, setNewShop] = useState([]);
   const [shopActivity, setShopActivity] = useState([]);
   const handleChange = (value) => {
@@ -220,6 +222,12 @@ const AdartsShopIndex = () => {
       }
     ])
   }
+  const handleShopClick = (item) => {
+    history.push({
+      pathname: '/AdartsShop/ShopInfo',
+      state: { id: item.id }
+    })
+  }
   useEffect(() => {
     getNewShopList();
     getShopActivityList()
@@ -248,7 +256,7 @@ const AdartsShopIndex = () => {
           <div className='adartsShopIndex'>
             {newShop.map(item => {
               return (
-                <div className='AllRightBox' key={item.shopId}>
+                <div className='AllRightBox' key={item.shopId} onClick={(item) => handleShopClick(item)}>
                   <div className='AllImgBox'>
                     <img src={item.shopImg} alt="" />
                   </div>

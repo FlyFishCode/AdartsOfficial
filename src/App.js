@@ -121,6 +121,9 @@ const Banner = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
+        autoplay: true,
+        pauseOnHover: true,
+        autoplaySpeed: 1000,
     }
     useEffect(() => {
         getData();

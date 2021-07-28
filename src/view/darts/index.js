@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Carousel } from 'antd';
+import { Row, Col } from 'antd';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import { indexBannerListHttp } from '@/api';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import Slider from "react-slick";
+import DartsList from './dartsList'
 
 import m from '@/assets/img/m.png'
 
-const Darts = () => {
-  const [bannerList, setBannerList] = useState([]);
+
+const Content = () => {
+  const history = useHistory();
   const [dartsList, setDartsList] = useState([]);
   const getData = () => {
-    indexBannerListHttp({ countryId: 208 }).then(res => {
-      setBannerList(res.data.data)
-    });
     setDartsList([
       {
         id: 1,
@@ -95,6 +96,48 @@ const Darts = () => {
       }
     ])
   }
+  useEffect(() => {
+    getData()
+  }, [])
+  return (
+    <div className='darts'>
+      <Row justify="space-between" className='dartsTitleBox'>
+        <Col span='2'>飞镖 Darts</Col>
+        <Col span='2' style={{ cursor: 'pointer' }} onClick={() => history.push('/Darts/DartsList')}>更多<PlusCircleOutlined /></Col>
+      </Row>
+      <Row className='dartsContentBox'>
+        {dartsList.map(i => {
+          return (
+            <Col span='6' key={i.id} className='dartsContent'>
+              <div><img src={m} alt="" /></div>
+              <div>{i.title}</div>
+              <div>{`${i.author}    ${i.time}`}</div>
+              <div>{i.content}</div>
+            </Col>
+          )
+        })}
+      </Row>
+    </div>
+  )
+}
+
+
+const Darts = () => {
+  const [bannerList, setBannerList] = useState([]);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    autoplay: true,
+    pauseOnHover: true,
+    autoplaySpeed: 1000,
+  }
+  const getData = () => {
+    indexBannerListHttp({ countryId: 208 }).then(res => {
+      setBannerList(res.data.data)
+    });
+  }
   const handleClick = (id) => {
     console.log(id)
   }
@@ -103,7 +146,7 @@ const Darts = () => {
   }, [])
   return (
     <div>
-      <Carousel autoplay effect="fade" className='bannerBox'>
+      <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
         {bannerList.map((item, index) => {
           return (
             <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
@@ -111,25 +154,15 @@ const Darts = () => {
             </div>
           )
         })}
-      </Carousel>
-      <div className='darts'>
-        <Row justify="space-between" className='dartsTitleBox'>
-          <Col span='2'>飞镖 Darts</Col>
-          <Col span='2'>更多<PlusCircleOutlined /></Col>
-        </Row>
-        <Row className='dartsContentBox'>
-          {dartsList.map(i => {
-            return (
-              <Col span='6' key={i.id} className='dartsContent'>
-                <div><img src={m} alt="" /></div>
-                <div>{i.title}</div>
-                <div>{`${i.author}    ${i.time}`}</div>
-                <div>{i.content}</div>
-              </Col>
-            )
-          })}
-        </Row>
-      </div>
+      </Slider>
+      <Switch>
+        <Route path='/Darts' exact>
+          <Content />
+        </Route>
+        <Route path='/Darts/DartsList'>
+          <DartsList />
+        </Route>
+      </Switch>
     </div>
   )
 }
