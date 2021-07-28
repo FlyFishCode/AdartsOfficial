@@ -3,7 +3,7 @@ import axios from 'axios';
 // import { useHistory } from 'react-router-dom';
 
 // 公共
-import { sendEmail,upLoadImg,shopList } from './common/index';
+import { sendEmail,sendPhone,upLoadImg,shopList } from './common/index';
 
 
 // 我的页面
@@ -81,9 +81,13 @@ const indexUserCardListHttp = (data:any) =>{
 const upLoadImgHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${upLoadImg}`, data);
 }
-// 发送邮箱
+// 发送邮箱验证
 const sendEmailHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${sendEmail}`, qs.stringify(data));
+}
+// 发送手机验证
+const sendPhoneHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${sendPhone}`, qs.stringify(data));
 }
 // 店铺列表
 const shopListHttp = (data:any) =>{
@@ -200,6 +204,7 @@ export {
 		accountInfoHttp,
 		accountInfoUpdateHttp,
 		sendEmailHttp,
+		sendPhoneHttp,
 		passwordChangeHttp,
 		newShopListHttp,
 		shopListHttp,

@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { countryListHttp } from '@/api'
 import { LeftOutlined } from '@ant-design/icons'
-import { indexRegisterHttp, sendEmailHttp } from '@/api'
-import { REG_PHONE, REG_EMAIL } from '@/common/Utlis'
+import { indexRegisterHttp, sendEmailHttp, sendPhoneHttp } from '@/api'
+import { REG_PHONE, REG_EMAIL, MD5 } from '@/common/Utlis'
 const AddUser = () => {
     const [countryId, setCountryId] = useState()
     const [countryList, setCountryList] = useState([])
@@ -17,7 +17,7 @@ const AddUser = () => {
     const [birth, setBirth] = useState('')
     const [type, setType] = useState('phone')
     const [phone, setPhone] = useState('')
-    const [phoneCode, setPhoneCode] = useState('+86')
+    const [countryCode, setPhoneCode] = useState('+86')
     const [code, setCode] = useState('')
     const [display, setDisplay] = useState('inline-block')
     const [gender, setGender] = useState(1)
@@ -34,8 +34,8 @@ const AddUser = () => {
         password: null,
         confirmPassword: null,
         phone: 'phone',
-        phoneCode: '+86',
-        typeValue: null
+        countryCode: '+86',
+        inputValue: null
     });
     const { Option } = Select;
     const layout = {
@@ -57,7 +57,7 @@ const AddUser = () => {
     }
     const handleTypeChange = (value) => {
         setType(value)
-        form.setFieldsValue({ typeValue: '' })
+        form.setFieldsValue({ inputValue: '' })
         if (value === 'phone') {
             setDisplay('inline-block')
         } else {
@@ -65,33 +65,42 @@ const AddUser = () => {
         }
     }
     const sendCode = () => {
-        let flag = false
-        let value = form.getFieldValue('typeValue');
+        let value = form.getFieldValue('inputValue');
         if (value) {
             if (type === 'email' && REG_EMAIL.test(value)) {
-                flag = true
-            }
-            if (type === 'phone' && REG_PHONE.test(value)) {
-                flag = true
-                value = `${phoneCode}-${value}`;
-
-            }
-            if (flag) {
+                setBtnDisabled(true);
                 sendEmailHttp({ email: value }).then(res => {
                     message.info(res.data.msg)
                 })
-                setBtnDisabled(true)
+                return;
             }
+            if (type === 'phone' && REG_PHONE.test(value)) {
+                setBtnDisabled(true);
+                value = `${countryCode}-${value}`;
+                sendPhoneHttp({ phone: value }).then(res => {
+                    if (res.data.code === 100) {
+                        message.info(res.data.msg)
+                    }
+                })
+                return;
+
+            }
+        } else {
+            message.warning(t(63))
         }
     }
     const subitFrom = () => {
         form.validateFields().then(values => {
-            const data = { ...values, gender, acceptSMS, phone, birth, name, countryId, languageId }
+            const data = { ...values, gender, acceptSMS, phone, birth, name, countryId, languageId };
+            data.password = MD5(data.password)
             if (type === 'email') {
+                data.email = data.inputValue;
                 data.emailCode = code
             } else {
+                data.phone = data.inputValue;
                 data.phoneCode = code
             }
+            delete data.inputValue
             indexRegisterHttp(data).then(res => {
                 if (res.data.code === 100) {
                     message.info(res.data.msg)
@@ -190,7 +199,6 @@ const AddUser = () => {
                 </Form.Item>
                 <Form.Item
                     label={t(37)}
-                    name="confirmPassword"
                     dependencies={['password']}
                     rules={[
                         {
@@ -222,7 +230,7 @@ const AddUser = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="typeValue"
+                    name="inputValue"
                     label={t(131)}
                     rules={[
                         { required: true, message: 'Please input your value' },
@@ -238,14 +246,14 @@ const AddUser = () => {
                 >
                     <Input addonBefore={
                         <>
-                            <Form.Item name="phone" noStyle>
-                                <Select style={{ width: 100 }} onChange={(value) => handleTypeChange(value)}>
+                            <Form.Item noStyle>
+                                <Select defaultValue='phone' style={{ width: 100 }} onChange={(value) => handleTypeChange(value)}>
                                     <Option value="phone">{t(48)}</Option>
                                     <Option value="email">{t(39)}</Option>
                                 </Select>
                             </Form.Item>
-                            <Form.Item name="phoneCode" noStyle>
-                                <Select style={{ width: 100, display: display }} onChange={(value) => setPhoneCode(value)}>
+                            <Form.Item noStyle>
+                                <Select defaultValue='+86' style={{ width: 100, display: display }} onChange={(value) => setPhoneCode(value)}>
                                     <Option value="+86">+86</Option>
                                     <Option value="+666">+666</Option>
                                 </Select>
@@ -302,10 +310,14 @@ const AddUser = () => {
                 <Col span='8' className='selectBox'>
                     <DatePicker onChange={dateChange} allowClear />
                 </Col>
-                <Col span='4' className='registerLabel'>{t(48)}</Col>
-                <Col span='8'>
-                    <Input value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
-                </Col>
+                {type === 'email' ?
+                    <>
+                        <Col span='4' className='registerLabel'>{t(48)}</Col>
+                        <Col span='8'>
+                            <Input value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
+                        </Col>
+                    </> : null}
+
             </Row>
             <div className='tipsBox'>
                 <div>{t(56)}</div>

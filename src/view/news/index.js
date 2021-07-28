@@ -17,7 +17,7 @@ const { Option } = Select;
 const NewsPage = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [activeClass, setActiveClass] = useState('1');
+  // const [activeClass, setActiveClass] = useState('1');
   const [type, setType] = useState('0');
   const [total, setTotal] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -105,12 +105,18 @@ const NewsPage = () => {
     return str
   };
   const NewsList = () => {
+    const handleNewInfoClick = (id) => {
+      history.push({
+        pathname: '/News/NewsInfo',
+        state: { id }
+      })
+    }
     return (
       <div className='news'>
         <div className='news pageTitle'>{t(11)}</div>
         {infoList.map(i => {
           return (
-            <div key={i.id} className='infoListBox'>
+            <div key={i.id} className='infoListBox' onClick={() => handleNewInfoClick(i.id)}>
               <div>[{getType(i.type)}]</div>
               <div>{i.content}</div>
               <div>{i.time}</div>
@@ -150,10 +156,10 @@ const NewsPage = () => {
       </div>
     )
   }
-  const handleClick = (e) => {
-    history.push(e.target.getAttribute('path'))
-    setActiveClass(e.target.getAttribute('active'))
-  }
+  // const handleClick = (e) => {
+  //   history.push(e.target.getAttribute('path'))
+  //   setActiveClass(e.target.getAttribute('active'))
+  // }
   useEffect(() => {
     getInfoList()
   }, [])
@@ -162,11 +168,12 @@ const NewsPage = () => {
   }, [type, inputValue])
   return (
     <Row className='NewsBox'>
-      <Col span='4' className='linkBox' onClick={handleClick}>
+      {/* <Col span='4' className='linkBox' onClick={handleClick}>
         <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/News' >11111</div>
         <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/News/NewsInfo'>22222</div>
-      </Col>
-      <Col span='19' offset='1'>
+      </Col> */}
+      {/* <Col span='19' offset='1'> */}
+      <Col span='24'>
         <Switch>
           <Route path='/News' exact>
             <NewsList />

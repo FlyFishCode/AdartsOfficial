@@ -6,9 +6,6 @@ import a from '@/assets/img/a.jpg';
 
 const { Option } = Select;
 
-
-
-
 const DartsList = () => {
   const { t } = useTranslation();
   const [type, setType] = useState('0');

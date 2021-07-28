@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 
 import './index.css';
@@ -7,6 +8,7 @@ import './index.css';
 
 const NewsInfo = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [newsInfo, setNewsInfo] = useState({});
   const getNewsInfo = () => {
     setNewsInfo({
@@ -15,6 +17,7 @@ const NewsInfo = () => {
       time: '2021-08-05'
     })
   }
+  console.log(location.state.id);
   const getType = (type) => {
     let str = ''
     switch (type) {
