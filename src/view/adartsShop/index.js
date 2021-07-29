@@ -23,7 +23,6 @@ const AdartsShop = () => {
     setCardId(value)
   }
   const handleClick = (e) => {
-    debugger
     history.push(e.target.getAttribute('path'))
     setActiveClass(e.target.getAttribute('active'))
   }

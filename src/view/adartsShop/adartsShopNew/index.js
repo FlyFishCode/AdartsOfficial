@@ -82,13 +82,15 @@ const AdartsShopNew = () => {
                   })}
                   </div>
                   <div className='iconImg'>
-                    {item.machineList.some(i => i.machineType === 'A1') ?
-                      <div className='iconImg'>
-                        <img src={A1} alt="" />
-                      </div> :
-                      <div className='iconImg'>
-                        <img src={W1} alt="" />
-                      </div>
+                    {item.machineList.length ?
+                      item.machineList.some(i => i.machineType === 'A1') ?
+                        <div className='iconImg'>
+                          <img src={A1} alt="" />
+                        </div> :
+                        <div className='iconImg'>
+                          <img src={W1} alt="" />
+                        </div>
+                      : null
                     }
                   </div>
                 </div>

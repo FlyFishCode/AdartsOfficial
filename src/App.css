@@ -785,21 +785,22 @@
     margin: 20px 0;
 }
 
-#myPageRight {
+
+/* #myPageRight {
     display: flex;
     flex-direction: column;
     height: 900px;
     overflow-y: scroll;
-    /* scroll-behavior: smooth; */
-}
+    scroll-behavior: smooth;
+} */
 
-#myPageRight .myPageTitle {
+.myPageTitle {
     font-size: 20px;
     padding: 10px;
     font-weight: bold;
 }
 
-#myPageRight .myPageTitle::before {
+.myPageTitle::before {
     display: block;
     content: '';
     width: 2px;

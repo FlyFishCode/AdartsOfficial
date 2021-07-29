@@ -30,8 +30,8 @@ const Head = (prop) => {
       <div className='iconMenu'>
         <Menu mode="horizontal">
           <SubMenu key="1" icon={<UnorderedListOutlined />}>
-            <Menu.Item key="/MyPage">
-              <div onClick={() => handlePushClick('MyPage')}>{t(135)}</div>
+            <Menu.Item key="/MyPageIndex">
+              <div onClick={() => handlePushClick('MyPageIndex')}>{t(135)}</div>
             </Menu.Item>
             <Menu.Item key="/News" disabled>
               <Link to='/News'>{t(136)}</Link>
