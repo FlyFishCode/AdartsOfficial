@@ -37,7 +37,6 @@ const setCountryIconPosition = (code) => {
         return `${0}% ${0}%`
     }
 }
-
 export {
     REG_PHONE,
     REG_EMAIL,

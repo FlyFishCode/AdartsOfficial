@@ -4,12 +4,15 @@ import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
 import { setCountryIconPosition } from '@/common/Utlis';
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// import icon1 from '@/assets/img/icon1.jpeg';
-// import icon2 from '@/assets/img/icon2.jpeg';
+import A1 from '@/assets/img/A1.png';
+import W1 from '@/assets/img/W1.png';
+import productA from '@/assets/img/productA.jpg';
+import productW from '@/assets/img/productW.jpg';
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -87,7 +90,7 @@ const App = () => {
                         <AddUser />
                     </Route>
                 </Switch>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </BrowserRouter >
     );
@@ -254,13 +257,14 @@ const News = () => {
                                             )
                                         })}</div>
                                         <div className='iconImg'>
-                                            {item.machineList && item.machineList.map((icon, jndex) => {
-                                                return (
-                                                    <div className='iconImg' key={jndex}>
-                                                        <img src={icon.img} alt="" />
-                                                    </div>
-                                                )
-                                            })}
+                                            {item.machineList.some(i => i.machineType === 'A1') ?
+                                                <div className='iconImg'>
+                                                    <img src={A1} alt="" />
+                                                </div> :
+                                                <div className='iconImg'>
+                                                    <img src={W1} alt="" />
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -278,9 +282,33 @@ const News = () => {
 }
 const Product = () => {
     const { t } = useTranslation();
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        pauseOnHover: true,
+        autoplaySpeed: 1000,
+    }
+    const bannerList = [
+        { id: 1, img: productA },
+        { id: 2, img: productW }
+    ]
+    const handleClick = (id) => {
+        console.log(id);
+    }
     return (
         <div className='product'>
-            <h1><GlobalOutlined />{t(14)}</h1>
+            <div><h1><GlobalOutlined />{t(14)}</h1></div>
+            <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
+                {bannerList.map((item, index) => {
+                    return (
+                        <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
+                            <img src={item.img} alt="" />
+                        </div>
+                    )
+                })}
+            </Slider>
         </div>
     )
 }
@@ -410,22 +438,22 @@ const Video = () => {
         </div>
     )
 }
-const Footer = () => {
-    return (
-        <div className='footer'>
-            <div className='footerContainer'>
-                <div className='footerLeft'>
-                    <h1>联系我们</h1>
-                    <p>欢迎成为我们的合作伙伴</p>
-                </div>
-                <div className='footerRight'>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                </div>
-            </div>
-        </div>
-    )
-}
+// const Footer = () => {
+//     return (
+//         <div className='footer'>
+//             <div className='footerContainer'>
+//                 <div className='footerLeft'>
+//                     <h1>联系我们</h1>
+//                     <p>欢迎成为我们的合作伙伴</p>
+//                 </div>
+//                 <div className='footerRight'>
+//                     <div>1</div>
+//                     <div>2</div>
+//                     <div>3</div>
+//                     <div>4</div>
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
 export default App;

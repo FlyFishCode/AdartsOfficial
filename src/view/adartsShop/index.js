@@ -23,6 +23,7 @@ const AdartsShop = () => {
     setCardId(value)
   }
   const handleClick = (e) => {
+    debugger
     history.push(e.target.getAttribute('path'))
     setActiveClass(e.target.getAttribute('active'))
   }
@@ -31,7 +32,7 @@ const AdartsShop = () => {
   }, [cardId])
   return (
     <Row className='NewsBox'>
-      <Col span='4' className='linkBox' onClick={handleClick}>
+      <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
         <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/AdartsShop' >{t(111)}</div>
         <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/AdartsShop/ShopSearch'>{t(112)}</div>
         <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/AdartsShop/ShopTheme'>{t(113)}</div>

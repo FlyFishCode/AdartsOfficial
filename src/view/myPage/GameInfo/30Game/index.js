@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Collapse } from 'antd';
 import { about30GameListHttp } from '@/api'
 import NoData from '@/common/components/noData'
+import defalutPlayer from '@/assets/img/defalutPlayer.png';
 import '../index.css'
 
 const { Panel } = Collapse;
@@ -100,7 +101,7 @@ const About30Game = (props) => {
           return (
             <Panel header={`${getDateTime(i.dateTime)}   |   ${getGameName(i.gameName)}   |   MPR：${i.mpr}`} key={i.dateTime}>
               <div className='Game30Box About30GamePersonalBox'>
-                <div className='AllGameDataImgBox'><img src={i.portrait} alt="" /></div>
+                <div className='AllGameDataImgBox'><img src={i.portrait ? i.portrait : defalutPlayer} alt="" /></div>
                 <div className='About30GameInfo'>
                   <div>{i.userName}</div>
                   <div>{`Rating：${i.rating}  MPR：${i.mpr}`}</div>

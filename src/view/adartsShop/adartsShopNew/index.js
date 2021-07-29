@@ -4,18 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { newShopListHttp, countryListHttp } from '@/api';
 import { setCountryIconPosition } from '@/common/Utlis'
 import NoData from '@/common/components/noData';
+import A1 from '@/assets/img/A1.png';
+import W1 from '@/assets/img/W1.png';
 
 const { Option } = Select;
 const AdartsShopNew = () => {
   const { t } = useTranslation();
   const [total, setTotal] = useState(1);
   const [pageNum, setPageNum] = useState(1);
-  const [countryId, setCountryId] = useState('');
+  const [countryId, setCountryId] = useState();
   const [countryList, setCountryList] = useState([]);
   const [newShopList, setNewShopList] = useState([]);
   const getCountryList = () => {
     countryListHttp().then(res => {
       setCountryList(res.data.data)
+      setCountryId(res.data.data[0].countryId)
     })
   }
   const getNewShopList = (countryId, pageNum) => {
@@ -79,11 +82,14 @@ const AdartsShopNew = () => {
                   })}
                   </div>
                   <div className='iconImg'>
-                    {item.machineList && item.machineList.map((icon, jndex) => {
-                      return (
-                        <img src={icon.img} alt="" key={jndex} />
-                      )
-                    })}
+                    {item.machineList.some(i => i.machineType === 'A1') ?
+                      <div className='iconImg'>
+                        <img src={A1} alt="" />
+                      </div> :
+                      <div className='iconImg'>
+                        <img src={W1} alt="" />
+                      </div>
+                    }
                   </div>
                 </div>
               </div>

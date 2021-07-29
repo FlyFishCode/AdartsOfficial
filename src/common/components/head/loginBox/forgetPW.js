@@ -3,10 +3,9 @@ import { Row, Col, Input, Button, message, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
-import { REG_PHONE, REG_EMAIL } from '@/common/Utlis';
+import { REG_PHONE, REG_EMAIL, MD5 } from '@/common/Utlis';
 import { sendEmailHttp, sendPhoneHttp, findPassWordHttp } from '@/api';
 
-import md5 from 'blueimp-md5'
 
 const { Option } = Select;
 
@@ -84,7 +83,7 @@ const ForgetPW = () => {
             emailCode,
             phone,
             phoneCode,
-            newPassword: md5(newPassword)
+            newPassword: MD5(newPassword)
         }
         findPassWordHttp(data).then(res => {
             if (res.data.code === 100) {

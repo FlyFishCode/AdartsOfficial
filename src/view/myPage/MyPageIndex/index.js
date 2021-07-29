@@ -7,8 +7,11 @@ import { myPageIndexUserCardInfoHttp, myPageIndexGameInfoHttp } from '@/api';
 import { MessageOutlined } from '@ant-design/icons';
 import { setCountryIconPosition } from '@/common/Utlis';
 
-import m from '@/assets/img/m.png'
-import adartsCard from '@/assets/img/adartsCard.png'
+import m from '@/assets/img/m.png';
+import adartsCard from '@/assets/img/adartsCard.png';
+import defaultPlayer from '@/assets/img/defalutPlayer.png';
+import goldCoin from '@/assets/img/goldCoin.png';
+import silverCoin from '@/assets/img/silverCoin.png';
 
 
 const MyPageIndex = (props) => {
@@ -108,7 +111,7 @@ const MyPageIndex = (props) => {
                 </div>
                 <div className='userInfoBox'>
                   <div className='userCardImg'>
-                    <img src={card.portrait} alt="" />
+                    <img src={card.portrait ? card.portrait : defaultPlayer} alt="" />
                   </div>
                   <div className='userName textOverFlow' title={card.name}>{card.name}</div>
                 </div>
@@ -169,11 +172,11 @@ const MyPageIndex = (props) => {
           <div>ITEM</div>
           <div>
             <div className='myPageIndexIconBox'>
-              <div><img src={ganeInfo.gameIcon} alt="" /></div>
+              <div><img src={goldCoin} alt="" /></div>
               <div>{ganeInfo.coin}</div>
             </div>
             <div className='myPageIndexIconBox'>
-              <div><img src={ganeInfo.gameIcon} alt="" /></div>
+              <div><img src={silverCoin} alt="" /></div>
               <div>{ganeInfo.coin}</div>
             </div>
           </div>
@@ -236,4 +239,4 @@ const MyPageIndex = (props) => {
     </div>
   )
 }
-export default MyPageIndex
+export default MyPageIndex;

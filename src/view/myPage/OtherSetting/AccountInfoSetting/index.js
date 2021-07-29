@@ -97,7 +97,7 @@ const AccountInfoSetting = () => {
     const data = {
       memberId,
       phone: `${phoneCode}-${phone}`,
-      portrait: fileList[0].url,
+      portrait: (fileList[0] && fileList[0].url) || '',
       homeShopId,
       countryId,
       languageId,

@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Button, Input, message } from 'antd'
-import useDeleteBox from '@/common/components/deleteBox.js'
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Button, Input, message } from 'antd';
+import useDeleteBox from '@/common/components/deleteBox.js';
 
-import { adartsCardListHttp, adartsCardDeleteHttp, adartsBindHttp } from '@/api'
+import { adartsCardListHttp, adartsCardDeleteHttp, adartsBindHttp } from '@/api';
 
-import m from '@/assets/img/m.png'
-import A from '@/assets/img/Adarts.png'
-import L from '@/assets/img/League.png'
+import adartsCard from '@/assets/img/adartsCard.png';
+import A from '@/assets/img/Adarts.png';
+import L from '@/assets/img/League.png';
 
 const AdartsCardSetting = () => {
   const { t } = useTranslation();
@@ -72,7 +72,7 @@ const AdartsCardSetting = () => {
         return (
           <div key={i.cardId} className='AdartsCardBox'>
             <div>
-              <div className='AdartsCardImgBox'><img src={m} alt="" /></div>
+              <div className='AdartsCardImgBox'><img src={adartsCard} alt="" /></div>
               <div className='AdartsCardUserName'>{i.name}</div>
             </div>
             <div className='AdartsCardInfoBox'>

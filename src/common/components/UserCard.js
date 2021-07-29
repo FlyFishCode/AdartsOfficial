@@ -7,7 +7,8 @@ import { indexUserCardListHttp } from '@/api';
 
 import { setCountryIconPosition } from '@/common/Utlis';
 
-import adartsCard from '@/assets/img/adartsCard.png'
+import adartsCard from '@/assets/img/adartsCard.png';
+import defaultPlayer from '@/assets/img/defalutPlayer.png';
 
 const UserCard = (props) => {
     // const history = useHistory();
@@ -59,7 +60,7 @@ const UserCard = (props) => {
     }, [position])
     return (
         <Row className='userCardBox'>
-            {userCard.length > 0 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col> : null}
+            {userCard.length > 1 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col> : null}
             <Col span='9' className='userCardListBg'>
                 <div className='userCardListBox animate__animated animate__fadeInRight'>
                     {userCard && userCard.map((i, index) => {
@@ -73,7 +74,7 @@ const UserCard = (props) => {
                                             </div>
                                             <div className='userInfoBox'>
                                                 <div className='userCardImg'>
-                                                    <img src={i.portrait} alt="" />
+                                                    <img src={i.portrait ? i.portrait : defaultPlayer} alt="" />
                                                 </div>
                                                 <div className='userName textOverFlow' title={i.name}>{i.name}</div>
                                             </div>
@@ -134,7 +135,7 @@ const UserCard = (props) => {
                     })}
                 </div>
             </Col>
-            {userCard.length > 0 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col> : null}
+            {userCard.length > 1 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col> : null}
             {/* <Col span='8' offset='1' className='userCardOther'>
         <div className='otherMoreBox'>
           <Button block onClick={() => handleBtnPush('About30Game')}>{t(16)}<RightOutlined /></Button>
