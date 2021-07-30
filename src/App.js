@@ -35,6 +35,7 @@ import LoginBox from './common/components/head/loginBox/login.js';
 import ForgetID from './common/components/head/loginBox/forgetID.js';
 import ForgetPW from './common/components/head/loginBox/forgetPW.js';
 import AddUser from './common/components/head/loginBox/addUser.js';
+import DartsInfo from './view/darts/dartsInfo.js'
 
 
 const App = () => {
@@ -76,6 +77,9 @@ const App = () => {
                     </Route>
                     <Route path='/Darts'>
                         <Darts />
+                    </Route>
+                    <Route path='/DartsInfo'>
+                        <DartsInfo />
                     </Route>
                     <Route path='/Login'>
                         <LoginBox changeUserName={handleUserName} />
@@ -126,7 +130,7 @@ const Banner = () => {
         slidesToShow: 3,
         autoplay: true,
         pauseOnHover: true,
-        autoplaySpeed: 1000,
+        autoplaySpeed: 3000,
     }
     useEffect(() => {
         getData();

@@ -39,7 +39,12 @@
     display: flex;
     width: 100%;
     padding: 10px;
+    cursor: pointer;
     border-bottom: 2px solid #eee;
+}
+
+.newsBox:hover {
+    border-bottom: 2px solid #666;
 }
 
 .newsTitleBox {
@@ -71,4 +76,14 @@
 .newsInfoTitle div:nth-child(1) {
     color: #F37E00;
     margin: 0 10px 0 0;
+}
+
+.dartsInfoBox {
+    padding: 10px;
+}
+
+.dartsInfoBox div:nth-child(1) {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
 }

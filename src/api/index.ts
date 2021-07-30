@@ -19,11 +19,14 @@ import {
 	adartsCardList,
 	adartsCardDelete,
 	adartsBind
-} from './Mypage';
+} from './mypage';
 
 // adarts店铺
 import { newShopList } from './adartsShop'
-
+// 选手
+import { playerList,playerInfo } from './player';
+// 飞镖
+import { dartsList,dartsInfo } from './darts';
 
 
 const baseWeb = '/rps/';
@@ -143,6 +146,24 @@ const newShopListHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${newShopList}`, qs.stringify(data));
 }
 
+// 选手列表
+const playerListHttp = (data:any) =>{
+	return axios.get(getNewUrl(`${baseWebsite}${playerList}`, data))
+}
+// 选手详情
+const playerInfoHttp = (data:any) =>{
+	return axios.get(getNewUrl(`${baseWebsite}${playerInfo}`, data))
+}
+
+// 飞镖列表
+const dartsListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${dartsList}`, data)
+}
+// 飞镖详情
+const dartsInfoHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${dartsInfo}`, data))
+}
+
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
 		// let flag = false
@@ -212,5 +233,9 @@ export {
 		adartsCardDeleteHttp,
 		adartsBindHttp,
 		findPassWordHttp,
-		findAccountHttp
+		findAccountHttp,
+		playerListHttp,
+		playerInfoHttp,
+		dartsListHttp,
+		dartsInfoHttp
 }
