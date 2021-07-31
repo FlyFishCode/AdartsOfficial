@@ -36,7 +36,7 @@ const LoginBox = (props) => {
         })
     }
     return (
-        <div className='loginBox'>
+        <div className='loginBox containerBox'>
             <div className='loginTitle'>
                 <div onClick={() => history.go(-1)}><HomeOutlined /></div>
                 <div>{t(4)}</div>

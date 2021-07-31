@@ -53,7 +53,7 @@ const MyPage = () => {
     handleChangeCardId();
   }, [cardId])
   return (
-    <Row className='myPage'>
+    <Row className='myPage containerBox'>
       <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
         <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
         <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AllGameData'>{t(21)}</div>

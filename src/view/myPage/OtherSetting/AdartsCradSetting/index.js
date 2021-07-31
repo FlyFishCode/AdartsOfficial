@@ -27,16 +27,16 @@ const AdartsCardSetting = () => {
       }
     })
   };
-  const handleCopy = (value) => {
-    const selectDom = document.createElement('input');
-    selectDom.setAttribute('style', 'position:absolute;top:0;left:0px;opacity:0;zIndex:--10');
-    selectDom.value = value;
-    document.body.appendChild(selectDom);
-    selectDom.select();
-    document.execCommand('copy');
-    document.body.removeChild(selectDom);
-    message.info(t(125));
-  }
+  // const handleCopy = (value) => {
+  //   const selectDom = document.createElement('input');
+  //   selectDom.setAttribute('style', 'position:absolute;top:0;left:0px;opacity:0;zIndex:--10');
+  //   selectDom.value = value;
+  //   document.body.appendChild(selectDom);
+  //   selectDom.select();
+  //   document.execCommand('copy');
+  //   document.body.removeChild(selectDom);
+  //   message.info(t(125));
+  // }
   const handleSetMainCard = (value) => {
     console.log(value);
   }
@@ -89,7 +89,7 @@ const AdartsCardSetting = () => {
             </div>
             <div className='AdartsCardBtnBox'>
               {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardNo)}>{t(144)}</Button> : null}
-              <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button>
+              {/* <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button> */}
               <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button>
             </div>
           </div>

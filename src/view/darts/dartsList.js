@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Input, Pagination } from 'antd';
-// import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import { EyeOutlined } from '@ant-design/icons';
 import { dartsListHttp } from '@/api';
 
 
 const DartsList = () => {
   // const { t } = useTranslation();
+  const history = useHistory();
   const [total, setTotal] = useState(1);
   const [inputValue, setInputValue] = useState('');
   const [pageNum, setPageNum] = useState(1);
@@ -23,11 +24,17 @@ const DartsList = () => {
       setTotal(res.data.data.total)
     })
   }
+  const handleNewsClick = (id) => {
+    history.push({
+      pathname: '/DartsInfo',
+      state: { id }
+    })
+  }
   useEffect(() => {
     getData(inputValue, pageNum)
   }, [inputValue, pageNum])
   return (
-    <div className='dartsList'>
+    <div className='dartsList containerBox'>
       <Row className='RowBox'>
         <Col span='24'>
           <Input.Search style={{ width: '100%' }} onSearch={(value) => setInputValue(value)} allowClear />
@@ -36,7 +43,7 @@ const DartsList = () => {
       <Row className='RowBox newsFirst'>
         {dartsList.map(i => {
           return (
-            <div key={i.id} className='newsBox'>
+            <div key={i.id} className='newsBox' onClick={() => handleNewsClick(i.id)}>
               <div className='newsImgBox'><img src={i.thumbnail} alt="" /></div>
               <div>
                 <div className='newsTitleBox'>

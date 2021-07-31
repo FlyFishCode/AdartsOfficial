@@ -110,7 +110,7 @@ const ForgetPW = () => {
         return () => clearInterval(timer)
     }, [disabled])
     return (
-        <div className='loginBox'>
+        <div className='loginBox containerBox'>
             <div className='loginTitle'>
                 <div onClick={() => history.go(-1)} > <LeftOutlined /> </div>
                 <div> {t(29)} </div>

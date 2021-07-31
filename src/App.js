@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
-// import { Row, Col } from 'antd';
-import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined } from '@ant-design/icons';
+import { Carousel } from 'antd';
+import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
 import { setCountryIconPosition } from '@/common/Utlis';
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';
@@ -52,65 +48,67 @@ const App = () => {
     }, [currentUserName])
     return (
         <BrowserRouter >
-            <div className='containerBox'>
-                <Head userName={userName} loginOut={handleUserName} />
-                <Switch>
-                    <Route path='/' exact>
-                        <Container userName={userName} />
-                    </Route>
-                    <Route path='/News'>
-                        <NewsPage />
-                    </Route>
-                    <Route path='/MyPageIndex'>
-                        <MyPage />
-                    </Route>
-                    <Route path='/AdartsShop'>
-                        <AdartsShop />
-                    </Route>
-                    <Route path='/Match'>
-                        <MatchPage />
-                    </Route>
-                    <Route path='/Players'>
-                        <Players />
-                    </Route>
-                    <Route path='/PlayerInfo'>
-                        <PlayerInfo />
-                    </Route>
-                    <Route path='/Darts'>
-                        <Darts />
-                    </Route>
-                    <Route path='/DartsInfo'>
-                        <DartsInfo />
-                    </Route>
-                    <Route path='/Login'>
-                        <LoginBox changeUserName={handleUserName} />
-                    </Route>
-                    <Route path='/ForgetID'>
-                        <ForgetID />
-                    </Route>
-                    <Route path='/ForgetPW'>
-                        <ForgetPW />
-                    </Route>
-                    <Route path='/AddUser'>
-                        <AddUser />
-                    </Route>
-                </Switch>
-                {/* <Footer /> */}
-            </div>
+            {/* <div className='containerBox'> */}
+            <Head userName={userName} loginOut={handleUserName} />
+            <Switch>
+                <Route path='/' exact>
+                    <Container userName={userName} />
+                </Route>
+                <Route path='/News'>
+                    <NewsPage />
+                </Route>
+                <Route path='/MyPageIndex'>
+                    <MyPage />
+                </Route>
+                <Route path='/AdartsShop'>
+                    <AdartsShop />
+                </Route>
+                <Route path='/Match'>
+                    <MatchPage />
+                </Route>
+                <Route path='/Players'>
+                    <Players />
+                </Route>
+                <Route path='/PlayerInfo'>
+                    <PlayerInfo />
+                </Route>
+                <Route path='/Darts'>
+                    <Darts />
+                </Route>
+                <Route path='/DartsInfo'>
+                    <DartsInfo />
+                </Route>
+                <Route path='/Login'>
+                    <LoginBox changeUserName={handleUserName} />
+                </Route>
+                <Route path='/ForgetID'>
+                    <ForgetID />
+                </Route>
+                <Route path='/ForgetPW'>
+                    <ForgetPW />
+                </Route>
+                <Route path='/AddUser'>
+                    <AddUser />
+                </Route>
+            </Switch>
+            <Footer />
+            {/* </div> */}
         </BrowserRouter >
     );
 }
 
 const Container = ({ userName }) => {
     return (
-        <div className='container'>
+        <div>
             <Banner />
-            {userName ? <UserCard /> : ''}
-            <News />
-            {/* <PlayerDes /> */}
-            {/* <Activity /> */}
-            <Video />
-            <Product />
+            <div className='containerBox'>
+                {userName ? <UserCard /> : ''}
+                <News />
+                {/* <PlayerDes /> */}
+                {/* <Activity /> */}
+                <Video />
+                <Product />
+            </div>
         </div>
     )
 }
@@ -124,20 +122,45 @@ const Banner = () => {
     const handleClick = (id) => {
         console.log(id)
     }
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
+    const PrevIcon = (props) => {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+                style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+            >
+                <LeftCircleOutlined />
+            </div>
+        )
+    }
+    const NextIcon = (props) => {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                onClick={onClick}
+                style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+            >
+                <RightCircleOutlined />
+            </div>
+        )
+    }
+    const setting = {
         autoplay: true,
-        pauseOnHover: true,
-        autoplaySpeed: 3000,
+        arrows: true,
+        centerMode: true,
+        slidesToShow: 3,
+        centerPadding: 0,
+        autoplaySpeed: 2000,
+        prevArrow: <PrevIcon />,
+        nextArrow: <NextIcon />
     }
     useEffect(() => {
         getData();
     }, [])
     return (
-        <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
+        <Carousel {...setting}>
             {bannerList.map((item, index) => {
                 return (
                     <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
@@ -145,7 +168,7 @@ const Banner = () => {
                     </div>
                 )
             })}
-        </Slider>
+        </Carousel>
     )
 }
 const News = () => {
@@ -177,18 +200,16 @@ const News = () => {
     };
     const handleNewsClick = (id) => {
         history.push({
-            pathname: 'News/NewsInfo',
+            pathname: '/News/NewsInfo',
             state: { id }
         })
     }
-    useEffect(() => {
-        getShopList();
-        return () => setshopList([]);
-    }, [])
-    useEffect(() => {
-        getNewsList(type);
-        return () => setNewsList([]);
-    }, [type]);
+    const handleShopClick = (id) => {
+        history.push({
+            pathname: '/AdartsShop/ShopInfo',
+            state: { id }
+        })
+    }
     const getTypeStr = (type) => {
         let str = ''
         switch (type) {
@@ -204,6 +225,25 @@ const News = () => {
         }
         return str
     };
+    const moreClick = (type) => {
+        if (type === 1) {
+            history.push('/News')
+        }
+        if (type === 2) {
+            history.push({
+                pathname: '/AdartsShop/ShopSearch',
+                state: { type: '2' }
+            })
+        }
+    }
+    useEffect(() => {
+        getShopList();
+        return () => setshopList([]);
+    }, [])
+    useEffect(() => {
+        getNewsList(type);
+        return () => setNewsList([]);
+    }, [type]);
     return (
         <div className='All'>
             <div className='AllLeft'>
@@ -234,8 +274,8 @@ const News = () => {
                         )
                     })}
                 </div>
-                <div className='AllFooter' onClick={() => history.push('/News')}>
-                    <div className='footerText'><DesktopOutlined />{t(11)}</div>
+                <div className='AllFooter' onClick={() => moreClick(1)}>
+                    <div className='footerText'><DesktopOutlined /><div className='footerTextInner'>{t(11)}</div></div>
                     <div className='footerMore'>{'>'}</div>
                 </div>
             </div>
@@ -246,9 +286,9 @@ const News = () => {
                 <div className='Allcontainer'>
                     {shopList.map(item => {
                         return (
-                            <div className='AllRightBox' key={item.shopId}>
+                            <div className='AllRightBox' key={item.shopId} onClick={() => handleShopClick(item.shopId)}>
                                 <div className='AllImgBox'>
-                                    <img src={item.shopImg ? item.shopImg : shopImg} alt="" />
+                                    <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
                                 </div>
                                 <div className='AllImgContent'>
                                     <div>
@@ -256,14 +296,14 @@ const News = () => {
                                             <div className='countryIconPosition'>
                                                 <div style={{ backgroundPosition: setCountryIconPosition(item.countryCode) }} />
                                             </div>
-                                            <div style={{ color: 'red', fontWeight: 'bold' }}>[{item.countryName}]</div>
+                                            <div style={{ color: 'red', fontWeight: 'bold', marginLeft: '2px', fontSize: '10px' }}>[{item.countryName}]</div>
                                             <div className='textOverFlow' title={item.shopName} style={{ width: '90px' }}>{item.shopName}</div>
                                         </div>
-                                        <div>{item.shopAddress}</div>
+                                        <div style={{ fontSize: '10px', color: '#505050' }}>{item.shopAddress}</div>
                                         <div>{item.machineList && item.machineList.map((i, index) => {
                                             return (
                                                 <div key={index} >
-                                                    <span style={{ color: 'red' }}>{i.machineType}：</span><span>{i.machineNum}</span>
+                                                    <span style={{ color: 'red', fontSize: '10px' }}>{i.machineType}：</span><span>{i.machineNum}</span>
                                                 </div>
                                             )
                                         })}</div>
@@ -285,8 +325,8 @@ const News = () => {
                         )
                     })}
                 </div>
-                <div className='AllFooter'>
-                    <div className='footerText'><BankOutlined />{t(12)}</div>
+                <div className='AllFooter' onClick={() => moreClick(2)}>
+                    <div className='footerText'><BankOutlined /><div className='footerTextInner'>{t(12)}</div></div>
                     <div className='footerMore'>{'>'}</div>
                 </div>
             </div>
@@ -295,33 +335,63 @@ const News = () => {
 }
 const Product = () => {
     const { t } = useTranslation();
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        pauseOnHover: true,
-        autoplaySpeed: 1000,
-    }
     const bannerList = [
         { id: 1, img: productA },
         { id: 2, img: productW }
     ]
     const handleClick = (id) => {
-        console.log(id);
+        if (id === 1) {
+            window.open("http://static.adarts-cn.com/static/webResource/pdf/A1.pdf");
+        } else if (id === 2) {
+            window.open("http://static.adarts-cn.com/static/webResource/pdf/W1.pdf");
+        }
     }
+    // const PrevIcon = (props) => {
+    //     const { className, style, onClick } = props;
+    //     return (
+    //         <div
+    //             className={className}
+    //             onClick={onClick}
+    //             style={{ ...style, display: "block", fontSize: '30px', color: '#000' }}
+    //         >
+    //             <LeftCircleOutlined />
+    //         </div>
+    //     )
+    // }
+    // const NextIcon = (props) => {
+    //     const { className, style, onClick } = props;
+    //     return (
+    //         <div
+    //             className={className}
+    //             onClick={onClick}
+    //             style={{ ...style, display: "block", fontSize: '30px', color: '#000' }}
+    //         >
+    //             <RightCircleOutlined />
+    //         </div>
+    //     )
+    // }
+    // const setting = {
+    //     autoplay: true,
+    //     arrows: true,
+    //     autoplaySpeed: 2000,
+    //     prevArrow: <PrevIcon />,
+    //     nextArrow: <NextIcon />
+    // }
     return (
         <div className='product'>
-            <div><h1><GlobalOutlined />{t(14)}</h1></div>
-            <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
-                {bannerList.map((item, index) => {
-                    return (
-                        <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
-                            <img src={item.img} alt="" />
-                        </div>
-                    )
-                })}
-            </Slider>
+            <div className='productContent'><GlobalOutlined />
+                <div className='productContentInterText'>{t(14)}</div>
+            </div>
+            {/*<Carousel {...setting}>*/}
+            {bannerList.map((item, index) => {
+                return (
+                    /*<div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>*/
+                    <div className='contentStyle' key={index}>
+                        <img src={item.img} alt="" style={{ cursor: 'pointer' }} onClick={() => handleClick(item.id)} />
+                    </div>
+                )
+            })}
+            {/*</Carousel>*/}
         </div>
     )
 }
@@ -429,17 +499,19 @@ const Video = () => {
     const getTVData = () => {
         setTVData({
             src: 'http://static.adarts-cn.com/static/bulletin/advert/20191227/advert_2.mp4',
-            title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-            text: '2222222222222222'
+            title: '',
+            text: ''
         })
     };
     return (
         <div className='video'>
-            <div className='tvBox'>
-                <div><VideoCameraOutlined />Adarts.TV</div>
-                {/* <div>MORE</div> */}
-            </div>
             <div className='videoBG'>
+
+                <div className='tvBox'>
+                    <div><VideoCameraOutlined /><div className='tvBoxInnerText'>Adarts.TV</div></div>
+                    {/* <div>MORE</div> */}
+                </div>
+
                 <div className='videoContainer'>
                     <video src={TVData.src} controls></video>
                 </div>
@@ -451,22 +523,25 @@ const Video = () => {
         </div>
     )
 }
-// const Footer = () => {
-//     return (
-//         <div className='footer'>
-//             <div className='footerContainer'>
-//                 <div className='footerLeft'>
-//                     <h1>联系我们</h1>
-//                     <p>欢迎成为我们的合作伙伴</p>
-//                 </div>
-//                 <div className='footerRight'>
-//                     <div>1</div>
-//                     <div>2</div>
-//                     <div>3</div>
-//                     <div>4</div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
+const Footer = () => {
+    return (
+        <div className='footer'>
+            <div className='footerContent'>
+                <div className='footerContentCopy'>© Copyright 2021, All Rights Reserved</div>
+            </div>
+            {/*<div className='footerContainer'>
+                <div className='footerLeft'>
+                    <h1>联系我们</h1>
+                    <p>欢迎成为我们的合作伙伴</p>
+                </div>
+                <div className='footerRight'>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                </div>
+            </div>*/}
+        </div>
+    )
+}
 export default App;

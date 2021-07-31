@@ -47,6 +47,8 @@ const findPassWord = `${baseWebsite}websitsMember/forgetPassword`;
 const countryList = `${baseWeb}countrylist`;
 // 首页新闻列表
 const indexNewsList = `${baseWebsite}websitenews/officialNewsList`;
+// 首页新闻详情
+const indexNewsInfo = `${baseWebsite}websitenews/newsInfo`;
 // 首页店铺列表
 const indexShopList = `${baseWebsite}websiteshop/newShop`;
 // 首页轮播图列表
@@ -59,6 +61,9 @@ const indexLoginHttp = (data:any) =>{
 }
 const indexNewsListHttp = (data:any) => {
     return axios.post(getNewUrl(indexNewsList, data))
+}
+const indexNewsInfoHttp = (data:any) => {
+    return axios.post(getNewUrl(indexNewsInfo, data))
 }
 const indexShopListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexShopList, data))
@@ -211,6 +216,7 @@ const getNewUrl = (url: string, data: any = null) => {
 export {
     indexLoginHttp,
     indexNewsListHttp,
+		indexNewsInfoHttp,
 		indexShopListHttp,
 		indexBannerListHttp,
 		indexUserCardListHttp,

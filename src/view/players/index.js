@@ -24,13 +24,13 @@ const PlayerDes = () => {
     getPlayerList()
   }, [])
   return (
-    <div className='playerDes'>
+    <div className='playerDes containerBox'>
       <Row className='playerDesBox' justify="space-around">
         {playerList.map(i => {
           return (
             <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
               <div className='playerBox'>
-                <div><img src={i.picture[0].url} alt="" /></div>
+                <div><img src={i.picture[0] ? i.picture[0].url : ''} alt="" /></div>
                 <div className='playerDesName'>{i.name}</div>
               </div>
             </Col>

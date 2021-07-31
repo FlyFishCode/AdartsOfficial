@@ -71,6 +71,12 @@
 
 .newsInfoTitle {
     display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.dartsContent {
+    text-align: center;
 }
 
 .newsInfoTitle div:nth-child(1) {

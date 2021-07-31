@@ -244,19 +244,6 @@
     justify-content: center;
 }
 
-.AccountInfoRadio .ant-radio-group {
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.AccountInfoEmailBox {
-    display: flex;
-    justify-content: space-around;
-    margin: 5px 0;
-}
-
 .AwardMsgSettingAwardBox {
     border-top: 2px solid #666;
     text-align: center;
@@ -295,14 +282,14 @@
 
 .myPageIndexBox {
     display: flex;
-    border: 2px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
 }
 
 .myPageIndexGameBox {
     margin: 5px 0;
     display: flex;
     align-items: center;
-    border: 2px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
     font-weight: bold;
 }
 
@@ -313,9 +300,12 @@
 
 .myPageIndexGameRating {
     display: flex;
-    border: 2px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
     margin: 5px 0;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .myPageIndexGameRating div {
     flex: 1;
@@ -442,7 +432,7 @@
     display: flex;
     margin: 5px 0;
     font-size: 20px;
-    border: 2px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
 }
 
 .myPageIndexOtherBox div {
@@ -479,14 +469,14 @@
     display: flex;
     width: 48%;
     justify-content: space-around;
-    border: 2px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
     padding: 10px;
     margin: 5px;
     cursor: pointer;
 }
 
 .myPageIndexPlayerBox>div:hover {
-    border: 2px solid #1890ff;
+    border: 1px solid #1890ff;
 }
 
 .myPageIndexPlayerIcon {

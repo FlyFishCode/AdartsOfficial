@@ -72,15 +72,35 @@ const AdartsShopInfo = () => {
             <div>{shopInfo.shopAddress}</div>
           </div>
           <div>
-            <div className='shopInfoLabel'>{t(149)}</div>
+            <div className='shopInfoLabel'>{t(150)}</div>
             <div>{shopInfo.shopPhone}</div>
           </div>
           <div>
-            <div className='shopInfoLabel'>{t(149)}</div>
+            <div className='shopInfoLabel'>{t(151)}</div>
             <div>{shopInfo.shopPhone}</div>
           </div>
           <div>
-            <div className='shopInfoLabel'>{t(149)}</div>
+            <div className='shopInfoLabel'>TEL</div>
+            <div>{shopInfo.shopPhone}</div>
+          </div>
+          <div>
+            <div className='shopInfoLabel'>{t(152)}</div>
+            <div>{shopInfo.shopPhone}</div>
+          </div>
+          <div>
+            <div className='shopInfoLabel'>{t(153)}</div>
+            <div>{shopInfo.shopPhone}</div>
+          </div>
+          <div>
+            <div className='shopInfoLabel'>{t(154)}</div>
+            <div>{shopInfo.shopPhone}</div>
+          </div>
+          <div>
+            <div className='shopInfoLabel'>{t(155)}</div>
+            <div>{shopInfo.shopPhone}</div>
+          </div>
+          <div>
+            <div className='shopInfoLabel'>{t(156)}</div>
             <div>{shopInfo.shopPhone}</div>
           </div>
         </Col>

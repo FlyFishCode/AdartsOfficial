@@ -63,7 +63,7 @@ const AdartsShopNew = () => {
           return (
             <div className='AllRightBox' key={item.shopId}>
               <div className='AllImgBox'>
-                <img src={item.shopImg ? item.shopImg : shopImg} alt="" />
+                <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
               </div>
               <div className='AllImgContent'>
                 <div>

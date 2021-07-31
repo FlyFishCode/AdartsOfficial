@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Carousel } from 'antd';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { indexBannerListHttp, dartsListHttp } from '@/api';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import Slider from "react-slick";
+import { PlusCircleOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import DartsList from './dartsList'
 
 
@@ -62,14 +61,36 @@ const Content = () => {
 
 const Darts = () => {
   const [bannerList, setBannerList] = useState([]);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
+  const PrevIcon = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        onClick={onClick}
+        style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+      >
+        <LeftCircleOutlined />
+      </div>
+    )
+  }
+  const NextIcon = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        onClick={onClick}
+        style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+      >
+        <RightCircleOutlined />
+      </div>
+    )
+  }
+  const setting = {
     autoplay: true,
-    pauseOnHover: true,
-    autoplaySpeed: 3000,
+    arrows: true,
+    autoplaySpeed: 2000,
+    prevArrow: <PrevIcon />,
+    nextArrow: <NextIcon />
   }
   const getData = () => {
     indexBannerListHttp({ countryId: 208 }).then(res => {
@@ -83,8 +104,8 @@ const Darts = () => {
     getData();
   }, [])
   return (
-    <div>
-      <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
+    <div className='containerBox'>
+      <Carousel {...setting}>
         {bannerList.map((item, index) => {
           return (
             <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
@@ -92,7 +113,16 @@ const Darts = () => {
             </div>
           )
         })}
-      </Slider>
+      </Carousel>
+      {/* <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
+        {bannerList.map((item, index) => {
+          return (
+            <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
+              <img src={item.image} alt="" />
+            </div>
+          )
+        })}
+      </Slider> */}
       <Switch>
         <Route path='/Darts' exact>
           <Content />

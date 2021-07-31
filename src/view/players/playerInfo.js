@@ -27,7 +27,7 @@ const PlayerInfo = () => {
     getPlayerInfo(parmas.state.id)
   }, [parmas])
   return (
-    <div>
+    <div className='containerBox'>
       <div className='playerName'>
         {playerInfo.name}
         {playerInfo.facebookLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.facebookLink)}><AndroidOutlined /></div> : null}

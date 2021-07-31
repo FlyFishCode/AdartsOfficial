@@ -222,10 +222,10 @@ const AdartsShopIndex = () => {
       }
     ])
   }
-  const handleShopClick = (item) => {
+  const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
-      state: { id: item.id }
+      state: { id }
     })
   }
   useEffect(() => {
@@ -256,7 +256,7 @@ const AdartsShopIndex = () => {
           <div className='adartsShopIndex'>
             {newShop.map(item => {
               return (
-                <div className='AllRightBox' key={item.shopId} onClick={(item) => handleShopClick(item)}>
+                <div className='AllRightBox' key={item.shopId} onClick={(item) => handleShopClick(item.shopId)}>
                   <div className='AllImgBox'>
                     <img src={item.shopImg} alt="" />
                   </div>

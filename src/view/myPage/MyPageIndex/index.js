@@ -164,8 +164,8 @@ const MyPageIndex = (props) => {
       </div>
       <div className='myPageIndexGameBox'><span className='myPageIndexIcon'><MessageOutlined /></span>{t(116)}</div>
       <div className='myPageIndexGameRating'>
-        <div>Adarts Rating：{ganeInfo.adartsRating}</div>
-        <div>League Rating：{ganeInfo.leagueRating}</div>
+        <div style={{fontSize:"15px"}}>Adarts Rating：{ganeInfo.adartsRating}</div>
+        <div style={{fontSize:"15px"}}>League Rating：{ganeInfo.leagueRating}</div>
       </div>
       <div className='myPageIndexBox'>
         <div className='myPageIndexItemBox'>

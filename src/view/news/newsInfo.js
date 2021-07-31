@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { indexNewsInfoHttp } from '@/api';
 
 
 import './index.css';
@@ -10,14 +11,12 @@ const NewsInfo = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [newsInfo, setNewsInfo] = useState({});
-  const getNewsInfo = () => {
-    setNewsInfo({
-      type: 1,
-      title: 'AAAAAAAAAAAAAAAAAAAAAAAA',
-      time: '2021-08-05'
+  const getNewsInfo = (id) => {
+    indexNewsInfoHttp({ id }).then(res => {
+      setNewsInfo(res.data.data);
+      document.querySelector('.dartsContent').innerHTML = res.data.data.contents;
     })
   }
-  console.log(location.state.id);
   const getType = (type) => {
     let str = ''
     switch (type) {
@@ -34,15 +33,16 @@ const NewsInfo = () => {
     return str
   };
   useEffect(() => {
-    getNewsInfo()
-  }, [])
+    getNewsInfo(location.state.id)
+  }, [location])
   return (
     <div>
       <div className='newsInfoTitle'>
         <div>[{getType(newsInfo.type)}]</div>
         <div>{newsInfo.title}</div>
       </div>
-      <div>{newsInfo.time}</div>
+      <div>{newsInfo.date}</div>
+      <div className='dartsContent'></div>
     </div>
   )
 }

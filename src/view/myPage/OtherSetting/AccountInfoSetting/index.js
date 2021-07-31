@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { Row, Col, Input, Button, Radio, Upload, Modal, Select, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusOutlined } from '@ant-design/icons'
-import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp, shopListHttp, countryListHttp } from '@/api'
+import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp, shopListHttp, countryListHttp, sendEmailHttp, sendPhoneHttp } from '@/api'
 import { REG_EMAIL } from '@/common/Utlis'
+import { REG_PHONE } from '../../../../common/Utlis'
 
 
 const { Option } = Select;
@@ -116,7 +117,22 @@ const AccountInfoSetting = () => {
   }
   const handleEmailBtnClick = () => {
     if (REG_EMAIL.test(email)) {
-      setEmailBtnDisabled(true)
+      setEmailBtnDisabled(true);
+      sendEmailHttp({ email }).then(res => {
+        message.info(res.data.msg)
+      })
+    } else {
+      message.warning(t(63))
+    }
+  }
+  const handlePhoneBtnClick = () => {
+    if (REG_PHONE.test(phone)) {
+      setPhoneBtnDisabled(true);
+      sendPhoneHttp({ phone: phoneCode + phone }).then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg)
+        }
+      })
     } else {
       message.warning(t(63))
     }
@@ -258,14 +274,14 @@ const AccountInfoSetting = () => {
         <Col span='10'>
           <Input.Group compact>
             <Select defaultValue={phoneCode} style={{ width: '30%' }} onChange={(value) => setPhoneCode(value)} >
-              <Option value="+81">+81</Option>
+              <Option value="+86">+86</Option>
               <Option value="000">+000</Option>
             </Select>
-            <Input style={{ width: '70%' }} defaultValue="Xihu District, Hangzhou" value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
+            <Input style={{ width: '70%' }} value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
           </Input.Group>
         </Col>
         <Col span='3' offset='1'>
-          <Button type="primary" onClick={() => setPhoneBtnDisabled(true)} disabled={phoneBtnDisabled}>{phoneBtnDisabled ? phoneCountDown : t(59)}</Button>
+          <Button type="primary" onClick={handlePhoneBtnClick} disabled={phoneBtnDisabled}>{phoneBtnDisabled ? phoneCountDown : t(59)}</Button>
         </Col>
         <Col span='4' offset='1'>
           <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear />
@@ -273,19 +289,15 @@ const AccountInfoSetting = () => {
       </Row>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(39)}</Col>
-        <Col span='20'>
-          <div><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></div>
-          <div className='AccountInfoEmailBox'>
-            <div><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></div>
-            <div><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></div>
-            <div className='AccountInfoRadio'>
-              <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
-                <Radio value={1}>{t(51)}</Radio>
-                <Radio value={0}>{t(52)}</Radio>
-              </Radio.Group>
-            </div>
-          </div>
-        </Col>
+        <Col span='10'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
+        <Col span='4' offset='1'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
+        <Col span='4'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
+      </Row>
+      <Row type="flex" justify="center">
+        <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
+          <Radio value={1}>{t(51)}</Radio>
+          <Radio value={0}>{t(52)}</Radio>
+        </Radio.Group>
       </Row>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(100)}</Col>

@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Select, Input, Pagination } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { useState, useEffect } from 'react';
+import { Row, Col, Select, Input, Pagination } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import m from '@/assets/img/m.png'
 
 const { Option } = Select;
 const { Search } = Input;
 const AdartsShopSearch = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [total, setTotal] = useState(1);
   const [shopList, setShopList] = useState([]);
   const handleChange = (value) => {
@@ -118,6 +120,12 @@ const AdartsShopSearch = () => {
   const handlePageChange = (index) => {
     console.log(index);
   }
+  const handleShopClick = (id) => {
+    history.push({
+      pathname: '/AdartsShop/ShopInfo',
+      state: { id }
+    })
+  }
   useEffect(() => {
     getShopList()
   }, [])
@@ -139,7 +147,7 @@ const AdartsShopSearch = () => {
       <div className='adartsShopIndex'>
         {shopList.map(item => {
           return (
-            <div className='AllRightBox' key={item.shopId}>
+            <div className='AllRightBox' key={item.shopId} onClick={() => handleShopClick(item.shopId)}>
               <div className='AllImgBox'>
                 <img src={item.shopImg} alt="" />
               </div>

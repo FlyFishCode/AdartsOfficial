@@ -127,7 +127,7 @@ const AddUser = () => {
         getCountryList()
     }, [])
     return (
-        <div className='loginBox'>
+        <div className='loginBox containerBox'>
             <div className='loginTitle'>
                 <div onClick={() => history.go(-1)}><LeftOutlined /></div>
                 <div>{t(30)}</div>

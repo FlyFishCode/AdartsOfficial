@@ -14,7 +14,7 @@ const DartsInfo = () => {
     getInfo(location.state.id)
   }, [location?.state?.id])
   return (
-    <div className='dartsInfoBox'>
+    <div className='dartsInfoBox containerBox'>
       <div>{info.title}</div>
       <div>{info.cdateInt}</div>
       <div className='dartsContent'></div>
