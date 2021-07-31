@@ -13,6 +13,7 @@ import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';
 import productA from '@/assets/img/productA.jpg';
 import productW from '@/assets/img/productW.jpg';
+import shopImg from '@/assets/img/shop.png';
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -174,6 +175,12 @@ const News = () => {
             setNewsList(res.data.data.list)
         })
     };
+    const handleNewsClick = (id) => {
+        history.push({
+            pathname: 'News/NewsInfo',
+            state: { id }
+        })
+    }
     useEffect(() => {
         getShopList();
         return () => setshopList([]);
@@ -212,7 +219,7 @@ const News = () => {
                 <div className='Allcontainer'>
                     {newsList.map(item => {
                         return (
-                            <div className='container' key={item.id}>
+                            <div className='container' key={item.id} onClick={() => handleNewsClick(item.id)}>
                                 <div className='newsImgBox'>
                                     <img src={item.img} alt="" />
                                 </div>
@@ -241,7 +248,7 @@ const News = () => {
                         return (
                             <div className='AllRightBox' key={item.shopId}>
                                 <div className='AllImgBox'>
-                                    <img src={item.shopImg} alt="" />
+                                    <img src={item.shopImg ? item.shopImg : shopImg} alt="" />
                                 </div>
                                 <div className='AllImgContent'>
                                     <div>

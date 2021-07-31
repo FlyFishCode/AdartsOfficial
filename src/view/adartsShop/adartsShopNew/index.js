@@ -6,6 +6,7 @@ import { setCountryIconPosition } from '@/common/Utlis'
 import NoData from '@/common/components/noData';
 import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';
+import shopImg from '@/assets/img/shop.png';
 
 const { Option } = Select;
 const AdartsShopNew = () => {
@@ -62,7 +63,7 @@ const AdartsShopNew = () => {
           return (
             <div className='AllRightBox' key={item.shopId}>
               <div className='AllImgBox'>
-                <img src={item.shopImg} alt="" />
+                <img src={item.shopImg ? item.shopImg : shopImg} alt="" />
               </div>
               <div className='AllImgContent'>
                 <div>
