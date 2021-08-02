@@ -138,8 +138,9 @@
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 20% 35% 10%;
+    grid-column-gap: 15%;
 }
 
 .AdartsCardResultBox {
@@ -305,7 +306,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 .myPageIndexGameRating div {
     flex: 1;

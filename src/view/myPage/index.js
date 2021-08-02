@@ -41,8 +41,12 @@ const MyPage = () => {
     })
   }
   const handleClick = (e) => {
-    history.push(e.target.getAttribute('path'))
-    setActiveClass(e.target.getAttribute('active'))
+    try {
+      history.push(e.target.getAttribute('path'))
+      setActiveClass(e.target.getAttribute('active'))
+    } catch (error) {
+      console.log('History Api：', error);
+    }
   }
   useEffect(() => {
     if (Location?.state?.name) {

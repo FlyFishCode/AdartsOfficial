@@ -90,7 +90,7 @@ const AdartsCardSetting = () => {
             <div className='AdartsCardBtnBox'>
               {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardNo)}>{t(144)}</Button> : null}
               {/* <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button> */}
-              <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button>
+              {!i.isMainCard ? <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button> : null}
             </div>
           </div>
         )

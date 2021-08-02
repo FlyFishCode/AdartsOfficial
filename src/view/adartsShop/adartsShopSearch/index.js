@@ -2,7 +2,13 @@ import { useState, useEffect } from 'react';
 import { Row, Col, Input, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import m from '@/assets/img/m.png'
+import { newShopListHttp } from '@/api';
+import { setCountryIconPosition } from '@/common/Utlis';
+
+
+import shopImg from '@/assets/img/shop.png';
+import A1 from '@/assets/img/A1.png';
+import W1 from '@/assets/img/W1.png';
 
 // const { Option } = Select;
 const { Search } = Input;
@@ -10,115 +16,25 @@ const AdartsShopSearch = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const [total, setTotal] = useState(1);
+  const [pageNum, setPageNum] = useState(1);
+  const [shopName, setShopName] = useState('');
   const [shopList, setShopList] = useState([]);
   // const handleChange = (value) => {
   //   console.log(value);
   // }
-  const onSearch = (value) => {
-    console.log(value);
-  }
-  const getShopList = () => {
-    setShopList([
-      {
-        icon: m,
-        shopId: 1,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 2,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 3,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 4,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 5,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
+  const getShopList = (pageNum, shopName) => {
+    const data = {
+      countryId: 208,
+      shopName,
+      pageNum,
+      pageSize: 5
+    }
+    newShopListHttp(data).then(res => {
+      if (res.data.code === 100) {
+        setShopList(res.data.data.list)
+        setTotal(res.data.data.total)
       }
-    ])
-    setTotal(500)
-  }
-  const handlePageChange = (index) => {
-    console.log(index);
+    })
   }
   const handleShopClick = (id) => {
     history.push({
@@ -127,8 +43,8 @@ const AdartsShopSearch = () => {
     })
   }
   useEffect(() => {
-    getShopList()
-  }, [])
+    getShopList(pageNum, shopName)
+  }, [pageNum, shopName])
   return (
     <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopSearch'>{t(112)}</div>
@@ -141,7 +57,7 @@ const AdartsShopSearch = () => {
           </Select>
         </Col> */}
         <Col span='24'>
-          <Search placeholder="input search text" onSearch={onSearch} allowClear />
+          <Search placeholder="input search text" onSearch={(value) => setShopName(value)} allowClear />
         </Col>
       </Row>
       <div className='adartsShopIndex'>
@@ -149,13 +65,13 @@ const AdartsShopSearch = () => {
           return (
             <div className='AllRightBox' key={item.shopId} onClick={() => handleShopClick(item.shopId)}>
               <div className='AllImgBox'>
-                <img src={item.shopImg} alt="" />
+                <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
               </div>
               <div className='AllImgContent'>
                 <div>
                   <div className='shopBox'>
-                    <div className='shopIconBox'>
-                      <img src={item.icon} alt="" />
+                    <div className='countryIconPosition'>
+                      <div style={{ backgroundPosition: setCountryIconPosition(item.countryCode) }} alt="" />
                     </div>
                     <div style={{ color: 'red', fontWeight: 'bold' }}> {item.shopName}</div>
                   </div>
@@ -169,11 +85,16 @@ const AdartsShopSearch = () => {
                   })}
                   </div>
                   <div className='iconImg'>
-                    {item.machineList && item.machineList.map((icon, jndex) => {
-                      return (
-                        <img src={icon.img} alt="" key={jndex} />
-                      )
-                    })}
+                    {item.machineList.length ?
+                      item.machineList.some(i => i.machineType === 'A1') ?
+                        <div className='iconImg'>
+                          <img src={A1} alt="" />
+                        </div> :
+                        <div className='iconImg'>
+                          <img src={W1} alt="" />
+                        </div>
+                      : null
+                    }
                   </div>
                 </div>
               </div>
@@ -181,7 +102,7 @@ const AdartsShopSearch = () => {
           )
         })}
       </div>
-      <Row justify="center"><Pagination total={total} showSizeChanger={false} onChange={handlePageChange} /></Row>
+      <Row justify="center"><Pagination total={total} showSizeChanger={false} onChange={(value) => setPageNum(value)} /></Row>
     </div>
   )
 }
