@@ -48,7 +48,7 @@ const AdartsShopInfo = () => {
         </Col>
         <Col span='4' style={{ textAlign: 'center' }}> <Button icon={<EnvironmentOutlined />} type="primary" >{t(147)}</Button></Col>
       </Row>
-      <Row className='RowBox shopInfoTitle'>{t(148)}</Row>
+      {/* <Row className='RowBox shopInfoTitle'>{t(148)}</Row> */}
       <Row>
         <Col span='6'>
           <div className='shopInfoOtherBox'><img src={shopInfo.img} alt="" /></div>

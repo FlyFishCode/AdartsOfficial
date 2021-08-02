@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Row, Col, Select, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { newShopListHttp, countryListHttp } from '@/api';
-import { setCountryIconPosition } from '@/common/Utlis'
+import { setCountryIconPosition } from '@/common/Utlis';
 import NoData from '@/common/components/noData';
 import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';

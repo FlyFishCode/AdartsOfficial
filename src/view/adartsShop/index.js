@@ -17,23 +17,20 @@ const AdartsShop = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const Location = useLocation();
-  const [cardId, setCardId] = useState();
   const [activeClass, setActiveClass] = useState('1');
-  const handleChangeCardId = (value) => {
-    setCardId(value)
-  }
   const handleClick = (e) => {
-    history.push(e.target.getAttribute('path'))
-    setActiveClass(e.target.getAttribute('active'))
+    try {
+      history.push(e.target.getAttribute('path'))
+      setActiveClass(e.target.getAttribute('active'))
+    } catch (error) {
+      console.log('History Api：', error);
+    }
   }
   useEffect(() => {
     if (Location.state) {
       setActiveClass(Location.state.type)
     }
   }, [Location])
-  useEffect(() => {
-    handleChangeCardId()
-  }, [cardId])
   return (
     <Row className='NewsBox containerBox'>
       <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>

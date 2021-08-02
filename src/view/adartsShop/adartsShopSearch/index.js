@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Select, Input, Pagination } from 'antd';
+import { Row, Col, Input, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import m from '@/assets/img/m.png'
 
-const { Option } = Select;
+// const { Option } = Select;
 const { Search } = Input;
 const AdartsShopSearch = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const [total, setTotal] = useState(1);
   const [shopList, setShopList] = useState([]);
-  const handleChange = (value) => {
-    console.log(value);
-  }
+  // const handleChange = (value) => {
+  //   console.log(value);
+  // }
   const onSearch = (value) => {
     console.log(value);
   }
@@ -133,14 +133,14 @@ const AdartsShopSearch = () => {
     <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopSearch'>{t(112)}</div>
       <Row className='adartsShopIndexSearchBox'>
-        <Col span='4' className='selectBox'>
+        {/* <Col span='4' className='selectBox'>
           <Select defaultValue="lucy" onChange={handleChange}>
             <Option value="jack">Jack</Option>
             <Option value="lucy">Lucy</Option>
             <Option value="Yiminghe">yiminghe</Option>
           </Select>
-        </Col>
-        <Col span='19' offset='1'>
+        </Col> */}
+        <Col span='24'>
           <Search placeholder="input search text" onSearch={onSearch} allowClear />
         </Col>
       </Row>

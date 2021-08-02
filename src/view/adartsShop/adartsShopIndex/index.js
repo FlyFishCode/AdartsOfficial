@@ -1,227 +1,147 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Input, Select } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { useState, useEffect } from 'react';
+import { Row, Col, Input } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { RightOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { newShopListHttp } from '@/api';
+import { setCountryIconPosition } from '@/common/Utlis';
 
-import m from '@/assets/img/m.png'
 
-const { Option } = Select;
+import shopImg from '@/assets/img/shop.png';
+import A1 from '@/assets/img/A1.png';
+import W1 from '@/assets/img/W1.png';
+
+
+
+// const { Option } = Select;
 const { Search } = Input;
 const AdartsShopIndex = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const [newShop, setNewShop] = useState([]);
-  const [shopActivity, setShopActivity] = useState([]);
-  const handleChange = (value) => {
-    console.log(value);
-  }
+  // const [shopActivity, setShopActivity] = useState([]);
+  // const handleChange = (value) => {
+  //   console.log(value);
+  // }
   const onSearch = (value) => {
     console.log(value);
   }
   const getNewShopList = () => {
-    setNewShop([
-      {
-        icon: m,
-        shopId: 1,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 2,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 3,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 4,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 5,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
+    const data = {
+      countryId: 208,
+      pageNum: 1,
+      pageSize: 5
+    }
+    newShopListHttp(data).then(res => {
+      if (res.data.code === 100) {
+        setNewShop(res.data.data.list)
       }
-    ])
+    })
   }
-  const getShopActivityList = () => {
-    setShopActivity([
-      {
-        icon: m,
-        shopId: 1,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        date: '2021 / 8 / 9',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 2,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        date: '2021 / 8 / 9',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 3,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        date: '2021 / 8 / 9',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 4,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        date: '2021 / 8 / 9',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      },
-      {
-        icon: m,
-        shopId: 5,
-        shopImg: m,
-        shopName: 'Adarts Shop',
-        shopAddress: '上海市黄浦区西藏中路160号',
-        date: '2021 / 8 / 9',
-        machineList: [
-          {
-            machineType: 'VSS',
-            machineNum: 1,
-            img: m
-          },
-          {
-            machineType: 'A1',
-            machineNum: 3,
-            img: m
-          }
-        ]
-      }
-    ])
-  }
+  // const getShopActivityList = () => {
+  //   setShopActivity([
+  //     {
+  //       icon: m,
+  //       shopId: 1,
+  //       shopImg: m,
+  //       shopName: 'Adarts Shop',
+  //       shopAddress: '上海市黄浦区西藏中路160号',
+  //       date: '2021 / 8 / 9',
+  //       machineList: [
+  //         {
+  //           machineType: 'VSS',
+  //           machineNum: 1,
+  //           img: m
+  //         },
+  //         {
+  //           machineType: 'A1',
+  //           machineNum: 3,
+  //           img: m
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       icon: m,
+  //       shopId: 2,
+  //       shopImg: m,
+  //       shopName: 'Adarts Shop',
+  //       shopAddress: '上海市黄浦区西藏中路160号',
+  //       date: '2021 / 8 / 9',
+  //       machineList: [
+  //         {
+  //           machineType: 'VSS',
+  //           machineNum: 1,
+  //           img: m
+  //         },
+  //         {
+  //           machineType: 'A1',
+  //           machineNum: 3,
+  //           img: m
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       icon: m,
+  //       shopId: 3,
+  //       shopImg: m,
+  //       shopName: 'Adarts Shop',
+  //       shopAddress: '上海市黄浦区西藏中路160号',
+  //       date: '2021 / 8 / 9',
+  //       machineList: [
+  //         {
+  //           machineType: 'VSS',
+  //           machineNum: 1,
+  //           img: m
+  //         },
+  //         {
+  //           machineType: 'A1',
+  //           machineNum: 3,
+  //           img: m
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       icon: m,
+  //       shopId: 4,
+  //       shopImg: m,
+  //       shopName: 'Adarts Shop',
+  //       shopAddress: '上海市黄浦区西藏中路160号',
+  //       date: '2021 / 8 / 9',
+  //       machineList: [
+  //         {
+  //           machineType: 'VSS',
+  //           machineNum: 1,
+  //           img: m
+  //         },
+  //         {
+  //           machineType: 'A1',
+  //           machineNum: 3,
+  //           img: m
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       icon: m,
+  //       shopId: 5,
+  //       shopImg: m,
+  //       shopName: 'Adarts Shop',
+  //       shopAddress: '上海市黄浦区西藏中路160号',
+  //       date: '2021 / 8 / 9',
+  //       machineList: [
+  //         {
+  //           machineType: 'VSS',
+  //           machineNum: 1,
+  //           img: m
+  //         },
+  //         {
+  //           machineType: 'A1',
+  //           machineNum: 3,
+  //           img: m
+  //         }
+  //       ]
+  //     }
+  //   ])
+  // }
   const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
@@ -230,25 +150,25 @@ const AdartsShopIndex = () => {
   }
   useEffect(() => {
     getNewShopList();
-    getShopActivityList()
+    // getShopActivityList()
   }, [])
   return (
     <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopIndex'>{t(111)}</div>
       <Row className='adartsShopIndexSearchBox'>
-        <Col span='4' className='selectBox'>
+        {/* <Col span='4' className='selectBox'>
           <Select defaultValue="lucy" onChange={handleChange}>
             <Option value="jack">Jack</Option>
             <Option value="lucy">Lucy</Option>
             <Option value="Yiminghe">yiminghe</Option>
           </Select>
-        </Col>
-        <Col span='19' offset='1'>
+        </Col> */}
+        <Col span='24'>
           <Search placeholder="input search text" onSearch={onSearch} allowClear />
         </Col>
       </Row>
       <Row className='RowBox adartsShopIndexBox'>
-        <Col span='11'>
+        <Col span='24'>
           <div className='adartsShopIndexTitleBox'>
             <div>{t(10)}</div>
             <div>MORE<RightOutlined /></div>
@@ -258,13 +178,13 @@ const AdartsShopIndex = () => {
               return (
                 <div className='AllRightBox' key={item.shopId} onClick={(item) => handleShopClick(item.shopId)}>
                   <div className='AllImgBox'>
-                    <img src={item.shopImg} alt="" />
+                    <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
                   </div>
                   <div className='AllImgContent'>
                     <div>
                       <div className='shopBox'>
-                        <div className='shopIconBox'>
-                          <img src={item.icon} alt="" />
+                        <div className='countryIconPosition'>
+                          <div style={{ backgroundPosition: setCountryIconPosition(item.countryCode) }} />
                         </div>
                         <div style={{ color: 'red', fontWeight: 'bold' }}> {item.shopName}</div>
                       </div>
@@ -278,11 +198,16 @@ const AdartsShopIndex = () => {
                       })}
                       </div>
                       <div className='iconImg'>
-                        {item.machineList && item.machineList.map((icon, jndex) => {
-                          return (
-                            <img src={icon.img} alt="" key={jndex} />
-                          )
-                        })}
+                        {item.machineList.length ?
+                          item.machineList.some(i => i.machineType === 'A1') ?
+                            <div className='iconImg'>
+                              <img src={A1} alt="" />
+                            </div> :
+                            <div className='iconImg'>
+                              <img src={W1} alt="" />
+                            </div>
+                          : null
+                        }
                       </div>
                     </div>
                   </div>
@@ -291,7 +216,7 @@ const AdartsShopIndex = () => {
             })}
           </div>
         </Col>
-        <Col span='11' offset='1'>
+        {/* <Col span='11' offset='1'>
           <div className='adartsShopIndexTitleBox'>
             <div>{t(13)}</div>
             <div>MORE<RightOutlined /></div>
@@ -317,7 +242,7 @@ const AdartsShopIndex = () => {
               )
             })}
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   )
