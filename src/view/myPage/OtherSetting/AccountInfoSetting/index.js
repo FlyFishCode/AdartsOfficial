@@ -189,7 +189,7 @@ const AccountInfoSetting = () => {
             {countryList.map(i => <Option key={i.countryId} value={i.countryId}>{i.countryName}</Option>)}
           </Select>
         </Col>
-        <Col span='5' offset='1' className='selectBox'>
+        {/* <Col span='5' offset='1' className='selectBox'>
           <Select
             showSearch
             placeholder="Select language"
@@ -204,7 +204,7 @@ const AccountInfoSetting = () => {
             <Option value="lucy">Lucy</Option>
             <Option value="tom">Tom</Option>
           </Select>
-        </Col>
+        </Col> */}
       </Row>
       <Row className='rowBox'>
         <Col span='4' className='AccountInfoLabel'>{t(34)}</Col>
@@ -293,7 +293,7 @@ const AccountInfoSetting = () => {
         <Col span='4' offset='1'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
         <Col span='4'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
       </Row>
-      <Row type="flex" justify="center">
+      <Row type="flex" justify="center" style={{ marginBottom: "10px" }}>
         <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
           <Radio value={1}>{t(51)}</Radio>
           <Radio value={0}>{t(52)}</Radio>

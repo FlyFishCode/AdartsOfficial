@@ -1,3 +1,8 @@
+.root {
+    width: 100%;
+    height: 100%;
+}
+
 .headBox {
     height: 65px;
     line-height: 65px;
@@ -31,7 +36,6 @@
 .loginInfoBox {
     display: flex;
     align-items: center;
-    margin-top: 20px;
 }
 
 .loginOut {
@@ -128,7 +132,7 @@
 .containerBox {
     width: 1200px;
     margin: 0 auto;
-    min-height: 1000px;
+    min-height: 800px;
 }
 
 .contentStyle {
@@ -944,6 +948,9 @@
 .dartsContent div:nth-child(2) {
     font-size: 20px;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dartsContent div:nth-child(3) {

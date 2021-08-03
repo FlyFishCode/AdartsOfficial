@@ -67,7 +67,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff',marginLeft:"10px",opacity:"0.5" }}
       >
         <LeftCircleOutlined />
       </div>
@@ -79,7 +79,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '30px', color: '#fff' }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff',marginRight:"10px",opacity:"0.5"  }}
       >
         <RightCircleOutlined />
       </div>

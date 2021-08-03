@@ -3,6 +3,8 @@ import { Row, Col, Select, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { newShopListHttp, countryListHttp } from '@/api';
 import { setCountryIconPosition } from '@/common/Utlis';
+import { useHistory } from 'react-router-dom';
+
 import NoData from '@/common/components/noData';
 import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';
@@ -11,6 +13,7 @@ import shopImg from '@/assets/img/shop.png';
 const { Option } = Select;
 const AdartsShopNew = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [total, setTotal] = useState(1);
   const [pageNum, setPageNum] = useState(1);
   const [countryId, setCountryId] = useState();
@@ -33,6 +36,12 @@ const AdartsShopNew = () => {
         setNewShopList(res.data.data.list)
         setTotal(res.data.data.total)
       }
+    })
+  }
+  const handleShopClick = (id) => {
+    history.push({
+      pathname: '/AdartsShop/ShopInfo',
+      state: { id }
     })
   }
   useEffect(() => {
@@ -61,7 +70,7 @@ const AdartsShopNew = () => {
       <div className='adartsShopIndex'>
         {newShopList.length ? newShopList.map(item => {
           return (
-            <div className='AllRightBox' key={item.shopId}>
+            <div className='AllRightBox' key={item.shopId} onClick={() => handleShopClick(item.shopId)}>
               <div className='AllImgBox'>
                 <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
               </div>

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Input, message } from 'antd';
 import useDeleteBox from '@/common/components/deleteBox.js';
 
-import { adartsCardListHttp, adartsCardDeleteHttp, adartsBindHttp } from '@/api';
+import { adartsCardListHttp, adartsCardDeleteHttp, adartsBindHttp, adartsMainCardHttp } from '@/api';
 
 import adartsCard from '@/assets/img/adartsCard.png';
 import A from '@/assets/img/Adarts.png';
@@ -37,8 +37,13 @@ const AdartsCardSetting = () => {
   //   document.body.removeChild(selectDom);
   //   message.info(t(125));
   // }
-  const handleSetMainCard = (value) => {
-    console.log(value);
+  const handleSetMainCard = (cardId) => {
+    adartsMainCardHttp({ cardId, memberId }).then(res => {
+      if (res.data.code === 100) {
+        message.info(res.data.msg)
+        getCardList()
+      }
+    })
   }
   const handleAddCrad = () => {
     adartsBindHttp({ cardNo, memberId }).then(res => {
@@ -88,7 +93,7 @@ const AdartsCardSetting = () => {
               </div>
             </div>
             <div className='AdartsCardBtnBox'>
-              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardNo)}>{t(144)}</Button> : null}
+              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardId)}>{t(144)}</Button> : null}
               {/* <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button> */}
               {!i.isMainCard ? <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button> : null}
             </div>

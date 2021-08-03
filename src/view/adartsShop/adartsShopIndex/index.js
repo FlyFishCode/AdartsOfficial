@@ -176,7 +176,7 @@ const AdartsShopIndex = () => {
           <div className='adartsShopIndex'>
             {newShop.map(item => {
               return (
-                <div className='AllRightBox' key={item.shopId} onClick={(item) => handleShopClick(item.shopId)}>
+                <div className='AllRightBox' key={item.shopId} onClick={() => handleShopClick(item.shopId)}>
                   <div className='AllImgBox'>
                     <img src={item.shopImg ? item.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" />
                   </div>

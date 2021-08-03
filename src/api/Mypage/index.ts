@@ -29,7 +29,9 @@ const adartsCardList = 'websitsMember/cardList';
 // 绑定卡
 const adartsBind = 'websitsMember/cardBundling';
 // 删除卡
-const adartsCardDelete = 'websitsMember/cardUnbundling'
+const adartsCardDelete = 'websitsMember/cardUnbundling';
+// 设置主卡
+const adartsMainCard = 'websitsMember/masterCard';
 
 
 export {
@@ -43,5 +45,6 @@ export {
   accountInfoUpdate,
   adartsCardList,
   adartsCardDelete,
-  adartsBind
+  adartsBind,
+  adartsMainCard
 }

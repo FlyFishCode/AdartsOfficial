@@ -1,107 +1,107 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
-// import { countryListHttp } from '@/api'
+import { PhoneOutlined } from '@ant-design/icons';
+import { shopInfoHttp } from '@/api'
+import shopImg from '@/assets/img/shop.png'
 
-import a from '@/assets/img/a.jpg'
 
 
 const AdartsShopInfo = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  console.log(location.state);
-  const [shopInfo, setShopInfo] = useState({});
-  const getShopList = () => {
-    setShopInfo(
-      {
-        id: 1,
-        img: a,
-        A1: 10,
-        W1: 8,
-        shopName: '11111111111111',
-        shopPhone: 'External Resources',
-        shopAddress: '杨皓然杨倩夺得中国第9金！ 奥运会10米气步枪混合团体决赛中，中国选手杨皓然/杨倩夺得冠军！弓摧南山虎，手接太行猱！#2020东京奥运会#'
-      })
+  const [shopInfo, setShopInfo] = useState({ machineList: [] });
+  const getShopList = (shopId) => {
+    shopInfoHttp({ shopId }).then(res => {
+      if (res.data.code === 100) {
+        setShopInfo(res.data.data)
+      }
+    })
   }
   useEffect(() => {
-    getShopList();
+    getShopList(location?.state?.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [location])
   return (
     <div className='shopInfoBox'>
       <Row>
         <Col span='3'>
-          <div className='shopInfoImgBox'><img src={shopInfo.img} alt="" /></div>
+          <div className='shopInfoImgBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
-        <Col span='10' className='shopInfoContent'>
+        <Col span='12' className='shopInfoContent'>
           <div>{shopInfo.shopName}</div>
           <div>
             <div></div>
-            <div>{`${t(145)}：${shopInfo.A1}`}</div>
-            <div>{`${t(146)}：${shopInfo.W1}`}</div>
+            {shopInfo.machineList[0] ?
+              <div>{`${shopInfo.machineList[0].machineType}：${shopInfo.machineList[0].machineNum} `}</div> :
+              <div>{`${t(145)}：0`}</div>
+            }
+            {shopInfo.machineList[1] ?
+              <div>{`${shopInfo.machineList[1].machineType}：${shopInfo.machineList[1].machineNum} `}</div> :
+              <div>{`${t(146)}：0`}</div>
+            }
           </div>
         </Col>
-        <Col span='6' offset='1'>
+        <Col span='5' >
           <div className='shopInfoPhoneBox'><PhoneOutlined />{shopInfo.shopPhone}</div>
         </Col>
-        <Col span='4' style={{ textAlign: 'center' }}> <Button icon={<EnvironmentOutlined />} type="primary" >{t(147)}</Button></Col>
+        {/* <Col span='4' style={{ textAlign: 'center' }}> <Button icon={<EnvironmentOutlined />} type="primary" >{t(147)}</Button></Col> */}
       </Row>
       {/* <Row className='RowBox shopInfoTitle'>{t(148)}</Row> */}
       <Row>
         <Col span='6'>
-          <div className='shopInfoOtherBox'><img src={shopInfo.img} alt="" /></div>
+          <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
         <Col span='18' className='shopInfoOther'>
           <div>{'来自店铺的信息'}</div>
           <div>
-            <div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
-            <div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
-            <div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+            <div>--------------------</div>
+            <div>--------------------</div>
+            <div>--------------------</div>
           </div>
         </Col>
       </Row>
       <Row className='RowBox'>
         <Col span='6'>
-          <div className='shopInfoOtherBox'><img src={shopInfo.img} alt="" /></div>
+          <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
         <Col span='18' className='shopInfoLabelBox'>
           <div>
             <div className='shopInfoLabel'>{t(149)}</div>
-            <div>{shopInfo.shopAddress}</div>
+            <div>{shopInfo.openingTime}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(150)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{shopInfo.offTime || '-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(151)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>TEL</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(152)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(153)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(154)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(155)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{'-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(156)}</div>
-            <div>{shopInfo.shopPhone}</div>
+            <div>{shopInfo.url || '-'}</div>
           </div>
         </Col>
       </Row>

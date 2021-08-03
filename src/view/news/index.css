@@ -86,10 +86,10 @@
 
 .dartsInfoBox {
     padding: 10px;
+    text-align: center;
 }
 
 .dartsInfoBox div:nth-child(1) {
     font-size: 30px;
     font-weight: bold;
-    text-align: center;
 }

@@ -102,7 +102,7 @@ const AdartsShopSearch = () => {
           )
         })}
       </div>
-      <Row justify="center"><Pagination total={total} showSizeChanger={false} onChange={(value) => setPageNum(value)} /></Row>
+      <Row justify="center"><Pagination total={total} pageSize='5' showSizeChanger={false} onChange={(value) => setPageNum(value)} /></Row>
     </div>
   )
 }

@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AndroidOutlined } from '@ant-design/icons';
+import { PaperClipOutlined } from '@ant-design/icons';
+import { createFromIconfontCN } from '@ant-design/icons';
 import { playerInfoHttp } from '@/api';
 
 import NoData from '@/common/components/noData.js'
+
+const MyIcon = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1994758_cbx0r9x7c16.js',
+});
 
 const PlayerInfo = () => {
   const parmas = useLocation();
@@ -30,9 +35,9 @@ const PlayerInfo = () => {
     <div className='containerBox'>
       <div className='playerName'>
         {playerInfo.name}
-        {playerInfo.facebookLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.facebookLink)}><AndroidOutlined /></div> : null}
-        {playerInfo.twitterLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.twitterLink)}><AndroidOutlined /></div> : null}
-        {playerInfo.otherLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.otherLink)}><AndroidOutlined /></div> : null}
+        {playerInfo.facebookLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.facebookLink)}><MyIcon type="el-icon-icon-facebook" /></div> : null}
+        {playerInfo.twitterLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.twitterLink)}><MyIcon type="el-icon-hoveraax" /></div> : null}
+        {playerInfo.otherLink ? <div className='playerIconBox' onClick={() => handleIconClick(playerInfo.otherLink)}><PaperClipOutlined /></div> : null}
       </div>
       <div className='playerImgBox'>{JSON.parse(playerInfo.picture).map(i => {
         return (

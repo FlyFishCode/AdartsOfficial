@@ -3,26 +3,26 @@ import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined } from '@ant-design/icons';
 import { Menu, message } from 'antd';
 import { useTranslation } from 'react-i18next';
-import logo from '@/assets/img/logo.png'
-import LoginBtn from './LoginBtn'
-const { SubMenu } = Menu;
+import logo from '@/assets/img/logo.png';
+import LoginBtn from './LoginBtn';
 
+const { SubMenu } = Menu;
 
 const Head = (prop) => {
   const { userName, loginOut } = prop;
   const history = useHistory();
   const { t } = useTranslation();
   const handleLoginOut = () => {
-    history.push('/')
-    loginOut()
+    history.push('/');
+    loginOut();
   }
   const handlePushClick = (value) => {
     const userId = sessionStorage.getItem('websiteMemberId')
     if (userId) {
-      history.push(value)
+      history.push(value);
     } else {
       message.info(t(130));
-      history.push('login')
+      history.push('login');
     }
   }
   return (
@@ -53,13 +53,13 @@ const Head = (prop) => {
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="/MatchRanking" disabled>
-              <Link to='/MatchRanking'>比赛排名</Link>
+              <Link to='/MatchRanking'>{t(157)}</Link>
             </Menu.Item>
             <Menu.Item key="/ShopPrps" disabled>
-              <Link to='/ShopPrps'>道具商店</Link>
+              <Link to='/ShopPrps'>{t(158)}</Link>
             </Menu.Item>
             <Menu.Item key="/Darts">
-              <Link to='/Darts'>飞镖专栏</Link>
+              <Link to='/Darts'>{t(159)}</Link>
             </Menu.Item>
             <Menu.Item key="/Players">
               <Link to='/Players'>{t(139)}</Link>

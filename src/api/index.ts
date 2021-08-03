@@ -18,11 +18,12 @@ import {
 	accountInfoUpdate,
 	adartsCardList,
 	adartsCardDelete,
-	adartsBind
+	adartsBind,
+	adartsMainCard
 } from './mypage';
 
 // adarts店铺
-import { newShopList } from './adartsShop'
+import { newShopList,shopInfo } from './adartsShop'
 // 选手
 import { playerList,playerInfo } from './player';
 // 飞镖
@@ -145,10 +146,18 @@ const adartsBindHttp = (data:any) =>{
 const adartsCardDeleteHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${adartsCardDelete}`, qs.stringify(data));
 }
+// adarts 设置主卡
+const adartsMainCardHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${adartsMainCard}`, qs.stringify(data));
+}
 
 // adarts店铺
 const newShopListHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${newShopList}`, qs.stringify(data));
+}
+// 店铺详情
+const shopInfoHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopInfo}`, qs.stringify(data));
 }
 
 // 选手列表
@@ -243,5 +252,7 @@ export {
 		playerListHttp,
 		playerInfoHttp,
 		dartsListHttp,
-		dartsInfoHttp
+		dartsInfoHttp,
+		adartsMainCardHttp,
+		shopInfoHttp
 }

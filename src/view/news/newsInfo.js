@@ -41,7 +41,7 @@ const NewsInfo = () => {
         <div>[{getType(newsInfo.type)}]</div>
         <div>{newsInfo.title}</div>
       </div>
-      <div>{newsInfo.date}</div>
+      <div style={{ textAlign: 'center' }}>{newsInfo.date}</div>
       <div className='dartsContent'></div>
     </div>
   )
