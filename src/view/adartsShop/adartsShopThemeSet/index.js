@@ -104,7 +104,7 @@ const AdartsShopThemeSet = () => {
                 </Col>
                 <Col span='1' offset='1' className='tips'>
                     <div>
-                        <Tooltip title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">
+                        <Tooltip title="tips">
                             <QuestionOutlined />
                         </Tooltip>
                     </div>

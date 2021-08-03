@@ -34,7 +34,7 @@ const DartsList = () => {
     getData(inputValue, pageNum)
   }, [inputValue, pageNum])
   return (
-    <div className='dartsList containerBox'>
+    <div className='dartsList'>
       <Row className='RowBox'>
         <Col span='24'>
           <Input.Search style={{ width: '100%' }} onSearch={(value) => setInputValue(value)} allowClear />

@@ -54,7 +54,7 @@ const AdartsShopInfo = () => {
           <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
         <Col span='18' className='shopInfoOther'>
-          <div>{'来自店铺的信息'}</div>
+          <div>{t(160)}</div>
           <div>
             <div>--------------------</div>
             <div>--------------------</div>
@@ -77,7 +77,7 @@ const AdartsShopInfo = () => {
           </div>
           <div>
             <div className='shopInfoLabel'>{t(151)}</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.shopAddress || '-'}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>TEL</div>

@@ -12,6 +12,7 @@ const Content = () => {
   const getData = () => {
     const obj = {
       countryId: 208,
+      type: 1,
       pageNum: 1,
       pageSize: 8,
     }
@@ -67,7 +68,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '26px', color: '#fff',marginLeft:"10px",opacity:"0.5" }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px", opacity: "0.5" }}
       >
         <LeftCircleOutlined />
       </div>
@@ -79,7 +80,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '26px', color: '#fff',marginRight:"10px",opacity:"0.5"  }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px", opacity: "0.5" }}
       >
         <RightCircleOutlined />
       </div>
@@ -93,7 +94,12 @@ const Darts = () => {
     nextArrow: <NextIcon />
   }
   const getData = () => {
-    indexBannerListHttp({ countryId: 208 }).then(res => {
+    const obj = {
+      countryId: 208,
+      status: 1,
+      type: 1
+    }
+    indexBannerListHttp(obj).then(res => {
       setBannerList(res.data.data)
     });
   }
