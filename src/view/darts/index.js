@@ -48,7 +48,7 @@ const Content = () => {
           return (
             <div key={i.id} className='dartsContent' onClick={() => handleClick(i.id)}>
               <div><img src={i.thumbnail} alt="" /></div>
-              <div>{i.title}</div>
+              <div title={i.title}>{i.title}</div>
               <div>{`${i.author}    ${i.cdateInt}`}</div>
               {render(i.contents)}
             </div>

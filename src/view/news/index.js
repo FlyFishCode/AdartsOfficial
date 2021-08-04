@@ -123,23 +123,25 @@ const NewsPage = () => {
     getNewsList(type, inputValue, pageNum)
   }, [type, inputValue, pageNum])
   return (
-    <Row className='NewsBox containerBox'>
-      {/* <Col span='4' className='linkBox' onClick={handleClick}>
-        <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/News' >11111</div>
-        <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/News/NewsInfo'>22222</div>
-      </Col> */}
-      {/* <Col span='19' offset='1'> */}
-      <Col span='24'>
-        <Switch>
-          <Route path='/News' exact>
-            <NewsList />
-          </Route>
-          <Route path='/News/NewsInfo'>
-            <NewsInfo />
-          </Route>
-        </Switch>
-      </Col>
-    </Row>
+    <div className="boxContent containerBox">  
+      <Row className='NewsBox'>
+        {/* <Col span='4' className='linkBox' onClick={handleClick}>
+          <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/News' >11111</div>
+          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/News/NewsInfo'>22222</div>
+        </Col> */}
+        {/* <Col span='19' offset='1'> */}
+        <Col span='24'>
+          <Switch>
+            <Route path='/News' exact>
+              <NewsList />
+            </Route>
+            <Route path='/News/NewsInfo'>
+              <NewsInfo />
+            </Route>
+          </Switch>
+        </Col>
+      </Row>
+    </div>
   )
 }
 export default NewsPage;

@@ -71,12 +71,10 @@
 
 .newsInfoTitle {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     font-size: 25px;
-}
-
-.dartsContent {
-    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 .newsInfoTitle div:nth-child(1) {

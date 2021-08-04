@@ -1,8 +1,3 @@
-.root {
-    width: 100%;
-    height: 100%;
-}
-
 .headBox {
     height: 65px;
     line-height: 65px;
@@ -23,10 +18,10 @@
 }
 
 .logoBox {
-    height: 35px;
+    height: 45px;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .logoBox img {
@@ -351,6 +346,32 @@
     margin-right: 10px;
     font-size: 25px;
     font-weight: bold;
+}
+
+.boxContent {
+    padding-top: 5px;
+    width: 100%;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: center;
+}
+
+.NewsBox {
+    width: 1000px;
+    background: #ffffff;
+}
+
+.PlayInfoBox {
+    width: 1200px;
+    background: #ffffff;
+    padding-right: 20px;
+}
+
+.playerDes {
+    margin-top: 5px;
+    padding: 20px;
+    width: 1200px;
+    background: #ffffff;
 }
 
 .playerDesBox {
@@ -696,6 +717,7 @@
     flex-direction: column;
     justify-content: space-around;
     flex: 3;
+    z-index: 1;
 }
 
 .userCardImg {
@@ -736,7 +758,6 @@
     position: absolute;
     left: 0px;
     top: 0px;
-    z-index: -1;
 }
 
 .cardStyleBox img {
@@ -865,6 +886,11 @@
     scroll-behavior: smooth;
 } */
 
+.myPage {
+    width: 1200px;
+    background: #ffffff;
+}
+
 .myPageTitle {
     font-size: 18px;
     padding: 10px;
@@ -889,8 +915,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 2px;
-    color: #222222;
     font-size: 12px;
 }
 

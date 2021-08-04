@@ -32,33 +32,35 @@ const AdartsShop = () => {
     }
   }, [Location])
   return (
-    <Row className='NewsBox containerBox'>
-      <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
-        <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/AdartsShop' >{t(111)}</div>
-        <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/AdartsShop/ShopSearch'>{t(112)}</div>
-        {/* <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/AdartsShop/ShopTheme'>{t(113)}</div> */}
-        <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/AdartsShop/NewShop'>{t(10)}</div>
-      </Col>
-      <Col span='19' offset='1'>
-        <Switch>
-          <Route path='/AdartsShop' exact>
-            <AdartsShopIndex />
-          </Route>
-          <Route path='/AdartsShop/ShopSearch'>
-            <AdartsShopSearch />
-          </Route>
-          <Route path='/AdartsShop/ShopTheme'>
-            <AdartsShopThemeSet />
-          </Route>
-          <Route path='/AdartsShop/NewShop'>
-            <AdartsShopNew />
-          </Route>
-          <Route path='/AdartsShop/ShopInfo'>
-            <AdartsShopInfo />
-          </Route>
-        </Switch>
-      </Col>
-    </Row>
+    <div className="boxContent containerBox">
+        <Row className='PlayInfoBox'>
+          <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
+            <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/AdartsShop' >{t(111)}</div>
+            <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/AdartsShop/ShopSearch'>{t(112)}</div>
+            {/* <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/AdartsShop/ShopTheme'>{t(113)}</div> */}
+            <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/AdartsShop/NewShop'>{t(10)}</div>
+          </Col>
+          <Col span='19' offset='1'>
+            <Switch>
+              <Route path='/AdartsShop' exact>
+                <AdartsShopIndex />
+              </Route>
+              <Route path='/AdartsShop/ShopSearch'>
+                <AdartsShopSearch />
+              </Route>
+              <Route path='/AdartsShop/ShopTheme'>
+                <AdartsShopThemeSet />
+              </Route>
+              <Route path='/AdartsShop/NewShop'>
+                <AdartsShopNew />
+              </Route>
+              <Route path='/AdartsShop/ShopInfo'>
+                <AdartsShopInfo />
+              </Route>
+            </Switch>
+          </Col>
+        </Row>
+    </div>
     // <Row id='myPage'>
     //   <Col span={4} offset={1}>
     //     <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={handleClick}>

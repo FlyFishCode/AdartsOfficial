@@ -44,7 +44,7 @@ const AdartsShopInfo = () => {
           </div>
         </Col>
         <Col span='5' >
-          <div className='shopInfoPhoneBox'><PhoneOutlined />{shopInfo.shopPhone}</div>
+          {shopInfo.shopPhone ? <div className='shopInfoPhoneBox'><PhoneOutlined />{shopInfo.shopPhone}</div> : null}
         </Col>
         {/* <Col span='4' style={{ textAlign: 'center' }}> <Button icon={<EnvironmentOutlined />} type="primary" >{t(147)}</Button></Col> */}
       </Row>

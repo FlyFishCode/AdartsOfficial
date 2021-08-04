@@ -36,12 +36,13 @@ const NewsInfo = () => {
     getNewsInfo(location.state.id)
   }, [location])
   return (
-    <div>
+    <div style={{ paddingLeft: "40px" }}>
       <div className='newsInfoTitle'>
         <div>[{getType(newsInfo.type)}]</div>
         <div>{newsInfo.title}</div>
       </div>
-      <div style={{ textAlign: 'center' }}>{newsInfo.date}</div>
+      <div style={{ textAlign: 'left', marginTop: "10px" }}>{newsInfo.date}</div>
+      <hr color="#eee" style={{ border: "none", height: "0.5px", marginRight: "20px" }} />
       <div className='dartsContent'></div>
     </div>
   )

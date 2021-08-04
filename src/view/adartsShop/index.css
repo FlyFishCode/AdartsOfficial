@@ -171,7 +171,8 @@
 }
 
 .shopInfoOtherBox {
-    height: 200px;
+    height: 180px;
+    margin-right: 10px;
 }
 
 .shopInfoOtherBox img {
