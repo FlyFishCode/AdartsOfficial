@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
+import { HashRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { Carousel } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
@@ -47,7 +47,7 @@ const App = () => {
         }
     }, [currentUserName])
     return (
-        <BrowserRouter >
+        <HashRouter >
             {/* <div className='containerBox'> */}
             <Head userName={userName} loginOut={handleUserName} />
             <Switch>
@@ -96,7 +96,7 @@ const App = () => {
             </Switch>
             <Footer />
             {/* </div> */}
-        </BrowserRouter >
+        </HashRouter >
     );
 }
 

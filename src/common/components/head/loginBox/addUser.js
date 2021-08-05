@@ -100,7 +100,8 @@ const AddUser = () => {
                 data.phone = data.inputValue;
                 data.phoneCode = code
             }
-            delete data.inputValue
+            delete data.inputValue;
+            delete data.confirmPassword;
             indexRegisterHttp(data).then(res => {
                 if (res.data.code === 100) {
                     message.info(res.data.msg)
@@ -119,7 +120,7 @@ const AddUser = () => {
             }, 1000);
         } else {
             setBtnDisabled(false)
-            setCountDown(5)
+            setCountDown(59)
         }
         return () => clearTimeout(time)
     }, [btnDisabled, countDown])
@@ -199,6 +200,7 @@ const AddUser = () => {
                 </Form.Item>
                 <Form.Item
                     label={t(37)}
+                    name="confirmPassword"
                     dependencies={['password']}
                     rules={[
                         {
