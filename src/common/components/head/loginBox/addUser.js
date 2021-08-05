@@ -153,7 +153,7 @@ const AddUser = () => {
                 </Col>
             </Row>
             <Row>
-                <Col span='4' className='registerTitle'>{t(33)}</Col>
+                <Col span='10' className='registerTitle'>{t(33)}</Col>
             </Row>
             <Form
                 {...layout}
@@ -247,7 +247,7 @@ const AddUser = () => {
                     <Input addonBefore={
                         <>
                             <Form.Item noStyle>
-                                <Select defaultValue='phone' style={{ width: 100 }} onChange={(value) => handleTypeChange(value)}>
+                                <Select defaultValue='phone' style={{ width: 200 }} onChange={(value) => handleTypeChange(value)}>
                                     <Option value="phone">{t(48)}</Option>
                                     <Option value="email">{t(39)}</Option>
                                 </Select>
@@ -262,7 +262,7 @@ const AddUser = () => {
                     } style={{ width: '100%' }} />
                 </Form.Item>
                 <Form.Item colon={false} label=" " style={{ marginBottom: 0 }}>
-                    <Form.Item style={{ display: 'inline-block', width: 100 }}>
+                    <Form.Item style={{ display: 'inline-block', width: 200 }}>
                         <Button type="primary" disabled={btnDisabled} onClick={sendCode}>{btnDisabled ? `${t(133)}${countDown}` : t(59)}</Button>
                     </Form.Item>
                     <Form.Item style={{ display: 'inline-block', width: 200, margin: '0 8px' }} >
@@ -277,7 +277,7 @@ const AddUser = () => {
                 </Form.Item>
             </Form>
             <Row>
-                <Col span='4' className='registerTitle'>{t(43)}</Col>
+                <Col span='10' className='registerTitle'>{t(43)}</Col>
             </Row>
             <div className='tipsBox'>
                 <div>{t(49)}</div>
@@ -290,15 +290,15 @@ const AddUser = () => {
                 </Col>
             </Row>
             <Row className='registerRow'>
-                <Col span='4' className='registerLabel'>{t(45)}</Col>
-                <Col span='8' className='radioBox'>
+                <Col span='2' className='registerLabel'>{t(45)}</Col>
+                <Col span='10' className='radioBox'>
                     <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender}>
                         <Radio value={1}>{t(53)}</Radio>
                         <Radio value={0}>{t(54)}</Radio>
                     </Radio.Group>
                 </Col>
-                <Col span='4' className='registerLabel'>{t(46)}</Col>
-                <Col span='8' className='radioBox'>
+                <Col span='2' className='registerLabel'>{t(46)}</Col>
+                <Col span='10' className='radioBox'>
                     <Radio.Group onChange={(e) => setAcceptSMS(e.target.value)} value={acceptSMS}>
                         <Radio value={1}>{t(51)}</Radio>
                         <Radio value={0}>{t(52)}</Radio>
