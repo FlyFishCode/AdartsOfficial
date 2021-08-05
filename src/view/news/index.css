@@ -85,6 +85,7 @@
 .dartsInfoBox {
     padding: 10px;
     text-align: center;
+    background: #fff;
 }
 
 .dartsInfoBox div:nth-child(1) {

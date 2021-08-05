@@ -1,0 +1,7 @@
+.dartsInfoTitle {
+    display: flex;
+    justify-content: left;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+}

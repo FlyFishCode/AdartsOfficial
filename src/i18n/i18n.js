@@ -20,7 +20,7 @@ i18n
     .use(initReactI18next)
     .init({
         fallbackLng: 'zh',
-        lng: 'zh',
+        lng: 'en',
         debug: true,
         resources: Language,
         interpolation: {

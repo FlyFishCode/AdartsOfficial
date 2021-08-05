@@ -51,7 +51,7 @@ const App = () => {
             {/* <div className='containerBox'> */}
             <Head userName={userName} loginOut={handleUserName} />
             <Switch>
-                <Route path='/' exact>
+                <Route path='/adartsoffice' exact>
                     <Container userName={userName} />
                 </Route>
                 <Route path='/News'>
@@ -89,6 +89,9 @@ const App = () => {
                 </Route>
                 <Route path='/AddUser'>
                     <AddUser />
+                </Route>
+                <Route path="*">
+                    <Container userName={userName} />
                 </Route>
             </Switch>
             <Footer />
@@ -128,7 +131,7 @@ const Banner = () => {
             <div
                 className={className}
                 onClick={onClick}
-                style={{ ...style, display: "block", fontSize: '26px', color: '#fff' ,marginLeft:"10px",opacity:"0.5"}}
+                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px", opacity: "0.5" }}
             >
                 <LeftCircleOutlined />
             </div>
@@ -140,7 +143,7 @@ const Banner = () => {
             <div
                 className={className}
                 onClick={onClick}
-                style={{ ...style, display: "block", fontSize: '26px', color: '#fff',marginRight:"10px",opacity:"0.5" }}
+                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px", opacity: "0.5" }}
             >
                 <RightCircleOutlined />
             </div>

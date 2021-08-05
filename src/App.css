@@ -127,7 +127,7 @@
 .containerBox {
     width: 1200px;
     margin: 0 auto;
-    min-height: 800px;
+    height: 100%;
 }
 
 .contentStyle {
@@ -958,10 +958,10 @@
 
 .dartsContent {
     padding: 10px;
-    background: #fff;
     margin: 5px;
     flex: 0 0 24%;
     cursor: pointer;
+    background: #fff;
 }
 
 .dartsContent div:nth-child(1) img {

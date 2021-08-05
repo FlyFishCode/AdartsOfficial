@@ -29,7 +29,7 @@ const LoginBox = (props) => {
                 sessionStorage.setItem('websiteUserName', data.username)
                 sessionStorage.setItem('websiteMemberId', data.memberId)
                 sessionStorage.setItem('websiteToken', data.token)
-                history.push('/')
+                history.push('/adartsoffice')
             } else {
                 message.warning(res.data.msg)
             }

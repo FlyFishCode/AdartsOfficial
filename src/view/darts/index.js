@@ -5,6 +5,7 @@ import { indexBannerListHttp, dartsListHttp } from '@/api';
 import { PlusCircleOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import DartsList from './dartsList'
 
+import './index.css';
 
 const Content = () => {
   const history = useHistory();
@@ -49,7 +50,7 @@ const Content = () => {
             <div key={i.id} className='dartsContent' onClick={() => handleClick(i.id)}>
               <div><img src={i.thumbnail} alt="" /></div>
               <div title={i.title}>{i.title}</div>
-              <div>{`${i.author}    ${i.cdateInt}`}</div>
+              <div>{i.cdateInt}</div>
               {render(i.contents)}
             </div>
           )
@@ -110,33 +111,26 @@ const Darts = () => {
     getData();
   }, [])
   return (
-    <div className='containerBox'>
-      <Carousel {...setting}>
-        {bannerList.map((item, index) => {
-          return (
-            <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
-              <img src={item.image} alt="" />
-            </div>
-          )
-        })}
-      </Carousel>
-      {/* <Slider {...settings} className='bannerBox' dotsClass='slick-dots'>
-        {bannerList.map((item, index) => {
-          return (
-            <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
-              <img src={item.image} alt="" />
-            </div>
-          )
-        })}
-      </Slider> */}
-      <Switch>
-        <Route path='/Darts' exact>
-          <Content />
-        </Route>
-        <Route path='/Darts/DartsList'>
-          <DartsList />
-        </Route>
-      </Switch>
+    <div className="boxContent">
+      <div className='containerBox'>
+        <Carousel {...setting}>
+          {bannerList.map((item, index) => {
+            return (
+              <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
+                <img src={item.image} alt="" />
+              </div>
+            )
+          })}
+        </Carousel>
+        <Switch>
+          <Route path='/Darts' exact>
+            <Content />
+          </Route>
+          <Route path='/Darts/DartsList'>
+            <DartsList />
+          </Route>
+        </Switch>
+      </div>
     </div>
   )
 }

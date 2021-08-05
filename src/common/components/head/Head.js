@@ -13,7 +13,7 @@ const Head = (prop) => {
   const history = useHistory();
   const { t } = useTranslation();
   const handleLoginOut = () => {
-    history.push('/');
+    history.push('/adartsoffice');
     loginOut();
   }
   const handlePushClick = (value) => {
@@ -22,7 +22,7 @@ const Head = (prop) => {
       history.push(value);
     } else {
       message.info(t(130));
-      history.push('login');
+      history.push('/login');
     }
   }
   return (
@@ -71,7 +71,7 @@ const Head = (prop) => {
         </Menu>
       </div>
       <div>
-        <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
+        <div className='logoBox' onClick={() => history.push('/adartsoffice')}><img src={logo} alt="logo" /></div>
       </div>
       <div className='loginAndGlobalBox'>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />

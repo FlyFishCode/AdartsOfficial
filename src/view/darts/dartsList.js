@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { EyeOutlined } from '@ant-design/icons';
 import { dartsListHttp } from '@/api';
 
+import './index.css';
 
 const DartsList = () => {
   // const { t } = useTranslation();
