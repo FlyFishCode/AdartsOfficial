@@ -140,7 +140,7 @@
     padding: 10px;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: 20% 35% 10%;
+    grid-template-columns: 15% 30% 20%;
     grid-column-gap: 15%;
 }
 

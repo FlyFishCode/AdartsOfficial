@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Progress } from 'antd'
+import { useState, useEffect } from 'react';
+import { Row, Col, Progress } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { indexUserCardListHttp } from '@/api';
 // import { useTranslation } from 'react-i18next';

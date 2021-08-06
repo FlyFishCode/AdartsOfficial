@@ -10,8 +10,8 @@ const AddUser = () => {
     const [countryId, setCountryId] = useState()
     const [countryList, setCountryList] = useState([])
     const [languageId, setLanguage] = useState('')
-    const [acceptSMS, setAcceptSMS] = useState(0)
-    const [acceptMail, setAcceptMail] = useState(0)
+    // const [acceptSMS, setAcceptSMS] = useState(0)
+    // const [acceptMail, setAcceptMail] = useState(0)
     const [btnDisabled, setBtnDisabled] = useState(false)
     const [countDown, setCountDown] = useState(5)
     const [birth, setBirth] = useState('')
@@ -29,7 +29,6 @@ const AddUser = () => {
         account: null,
         cardNo: null,
         email: null,
-        acceptMail: 0,
         nickname: null,
         password: null,
         confirmPassword: null,
@@ -91,7 +90,7 @@ const AddUser = () => {
     }
     const subitFrom = () => {
         form.validateFields().then(values => {
-            const data = { ...values, gender, acceptSMS, phone, birth, name, countryId, languageId };
+            const data = { ...values, gender, acceptSMS: 1, acceptMail: 1, phone, birth, name, countryId, languageId };
             data.password = MD5(data.password)
             if (type === 'email') {
                 data.email = data.inputValue;
@@ -271,12 +270,12 @@ const AddUser = () => {
                         <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} />
                     </Form.Item>
                 </Form.Item>
-                <Form.Item name='acceptMail' label={t(55)}>
+                {/* <Form.Item name='acceptMail' label={t(55)}>
                     <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
                         <Radio value={1}>{t(51)}</Radio>
                         <Radio value={0}>{t(52)}</Radio>
                     </Radio.Group>
-                </Form.Item>
+                </Form.Item> */}
             </Form>
             <Row>
                 <Col span='10' className='registerTitle'>{t(43)}</Col>
@@ -292,20 +291,20 @@ const AddUser = () => {
                 </Col>
             </Row>
             <Row className='registerRow'>
-                <Col span='2' className='registerLabel'>{t(45)}</Col>
+                <Col span='4' className='registerLabel'>{t(45)}</Col>
                 <Col span='10' className='radioBox'>
                     <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender}>
                         <Radio value={1}>{t(53)}</Radio>
                         <Radio value={0}>{t(54)}</Radio>
                     </Radio.Group>
                 </Col>
-                <Col span='2' className='registerLabel'>{t(46)}</Col>
+                {/* <Col span='2' className='registerLabel'>{t(46)}</Col>
                 <Col span='10' className='radioBox'>
                     <Radio.Group onChange={(e) => setAcceptSMS(e.target.value)} value={acceptSMS}>
                         <Radio value={1}>{t(51)}</Radio>
                         <Radio value={0}>{t(52)}</Radio>
                     </Radio.Group>
-                </Col>
+                </Col> */}
             </Row>
             <Row className='registerRow'>
                 <Col span='4' className='registerLabel'>{t(47)}</Col>
@@ -318,7 +317,8 @@ const AddUser = () => {
                         <Col span='8'>
                             <Input value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
                         </Col>
-                    </> : null}
+                    </> : null
+                }
 
             </Row>
             <div className='tipsBox'>

@@ -49,13 +49,13 @@ const AllGameData = () => {
       </div>
       <div className='AllGameDataDefault AllGameDataGameRateBox'>
         <div className='AllGameDataGameRate'>
-          <div>{t(74)}</div>
+          {/* <div>{t(74)}</div> */}
           <div>{t(75)}</div>
           <div>{t(76)}</div>
           <div>{t(77)}</div>
         </div>
         <div className='AllGameDataGameRate'>
-          <div>{`${data.quantity01 || '-'} / ${data.quantity01 || '-'}%`} </div>
+          {/* <div>{`${data.quantity01 || '-'} / ${data.quantity01 || '-'}`} </div> */}
           <div>{`${data.quantity01 || '-'} / ${data.winProbability01 || '-'}%`}</div>
           <div>{`${data.quantityCricket || '-'} / ${data.winProbabilityCricket || '-'}%`}</div>
           <div>{`${data.allQuantity || '-'} / ${data.allWinProbability || '-'}%`}</div>

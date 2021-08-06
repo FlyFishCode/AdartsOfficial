@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Row, Col } from 'antd';
 import { playerListHttp } from '@/api';
+import world from '@/assets/img/world.png';
 
 const PlayerDes = () => {
   const history = useHistory();
@@ -24,7 +25,8 @@ const PlayerDes = () => {
     getPlayerList()
   }, [])
   return (
-    <div className="boxContent containerBox">  
+    <div className="boxContent containerBox">
+      <div><img src={world} alt="" /></div>
       <div className='playerDes'>
         <Row className='playerDesBox' justify="space-around">
           {playerList.map(i => {

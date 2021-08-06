@@ -59,9 +59,6 @@ const AccountInfoSetting = () => {
     setPreviewImage(file.url || file.preview)
     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1))
   };
-  const handleChange = ({ fileList }) => {
-    setFileList(fileList)
-  }
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -74,7 +71,7 @@ const AccountInfoSetting = () => {
     const formData = new FormData();
     formData.append("image", file);
     upLoadImgHttp(formData).then(res => {
-      setFileList([{ url: res.data.data }])
+      setFileList([{ uid: '1', url: res.data.data }])
     })
   }
   const getCardInfo = (memberId) => {
@@ -90,7 +87,7 @@ const AccountInfoSetting = () => {
         setLanguage(data.languageId)
         setNickname(data.nickname)
         setAcceptMail(data.acceptMail)
-        setFileList([{ url: data.portrait }])
+        setFileList([{ uid: new Date().getTime(), url: data.portrait }])
       }
     })
   }
@@ -176,7 +173,7 @@ const AccountInfoSetting = () => {
     <div>
       <div className='myPageTitle' id='AccountInfoSetting'>{t(70)}</div>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(99)}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(99)}</Col>
         <Col span='5' className='selectBox'>
           <Select
             showSearch
@@ -207,28 +204,28 @@ const AccountInfoSetting = () => {
         </Col> */}
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(34)}</Col>
-        <Col span='20'>{cardInfo.account}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(34)}</Col>
+        <Col span='18'>{cardInfo.account}</Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(44)}</Col>
-        <Col span='20'>{cardInfo.name}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(44)}</Col>
+        <Col span='18'>{cardInfo.name}</Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(45)}</Col>
-        <Col span='20'>{cardInfo.gender ? t(53) : t(54)}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(45)}</Col>
+        <Col span='18'>{cardInfo.gender ? t(53) : t(54)}</Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(35)}</Col>
-        <Col span='20'>{cardInfo.cardNo}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(35)}</Col>
+        <Col span='18'>{cardInfo.cardNo}</Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(38)}</Col>
-        <Col span='20'><Input placeholder="Basic usage" value={nickname} onChange={(e) => setNickname(e.target.value)} allowClear /></Col>
+        <Col span='6' className='AccountInfoLabel'>{t(38)}</Col>
+        <Col span='18'><Input placeholder="Basic usage" value={nickname} onChange={(e) => setNickname(e.target.value)} allowClear /></Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(23)}</Col>
-        <Col span='20' className='selectBox'>
+        <Col span='6' className='AccountInfoLabel'>{t(23)}</Col>
+        <Col span='18' className='selectBox'>
           <Select
             showSearch
             placeholder="Select a person"
@@ -244,14 +241,13 @@ const AccountInfoSetting = () => {
         </Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(102)}</Col>
-        <Col span='20'>
+        <Col span='6' className='AccountInfoLabel'>{t(102)}</Col>
+        <Col span='18'>
           <Upload
             customRequest={() => handleRequset}
             listType="picture-card"
             fileList={fileList}
             onPreview={handlePreview}
-            onChange={handleChange}
           >
             {fileList.length >= 1 ? null : uploadButton}
           </Upload>
@@ -266,12 +262,12 @@ const AccountInfoSetting = () => {
         </Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(47)}</Col>
-        <Col span='20'>{cardInfo.birth}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(47)}</Col>
+        <Col span='18'>{cardInfo.birth}</Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(48)}</Col>
-        <Col span='10'>
+        <Col span='6' className='AccountInfoLabel'>{t(48)}</Col>
+        <Col span='7'>
           <Input.Group compact>
             <Select defaultValue={phoneCode} style={{ width: '30%' }} onChange={(value) => setPhoneCode(value)} >
               <Option value="+86">+86</Option>
@@ -280,18 +276,18 @@ const AccountInfoSetting = () => {
             <Input style={{ width: '70%' }} value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
           </Input.Group>
         </Col>
-        <Col span='3' offset='1'>
+        <Col span='5'>
           <Button type="primary" onClick={handlePhoneBtnClick} disabled={phoneBtnDisabled}>{phoneBtnDisabled ? phoneCountDown : t(59)}</Button>
         </Col>
-        <Col span='4' offset='1'>
+        <Col span='6'>
           <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear />
         </Col>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(39)}</Col>
-        <Col span='10'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
-        <Col span='4' offset='1'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
-        <Col span='4'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
+        <Col span='6' className='AccountInfoLabel'>{t(39)}</Col>
+        <Col span='7'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
+        <Col span='5'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
+        <Col span='6'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
       </Row>
       <Row type="flex" justify="center" style={{ marginBottom: "10px" }}>
         <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
@@ -300,8 +296,8 @@ const AccountInfoSetting = () => {
         </Radio.Group>
       </Row>
       <Row className='rowBox'>
-        <Col span='4' className='AccountInfoLabel'>{t(100)}</Col>
-        <Col span='20'>{cardInfo.cardBindTime}</Col>
+        <Col span='6' className='AccountInfoLabel'>{t(100)}</Col>
+        <Col span='18'>{cardInfo.cardBindTime}</Col>
       </Row>
       <div className='btnBox'>
         <Button type="primary" onClick={handleOk}>{t(19)}</Button>

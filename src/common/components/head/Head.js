@@ -80,4 +80,4 @@ const Head = (prop) => {
     </div >
   )
 }
-export default Head
+export default Head;

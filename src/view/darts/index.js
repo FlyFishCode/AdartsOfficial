@@ -69,7 +69,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px", opacity: "0.5" }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px" }}
       >
         <LeftCircleOutlined />
       </div>
@@ -81,7 +81,7 @@ const Darts = () => {
       <div
         className={className}
         onClick={onClick}
-        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px", opacity: "0.5" }}
+        style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px" }}
       >
         <RightCircleOutlined />
       </div>
@@ -89,7 +89,13 @@ const Darts = () => {
   }
   const setting = {
     autoplay: true,
+    variableWidth: true,
     arrows: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: 0,
     autoplaySpeed: 2000,
     prevArrow: <PrevIcon />,
     nextArrow: <NextIcon />
@@ -104,24 +110,21 @@ const Darts = () => {
       setBannerList(res.data.data)
     });
   }
-  const handleClick = (id) => {
-    console.log(id)
-  }
   useEffect(() => {
     getData();
   }, [])
   return (
-    <div className="boxContent">
+    <div>
+      <Carousel {...setting}>
+        {bannerList.map((item, index) => {
+          return (
+            <div className='contentStyle' key={index} onClick={() => window.open(item.link)}>
+              <img src={item.image} alt="" />
+            </div>
+          )
+        })}
+      </Carousel>
       <div className='containerBox'>
-        <Carousel {...setting}>
-          {bannerList.map((item, index) => {
-            return (
-              <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
-                <img src={item.image} alt="" />
-              </div>
-            )
-          })}
-        </Carousel>
         <Switch>
           <Route path='/Darts' exact>
             <Content />

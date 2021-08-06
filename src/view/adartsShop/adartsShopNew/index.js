@@ -45,7 +45,9 @@ const AdartsShopNew = () => {
     })
   }
   useEffect(() => {
-    getNewShopList(countryId, pageNum);
+    if (countryId) {
+      getNewShopList(countryId, pageNum);
+    }
   }, [countryId, pageNum])
   useEffect(() => {
     getCountryList();

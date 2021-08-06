@@ -37,7 +37,7 @@ import DartsInfo from './view/darts/dartsInfo.js'
 
 const App = () => {
     const [userName, setUserName] = useState('');
-    const currentUserName = sessionStorage.getItem('websiteUserName')
+    const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
     }
@@ -103,7 +103,7 @@ const App = () => {
 const Container = ({ userName }) => {
     return (
         <div>
-            <Banner />
+            <div><Banner /></div>
             <div className='containerBox'>
                 {userName ? <UserCard /> : ''}
                 <News />
@@ -119,11 +119,8 @@ const Banner = () => {
     let [bannerList, setBannerList] = useState([]);
     const getData = () => {
         indexBannerListHttp({ countryId: 208 }).then(res => {
-            setBannerList(res.data.data)
+            setBannerList(res.data.data);
         })
-    }
-    const handleClick = (id) => {
-        console.log(id)
     }
     const PrevIcon = (props) => {
         const { className, style, onClick } = props;
@@ -151,9 +148,12 @@ const Banner = () => {
     }
     const setting = {
         autoplay: true,
+        variableWidth: true,
         arrows: true,
+        infinite: true,
         centerMode: true,
-        slidesToShow: 3,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         centerPadding: 0,
         autoplaySpeed: 2000,
         prevArrow: <PrevIcon />,
@@ -166,7 +166,7 @@ const Banner = () => {
         <Carousel {...setting}>
             {bannerList.map((item, index) => {
                 return (
-                    <div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>
+                    <div className='contentStyle' key={index} onClick={() => window.open(item.link)}>
                         <img src={item.image} alt="" />
                     </div>
                 )

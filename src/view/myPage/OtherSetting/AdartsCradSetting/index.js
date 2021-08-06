@@ -93,7 +93,7 @@ const AdartsCardSetting = () => {
               </div>
             </div>
             <div className='AdartsCardBtnBox'>
-              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardId)}>{t(144)}</Button> : null}
+              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardId)}>{t(144)}</Button> : '主卡'}
               {/* <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button> */}
               {!i.isMainCard ? <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button> : null}
             </div>
