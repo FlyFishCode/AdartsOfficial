@@ -59,6 +59,11 @@ const AccountInfoSetting = () => {
     setPreviewImage(file.url || file.preview)
     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1))
   };
+  const handleChange = ({ file }) => {
+    if (file.status === "removed") {
+      setFileList([])
+    }
+  };
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -244,10 +249,11 @@ const AccountInfoSetting = () => {
         <Col span='6' className='AccountInfoLabel'>{t(102)}</Col>
         <Col span='18'>
           <Upload
-            customRequest={() => handleRequset}
+            customRequest={handleRequset}
             listType="picture-card"
             fileList={fileList}
             onPreview={handlePreview}
+            onChange={handleChange}
           >
             {fileList.length >= 1 ? null : uploadButton}
           </Upload>

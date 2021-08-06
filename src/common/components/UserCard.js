@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 import { Row, Col, Progress } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { indexUserCardListHttp } from '@/api';
+
+import * as echarts from 'echarts/core';
+import { PieChart, GaugeChart } from 'echarts/charts';
+import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+
+
+
 // import { useTranslation } from 'react-i18next';
 // import { useHistory } from 'react-router-dom'
 
@@ -10,7 +18,10 @@ import { setCountryIconPosition } from '@/common/Utlis';
 import adartsCard from '@/assets/img/adartsCard.png';
 import defaultPlayer from '@/assets/img/defalutPlayer.png';
 
+
+
 const UserCard = (props) => {
+    echarts.use([TitleComponent, TooltipComponent, GridComponent, CanvasRenderer, PieChart, GaugeChart]);
     // const history = useHistory();
     // const { t } = useTranslation();
     // const [friend, setFriend] = useState(0);
@@ -32,14 +43,73 @@ const UserCard = (props) => {
             }
         }
     }
+    const render = (list) => {
+        list.forEach((i, index) => {
+            const dom = echarts.init(document.querySelector(`.Editor${index}`));
+            dom.setOption({
+                series: [{
+                    type: 'gauge',
+                    startAngle: 90,
+                    endAngle: -270,
+                    max: 30,
+                    color: 'red',
+                    pointer: {
+                        show: false
+                    },
+                    progress: {
+                        show: true,
+                        overlap: false,
+                        roundCap: true,
+                        clip: false,
+                        itemStyle: {
+                            borderWidth: 1,
+                            borderColor: '#464646'
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 5
+                        }
+                    },
+                    splitLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false,
+                    },
+                    data: [{
+                        value: i.rating,
+                        name: 'RATING',
+                        title: {
+                            color: 'red',
+                            fontSize: 15,
+                            fontWeight: 'bold',
+                            offsetCenter: ['0%', '10%']
+                        },
+                        detail: {
+                            fontSize: 15,
+                            color: 'red',
+                            offsetCenter: ['0%', '-10%']
+                        }
+                    }
+                    ],
+                }]
+            })
+        })
+    }
     const getUserCardList = () => {
         indexUserCardListHttp({ memberId: sessionStorage.getItem('websiteMemberId') || '' }).then(res => {
             if (res.data.code === 100) {
                 setUserCard(res.data.data)
+                render(res.data.data)
                 sessionStorage.setItem('websiteCardId', res.data.data[0].cardId)
             }
         })
     }
+
     // const handleBtnPush = (name) => {
     //   history.push({
     //     pathname: '/MyPage',
@@ -53,6 +123,7 @@ const UserCard = (props) => {
         // setFriend(1)
         // setGift(1)
         return () => setUserCard([])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => {
         const dom = document.querySelector('.userCardListBox');
@@ -80,7 +151,7 @@ const UserCard = (props) => {
                                             </div>
                                         </div>
                                         <div className='userInfoGameBox'>
-                                            <div><Progress type="circle" percent={i.rating} status="exception" format={percent => `${percent} RATING`} /></div>
+                                            <div className={`Editor${index}`} style={{ height: 200, width: 200 }}></div>
                                             <div className='userInfoGame'>
                                                 <div>
                                                     <div className='userCardFont'>{i.ppd}</div>

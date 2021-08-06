@@ -7,6 +7,12 @@ import { myPageIndexUserCardInfoHttp, myPageIndexGameInfoHttp } from '@/api';
 import { MessageOutlined } from '@ant-design/icons';
 import { setCountryIconPosition } from '@/common/Utlis';
 
+import * as echarts from 'echarts/core';
+import { PieChart, GaugeChart } from 'echarts/charts';
+import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+
+
 import m from '@/assets/img/m.png';
 import adartsCard from '@/assets/img/adartsCard.png';
 import defaultPlayer from '@/assets/img/defalutPlayer.png';
@@ -15,6 +21,7 @@ import goldCoin from '@/assets/img/goldCoin.png';
 
 
 const MyPageIndex = (props) => {
+  echarts.use([TitleComponent, TooltipComponent, GridComponent, CanvasRenderer, PieChart, GaugeChart]);
   // const { changeCardId } = props;
   const { t } = useTranslation()
   const [card, setCard] = useState({});
@@ -68,6 +75,62 @@ const MyPageIndex = (props) => {
   // const MyIcon = createFromIconfontCN({
   //   scriptUrl: '//at.alicdn.com/t/font_1994758_ss07hdd81wn.js'
   // })
+
+  const render = (rating) => {
+    const dom = echarts.init(document.querySelector('.Editor'));
+    dom.setOption({
+      series: [{
+        type: 'gauge',
+        startAngle: 90,
+        endAngle: -270,
+        max: 30,
+        color: 'red',
+        pointer: {
+          show: false
+        },
+        progress: {
+          show: true,
+          overlap: false,
+          roundCap: true,
+          clip: false,
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: '#464646'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            width: 5
+          }
+        },
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false
+        },
+        axisLabel: {
+          show: false,
+        },
+        data: [{
+          value: rating,
+          name: 'RATING',
+          title: {
+            color: 'red',
+            fontSize: 15,
+            fontWeight: 'bold',
+            offsetCenter: ['0%', '10%']
+          },
+          detail: {
+            fontSize: 15,
+            color: 'red',
+            offsetCenter: ['0%', '-10%']
+          }
+        }
+        ],
+      }]
+    })
+  }
   const getData = (cardId) => {
     myPageIndexUserCardInfoHttp({
       cardId: cardId,
@@ -75,6 +138,7 @@ const MyPageIndex = (props) => {
     }).then(res => {
       if (res.data.data) {
         setCard(res.data.data)
+        render(res.data.data.rating)
         // changeCardId(res.data.data.cardId)
         // sessionStorage.setItem('websiteCardId', res.data.data.cardId)
       }
@@ -97,6 +161,7 @@ const MyPageIndex = (props) => {
       setCard({});
       setGaneInfo({});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
@@ -117,7 +182,7 @@ const MyPageIndex = (props) => {
                 </div>
               </div>
               <div className='userInfoGameBox'>
-                <div><Progress type="circle" percent={card.rating} status="exception" format={percent => `${percent} RATING`} /></div>
+                <div className='Editor' style={{ height: 200, width: 200 }}></div>
                 <div className='userInfoGame'>
                   <div>
                     <div className='userCardFont'>{card.ppd}</div>

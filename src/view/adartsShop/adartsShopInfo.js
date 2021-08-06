@@ -81,7 +81,7 @@ const AdartsShopInfo = () => {
           </div>
           <div>
             <div className='shopInfoLabel'>TEL</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.shopPhone}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(152)}</div>
