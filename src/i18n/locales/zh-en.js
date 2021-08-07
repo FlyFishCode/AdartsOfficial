@@ -158,6 +158,8 @@ const EN = {
     "157": 'Tournament ranking',
     "158": 'Items Shop',
     "159": 'Darts Column',
+    "160": 'Message from store',
+    "161": 'Master card',
 
 };
 export default EN;

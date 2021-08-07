@@ -28,7 +28,7 @@ const DartsList = () => {
   const handleNewsClick = (id) => {
     history.push({
       pathname: '/DartsInfo',
-      state: { id }
+      search: `?id=${id}`
     })
   }
   useEffect(() => {

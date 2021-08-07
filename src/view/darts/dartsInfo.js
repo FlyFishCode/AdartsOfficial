@@ -14,8 +14,8 @@ const DartsInfo = () => {
     })
   }
   useEffect(() => {
-    getInfo(location.state.id)
-  }, [location?.state?.id])
+    getInfo(location.search.substr(1).split('=')[1])
+  }, [location])
   return (
     /*<div className='dartsInfoBox containerBox'>*/
     <div className="boxContent containerBox">

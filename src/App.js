@@ -147,7 +147,7 @@ const Banner = () => {
         )
     }
     const setting = {
-        // autoplay: true,
+        autoplay: true,
         variableWidth: true,
         arrows: true,
         infinite: true,
@@ -155,7 +155,7 @@ const Banner = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         centerPadding: 0,
-        // autoplaySpeed: 2000,
+        autoplaySpeed: 2000,
         prevArrow: <PrevIcon />,
         nextArrow: <NextIcon />
     }

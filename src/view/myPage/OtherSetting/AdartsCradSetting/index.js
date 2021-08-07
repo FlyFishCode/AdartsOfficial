@@ -94,7 +94,7 @@ const AdartsCardSetting = () => {
               </div>
             </div>
             <div className='AdartsCardBtnBox'>
-              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardId)}>{t(144)}</Button> : '主卡'}
+              {!i.isMainCard ? <Button type="primary" onClick={() => handleSetMainCard(i.cardId)}>{t(144)}</Button> : t(161)}
               {/* <Button type="primary" onClick={() => handleCopy(i.cardNo)}>{t(96)}</Button> */}
               {!i.isMainCard ? <Button type="primary" danger onClick={() => handleDeleteBtn(i.cardId)}>{t(97)}</Button> : null}
             </div>
@@ -103,7 +103,7 @@ const AdartsCardSetting = () => {
       })}
       {cardList.length < 3 ?
         <div className='AdartsCardBox'>
-          <div className='AdartsCardName'>卡号：</div>
+          <div className='AdartsCardName'>{t(35)}：</div>
           <div className='AdartsCardAddCard'><Input onChange={(e) => setCardNo(e.target.value)} /></div>
           <div className='AdartsCardBtnBox'><Button type="primary" onClick={handleAddCrad}>{t(98)}</Button></div>
         </div>
