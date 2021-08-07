@@ -140,7 +140,7 @@
     padding: 10px;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: 15% 30% 20%;
+    grid-template-columns: 15% 35% 20%;
     grid-column-gap: 15%;
 }
 
@@ -191,7 +191,6 @@
 .AdartsCardInfo {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .AdartsCardIconBox img {

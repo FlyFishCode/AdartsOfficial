@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 // import { RightOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
@@ -14,8 +14,9 @@ import W1 from '@/assets/img/W1.png';
 
 
 // const { Option } = Select;
-// const { Search } = Input;
-const AdartsShopIndex = () => {
+const { Search } = Input;
+const AdartsShopIndex = (prop) => {
+  const { shopIndexSearch } = prop;
   const { t } = useTranslation();
   const history = useHistory();
   const [newShop, setNewShop] = useState([]);
@@ -23,9 +24,13 @@ const AdartsShopIndex = () => {
   // const handleChange = (value) => {
   //   console.log(value);
   // }
-  // const onSearch = (value) => {
-  //   console.log(value);
-  // }
+  const onSearch = (value) => {
+    shopIndexSearch({
+      path: '/AdartsShop/ShopSearch',
+      active: '2',
+      searchValue: value
+    })
+  }
   const getNewShopList = () => {
     const data = {
       countryId: 208,
@@ -155,18 +160,11 @@ const AdartsShopIndex = () => {
   return (
     <div className='AnchorBox'>
       <div className='myPageTitle' id='adartsShopIndex'>{t(111)}</div>
-      {/* <Row className='adartsShopIndexSearchBox'>
-        <Col span='4' className='selectBox'>
-          <Select defaultValue="lucy" onChange={handleChange}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
-        </Col>
+      <Row className='adartsShopIndexSearchBox'>
         <Col span='24'>
           <Search placeholder="input search text" onSearch={onSearch} allowClear />
         </Col>
-      </Row> */}
+      </Row>
       <Row className='RowBox adartsShopIndexBox'>
         <Col span='24'>
           <div className='adartsShopIndexTitleBox'>

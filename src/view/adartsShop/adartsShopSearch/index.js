@@ -12,7 +12,8 @@ import W1 from '@/assets/img/W1.png';
 
 // const { Option } = Select;
 const { Search } = Input;
-const AdartsShopSearch = () => {
+const AdartsShopSearch = (prop) => {
+  // const { inputValue } = prop;
   const { t } = useTranslation();
   const history = useHistory();
   const [total, setTotal] = useState(1);

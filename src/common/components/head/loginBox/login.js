@@ -7,7 +7,7 @@ import { indexLoginHttp } from '@/api/index'
 import { MD5 } from '@/common/Utlis'
 
 const LoginBox = (props) => {
-    const { changeUserName } = props
+    const { changeUserName } = props;
     const { t } = useTranslation();
     const history = useHistory();
     const [username, setUserName] = useState('');

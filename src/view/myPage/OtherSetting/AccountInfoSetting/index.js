@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Row, Col, Input, Button, Radio, Upload, Modal, Select, message } from 'antd'
+import { Row, Col, Input, Button, Upload, Modal, Select, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { PlusOutlined } from '@ant-design/icons'
 import { accountInfoHttp, upLoadImgHttp, accountInfoUpdateHttp, shopListHttp, countryListHttp, sendEmailHttp, sendPhoneHttp } from '@/api'
@@ -30,7 +30,6 @@ const AccountInfoSetting = () => {
   const [previewTitle, setPreviewTitle] = useState('');
   const [previewImage, setPreviewImage] = useState('');
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [acceptMail, setAcceptMail] = useState(1);
   const memberId = sessionStorage.getItem('websiteMemberId');
 
   const uploadButton = (
@@ -83,15 +82,14 @@ const AccountInfoSetting = () => {
     accountInfoHttp({ memberId }).then(res => {
       if (res.data.code === 100) {
         const data = res.data.data
-        setCardInfo(res.data.data)
-        setPhoneCode(data.phone && data.phone.split('-')[0])
-        setPhone(data.phone && data.phone.split('-')[1])
-        setEmail(data.email)
-        setHomeShopId(data.homeShopId)
-        setCountryId(data.countryId)
-        setLanguage(data.languageId)
-        setNickname(data.nickname)
-        setAcceptMail(data.acceptMail)
+        setCardInfo(res.data.data);
+        setPhoneCode(data.phone && data.phone.split('-')[0]);
+        setPhone(data.phone && data.phone.split('-')[1]);
+        setEmail(data.email);
+        setHomeShopId(data.homeShopId);
+        setCountryId(data.countryId);
+        setLanguage(data.languageId);
+        setNickname(data.nickname);
         setFileList([{ uid: new Date().getTime(), url: data.portrait }])
       }
     })
@@ -107,7 +105,7 @@ const AccountInfoSetting = () => {
       nickname,
       email,
       emailCode,
-      acceptMail,
+      acceptMail: 1,
     }
     accountInfoUpdateHttp(data).then(res => {
       if (res.data.code === 100) {
@@ -273,34 +271,34 @@ const AccountInfoSetting = () => {
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(48)}</Col>
-        <Col span='7'>
+        <Col span='6'>
           <Input.Group compact>
-            <Select defaultValue={phoneCode} style={{ width: '30%' }} onChange={(value) => setPhoneCode(value)} >
+            <Select defaultValue={phoneCode} style={{ width: '40%' }} onChange={(value) => setPhoneCode(value)} >
               <Option value="+86">+86</Option>
               <Option value="000">+000</Option>
             </Select>
-            <Input style={{ width: '70%' }} value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
+            <Input style={{ width: '60%' }} value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
           </Input.Group>
         </Col>
         <Col span='5'>
           <Button type="primary" onClick={handlePhoneBtnClick} disabled={phoneBtnDisabled}>{phoneBtnDisabled ? phoneCountDown : t(59)}</Button>
         </Col>
-        <Col span='6'>
+        <Col span='7'>
           <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear />
         </Col>
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(39)}</Col>
-        <Col span='7'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
+        <Col span='6'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
         <Col span='5'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
-        <Col span='6'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
+        <Col span='7'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
       </Row>
-      <Row type="flex" justify="center" style={{ marginBottom: "10px" }}>
+      {/* <Row type="flex" justify="center" style={{ marginBottom: "10px" }}>
         <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>
           <Radio value={1}>{t(51)}</Radio>
           <Radio value={0}>{t(52)}</Radio>
         </Radio.Group>
-      </Row>
+      </Row> */}
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(100)}</Col>
         <Col span='18'>{cardInfo.cardBindTime}</Col>

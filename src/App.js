@@ -128,7 +128,7 @@ const Banner = () => {
             <div
                 className={className}
                 onClick={onClick}
-                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px", opacity: "0.5" }}
+                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginLeft: "10px" }}
             >
                 <LeftCircleOutlined />
             </div>
@@ -140,14 +140,14 @@ const Banner = () => {
             <div
                 className={className}
                 onClick={onClick}
-                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px", opacity: "0.5" }}
+                style={{ ...style, display: "block", fontSize: '26px', color: '#fff', marginRight: "10px" }}
             >
                 <RightCircleOutlined />
             </div>
         )
     }
     const setting = {
-        autoplay: true,
+        // autoplay: true,
         variableWidth: true,
         arrows: true,
         infinite: true,
@@ -155,7 +155,7 @@ const Banner = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         centerPadding: 0,
-        autoplaySpeed: 2000,
+        // autoplaySpeed: 2000,
         prevArrow: <PrevIcon />,
         nextArrow: <NextIcon />
     }
@@ -389,7 +389,7 @@ const Product = () => {
             {bannerList.map((item, index) => {
                 return (
                     /*<div className='contentStyle' key={index} onClick={() => handleClick(item.id)}>*/
-                    <div className='contentStyle' key={index}>
+                    <div className='productBox' key={index}>
                         <img src={item.img} alt="" style={{ cursor: 'pointer' }} onClick={() => handleClick(item.id)} />
                     </div>
                 )

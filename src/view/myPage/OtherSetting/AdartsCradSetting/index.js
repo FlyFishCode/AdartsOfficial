@@ -41,6 +41,7 @@ const AdartsCardSetting = () => {
     adartsMainCardHttp({ cardId, memberId }).then(res => {
       if (res.data.code === 100) {
         message.info(res.data.msg)
+        sessionStorage.setItem('websiteCardId', cardId)
         getCardList()
       }
     })
