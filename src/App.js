@@ -34,6 +34,7 @@ import ForgetPW from './common/components/head/loginBox/forgetPW.js';
 import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js'
 
+sessionStorage.setItem('websiteCountryId', 17829);
 
 const App = () => {
     const [userName, setUserName] = useState('');
@@ -118,7 +119,7 @@ const Container = ({ userName }) => {
 const Banner = () => {
     let [bannerList, setBannerList] = useState([]);
     const getData = () => {
-        indexBannerListHttp({ countryId: 208 }).then(res => {
+        indexBannerListHttp({ countryId: sessionStorage.getItem('websiteCountryId') }).then(res => {
             setBannerList(res.data.data);
         })
     }
@@ -182,7 +183,7 @@ const News = () => {
     const history = useHistory();
     const getShopList = () => {
         const ShopData = {
-            countryId: 208,
+            countryId: sessionStorage.getItem('websiteCountryId'),
             pageNum: 1,
             pageSize: 5
         }
@@ -193,7 +194,7 @@ const News = () => {
     const getNewsList = (type) => {
         const NewsData = {
             category: type,
-            countryId: 208,
+            countryId: sessionStorage.getItem('websiteCountryId'),
             pageNum: 1,
             pageSize: 4
         }

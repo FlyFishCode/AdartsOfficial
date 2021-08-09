@@ -33,7 +33,7 @@ const AdartsShopIndex = (prop) => {
   }
   const getNewShopList = () => {
     const data = {
-      countryId: 208,
+      countryId: sessionStorage.getItem('websiteCountryId'),
       pageNum: 1,
       pageSize: 5
     }

@@ -14,7 +14,7 @@ const PlayerDes = () => {
     })
   }
   const getPlayerList = () => {
-    playerListHttp({ countryId: 208 }).then(res => {
+    playerListHttp({ countryId: sessionStorage.getItem('websiteCountryId') }).then(res => {
       res.data.data.forEach(i => {
         i.picture = JSON.parse(i.picture)
       })

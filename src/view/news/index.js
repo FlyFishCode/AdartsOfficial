@@ -24,7 +24,7 @@ const NewsPage = () => {
   const getInfoList = () => {
     const obj = {
       category: 6,
-      countryId: 208,
+      countryId: sessionStorage.getItem('websiteCountryId'),
       pageNum: 1,
       pageSize: 5,
     }
@@ -36,7 +36,7 @@ const NewsPage = () => {
     const obj = {
       category: type,
       title: inputValue,
-      countryId: 208,
+      countryId: sessionStorage.getItem('websiteCountryId'),
       pageNum,
       pageSize: 5,
     }
@@ -123,7 +123,7 @@ const NewsPage = () => {
     getNewsList(type, inputValue, pageNum)
   }, [type, inputValue, pageNum])
   return (
-    <div className="boxContent containerBox">  
+    <div className="boxContent containerBox">
       <Row className='NewsBox'>
         {/* <Col span='4' className='linkBox' onClick={handleClick}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/News' >11111</div>

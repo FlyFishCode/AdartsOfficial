@@ -12,7 +12,7 @@ const Content = () => {
   const [dartsList, setDartsList] = useState([]);
   const getData = () => {
     const obj = {
-      countryId: 208,
+      countryId: sessionStorage.getItem('websiteCountryId'),
       type: 1,
       pageNum: 1,
       pageSize: 8,
@@ -102,7 +102,7 @@ const Darts = () => {
   }
   const getData = () => {
     const obj = {
-      countryId: 208,
+      countryId: sessionStorage.getItem('websiteCountryId'),
       status: 1,
       type: 1
     }
