@@ -16,7 +16,7 @@ import W1 from '@/assets/img/W1.png';
 // const { Option } = Select;
 const { Search } = Input;
 const AdartsShopIndex = (prop) => {
-  const { shopIndexSearch } = prop;
+  const { setActive } = prop;
   const { t } = useTranslation();
   const history = useHistory();
   const [newShop, setNewShop] = useState([]);
@@ -25,11 +25,11 @@ const AdartsShopIndex = (prop) => {
   //   console.log(value);
   // }
   const onSearch = (value) => {
-    shopIndexSearch({
-      path: '/AdartsShop/ShopSearch',
-      active: '2',
-      searchValue: value
+    history.push({
+      pathname: "/AdartsShop/ShopSearch",
+      search: `?value=${value}`
     })
+    setActive('2')
   }
   const getNewShopList = () => {
     const data = {

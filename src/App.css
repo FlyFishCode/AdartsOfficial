@@ -978,7 +978,7 @@
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .dartsContent div:nth-child(3) {

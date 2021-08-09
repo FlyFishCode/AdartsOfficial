@@ -17,13 +17,11 @@ const AdartsShop = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const Location = useLocation();
-  const [inputValue, setInputValue] = useState('');
   const [activeClass, setActiveClass] = useState('1');
   const handleClick = (e) => {
     try {
-      history.push(e?.target?.getAttribute('path') ?? e.path);
+      history.push(e?.target?.getAttribute('path'));
       setActiveClass(e?.target?.getAttribute('active') ?? e.active);
-      setInputValue(e.searchValue)
     } catch (error) {
       console.log('History Api：', error);
     }
@@ -45,10 +43,10 @@ const AdartsShop = () => {
         <Col span='19' offset='1'>
           <Switch>
             <Route path='/AdartsShop' exact>
-              <AdartsShopIndex shopIndexSearch={handleClick} />
+              <AdartsShopIndex setActive={(acvive) => setActiveClass(acvive)} />
             </Route>
             <Route path='/AdartsShop/ShopSearch'>
-              <AdartsShopSearch inputValue={inputValue} />
+              <AdartsShopSearch />
             </Route>
             <Route path='/AdartsShop/ShopTheme'>
               <AdartsShopThemeSet />

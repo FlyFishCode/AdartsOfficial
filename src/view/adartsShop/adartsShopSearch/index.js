@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Input, Pagination } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { newShopListHttp } from '@/api';
 import { setCountryIconPosition } from '@/common/Utlis';
 
@@ -16,9 +16,10 @@ const AdartsShopSearch = (prop) => {
   // const { inputValue } = prop;
   const { t } = useTranslation();
   const history = useHistory();
+  const location = useLocation();
   const [total, setTotal] = useState(1);
   const [pageNum, setPageNum] = useState(1);
-  const [shopName, setShopName] = useState('');
+  const [shopName, setShopName] = useState(location.search ? decodeURI(location.search.substr(1).split('=')[1]) : '');
   const [shopList, setShopList] = useState([]);
   // const handleChange = (value) => {
   //   console.log(value);
@@ -43,6 +44,9 @@ const AdartsShopSearch = (prop) => {
       state: { id }
     })
   }
+  useEffect(() => {
+
+  })
   useEffect(() => {
     getShopList(pageNum, shopName)
   }, [pageNum, shopName])
