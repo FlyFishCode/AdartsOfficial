@@ -160,19 +160,26 @@ const Banner = () => {
         prevArrow: <PrevIcon />,
         nextArrow: <NextIcon />
     }
+    const handleClick = (e) => {
+        if (e.target.children[2]) {
+            window.open(e.target.children[2].children[0].firstChild.getAttribute('data-item'))
+        }
+    }
     useEffect(() => {
         getData();
     }, [])
     return (
-        <Carousel {...setting}>
-            {bannerList.map((item, index) => {
-                return (
-                    <div className='contentStyle' key={index} onClick={() => window.open(item.link)}>
-                        <img src={item.image} alt="" />
-                    </div>
-                )
-            })}
-        </Carousel>
+        <div onClick={handleClick} className='CarouselBox'>
+            <Carousel {...setting}>
+                {bannerList.map(item => {
+                    return (
+                        <div className='contentStyle' data-item={item.link} key={item.id} onClick={() => window.open(item.link)}>
+                            <img src={item.image} alt="" />
+                        </div>
+                    )
+                })}
+            </Carousel>
+        </div>
     )
 }
 const News = () => {

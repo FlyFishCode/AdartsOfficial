@@ -21,13 +21,20 @@ const Content = () => {
       setDartsList(res.data.data.list)
     })
   }
-  const render = (contents) => {
-    if (document.querySelector('.dartsInfoContent')) {
-      document.querySelector('.dartsInfoContent').innerHTML = contents
-    }
-    return (
-      <div className='dartsInfoContent'></div>
-    )
+  const render = (id, contents) => {
+    setTimeout(() => {
+      const dom = document.querySelectorAll(`.dartsInfoContent${id}`);
+      if (dom.length) {
+        for (let i = 0; i < dom.length; i++) {
+          contents = contents.replace(/(\n)/g, "");
+          contents = contents.replace(/(\t)/g, "");
+          contents = contents.replace(/(\r)/g, "");
+          contents = contents.replace(/<\/?[^>]*>/g, "");
+          contents = contents.replace(/\s*/g, "");
+          dom[i].innerHTML = contents
+        }
+      }
+    }, 200);
   }
   const handleClick = (id) => {
     history.push({
@@ -37,6 +44,7 @@ const Content = () => {
   }
   useEffect(() => {
     getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div className='darts'>
@@ -51,7 +59,7 @@ const Content = () => {
               <div><img src={i.thumbnail} alt="" /></div>
               <div title={i.title}>{i.title}</div>
               <div>{i.cdateInt}</div>
-              {render(i.contents)}
+              <div className={`dartsInfoContent${i.id}`}>{render(i.id, i.contents)}</div>
             </div>
           )
         })}
@@ -110,15 +118,20 @@ const Darts = () => {
       setBannerList(res.data.data)
     });
   }
+  const handleClick = (e) => {
+    if (e.target.children[2]) {
+      window.open(e.target.children[2].children[0].firstChild.getAttribute('data-item'))
+    }
+  }
   useEffect(() => {
     getData();
   }, [])
   return (
-    <div>
+    <div onClick={handleClick} className='CarouselBox'>
       <Carousel {...setting}>
         {bannerList.map((item, index) => {
           return (
-            <div className='contentStyle' key={index} onClick={() => window.open(item.link)}>
+            <div className='contentStyle' data-item={item.link} key={index} onClick={() => window.open(item.link)}>
               <img src={item.image} alt="" />
             </div>
           )

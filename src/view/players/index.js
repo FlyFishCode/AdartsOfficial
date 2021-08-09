@@ -26,7 +26,7 @@ const PlayerDes = () => {
   }, [])
   return (
     <div className="boxContent containerBox">
-      <div><img src={world} alt="" /></div>
+      <div className='worldImgBox'><img src={world} alt="" /></div>
       <div className='playerDes'>
         <Row className='playerDesBox' justify="space-around">
           {playerList.map(i => {
