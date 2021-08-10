@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { newShopListHttp } from '@/api';
 import { setCountryIconPosition } from '@/common/Utlis';
-
+import { dealUrlHash } from '@/common/Utlis';
 
 import shopImg from '@/assets/img/shop.png';
 import A1 from '@/assets/img/A1.png';
@@ -19,7 +19,7 @@ const AdartsShopSearch = (prop) => {
   const location = useLocation();
   const [total, setTotal] = useState(1);
   const [pageNum, setPageNum] = useState(1);
-  const [shopName, setShopName] = useState(location.search ? decodeURI(location.search.substr(1).split('=')[1]) : '');
+  const [shopName, setShopName] = useState(location.search ? dealUrlHash(location) : '');
   const [shopList, setShopList] = useState([]);
   // const handleChange = (value) => {
   //   console.log(value);
@@ -41,7 +41,7 @@ const AdartsShopSearch = (prop) => {
   const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
-      state: { id }
+      search: `?id=${id}`
     })
   }
   useEffect(() => {

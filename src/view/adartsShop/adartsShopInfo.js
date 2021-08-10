@@ -3,7 +3,8 @@ import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { PhoneOutlined } from '@ant-design/icons';
-import { shopInfoHttp } from '@/api'
+import { shopInfoHttp } from '@/api';
+import { dealUrlHash } from '@/common/Utlis';
 import shopImg from '@/assets/img/shop.png'
 
 
@@ -20,9 +21,9 @@ const AdartsShopInfo = () => {
     })
   }
   useEffect(() => {
-    getShopList(location?.state?.id);
+    getShopList(dealUrlHash(location));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [])
   return (
     <div className='shopInfoBox'>
       <Row>

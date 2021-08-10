@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { indexNewsInfoHttp } from '@/api';
-
+import { dealUrlHash } from '@/common/Utlis';
 
 import './index.css';
 
@@ -33,7 +33,7 @@ const NewsInfo = () => {
     return str
   };
   useEffect(() => {
-    getNewsInfo(location.state.id)
+    getNewsInfo(dealUrlHash(location))
   }, [location])
   return (
     <div style={{ paddingLeft: "40px" }}>

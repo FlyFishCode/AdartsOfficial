@@ -37,9 +37,13 @@ const setCountryIconPosition = (code) => {
         return `${0}% ${0}%`
     }
 }
+const dealUrlHash = (str) => {
+    return decodeURI(str.search.substr(1).split('=')[1])
+}
 export {
     REG_PHONE,
     REG_EMAIL,
     MD5,
-    setCountryIconPosition
+    setCountryIconPosition,
+    dealUrlHash
 }

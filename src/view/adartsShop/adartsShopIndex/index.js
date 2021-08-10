@@ -39,7 +39,7 @@ const AdartsShopIndex = (prop) => {
     }
     newShopListHttp(data).then(res => {
       if (res.data.code === 100) {
-        setNewShop(res.data.data.list)
+        setNewShop(res.data.data.list);
       }
     })
   }
@@ -150,7 +150,7 @@ const AdartsShopIndex = (prop) => {
   const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
-      state: { id }
+      search: `?id=${id}`
     })
   }
   useEffect(() => {

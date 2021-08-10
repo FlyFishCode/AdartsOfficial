@@ -41,7 +41,7 @@ const AdartsShopNew = () => {
   const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
-      state: { id }
+      search: `?id=${id}`
     })
   }
   useEffect(() => {

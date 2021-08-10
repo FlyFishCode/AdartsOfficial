@@ -64,7 +64,7 @@ const NewsPage = () => {
     const handleNewInfoClick = (id) => {
       history.push({
         pathname: '/News/NewsInfo',
-        state: { id }
+        search: `?id=${id}`
       })
     }
     return (

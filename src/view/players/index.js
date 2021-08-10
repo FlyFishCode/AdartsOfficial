@@ -10,7 +10,7 @@ const PlayerDes = () => {
   const handlePlayerClick = (id) => {
     history.push({
       pathname: 'PlayerInfo',
-      state: { id }
+      search: `?id=${id}`
     })
   }
   const getPlayerList = () => {

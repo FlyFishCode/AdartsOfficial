@@ -212,13 +212,13 @@ const News = () => {
     const handleNewsClick = (id) => {
         history.push({
             pathname: '/News/NewsInfo',
-            state: { id }
+            search: `?id=${id}`
         })
     }
     const handleShopClick = (id) => {
         history.push({
             pathname: '/AdartsShop/ShopInfo',
-            state: { id }
+            search: `?id=${id}`
         })
     }
     const getTypeStr = (type) => {
