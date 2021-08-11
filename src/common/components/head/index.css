@@ -80,3 +80,38 @@
     justify-content: center;
     align-items: center;
 }
+
+.loginAndGlobalBox {
+    display: flex;
+}
+
+.languageBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.iconMenu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.headBox {
+    width: 1200px;
+    margin: 0 auto;
+    height: 65px;
+    line-height: 65px;
+}
+
+.headBox .ant-menu-horizontal {
+    height: 100%;
+    line-height: 65px;
+    border-bottom: none;
+}
+
+.headBox .ant-menu-item,
+.ant-menu-submenu-title {
+    width: 170px;
+    text-align: center;
+}

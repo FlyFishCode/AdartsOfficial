@@ -51,4 +51,4 @@ const AwardMsgSetting = () => {
     </div>
   )
 }
-export default AwardMsgSetting
+export default AwardMsgSetting;

@@ -16,7 +16,7 @@ import AwardHistory from './GameInfo/AwardHistory';
 
 import AdartsCardSetting from './OtherSetting/AdartsCradSetting';
 import AccountInfoSetting from './OtherSetting/AccountInfoSetting';
-// import AdartsMsgSetting from './OtherSetting/AwardMsgSetting';
+import AdartsMsgSetting from './OtherSetting/AwardMsgSetting';
 // import PropSetting from './OtherSetting/PropSetting';
 import PasswordSetting from './OtherSetting/PasswordSetting';
 
@@ -57,55 +57,55 @@ const MyPage = () => {
     handleChangeCardId();
   }, [cardId])
   return (
-        <div className="boxContent containerBox">
-        <Row className='myPage'>
-          <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
-            <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
-            <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AllGameData'>{t(21)}</div>
-            <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/About30Game'>{t(64)}</div>
-            <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
-    
-            {/* <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/NewShop'>{t(67)}</div>
+    <div className="boxContent containerBox">
+      <Row className='myPage'>
+        <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
+          <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
+          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AllGameData'>{t(21)}</div>
+          <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/About30Game'>{t(64)}</div>
+          <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
+
+          {/* <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/NewShop'>{t(67)}</div>
             <div className={activeClass === '6' ? 'activeClass' : null} active='6' path='/MyPageIndex/NewShop'>{t(68)}</div> */}
-            <div className={activeClass === '7' ? 'activeClass' : null} active='7' path='/MyPageIndex/AdartsCardSetting'>{t(69)}</div>
-            <div className={activeClass === '8' ? 'activeClass' : null} active='8' path='/MyPageIndex/AccountInfoSetting'>{t(70)}</div>
-            {/* <div className={activeClass === '9' ? 'activeClass' : null} active='9' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
-            <div className={activeClass === '10' ? 'activeClass' : null} active='10' path='/MyPageIndex/PropSetting'>{t(72)}</div> */}
-            <div className={activeClass === '11' ? 'activeClass' : null} active='11' path='/MyPageIndex/PasswordSetting'>{t(73)}</div>
-          </Col>
-          <Col span='19' offset='1'>
-            <Switch>
-              <Route path='/MyPageIndex' exact>
-                <MyPageIndex changeCardId={handleChangeCardId} />
-              </Route>
-              <Route path='/MyPageIndex/AllGameData'>
-                <AllGameData />
-              </Route>
-              <Route path='/MyPageIndex/About30Game'>
-                <About30Game />
-              </Route>
-              <Route path='/MyPageIndex/AwardHistory'>
-                <AwardHistory />
-              </Route>
-              <Route path='/MyPageIndex/AdartsCardSetting'>
-                <AdartsCardSetting />
-              </Route>
-              <Route path='/MyPageIndex/AccountInfoSetting'>
-                <AccountInfoSetting />
-              </Route>
-              {/* <Route path='/MyPageIndex/AdartsMsgSetting'>
-                <AdartsMsgSetting />
-              </Route> */}
-              {/* <Route path='/MyPageIndex/PropSetting'>
+          <div className={activeClass === '7' ? 'activeClass' : null} active='7' path='/MyPageIndex/AdartsCardSetting'>{t(69)}</div>
+          <div className={activeClass === '8' ? 'activeClass' : null} active='8' path='/MyPageIndex/AccountInfoSetting'>{t(70)}</div>
+          <div className={activeClass === '9' ? 'activeClass' : null} active='9' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
+          {/* <div className={activeClass === '10' ? 'activeClass' : null} active='10' path='/MyPageIndex/PropSetting'>{t(72)}</div> */}
+          <div className={activeClass === '11' ? 'activeClass' : null} active='11' path='/MyPageIndex/PasswordSetting'>{t(73)}</div>
+        </Col>
+        <Col span='19' offset='1'>
+          <Switch>
+            <Route path='/MyPageIndex' exact>
+              <MyPageIndex changeCardId={handleChangeCardId} />
+            </Route>
+            <Route path='/MyPageIndex/AllGameData'>
+              <AllGameData />
+            </Route>
+            <Route path='/MyPageIndex/About30Game'>
+              <About30Game />
+            </Route>
+            <Route path='/MyPageIndex/AwardHistory'>
+              <AwardHistory />
+            </Route>
+            <Route path='/MyPageIndex/AdartsCardSetting'>
+              <AdartsCardSetting />
+            </Route>
+            <Route path='/MyPageIndex/AccountInfoSetting'>
+              <AccountInfoSetting />
+            </Route>
+            <Route path='/MyPageIndex/AdartsMsgSetting'>
+              <AdartsMsgSetting />
+            </Route>
+            {/* <Route path='/MyPageIndex/PropSetting'>
                 <PropSetting />
               </Route> */}
-              <Route path='/MyPageIndex/PasswordSetting'>
-                <PasswordSetting />
-              </Route>
-            </Switch>
-          </Col>
-        </Row>
-        </div>
+            <Route path='/MyPageIndex/PasswordSetting'>
+              <PasswordSetting />
+            </Route>
+          </Switch>
+        </Col>
+      </Row>
+    </div>
     // <Row id='myPage'>
     //   <Col span={4} offset={1}>
     //     <Anchor className='AnchorBox' getContainer={() => document.getElementById('myPageRight')} onClick={(e) => e.preventDefault()}>

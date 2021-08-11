@@ -2,25 +2,6 @@
     position: relative;
 }
 
-.headBox {
-    height: 65px;
-    line-height: 65px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.headBox .ant-menu-horizontal {
-    height: 100%;
-    line-height: 65px;
-    border-bottom: none;
-}
-
-.headBox .ant-menu-item,
-.ant-menu-submenu-title {
-    width: 120px;
-    text-align: center;
-}
-
 .logoBox {
     height: 45px;
     display: flex;
@@ -524,12 +505,6 @@
     width: 60%;
 }
 
-.iconMenu {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
 .newsTitle {
     font-size: 15px;
     font-weight: bold;
@@ -849,10 +824,6 @@
 
 .animate__fadeInRight {
     transition: all 0.5s ease;
-}
-
-.loginAndGlobalBox {
-    display: flex;
 }
 
 .RowBox {

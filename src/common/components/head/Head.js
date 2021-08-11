@@ -1,17 +1,20 @@
-// import { useCallback } from 'react';
+import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined } from '@ant-design/icons';
-import { Menu, message } from 'antd';
+import { Col, Menu, message, Row, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
 
 const { SubMenu } = Menu;
+const { Option } = Select;
+
 
 const Head = (prop) => {
   const { userName, loginOut } = prop;
+  const [language, setLanguage] = useState('en');
   const history = useHistory();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const handleLoginOut = () => {
     history.push('/adartsoffice');
     loginOut();
@@ -25,9 +28,13 @@ const Head = (prop) => {
       history.push('/login');
     }
   }
+  const handleChange = (value) => {
+    setLanguage(value);
+    i18n.changeLanguage(value);
+  }
   return (
-    <div className='headBox'>
-      <div className='iconMenu'>
+    <Row className='headBox'>
+      <Col span='4' className='iconMenu'>
         <Menu mode="horizontal">
           <SubMenu key="1" icon={<UnorderedListOutlined />}>
             <Menu.Item key="/MyPageIndex">
@@ -69,15 +76,28 @@ const Head = (prop) => {
             </Menu.Item>
           </SubMenu>
         </Menu>
-      </div>
-      <div>
+      </Col>
+      <Col span='13'>
         <div className='logoBox' onClick={() => history.push('/adartsoffice')}><img src={logo} alt="logo" /></div>
-      </div>
-      <div className='loginAndGlobalBox'>
+      </Col>
+      <Col span='4'>
+        <div className='languageBox'>
+          <div style={{ width: '20%' }}>{t(32)}</div>
+          <Select value={language} style={{ width: '50%' }} size='small' onChange={handleChange}>
+            {/* <Option value="jt">{t(1)}</Option>
+            <Option value="ft">{t(2)}</Option>
+            <Option value="en">{t(3)}</Option> */}
+            <Option value="jt">简体中文</Option>
+            <Option value="ft">繁体中文</Option>
+            <Option value="en">英文</Option>
+          </Select>
+        </div>
+      </Col>
+      <Col span='3' className='loginAndGlobalBox'>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
         {/* <div className='globalBox'><GlobalOutlined /></div> */}
-      </div>
-    </div >
+      </Col>
+    </Row >
   )
 }
 export default Head;

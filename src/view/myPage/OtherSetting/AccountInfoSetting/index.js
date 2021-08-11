@@ -212,7 +212,7 @@ const AccountInfoSetting = () => {
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(44)}</Col>
-        <Col span='18'>{cardInfo.name}</Col>
+        <Col span='18'>{cardInfo.nickname}</Col>
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(45)}</Col>
@@ -309,4 +309,4 @@ const AccountInfoSetting = () => {
     </div>
   )
 }
-export default AccountInfoSetting
+export default AccountInfoSetting;
