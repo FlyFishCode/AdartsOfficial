@@ -62,8 +62,8 @@ const Head = (prop) => {
             <Menu.Item key="/MatchRanking" disabled>
               <Link to='/MatchRanking'>{t(157)}</Link>
             </Menu.Item>
-            <Menu.Item key="/ShopPrps" disabled>
-              <Link to='/ShopPrps'>{t(158)}</Link>
+            <Menu.Item key="/ShopProp">
+              <Link to='/ShopProp'>{t(158)}</Link>
             </Menu.Item>
             <Menu.Item key="/Darts">
               <Link to='/Darts'>{t(159)}</Link>
