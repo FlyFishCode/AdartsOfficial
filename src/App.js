@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HashRouter, Switch, Route, useHistory } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { Carousel } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
@@ -34,6 +34,8 @@ import ForgetID from './common/components/head/loginBox/forgetID.js';
 import ForgetPW from './common/components/head/loginBox/forgetPW.js';
 import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js'
+import Download from './view/other/download.js'
+
 
 sessionStorage.setItem('websiteCountryId', 17829);
 
@@ -49,7 +51,7 @@ const App = () => {
         }
     }, [currentUserName])
     return (
-        <HashRouter >
+        <BrowserRouter >
             {/* <div className='containerBox'> */}
             <Head userName={userName} loginOut={handleUserName} />
             <Switch>
@@ -83,6 +85,9 @@ const App = () => {
                 <Route path='/DartsInfo'>
                     <DartsInfo />
                 </Route>
+                <Route path='/Download'>
+                    <Download />
+                </Route>
                 <Route path='/Login'>
                     <LoginBox changeUserName={handleUserName} />
                 </Route>
@@ -101,7 +106,7 @@ const App = () => {
             </Switch>
             <Footer />
             {/* </div> */}
-        </HashRouter >
+        </BrowserRouter >
     );
 }
 

@@ -1,0 +1,80 @@
+.shopPropBox {
+    margin: 15px 0;
+}
+
+.shopItemRow {
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.recommendBox {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 22% 22% 22% 22%;
+    grid-column-gap: 4%;
+}
+
+.recommendBox img {
+    height: 250px;
+    width: 100%;
+}
+
+.recommendBoxTitle {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0;
+    color: #768089;
+}
+
+.recommendBtn button {
+    width: 100%;
+}
+
+.optionLabel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.templateBox {
+    background: #eaedf1;
+    padding: 20px;
+}
+
+.ant-collapse-header {
+    background: #afb8c3;
+    font-weight: bold;
+    color: #fff!important;
+}
+
+.ShopPropSettingBox {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-column-gap: 10%;
+}
+
+.ShopPropSettingImg {
+    height: 250px;
+}
+
+.ShopPropSettingImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.ShopPropShopName {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.ShopPropSettingTitle {
+    font-size: 18px;
+}
+
+.everyShopPropSettingBox {
+    display: grid;
+    grid-row-gap: 10px;
+}

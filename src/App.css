@@ -1177,3 +1177,16 @@
     padding: 10px;
     font-weight: bold
 }
+
+.Download {
+    height: 100%;
+    text-align: center;
+}
+
+.shopMenuBox {
+    margin: 10px auto;
+}
+
+.ant-menu-horizontal {
+    border-bottom: none
+}
