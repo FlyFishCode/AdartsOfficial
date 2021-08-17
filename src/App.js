@@ -85,7 +85,7 @@ const App = () => {
                 <Route path='/DartsInfo'>
                     <DartsInfo />
                 </Route>
-                <Route path='/Download'>
+                <Route path='/alpha/download'>
                     <Download />
                 </Route>
                 <Route path='/Login'>

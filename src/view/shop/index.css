@@ -51,10 +51,11 @@
     display: grid;
     grid-template-columns: 45% 45%;
     grid-column-gap: 10%;
+    margin: 10px 0 30px 0;
 }
 
 .ShopPropSettingImg {
-    height: 250px;
+    height: 300px;
 }
 
 .ShopPropSettingImg img {

@@ -82,7 +82,7 @@ const ShopProp = () => {
             <Menu.Item key="3-3">{t(168)}</Menu.Item>
           </SubMenu>
           <Menu.Item key="3">{t(164)}</Menu.Item>
-          <Menu.Item key="5">{t(165)}</Menu.Item>
+          <Menu.Item key="/alpha/download">{t(165)}</Menu.Item>
         </Menu>
       </div>
       <Carousel {...setting}>
