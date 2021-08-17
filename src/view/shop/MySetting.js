@@ -100,36 +100,7 @@ const MySetting = () => {
 
             <div className='ShopPropSettingBox'>
               <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Dart Throw ({1})</div>
-                <div>
-                  <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-                </div>
-                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                <div className='ShopPropShopName'>{11111111111111}</div>
-                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
-              </div>
-              <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Frame ({1})</div>
-                <div>
-                  <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-                </div>
-                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                <div className='ShopPropShopName'>{11111111111111}</div>
-                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
-              </div>
-            </div>
-
-            <div className='ShopPropSettingBox'>
-              <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Dynamic Frame ({1})</div>
+                <div className='ShopPropSettingTitle'>Effect ({1})</div>
                 <div>
                   <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
                     <Option value="jack">Jack</Option>
@@ -171,58 +142,7 @@ const MySetting = () => {
                 <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
               </div>
               <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Effect ({1})</div>
-                <div>
-                  <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-                </div>
-                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                <div className='ShopPropShopName'>{11111111111111}</div>
-                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
-              </div>
-            </div>
-
-          </Panel>
-        </Collapse>
-      </div>
-      <div className='RowBox'>
-        <Collapse bordered={false} defaultActiveKey={['1']}>
-          <Panel header={t(176)} key="1">
-            <div className='ShopPropSettingBox'>
-              <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Bull 1 ({1})</div>
-                <div>
-                  <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-                </div>
-                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                <div className='ShopPropShopName'>{11111111111111}</div>
-                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
-              </div>
-              <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Bull 2 ({1})</div>
-                <div>
-                  <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-                </div>
-                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                <div className='ShopPropShopName'>{11111111111111}</div>
-                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
-              </div>
-            </div>
-
-            <div className='ShopPropSettingBox'>
-              <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>Bull 3 ({1})</div>
+                <div className='ShopPropSettingTitle'>Bull ({1})</div>
                 <div>
                   <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
                     <Option value="jack">Jack</Option>
@@ -243,7 +163,7 @@ const MySetting = () => {
           <Panel header={t(177)} key="1">
             <div className='ShopPropSettingBox'>
               <div className='everyShopPropSettingBox'>
-                <div className='ShopPropSettingTitle'>PHOENIX EYE ({1})</div>
+                <div className='ShopPropSettingTitle'>THREE IN THE BLACK ({1})</div>
                 <div>
                   <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
                     <Option value="jack">Jack</Option>

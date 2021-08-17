@@ -7,6 +7,8 @@ import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
+import MyPropList from './MyPropList';
+import RedeemProp from './RedeemProp';
 
 import './index.css';
 
@@ -78,8 +80,8 @@ const ShopProp = () => {
           <Menu.Item key="/ShopProp">{t(162)}</Menu.Item>
           <SubMenu key="2" title={t(163)}>
             <Menu.Item key="/ShopProp/MySetting">{t(166)}</Menu.Item>
-            <Menu.Item key="3-2">{t(167)}</Menu.Item>
-            <Menu.Item key="3-3">{t(168)}</Menu.Item>
+            <Menu.Item key="/ShopProp/MyPropList">{t(167)}</Menu.Item>
+            <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item>
           </SubMenu>
           <Menu.Item key="3">{t(164)}</Menu.Item>
           <Menu.Item key="/alpha/download">{t(165)}</Menu.Item>
@@ -99,8 +101,14 @@ const ShopProp = () => {
           <Route path='/ShopProp' exact>
             <ShopPropIndex />
           </Route>
-          <Route path='/ShopProp/MySetting' exact>
+          <Route path='/ShopProp/MySetting'>
             <MySetting />
+          </Route>
+          <Route path='/ShopProp/MyPropList'>
+            <MyPropList />
+          </Route>
+          <Route path='/ShopProp/RedeemProp'>
+            <RedeemProp />
           </Route>
         </Switch>
       </div>

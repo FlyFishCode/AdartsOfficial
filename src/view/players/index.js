@@ -28,7 +28,7 @@ const PlayerDes = () => {
     <div className="boxContent containerBox">
       <div className='worldImgBox'><img src={world} alt="" /></div>
       <div className='playerDes'>
-        <Row className='playerDesBox' justify="space-around">
+        <Row className='playerDesBox' justify="space-between">
           {playerList.map(i => {
             return (
               <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
