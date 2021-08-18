@@ -16,7 +16,7 @@ const Head = (prop) => {
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const handleLoginOut = () => {
-    history.push('/adartsoffice');
+    history.push('/');
     loginOut();
   }
   const handlePushClick = (value) => {
@@ -78,7 +78,7 @@ const Head = (prop) => {
         </Menu>
       </Col>
       <Col span='13'>
-        <div className='logoBox' onClick={() => history.push('/adartsoffice')}><img src={logo} alt="logo" /></div>
+        <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
       </Col>
       <Col span='4'>
         <div className='languageBox'>

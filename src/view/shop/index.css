@@ -99,6 +99,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
 }
 
 .myListBoxImg {
@@ -108,4 +109,24 @@
 .myListBoxImg img {
     width: 100%;
     height: 100%;
+}
+
+.Title {
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.myListCheckbox {
+    position: absolute;
+    right: 0;
+}
+
+.myListCheckbox .ant-checkbox {
+    top: 0;
+}
+
+.myListCheckbox .ant-checkbox-inner {
+    width: 20px;
+    height: 20px;
 }

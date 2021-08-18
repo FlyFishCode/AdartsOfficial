@@ -36,6 +36,7 @@ import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js'
 import Download from './view/other/download.js'
 
+//hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
 sessionStorage.setItem('websiteCountryId', 17829);
 
@@ -55,7 +56,7 @@ const App = () => {
             {/* <div className='containerBox'> */}
             <Head userName={userName} loginOut={handleUserName} />
             <Switch>
-                <Route path='/adartsoffice' exact>
+                <Route path='/' exact>
                     <Container userName={userName} />
                 </Route>
                 <Route path='/News'>

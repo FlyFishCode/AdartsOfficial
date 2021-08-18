@@ -36,7 +36,7 @@ const MySetting = () => {
   }, [])
   return (
     <div>
-      <div className='myPageTitle'>{t(172)}</div>
+      <div className='Title'>{t(166)}</div>
       <div className='templateBox'>
         <Row>
           <Col span='2' className='labelTitle'>{t(173)}</Col>

@@ -97,8 +97,8 @@ const MyPage = () => {
               <AdartsMsgSetting />
             </Route>
             {/* <Route path='/MyPageIndex/PropSetting'>
-                <PropSetting />
-              </Route> */}
+              <PropSetting />
+            </Route> */}
             <Route path='/MyPageIndex/PasswordSetting'>
               <PasswordSetting />
             </Route>

@@ -52,7 +52,7 @@ const MyPropList = () => {
   }, [])
   return (
     <div>
-      <div className='myPageTitle'>{t(167)}</div>
+      <div className='Title'>{t(167)}</div>
       <Tabs defaultActiveKey="1" size='large'>
         <TabPane tab={t(176)} key="1">
           <div className='myListBG'>

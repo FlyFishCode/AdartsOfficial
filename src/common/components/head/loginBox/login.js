@@ -30,7 +30,7 @@ const LoginBox = (props) => {
                 sessionStorage.setItem('websiteMemberId', data.memberId);
                 sessionStorage.setItem('websiteToken', data.token);
                 sessionStorage.setItem('websiteCountryId', 17829);
-                history.push('/adartsoffice');
+                history.push('/');
             } else {
                 message.warning(res.data.msg)
             }

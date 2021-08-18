@@ -1,4 +1,4 @@
-import { Tabs } from 'antd';
+import { Tabs, Checkbox, Button, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -13,6 +13,7 @@ const { TabPane } = Tabs;
 const RedeemProp = () => {
   const { t } = useTranslation();
   const [allList, setAllList] = useState([]);
+  const [redeemList, setRedeemList] = useState([]);
   const typeList = [
     { id: 1, title: '全部' },
     { id: 2, title: 'Set' },
@@ -41,12 +42,23 @@ const RedeemProp = () => {
       setAllList([])
     }
   }
+  const onChange = (bool, id) => {
+    if (bool) {
+      setRedeemList(() => [...redeemList, id])
+    } else {
+      redeemList.splice(redeemList.findIndex(i => i === id), 1)
+      setRedeemList([...redeemList])
+    }
+  }
+  const handleClick = () => {
+    console.log(redeemList);
+  }
   useEffect(() => {
     getData()
   }, [])
   return (
     <div>
-      <div className='myPageTitle'>{t(168)}</div>
+      <div className='Title'>{t(168)}</div>
       <Tabs defaultActiveKey='全部' onTabClick={tabClick}>
         {typeList.map(i => {
           return (
@@ -58,6 +70,7 @@ const RedeemProp = () => {
                       <div className='myListBoxImg'><img src={i.img} alt="" /></div>
                       <div>{i.title}</div>
                       <div>{i.time}</div>
+                      <div className='myListCheckbox'><Checkbox onChange={(e) => onChange(e.target.checked, i.id)}></Checkbox></div>
                     </div>
                   )
                 })}
@@ -66,6 +79,7 @@ const RedeemProp = () => {
           )
         })}
       </Tabs>
+      {redeemList.length > 0 ? <Row justify="center" className='RowBox'><Button type="primary" onClick={handleClick}>{t(172)}</Button></Row> : null}
     </div>
   )
 }
