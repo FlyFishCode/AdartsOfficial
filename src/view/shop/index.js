@@ -10,6 +10,7 @@ import MySetting from './MySetting';
 import MyPropList from './MyPropList';
 import RedeemProp from './RedeemProp';
 import ItemBuy from './ItemBuy';
+import ShopIntroduce from './ShopIntroduce';
 
 import './index.css';
 
@@ -85,7 +86,7 @@ const ShopProp = () => {
             <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item>
           </SubMenu>
           <Menu.Item key="/ShopProp/ItemBuy">{t(164)}</Menu.Item>
-          <Menu.Item key="/alpha/download">{t(165)}</Menu.Item>
+          <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
         </Menu>
       </div>
       <Carousel {...setting}>
@@ -113,6 +114,9 @@ const ShopProp = () => {
           </Route>
           <Route path='/ShopProp/ItemBuy'>
             <ItemBuy />
+          </Route>
+          <Route path='/ShopProp/ShopIntroduce'>
+            <ShopIntroduce />
           </Route>
         </Switch>
       </div>

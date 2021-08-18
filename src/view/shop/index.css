@@ -100,6 +100,7 @@
     flex-direction: column;
     text-align: center;
     position: relative;
+    cursor: pointer;
 }
 
 .myListBoxImg {
@@ -171,4 +172,63 @@
 .myListRedeemBox>div:nth-child(2) {
     border-left: 2px solid #fff;
     border-right: 2px solid #fff;
+}
+
+.InfoDomGold {
+    font-size: 18px;
+    text-align: right;
+}
+
+.InfoDomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* .InfoDomInfo>div {
+    margin: 10px 0;
+} */
+
+.InfoDomInfo>div:nth-child(1) {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.InfoDomInfo>div:nth-child(2) {
+    height: 400px;
+    width: 800px;
+    margin: 20px 0;
+}
+
+.InfoDomInfo>div:nth-child(2) img {
+    width: 100%;
+    height: 100%;
+}
+
+.InfoDomInfo>div:nth-child(4) {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    padding: 20px 0;
+    border-top: 2px solid #eee;
+}
+
+.InfoDomInfo>div:nth-child(5) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    padding: 20px 0;
+    border-top: 2px solid #eee;
+}
+
+.ShopIntroduceBox {
+    padding: 50px 0;
+}
+
+.ShopIntroduceTitle {
+    padding: 10px 0;
+    color: #588BFE;
+    background: #E6EAF9;
 }
