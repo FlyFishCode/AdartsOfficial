@@ -9,6 +9,7 @@ import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
 import MyPropList from './MyPropList';
 import RedeemProp from './RedeemProp';
+import ItemBuy from './ItemBuy';
 
 import './index.css';
 
@@ -83,7 +84,7 @@ const ShopProp = () => {
             <Menu.Item key="/ShopProp/MyPropList">{t(167)}</Menu.Item>
             <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item>
           </SubMenu>
-          <Menu.Item key="3">{t(164)}</Menu.Item>
+          <Menu.Item key="/ShopProp/ItemBuy">{t(164)}</Menu.Item>
           <Menu.Item key="/alpha/download">{t(165)}</Menu.Item>
         </Menu>
       </div>
@@ -109,6 +110,9 @@ const ShopProp = () => {
           </Route>
           <Route path='/ShopProp/RedeemProp'>
             <RedeemProp />
+          </Route>
+          <Route path='/ShopProp/ItemBuy'>
+            <ItemBuy />
           </Route>
         </Switch>
       </div>

@@ -1,4 +1,5 @@
-import { Tabs, Checkbox, Button, Row } from 'antd';
+import { Tabs, Checkbox, Button, Row, Modal, Col } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +13,7 @@ const { TabPane } = Tabs;
 
 const RedeemProp = () => {
   const { t } = useTranslation();
+  const [visible, setVisible] = useState(false);
   const [allList, setAllList] = useState([]);
   const [redeemList, setRedeemList] = useState([]);
   const typeList = [
@@ -28,15 +30,12 @@ const RedeemProp = () => {
     { id: 11, title: 'Bull' },
     { id: 12, title: 'Award' },
   ];
-  const getData = () => {
-    setAllList([])
-  }
   const tabClick = (value) => {
     if (value === '1') {
       setAllList([
-        { id: 1, img: a, title: 'AAAAAAAAAAAAAAAAAA', time: new Date().getTime() },
-        { id: 2, img: a, title: 'AAAAAAAAAAAAAAAAAA', time: new Date().getTime() },
-        { id: 3, img: a, title: 'AAAAAAAAAAAAAAAAAA', time: new Date().getTime() },
+        { id: 1, img: a, title: 'AAAAAAAAAAAAAAAAAA', price: 100, time: new Date().getTime() },
+        { id: 2, img: a, title: 'AAAAAAAAAAAAAAAAAA', price: 200, time: new Date().getTime() },
+        { id: 3, img: a, title: 'AAAAAAAAAAAAAAAAAA', price: 300, time: new Date().getTime() }
       ])
     } else {
       setAllList([])
@@ -44,17 +43,24 @@ const RedeemProp = () => {
   }
   const onChange = (bool, id) => {
     if (bool) {
-      setRedeemList(() => [...redeemList, id])
+      setRedeemList(() => [...redeemList, allList.find(i => i.id === id)])
     } else {
       redeemList.splice(redeemList.findIndex(i => i === id), 1)
       setRedeemList([...redeemList])
     }
   }
-  const handleClick = () => {
-    console.log(redeemList);
+  const getTotalPrice = () => {
+    let count = 0;
+    redeemList.forEach(i => {
+      count += i.price
+    })
+    return count;
+  }
+  const handleOk = () => {
+    console.log('handleOk');
   }
   useEffect(() => {
-    getData()
+    tabClick('1')
   }, [])
   return (
     <div>
@@ -64,13 +70,13 @@ const RedeemProp = () => {
           return (
             <TabPane tab={i.title} key={i.id}>
               <div className='myListBG'>
-                {allList.map(i => {
+                {allList.map(j => {
                   return (
-                    <div key={i.id} className='myListBox'>
-                      <div className='myListBoxImg'><img src={i.img} alt="" /></div>
-                      <div>{i.title}</div>
-                      <div>{i.time}</div>
-                      <div className='myListCheckbox'><Checkbox onChange={(e) => onChange(e.target.checked, i.id)}></Checkbox></div>
+                    <div key={j.id} className='myListBox'>
+                      <div className='myListBoxImg'><img src={j.img} alt="" /></div>
+                      <div>{j.title}</div>
+                      <div>{j.time}</div>
+                      <div className='myListCheckbox'><Checkbox onChange={(e) => onChange(e.target.checked, j.id)}></Checkbox></div>
                     </div>
                   )
                 })}
@@ -79,7 +85,45 @@ const RedeemProp = () => {
           )
         })}
       </Tabs>
-      {redeemList.length > 0 ? <Row justify="center" className='RowBox'><Button type="primary" onClick={handleClick}>{t(172)}</Button></Row> : null}
+      {redeemList.length ? <Row justify="center" className='RowBox'><Button type="primary" onClick={() => setVisible(true)}>{t(172)}</Button></Row> : null}
+      <Modal title={t(172)} visible={visible} centered footer={null} width='50%' onCancel={() => setVisible(false)}>
+        <div className='RowBox' style={{ fontWeight: 'bold' }}>{t(179)}</div>
+        {redeemList.map(i => {
+          return (
+            <div className='myListSelectBox' key={i.id}>
+              <div>
+                <div>{i.title}</div>
+                <div>{i.time}</div>
+              </div>
+              <div>
+                <div>{t(181)}：</div>
+                <div>{i.price}</div>
+              </div>
+            </div>
+          )
+        })}
+        <div className='myListRedeemBox'>
+          <div>
+            <div>{t(182)}</div>
+            <div>1111</div>
+          </div>
+          <div>
+            <div>{t(181)}</div>
+            <div>{getTotalPrice()}</div>
+          </div>
+          <div>
+            <div>{t(183)}</div>
+            <div>{100 + getTotalPrice()}</div>
+          </div>
+        </div>
+        <div className='myListTipsBox'><InfoCircleOutlined />{t(180)}</div>
+        <Row justify="center">
+          <Col span='6' style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Button type="primary" onClick={handleOk}>{t(19)}</Button>
+            <Button type="primary" onClick={() => setVisible(false)}>{t(127)}</Button>
+          </Col>
+        </Row>
+      </Modal>
     </div>
   )
 }

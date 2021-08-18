@@ -130,3 +130,45 @@
     width: 20px;
     height: 20px;
 }
+
+.myListSelectBox {
+    display: flex;
+    justify-content: space-evenly;
+    height: 32px;
+    line-height: 32px;
+    border-bottom: 1px solid #efefef;
+}
+
+.myListSelectBox>div {
+    display: flex;
+}
+
+.myListSelectBox>div>div {
+    margin: 0 10px;
+}
+
+.myListTipsBox {
+    margin: 20px 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    color: #57616b;
+}
+
+.myListRedeemBox {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background: #eaedf1;
+    margin: 20px 0;
+    height: 70px;
+}
+
+.myListRedeemBox>div {
+    flex: 1;
+}
+
+.myListRedeemBox>div:nth-child(2) {
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
