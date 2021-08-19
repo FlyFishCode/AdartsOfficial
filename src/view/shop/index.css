@@ -232,3 +232,20 @@
     color: #588BFE;
     background: #E6EAF9;
 }
+
+.ShopIntroduceInfo {
+    color: #B0B0AF;
+}
+
+.ShopIntroduceGoldItem {
+    border: 1px solid #E2E3E5;
+    padding: 10px;
+}
+
+.ShopIntroduceGoldItem>div {
+    padding: 5px 0;
+}
+
+.ShopIntroduceGoldItem span {
+    color: #FC6703;
+}

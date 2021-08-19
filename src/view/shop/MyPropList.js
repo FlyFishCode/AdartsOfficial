@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { useHistory } from 'react-router-dom';
 
 import { Tabs } from 'antd';
 
@@ -11,6 +11,7 @@ const { TabPane } = Tabs;
 
 const MyPropList = () => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [myList, setMyList] = useState([]);
   const [allList, setAllList] = useState([]);
   const typeList = [
@@ -47,8 +48,15 @@ const MyPropList = () => {
       { id: 5, img: a, title: 'AAAAAAAAAAAAAAAAAA', time: new Date().getTime() }
     ])
   }
+  const handleClick = (id) => {
+    history.push({
+      pathname: '/ShopProp/ItemBuy',
+      search: `?id=${id}`
+    })
+  };
   useEffect(() => {
     getData()
+    tabClick('1')
   }, [])
   return (
     <div>
@@ -58,7 +66,7 @@ const MyPropList = () => {
           <div className='myListBG'>
             {myList.map(i => {
               return (
-                <div key={i.id} className='myListBox'>
+                <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
                   <div className='myListBoxImg'><img src={i.img} alt="" /></div>
                   <div>{i.title}</div>
                   <div>{i.time}</div>
@@ -75,7 +83,7 @@ const MyPropList = () => {
                   <div className='myListBG'>
                     {allList.map(i => {
                       return (
-                        <div key={i.id} className='myListBox'>
+                        <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
                           <div className='myListBoxImg'><img src={i.img} alt="" /></div>
                           <div>{i.title}</div>
                           <div>{i.time}</div>

@@ -21,26 +21,10 @@ const ShopPropIndex = () => {
     ])
   }
   const handleClick = (type, id) => {
-    switch (type) {
-      case 1:
-        history.push({
-          pathname: '',
-          search: { id }
-        })
-        break;
-      case 2:
-        history.push({
-          pathname: '',
-          search: { id }
-        })
-        break;
-      default:
-        history.push({
-          pathname: '',
-          search: { id }
-        })
-        break;
-    }
+    history.push({
+      pathname: '/ShopProp/ItemBuy',
+      search: `?id=${id}`
+    })
   }
   useEffect(() => {
     getData()

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs, Radio, Row, Col, Button, Modal } from 'antd';
@@ -7,12 +7,14 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 
 import a from '@/assets/img/a.jpg';
 
+import { dealUrlHash } from '@/common/Utlis';
 
 const { TabPane } = Tabs;
 
 
 const ItemBuy = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [info, setInfo] = useState(false);
   const [infoId, setInfoId] = useState(0);
   const [value, setValue] = useState(1);
@@ -97,11 +99,14 @@ const ItemBuy = () => {
   }
   const handleClick = (id) => {
     setInfo(true);
-    setInfoId(id);
+    setInfoId(Number(id));
   }
   useEffect(() => {
-    tabClick('1')
-  }, [])
+    tabClick('1');
+    if (location?.search) {
+      handleClick(dealUrlHash(location))
+    }
+  }, [location])
   return (
     <div>
       <div className='Title'>{t(164)}</div>
