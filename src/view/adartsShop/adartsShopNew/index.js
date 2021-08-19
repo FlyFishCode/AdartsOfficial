@@ -5,7 +5,7 @@ import { newShopListHttp, countryListHttp } from '@/api';
 import { setCountryIconPosition } from '@/common/Utlis';
 import { useHistory } from 'react-router-dom';
 
-import NoData from '@/common/components/noData';
+import NoData from '@/common/components/NoData';
 import A1 from '@/assets/img/A1.png';
 import W1 from '@/assets/img/W1.png';
 import shopImg from '@/assets/img/shop.png';

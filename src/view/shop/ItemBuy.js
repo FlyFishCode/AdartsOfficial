@@ -8,6 +8,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import a from '@/assets/img/a.jpg';
 
 import { dealUrlHash } from '@/common/Utlis';
+import NoData from '@/common/components/NoData';
 
 const { TabPane } = Tabs;
 
@@ -19,6 +20,8 @@ const ItemBuy = () => {
   const [infoId, setInfoId] = useState(0);
   const [value, setValue] = useState(1);
   const [allList, setAllList] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [matchPlayer, setMatchPlayer] = useState([]);
   const typeList = [
     { id: 1, title: '全部' },
     { id: 2, title: 'Set' },
@@ -33,26 +36,48 @@ const ItemBuy = () => {
     { id: 11, title: 'Bull' },
     { id: 12, title: 'Award' },
   ];
+  const FriendListDom = (list) => {
+    const [value, setValue] = useState(1);
+    return (
+      <div className='friendStyle'>
+        <div>
+          {list.map(i => {
+            return (
+              <div key={i.id}>{i.name}</div>
+            )
+          })}
+        </div>
+        <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
+          {list.map(i => {
+            return (
+              <div key={i.id}>
+                <Radio value={i.id}>{t(197)}</Radio>
+              </div>
+            )
+          })}
+        </Radio.Group>
+      </div>
+    )
+  }
   const InfoDom = () => {
-    const [visible, setVisible] = useState(false);
+    const [buyVisible, setBuyVisible] = useState(false);
+    const [sendVisible, setSendVisible] = useState(false);
+    const [askVisible, setAskVisible] = useState(false);
     const obj = allList.find(i => i.id === infoId);
-    const onBuyClick = () => {
-      setVisible(true)
-    }
-    const onSendGift = () => {
-      console.log('onSendGift');
-    }
-    const onAskGift = () => {
-      console.log('onAskGift');
-    }
     const onBuyAndSetting = () => {
       console.log('onBuyAndSetting');
     }
     const onBuyConfirm = () => {
       console.log('onBuyConfirm');
     }
+    const onSendOk = () => {
+      console.log('onSendOk')
+    }
+    const onAskOk = () => {
+      console.log('onAskOk')
+    }
     return (
-      <div>
+      <div style={{ padding: '50px' }}>
         <div className='InfoDomGold'>{t(185)}  |  {100}</div>
         <div className='InfoDomInfo'>
           <div>{t(184)}</div>
@@ -69,17 +94,40 @@ const ItemBuy = () => {
             <div>GOLD : {200 * value}</div>
           </div>
           <Row style={{ width: '800px', textAlign: 'center' }}>
-            <Col span='8'><Button danger onClick={onBuyClick}>{t(178)}</Button></Col>
-            <Col span='8'><Button danger onClick={onSendGift}>{t(186)}</Button></Col>
-            <Col span='8'><Button danger onClick={onAskGift}>{t(187)}</Button></Col>
+            <Col span='8'><Button danger onClick={() => setBuyVisible(true)}>{t(178)}</Button></Col>
+            <Col span='8'><Button danger onClick={() => setSendVisible(true)}>{t(186)}</Button></Col>
+            <Col span='8'><Button danger onClick={() => setAskVisible(true)}>{t(187)}</Button></Col>
           </Row>
         </div>
-        <Modal title={t(164)} visible={visible} footer={null} width='40%' onCancel={() => setVisible(false)} centered>
+        {/* 购买Dialog */}
+        <Modal title={t(164)} visible={buyVisible} footer={null} width='40%' centered onCancel={() => setBuyVisible(false)}>
           <div style={{ fontSize: '80px', textAlign: 'center' }}><InfoCircleOutlined /></div>
           <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{obj.title}]</span>?</div>
           <Row style={{ textAlign: 'center', margin: '30px 0' }}>
             <Col span='12'><Button danger onClick={onBuyAndSetting}>{t(189)}</Button></Col>
             <Col span='12'><Button danger onClick={onBuyConfirm}>{t(190)}</Button></Col>
+          </Row>
+        </Modal>
+        {/* 赠送Dialog */}
+        <Modal title={t(186)} visible={sendVisible} footer={null} width='40%' centered onCancel={() => setSendVisible(false)}>
+          <Tabs defaultActiveKey="1" size='large'>
+            <TabPane tab={t(93)} key="1">
+              {friends.length ? FriendListDom(friends) : <NoData />}
+            </TabPane>
+            <TabPane tab={t(196)} key="2">
+              {matchPlayer.length ? FriendListDom(matchPlayer) : <NoData />}
+            </TabPane>
+          </Tabs>
+          <Row justify='center' className='RowBox'>
+            <Button danger onClick={onSendOk}>{t(19)}</Button>
+          </Row>
+        </Modal>
+        {/* 索要Dialog */}
+        <Modal title={t(187)} visible={askVisible} footer={null} width='40%' centered onCancel={() => setAskVisible(false)}>
+          <div style={{ fontSize: '80px', textAlign: 'center' }}><InfoCircleOutlined /></div>
+          <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{obj.title}]</span>?</div>
+          <Row justify='center' className='RowBox'>
+            <Button danger onClick={onAskOk}>{t(19)}</Button>
           </Row>
         </Modal>
       </div>
@@ -101,8 +149,22 @@ const ItemBuy = () => {
     setInfo(true);
     setInfoId(Number(id));
   }
+  const getData = () => {
+    setFriends([
+      { id: 1, name: '段狂胤', type: 1 },
+      { id: 2, name: '白莲花', type: 2 },
+      { id: 3, name: '小庄子', type: 1 },
+    ])
+    setMatchPlayer([
+      { id: 1, name: '张自然', type: 1 },
+      { id: 2, name: '李逍遥', type: 2 },
+      { id: 3, name: '刘长安', type: 1 },
+      { id: 4, name: '王富贵', type: 1 },
+    ])
+  }
   useEffect(() => {
     tabClick('1');
+    getData()
     if (location?.search) {
       handleClick(dealUrlHash(location))
     }

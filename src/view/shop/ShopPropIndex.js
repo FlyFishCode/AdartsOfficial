@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Row, Col, Button } from 'antd';
-// import NoData from '@/common/components/noData';
+// import NoData from '@/common/components/NoData';
 
 // const { Option } = Select;
 

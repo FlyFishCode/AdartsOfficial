@@ -194,5 +194,7 @@ const JT = {
     "193": '什么是Item Shop？',
     "194": 'Gold Item 分类 & Item 种类',
     "195": '购买Item & Custom(Item设定与取消)',
+    "196": '最近对战对手',
+    "197": '选择',
 };
 export default JT;
