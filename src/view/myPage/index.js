@@ -6,8 +6,10 @@ import { Row, Col } from 'antd';
 import MyPageIndex from './MyPageIndex';
 // import AnyWhere from './AnyWhere';
 // import GameInfo from './GameInfo';
-// import FriendsChat from './FriendsChat';
 // import OtherSetting from './OtherSetting';
+
+import FriendsList from './FriendsChat/FriendsList';
+import AddFriends from './FriendsChat/AddFriends';
 
 import AllGameData from './GameInfo/AllGameData';
 import About30Game from './GameInfo/30Game';
@@ -65,8 +67,8 @@ const MyPage = () => {
           <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/About30Game'>{t(64)}</div>
           <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
 
-          {/* <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/NewShop'>{t(67)}</div>
-            <div className={activeClass === '6' ? 'activeClass' : null} active='6' path='/MyPageIndex/NewShop'>{t(68)}</div> */}
+          <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/FriendsList'>{t(67)}</div>
+          <div className={activeClass === '6' ? 'activeClass' : null} active='6' path='/MyPageIndex/AddFriends'>{t(68)}</div>
           <div className={activeClass === '7' ? 'activeClass' : null} active='7' path='/MyPageIndex/AdartsCardSetting'>{t(69)}</div>
           <div className={activeClass === '8' ? 'activeClass' : null} active='8' path='/MyPageIndex/AccountInfoSetting'>{t(70)}</div>
           <div className={activeClass === '9' ? 'activeClass' : null} active='9' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
@@ -101,6 +103,13 @@ const MyPage = () => {
             </Route> */}
             <Route path='/MyPageIndex/PasswordSetting'>
               <PasswordSetting />
+            </Route>
+
+            <Route path='/MyPageIndex/FriendsList'>
+              <FriendsList />
+            </Route>
+            <Route path='/MyPageIndex/AddFriends'>
+              <AddFriends />
             </Route>
           </Switch>
         </Col>

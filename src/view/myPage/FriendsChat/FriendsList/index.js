@@ -46,7 +46,7 @@ const FriendsList = () => {
       render: (text, row, index) => {
         return (
           <div className='handleBox'>
-            <Rate count='1' value={dataList[index].value} onChange={() => handleRateChange(index)} />
+            <Rate count='1' value={text} onChange={() => handleRateChange(index)} />
             <div><Button size='small' icon={<CloseOutlined />} /></div>
           </div>
         )
@@ -54,11 +54,9 @@ const FriendsList = () => {
     }
   ];
   const handleRateChange = (index) => {
-    setDataList((dataList) => {
-      dataList[index].value = Number(!dataList[index].value)
-      return dataList
-    })
-    console.log(dataList);
+    console.log(index);
+    dataList[index].value = Number(!dataList[index].value);
+    setDataList([...dataList]);
   }
   const handleSearch = () => {
     console.log(1);
@@ -67,7 +65,7 @@ const FriendsList = () => {
     console.log(1);
   }
   const handleClick = () => {
-    const ele = document.getElementById('AddFriends')
+    const ele = document.getElementById('AddFriends');
     ele && ele.scrollIntoView({
       behavior: "smooth", // 默认 auto
       block: "start", // 默认 center
@@ -163,7 +161,7 @@ const FriendsList = () => {
       <div className='myPageTitle' id='FriendsList'>{t(67)}</div>
       <Row justify="center">
         <Col>
-          <Select defaultValue="1" onChange={handleChange}>
+          <Select defaultValue="1" style={{ width: 150 }} onChange={handleChange}>
             <Option value="1">{t(92)}</Option>
             <Option value="2">{t(93)}</Option>
             <Option value="3">{t(94)}</Option>

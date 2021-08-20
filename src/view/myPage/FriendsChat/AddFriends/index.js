@@ -219,9 +219,9 @@ const AddFriends = () => {
     <div>
       <div className='myPageTitle' id='AddFriends'>{t(68)}</div>
       <Row>
-        <Col span='4' className='AddFriendLabel'>{t(122)}</Col>
-        <Col span='12'><Search placeholder="input search text" allowClear onSearch={handleSearch} /></Col>
-        <Col span='5' offset='2' className='AddFriendBtn'>
+        <Col span='6' className='AddFriendLabel'>{t(122)}</Col>
+        <Col span='10' offset='1'><Search placeholder="input search text" allowClear onSearch={handleSearch} /></Col>
+        <Col span='5' offset='1' className='AddFriendBtn'>
           <Button type={flag ? 'primary' : ''} onClick={() => setFlag((flag) => !flag)}>{t(123)}</Button>
           <Button type={flag ? '' : 'primary'} onClick={() => setFlag((flag) => !flag)}>{t(124)}</Button>
         </Col>
