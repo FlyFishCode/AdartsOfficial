@@ -36,45 +36,37 @@ const ItemBuy = () => {
     { id: 11, title: 'Bull' },
     { id: 12, title: 'Award' },
   ];
-  const FriendListDom = (list) => {
-    const [value, setValue] = useState(1);
-    return (
-      <div className='friendStyle'>
-        <div>
-          {list.map(i => {
-            return (
-              <div key={i.id}>{i.name}</div>
-            )
-          })}
-        </div>
-        <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
-          {list.map(i => {
-            return (
-              <div key={i.id}>
-                <Radio value={i.id}>{t(197)}</Radio>
-              </div>
-            )
-          })}
-        </Radio.Group>
-      </div>
-    )
-  }
   const InfoDom = () => {
     const [buyVisible, setBuyVisible] = useState(false);
     const [sendVisible, setSendVisible] = useState(false);
     const [askVisible, setAskVisible] = useState(false);
     const obj = allList.find(i => i.id === infoId);
+
+    const FriendListDom = (type, list) => {
+      const handleGiftClick = (id) => {
+        console.log(type, id)
+      }
+      return (
+        <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+          {list.length && list.map(i => {
+            return (
+              <div key={i.id} className='friendStyle'>
+                <div className='friendImgBox'>
+                  <div><img src={i.img} alt="" /></div>
+                  <div>{i.name}</div>
+                </div>
+                <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.id)}>{t(186)}</Button></div>
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
     const onBuyAndSetting = () => {
       console.log('onBuyAndSetting');
     }
     const onBuyConfirm = () => {
       console.log('onBuyConfirm');
-    }
-    const onSendOk = () => {
-      console.log('onSendOk')
-    }
-    const onAskOk = () => {
-      console.log('onAskOk')
     }
     return (
       <div style={{ padding: '50px' }}>
@@ -112,22 +104,28 @@ const ItemBuy = () => {
         <Modal title={t(186)} visible={sendVisible} footer={null} width='40%' centered onCancel={() => setSendVisible(false)}>
           <Tabs defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
-              {friends.length ? FriendListDom(friends) : <NoData />}
+              {friends.length ? FriendListDom(1, friends) : <NoData />}
             </TabPane>
             <TabPane tab={t(196)} key="2">
-              {matchPlayer.length ? FriendListDom(matchPlayer) : <NoData />}
+              {matchPlayer.length ? FriendListDom(1, matchPlayer) : <NoData />}
             </TabPane>
           </Tabs>
           <Row justify='center' className='RowBox'>
-            <Button danger onClick={onSendOk}>{t(19)}</Button>
+            <Button danger onClick={() => setSendVisible(false)}>{t(127)}</Button>
           </Row>
         </Modal>
         {/* 索要Dialog */}
         <Modal title={t(187)} visible={askVisible} footer={null} width='40%' centered onCancel={() => setAskVisible(false)}>
-          <div style={{ fontSize: '80px', textAlign: 'center' }}><InfoCircleOutlined /></div>
-          <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{obj.title}]</span>?</div>
+          <Tabs defaultActiveKey="1" size='large'>
+            <TabPane tab={t(93)} key="1">
+              {friends.length ? FriendListDom(2, friends) : <NoData />}
+            </TabPane>
+            <TabPane tab={t(196)} key="2">
+              {matchPlayer.length ? FriendListDom(2, matchPlayer) : <NoData />}
+            </TabPane>
+          </Tabs>
           <Row justify='center' className='RowBox'>
-            <Button danger onClick={onAskOk}>{t(19)}</Button>
+            <Button danger onClick={() => setAskVisible(false)}>{t(127)}</Button>
           </Row>
         </Modal>
       </div>
@@ -151,15 +149,15 @@ const ItemBuy = () => {
   }
   const getData = () => {
     setFriends([
-      { id: 1, name: '段狂胤', type: 1 },
-      { id: 2, name: '白莲花', type: 2 },
-      { id: 3, name: '小庄子', type: 1 },
+      { id: 1, name: '段狂胤', img: a, type: 1 },
+      { id: 2, name: '白莲花', img: a, type: 2 },
+      { id: 3, name: '小庄子', img: a, type: 1 },
     ])
     setMatchPlayer([
-      { id: 1, name: '张自然', type: 1 },
-      { id: 2, name: '李逍遥', type: 2 },
-      { id: 3, name: '刘长安', type: 1 },
-      { id: 4, name: '王富贵', type: 1 },
+      { id: 1, name: '张自然', img: a, type: 1 },
+      { id: 2, name: '李逍遥', img: a, type: 2 },
+      { id: 3, name: '刘长安', img: a, type: 1 },
+      { id: 4, name: '王富贵', img: a, type: 1 },
     ])
   }
   useEffect(() => {

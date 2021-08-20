@@ -253,9 +253,23 @@
 .friendStyle {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     border: 1px solid #eee;
     padding: 10px 0;
     margin: 5px 0;
-    max-height: 300px;
-    overflow-y: auto;
+}
+
+.friendImgBox {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    align-items: center;
+}
+
+.friendImgBox>div:nth-child(1) {
+    height: 50px;
+}
+
+.friendImgBox img {
+    height: 100%;
 }
