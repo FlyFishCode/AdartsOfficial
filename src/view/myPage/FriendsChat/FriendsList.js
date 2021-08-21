@@ -3,10 +3,11 @@ import { Input, Button, Select, Row, Col, Table, Rate } from 'antd';
 import { CloseOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next';
 
-import { friendsListHttp } from '@/api';
+import { friendsListHttp, starSettingHttp } from '@/api';
 
 const { Search } = Input;
 const { Option } = Select;
+
 const FriendsList = () => {
   const { t } = useTranslation();
   const [dataList, setDataList] = useState([]);
@@ -48,16 +49,23 @@ const FriendsList = () => {
       render: (text, row, index) => {
         return (
           <div className='handleBox'>
-            <Rate count='1' value={text} onChange={() => handleRateChange(index)} />
+            <Rate count='1' value={text} onChange={() => handleRateChange(row.memberRelationshipId, row.star)} />
             <div><Button size='small' icon={<CloseOutlined />} /></div>
           </div>
         )
       }
     }
   ];
-  const handleRateChange = (index) => {
-    dataList[index].value = Number(!dataList[index].value);
-    setDataList([...dataList]);
+  const handleRateChange = (memberRelationshipId, star) => {
+    const obj = {
+      memberRelationshipId,
+      star: Number(Boolean(star))
+    }
+    starSettingHttp(obj).then(res => {
+      if (res.data.code === 100) {
+        getData()
+      }
+    })
   }
   const handleClick = () => {
     const ele = document.getElementById('AddFriends');
@@ -67,9 +75,10 @@ const FriendsList = () => {
       inline: "nearest", // 默认 nearest
     })
   }
-  const getData = (searchValue, pageNum) => {
+  const getData = (pageNum) => {
     const obj = {
-      type: 1,
+      type: selectValue,
+      status: 0,
       memberId: sessionStorage.getItem('websiteMemberId'),
       friendName: searchValue,
       pageNum: pageNum,
@@ -83,19 +92,20 @@ const FriendsList = () => {
     })
   }
   useEffect(() => {
-    getData(searchValue, pageNum)
-  }, [searchValue, pageNum])
+    getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNum])
   return (
     <div>
       <div className='myPageTitle' id='FriendsList'>{t(67)}</div>
       <Row justify="center">
         <Col>
           <Select value={selectValue} style={{ width: 150 }} onChange={(value) => setSelectValue(value)}>
-            <Option value={1}>{t(92)}</Option>
-            <Option value={2}>{t(93)}</Option>
-            <Option value={3}>{t(94)}</Option>
+            <Option value={0}>{t(92)}</Option>
+            <Option value={1}>{t(93)}</Option>
+            <Option value={2}>{t(94)}</Option>
           </Select>
-          <Search placeholder="input search text" onChange={(e) => setSearchValue(e.target.value)} onSearch={(value) => value && getData()} style={{ width: 200 }} allowClear />
+          <Search placeholder="input search text" onChange={(e) => setSearchValue(e.target.value)} onSearch={() => getData()} style={{ width: 200 }} allowClear />
           <Button type="primary" onClick={handleClick}>{t(68)}</Button>
         </Col>
       </Row>

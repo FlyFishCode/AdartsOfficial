@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import JT from './locales/zh-jt'
 import FT from './locales/zh-ft'
 import EN from './locales/zh-en'
+import JP from './locales/zh-jp';
 
 const Language = {
     zh: {
@@ -13,6 +14,9 @@ const Language = {
     },
     en: {
         translation: EN
+    },
+    jp: {
+        translation: JP
     }
 }
 

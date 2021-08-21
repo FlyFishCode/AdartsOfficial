@@ -90,6 +90,7 @@ const Head = (prop) => {
             <Option value="jt">简体中文</Option>
             <Option value="ft">繁体中文</Option>
             <Option value="en">英文</Option>
+            <Option value="jp">日语</Option>
           </Select>
         </div>
       </Col>

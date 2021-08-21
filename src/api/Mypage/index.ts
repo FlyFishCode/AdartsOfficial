@@ -40,6 +40,8 @@ const aboutSevenPlayerList = 'friend/warFriends';
 const handleFriends = 'friend/agreeFriend';
 // 好友列表
 const friendsList = 'friend/friendList';
+// 星星 好友
+const starSetting = 'friend/starFriend';
 
 export {
   myPageIndexUserCardInfo,
@@ -56,5 +58,6 @@ export {
   adartsMainCard,
   aboutSevenPlayerList,
   handleFriends,
-  friendsList
+  friendsList,
+  starSetting
 }

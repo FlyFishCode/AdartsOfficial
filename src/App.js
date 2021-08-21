@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
-import { Carousel } from 'antd';
+import { Carousel, Badge, Button, Calendar } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
 import { setCountryIconPosition } from '@/common/Utlis';
@@ -10,6 +10,9 @@ import W1 from '@/assets/img/W1.png';
 import productA from '@/assets/img/productA.jpg';
 import productW from '@/assets/img/productW.jpg';
 import shopImg from '@/assets/img/shop.png';
+import icon1 from '@/assets/img/icon1.jpeg';
+import icon2 from '@/assets/img/icon2.jpeg';
+
 import 'antd/dist/antd.css';
 import './App.css';
 
@@ -119,7 +122,7 @@ const Container = ({ userName }) => {
                 {userName ? <UserCard /> : ''}
                 <News />
                 {/* <PlayerDes /> */}
-                {/* <Activity /> */}
+                <Activity />
                 <Video />
                 <Product />
             </div>
@@ -416,101 +419,101 @@ const Product = () => {
         </div>
     )
 }
-// const Activity = () => {
-//     const { t } = useTranslation();
-//     const [list, setList] = useState([])
-//     const getDate = () => {
-//         // indexNewsListHttp().then(res => {
-//         //     console.log((res));
-//         // })
-//         setList(
-//             [
-//                 {
-//                     id: 1, count: 99, date: '2021-6-3', matchList: [
-//                         { type: 1, count: 2 },
-//                         { type: 2, count: 5 }
-//                     ]
-//                 },
-//                 {
-//                     id: 2, count: 4, date: '2021-6-4', matchList: [
-//                         { type: 1, count: 2 },
-//                         { type: 2, count: 5 }
-//                     ]
-//                 },
-//                 {
-//                     id: 3, count: 5, date: '2021-6-5', matchList: [
-//                         { type: 1, count: 2 },
-//                         { type: 2, count: 5 }
-//                     ]
-//                 },
-//                 {
-//                     id: 6, count: 5, date: '2021-6-17', matchList: [
-//                         { type: 1, count: 2 },
-//                         { type: 2, count: 5 }
-//                     ]
-//                 },
-//             ]
-//         )
-//     }
-//     useEffect(() => {
-//         getDate()
-//     }, [])
-//     const getListData = (date) => {
-//         const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
-//         const today = `${year}-${month}-${day}`;
-//         return list.filter(i => i.date === today)
-//     }
-//     const handleDayClick = (count) => {
-//         console.log(count);
-//     }
-//     const dateChange = (date) => {
-//         const obj = {
-//             year: date._d.getFullYear(),
-//             month: date._d.getMonth() + 1
-//         };
-//         console.log(obj);
-//     }
-//     const dateCellRender = (value) => {
-//         const list = getListData(value)
-//         return (
-//             <div>
-//                 {list.map((item, index) => {
-//                     return (
-//                         <div key={index} className='badgeBox'>
-//                             {item.matchList.map((ele, jndex) => {
-//                                 return (
-//                                     <div key={jndex} onClick={() => handleDayClick(item.count)}>
-//                                         <Badge count={item.count} >
-//                                             {ele.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
-//                                         </Badge>
-//                                     </div>
-//                                 )
-//                             })}
-//                         </div>
-//                     )
-//                 })}
-//             </div>
-//         )
-//     }
-//     return (
-//         <div className='activity'>
-//             <h1><GlobalOutlined />{t(13)}</h1>
-//             <div className='activityContainer'>
-//                 <div className='activityOtherBox'>
-//                     <div className='iconBtnBox'>
-//                         <img src={icon1} alt="" />
-//                         <div className='activityBtnBox'><Button type="primary" block>{t(7)}</Button></div>
-//                     </div>
-//                     <div className='iconBtnBox'>
-//                         <img src={icon2} alt="" />
-//                         <div className='activityBtnBox'><Button type="primary" block>{t(8)}</Button></div>
-//                     </div>
-//                 </div>
-//                 <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />
-//             </div>
-//         </div>
-//     )
-// }
+const Activity = () => {
+    const { t } = useTranslation();
+    const [list, setList] = useState([])
+    const getDate = () => {
+        // indexNewsListHttp().then(res => {
+        //     console.log((res));
+        // })
+        setList(
+            [
+                {
+                    id: 1, count: 99, date: '2021-6-3', matchList: [
+                        { type: 1, count: 2 },
+                        { type: 2, count: 5 }
+                    ]
+                },
+                {
+                    id: 2, count: 4, date: '2021-6-4', matchList: [
+                        { type: 1, count: 2 },
+                        { type: 2, count: 5 }
+                    ]
+                },
+                {
+                    id: 3, count: 5, date: '2021-6-5', matchList: [
+                        { type: 1, count: 2 },
+                        { type: 2, count: 5 }
+                    ]
+                },
+                {
+                    id: 6, count: 5, date: '2021-6-17', matchList: [
+                        { type: 1, count: 2 },
+                        { type: 2, count: 5 }
+                    ]
+                },
+            ]
+        )
+    }
+    useEffect(() => {
+        getDate()
+    }, [])
+    const getListData = (date) => {
+        const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
+        const today = `${year}-${month}-${day}`;
+        return list.filter(i => i.date === today)
+    }
+    const handleDayClick = (count) => {
+        console.log(count);
+    }
+    const dateChange = (date) => {
+        const obj = {
+            year: date._d.getFullYear(),
+            month: date._d.getMonth() + 1
+        };
+        console.log(obj);
+    }
+    const dateCellRender = (value) => {
+        const list = getListData(value)
+        return (
+            <div>
+                {list.map((item, index) => {
+                    return (
+                        <div key={index} className='badgeBox'>
+                            {item.matchList.map((ele, jndex) => {
+                                return (
+                                    <div key={jndex} onClick={() => handleDayClick(item.count)}>
+                                        <Badge count={item.count} >
+                                            {ele.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
+                                        </Badge>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+    return (
+        <div className='activity'>
+            <h1><GlobalOutlined />{t(13)}</h1>
+            <div className='activityContainer'>
+                <div className='activityOtherBox'>
+                    <div className='iconBtnBox'>
+                        <img src={icon1} alt="" />
+                        <div className='activityBtnBox'><Button type="primary" block>{t(7)}</Button></div>
+                    </div>
+                    <div className='iconBtnBox'>
+                        <img src={icon2} alt="" />
+                        <div className='activityBtnBox'><Button type="primary" block>{t(8)}</Button></div>
+                    </div>
+                </div>
+                <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />
+            </div>
+        </div>
+    )
+}
 
 const Video = () => {
     const [TVData, setTVData] = useState({});
