@@ -33,6 +33,13 @@ const adartsCardDelete = 'websitsMember/cardUnbundling';
 // 设置主卡
 const adartsMainCard = 'websitsMember/masterCard';
 
+// 好友列表
+// 近七日对战玩家
+const aboutSevenPlayerList = 'friend/warFriends';
+// 接受、拒绝好友
+const handleFriends = 'friend/agreeFriend';
+// 好友列表
+const friendsList = 'friend/friendList';
 
 export {
   myPageIndexUserCardInfo,
@@ -46,5 +53,8 @@ export {
   adartsCardList,
   adartsCardDelete,
   adartsBind,
-  adartsMainCard
+  adartsMainCard,
+  aboutSevenPlayerList,
+  handleFriends,
+  friendsList
 }

@@ -196,5 +196,6 @@ const JT = {
     "195": '购买Item & Custom(Item设定与取消)',
     "196": '最近对战对手',
     "197": '选择',
+    "198": '最后游玩时间',
 };
 export default JT;

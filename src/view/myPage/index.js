@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'antd';
 
 import MyPageIndex from './MyPageIndex';
-// import AnyWhere from './AnyWhere';
+import AnyWhere from './AnyWhere';
 // import GameInfo from './GameInfo';
 // import OtherSetting from './OtherSetting';
 
@@ -63,16 +63,15 @@ const MyPage = () => {
       <Row className='myPage'>
         <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
-          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AllGameData'>{t(21)}</div>
-          <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/About30Game'>{t(64)}</div>
-          <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
-
-          <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/FriendsList'>{t(67)}</div>
-          <div className={activeClass === '6' ? 'activeClass' : null} active='6' path='/MyPageIndex/AddFriends'>{t(68)}</div>
-          <div className={activeClass === '7' ? 'activeClass' : null} active='7' path='/MyPageIndex/AdartsCardSetting'>{t(69)}</div>
-          <div className={activeClass === '8' ? 'activeClass' : null} active='8' path='/MyPageIndex/AccountInfoSetting'>{t(70)}</div>
-          <div className={activeClass === '9' ? 'activeClass' : null} active='9' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
-          {/* <div className={activeClass === '10' ? 'activeClass' : null} active='10' path='/MyPageIndex/PropSetting'>{t(72)}</div> */}
+          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AnyWhere'>AnyWhere</div>
+          <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/AllGameData'>{t(21)}</div>
+          <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/About30Game'>{t(64)}</div>
+          <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
+          <div className={activeClass === '6' ? 'activeClass' : null} active='6' path='/MyPageIndex/FriendsList'>{t(67)}</div>
+          <div className={activeClass === '7' ? 'activeClass' : null} active='7' path='/MyPageIndex/AddFriends'>{t(68)}</div>
+          <div className={activeClass === '8' ? 'activeClass' : null} active='8' path='/MyPageIndex/AdartsCardSetting'>{t(69)}</div>
+          <div className={activeClass === '9' ? 'activeClass' : null} active='9' path='/MyPageIndex/AccountInfoSetting'>{t(70)}</div>
+          <div className={activeClass === '10' ? 'activeClass' : null} active='10' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
           <div className={activeClass === '11' ? 'activeClass' : null} active='11' path='/MyPageIndex/PasswordSetting'>{t(73)}</div>
         </Col>
         <Col span='19' offset='1'>
@@ -82,6 +81,9 @@ const MyPage = () => {
             </Route>
             <Route path='/MyPageIndex/AllGameData'>
               <AllGameData />
+            </Route>
+            <Route path='/MyPageIndex/AnyWhere'>
+              <AnyWhere />
             </Route>
             <Route path='/MyPageIndex/About30Game'>
               <About30Game />
@@ -104,7 +106,6 @@ const MyPage = () => {
             <Route path='/MyPageIndex/PasswordSetting'>
               <PasswordSetting />
             </Route>
-
             <Route path='/MyPageIndex/FriendsList'>
               <FriendsList />
             </Route>

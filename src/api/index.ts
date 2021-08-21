@@ -19,7 +19,10 @@ import {
 	adartsCardList,
 	adartsCardDelete,
 	adartsBind,
-	adartsMainCard
+	adartsMainCard,
+	aboutSevenPlayerList,
+	handleFriends,
+	friendsList
 } from './mypage';
 
 // adarts店铺
@@ -117,6 +120,18 @@ const about30GameListHttp = (data:any) =>{
 // 我的页面整体数据
 const allGameDataHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${allGameData}`, qs.stringify(data));
+}
+// 近七日好友列表
+const aboutSevenPlayerListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${aboutSevenPlayerList}`, qs.stringify(data));
+}
+// 接受、拒绝好友
+const handleFriendsHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${handleFriends}`, qs.stringify(data));
+}
+// 好友列表
+const friendsListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${friendsList}`, qs.stringify(data));
 }
 // Award记录数据
 const awardHistoryDataHttp = (data:any) =>{
@@ -254,5 +269,8 @@ export {
 		dartsListHttp,
 		dartsInfoHttp,
 		adartsMainCardHttp,
-		shopInfoHttp
+		shopInfoHttp,
+		aboutSevenPlayerListHttp,
+		handleFriendsHttp,
+		friendsListHttp
 }

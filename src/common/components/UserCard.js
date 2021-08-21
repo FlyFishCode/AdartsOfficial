@@ -44,9 +44,9 @@ const UserCard = (props) => {
         }
     }
     const render = (list) => {
-        list.forEach((i, index) => {
+        list.length && list.forEach((i, index) => {
             const dom = echarts.init(document.querySelector(`.Editor${index}`));
-            dom && dom.setOption({
+            dom.setOption({
                 series: [{
                     type: 'gauge',
                     startAngle: 90,
