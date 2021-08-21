@@ -36,6 +36,8 @@ const adartsMainCard = 'websitsMember/masterCard';
 // 好友列表
 // 近七日对战玩家
 const aboutSevenPlayerList = 'friend/warFriends';
+// 添加好友
+const addFriends = 'friend/addFriend';
 // 接受、拒绝好友
 const handleFriends = 'friend/agreeFriend';
 // 好友列表
@@ -59,5 +61,6 @@ export {
   aboutSevenPlayerList,
   handleFriends,
   friendsList,
-  starSetting
+  starSetting,
+  addFriends
 }

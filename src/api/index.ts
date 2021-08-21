@@ -23,7 +23,8 @@ import {
 	aboutSevenPlayerList,
 	handleFriends,
 	friendsList,
-	starSetting
+	starSetting,
+	addFriends
 } from './mypage';
 
 // adarts店铺
@@ -129,6 +130,10 @@ const aboutSevenPlayerListHttp = (data:any) =>{
 // 星星 好友
 const starSettingHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${starSetting}`, qs.stringify(data));
+}
+// 请求好友
+const addFriendsHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${addFriends}`, qs.stringify(data));
 }
 // 接受、拒绝好友
 const handleFriendsHttp = (data:any) =>{
@@ -278,5 +283,6 @@ export {
 		aboutSevenPlayerListHttp,
 		handleFriendsHttp,
 		friendsListHttp,
-		starSettingHttp
+		starSettingHttp,
+		addFriendsHttp
 }

@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Input, Button, Select, Row, Col, Table, Rate } from 'antd';
-import { CloseOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next';
 
 import { friendsListHttp, starSettingHttp } from '@/api';
@@ -11,7 +10,7 @@ const { Option } = Select;
 const FriendsList = () => {
   const { t } = useTranslation();
   const [dataList, setDataList] = useState([]);
-  const [selectValue, setSelectValue] = useState(1);
+  const [selectValue, setSelectValue] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(1);
@@ -50,7 +49,6 @@ const FriendsList = () => {
         return (
           <div className='handleBox'>
             <Rate count='1' value={text} onChange={() => handleRateChange(row.memberRelationshipId, row.star)} />
-            <div><Button size='small' icon={<CloseOutlined />} /></div>
           </div>
         )
       }
@@ -59,7 +57,7 @@ const FriendsList = () => {
   const handleRateChange = (memberRelationshipId, star) => {
     const obj = {
       memberRelationshipId,
-      star: Number(Boolean(star))
+      star: Number(!Boolean(star))
     }
     starSettingHttp(obj).then(res => {
       if (res.data.code === 100) {
@@ -78,7 +76,7 @@ const FriendsList = () => {
   const getData = (pageNum) => {
     const obj = {
       type: selectValue,
-      status: 0,
+      status: 1,
       memberId: sessionStorage.getItem('websiteMemberId'),
       friendName: searchValue,
       pageNum: pageNum,
