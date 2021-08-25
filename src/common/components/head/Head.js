@@ -54,13 +54,13 @@ const Head = (prop) => {
                 <Link to='/GameRanking'>游戏排名</Link>
               </Menu.Item>
             </SubMenu> */}
-            <SubMenu key="3" title="Adarts活动" disabled>
-              <Menu.Item key="/TaskReward">
-                <Link to='/TaskReward'>{t(138)}</Link>
-              </Menu.Item>
-            </SubMenu>
-            <Menu.Item key="/MatchRanking" disabled>
-              <Link to='/MatchRanking'>{t(157)}</Link>
+            {/* <SubMenu key="3" title="Adarts活动" disabled> */}
+            <Menu.Item key="/TaskReward" disabled>
+              <Link to='/TaskReward'>{t(138)}</Link>
+            </Menu.Item>
+            {/* </SubMenu> */}
+            <Menu.Item key="/MatchRanting">
+              <Link to='/MatchRanting'>{t(157)}</Link>
             </Menu.Item>
             <Menu.Item key="/ShopProp" >
               <Link to='/ShopProp'>{t(158)}</Link>

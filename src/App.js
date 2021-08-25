@@ -28,6 +28,7 @@ import Darts from './view/darts';
 import Players from './view/players';
 import PlayerInfo from './view/players/playerInfo';
 import ShopProp from './view/shop';
+import MatchRanting from './view/matchRanting';
 
 
 import Head from './common/components/head/Head.js';
@@ -79,6 +80,9 @@ const App = () => {
                 </Route>
                 <Route path='/PlayerInfo'>
                     <PlayerInfo />
+                </Route>
+                <Route path='/MatchRanting'>
+                    <MatchRanting />
                 </Route>
                 <Route path='/Darts'>
                     <Darts />

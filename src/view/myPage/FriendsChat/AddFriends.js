@@ -52,7 +52,7 @@ const AddFriends = () => {
       render: (text, row, index) => {
         return (
           <div className='handleBox'>
-            <div><Button type='primary' size='small' onClick={() => haddleAgreeClick(row)} icon={<CheckOutlined />} /></div>
+            <div><Button type='primary' size='small' onClick={() => handleAgreeClick(row)} icon={<CheckOutlined />} /></div>
           </div>
         )
       }
@@ -100,7 +100,7 @@ const AddFriends = () => {
       }
     }
   ];
-  const haddleAgreeClick = (row) => {
+  const handleAgreeClick = (row) => {
     const obj = {
       memberId: sessionStorage.getItem('websiteMemberId'),
       friendId: row.friendId

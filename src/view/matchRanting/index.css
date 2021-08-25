@@ -1,0 +1,78 @@
+.Ranting .ant-tabs {
+    padding-left: 1px;
+}
+
+.Ranting .ant-tabs-tab {
+    width: 100%;
+    text-align: center;
+}
+
+.Ranting .ant-tabs-tab>div {
+    margin: 0 auto;
+}
+
+.renderTitle {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.renderTitleThis {
+    background: #DFEFFE;
+}
+
+.renderTitleLast {
+    background: #FFE5E6;
+}
+
+
+/* .renderDomBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+} */
+
+.renderDomBox {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 15% 15% 40% 15% 15%;
+    margin: 10px 0;
+}
+
+.renderImgBox {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: 1px solid #eee;
+}
+
+.renderImgBox img {
+    width: 100%;
+    display: block;
+}
+
+.oderBg0 {
+    background: #FED700;
+}
+
+.oderBg1 {
+    background: #C0C0C0;
+}
+
+.oderBg2 {
+    background: #C47121;
+}
+
+.renderLink {
+    color: #1890ff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.renderScore {
+    color: #C47121;
+}
