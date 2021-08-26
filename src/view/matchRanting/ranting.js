@@ -14,6 +14,15 @@ const Ranting = () => {
   const { t } = useTranslation();
   const [oneGameThisList, setOneGameThisList] = useState([]);
   const [oneGameLastList, setOneGameLastList] = useState([]);
+
+  const [cricketThisList, setCricketThisList] = useState([]);
+  const [cricketLastList, setCricketLastList] = useState([]);
+
+  const [countUpThisList, setCountUpThisList] = useState([]);
+  const [countUpLastList, setCountUpLastList] = useState([]);
+
+  const [ratingThisList, setRatingThisList] = useState([]);
+  const [ratingLastList, setRatingLastList] = useState([]);
   const getData = () => {
     setOneGameThisList([
       { id: 1, img: a, teamName: 'aaa temaoseing', name: 'Lisa', count: 1052, country: a },
@@ -23,7 +32,7 @@ const Ranting = () => {
       { id: 5, img: a, teamName: 'sss temaoseing', name: 'Lisa', count: 1052, country: a },
       { id: 6, img: a, teamName: 'qqq temaoseing', name: 'Lisa', count: 1052, country: a },
       { id: 7, img: a, teamName: 'vvv temaoseing', name: 'Lisa', count: 1052, country: a }
-    ])
+    ]);
     setOneGameLastList([
       { id: 1, img: a, teamName: 'ggg temaoseing', name: 'Lisa', count: 1052, country: a },
       { id: 2, img: a, teamName: 'hhh temaoseing', name: 'Lisa', count: 1052, country: a },
@@ -32,7 +41,16 @@ const Ranting = () => {
       { id: 5, img: a, teamName: 'ttt temaoseing', name: 'Lisa', count: 1052, country: a },
       { id: 6, img: a, teamName: 'rrr temaoseing', name: 'Lisa', count: 1052, country: a },
       { id: 7, img: a, teamName: 'mmm temaoseing', name: 'Lisa', count: 1052, country: a }
-    ])
+    ]);
+
+    setCricketThisList([]);
+    setCricketLastList([]);
+
+    setCountUpThisList([]);
+    setCountUpLastList([]);
+
+    setRatingThisList([]);
+    setRatingLastList([]);
   }
   useEffect(() => {
     getData();
@@ -45,16 +63,16 @@ const Ranting = () => {
           <RenderDom thisMonth={oneGameThisList} lastMonth={oneGameLastList} />
         </TabPane>
         <TabPane tab="CRICKET" key="2">
-          2
+          <RenderDom thisMonth={cricketThisList} lastMonth={cricketLastList} />
         </TabPane>
         <TabPane tab="COUNT UP" key="3">
-          3
+          <RenderDom thisMonth={countUpThisList} lastMonth={countUpLastList} />
         </TabPane>
         <TabPane tab="RATING" key="4">
-          4
+          <RenderDom thisMonth={ratingThisList} lastMonth={ratingLastList} />
         </TabPane>
         <TabPane tab="RATING" key="5">
-          5
+          <RenderDom thisMonth={oneGameThisList} lastMonth={oneGameLastList} />
         </TabPane>
       </Tabs>
     </div>

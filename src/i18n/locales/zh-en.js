@@ -130,7 +130,7 @@ const EN = {
     "129": 'Number of times',
     "130": 'Please login and check my page! ',
     "131": 'Verification method',
-    "132": 'No data',
+    "132": 'No Data',
     "133": 'Countdown:',
     "134": 'Please enter a new password',
     "135": 'My Page',
