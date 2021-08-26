@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import { Row, Col } from 'antd';
 
-import Ranting from './ranting';
-import AwardRanting from './awardRanting';
+import Activities from './activities';
+import ActivitieInfo from './activitieInfo';
 
-const MatchRanting = () => {
+const ShopActivitie = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const [activeClass, setActiveClass] = useState('1');
@@ -16,30 +16,23 @@ const MatchRanting = () => {
       history.push(e.target.getAttribute('path'))
       setActiveClass(e.target.getAttribute('active'))
     }
-    // try {
-    //   history.push(e.target.getAttribute('path'))
-    //   setActiveClass(e.target.getAttribute('active'))
-    // } catch (error) {
-    //   console.log('History Api：', error);
-    // }
   }
   useEffect(() => {
-
+    console.log(1);
   }, [])
   return (
     <div className="containerBox">
       <Row>
         <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
-          <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MatchRanting' >{t(119)}</div>
-          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MatchRanting/AwardRanting'>{t(200)}</div>
+          <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/ShopActivitie' >{t(13)}</div>
         </Col>
         <Col span='19' offset='1'>
           <Switch>
-            <Route path='/MatchRanting' exact>
-              <Ranting />
+            <Route path='/ShopActivitie' exact>
+              <Activities />
             </Route>
-            <Route path='/MatchRanting/AwardRanting'>
-              <AwardRanting />
+            <Route path='/ShopActivitie/ActivitieInfo'>
+              <ActivitieInfo />
             </Route>
           </Switch>
         </Col>
@@ -47,4 +40,4 @@ const MatchRanting = () => {
     </div>
   )
 }
-export default MatchRanting;
+export default ShopActivitie;

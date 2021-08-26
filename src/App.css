@@ -891,7 +891,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 12px;
 }
 
 .darts {
@@ -1189,4 +1188,45 @@
 
 .ant-menu-horizontal {
     border-bottom: none
+}
+
+.shopActivitie {
+    margin-top: 60px;
+}
+
+.shopActivitie .ant-picker-calendar-header {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    border: 1px solid #e7e7e7;
+}
+
+.shopActivitie .ant-picker-calendar-header .ant-picker-calendar-mode-switch {
+    display: none;
+}
+
+.shopActivitie .ant-picker-calendar {
+    border: 1px solid #e8e8e8;
+}
+
+.shopActivitie th {
+    background: #eee;
+    text-align: center;
+    padding: 5px !important;
+}
+
+.shopActivitie .ant-picker-calendar-date-content {
+    height: 50px!important;
+}
+
+.shopActivitieTitle {
+    width: 100%;
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    background: #e7e7e7;
+    text-align: center;
 }

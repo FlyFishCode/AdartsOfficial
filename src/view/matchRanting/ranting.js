@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Tabs } from 'antd';
+import { CaretUpOutlined } from '@ant-design/icons';
 
 import './index.css';
 import a from '@/assets/img/a.jpg';
@@ -71,7 +72,7 @@ const Ranting = () => {
         <TabPane tab="RATING" key="4">
           <RenderDom thisMonth={ratingThisList} lastMonth={ratingLastList} />
         </TabPane>
-        <TabPane tab="RATING" key="5">
+        <TabPane tab={<span>RATING<CaretUpOutlined /></span>} key="5">
           <RenderDom thisMonth={oneGameThisList} lastMonth={oneGameLastList} />
         </TabPane>
       </Tabs>

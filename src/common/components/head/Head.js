@@ -54,7 +54,9 @@ const Head = (prop) => {
                 <Link to='/GameRanking'>游戏排名</Link>
               </Menu.Item>
             </SubMenu> */}
-            {/* <SubMenu key="3" title="Adarts活动" disabled> */}
+            <Menu.Item key="/ShopActivitie">
+              <Link to='/ShopActivitie'>{t(13)}</Link>
+            </Menu.Item>
             <Menu.Item key="/TaskReward" disabled>
               <Link to='/TaskReward'>{t(138)}</Link>
             </Menu.Item>
