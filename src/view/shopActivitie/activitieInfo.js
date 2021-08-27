@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-
-
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { ExceptionOutlined, TrophyOutlined, DollarCircleOutlined, FileTextOutlined, FileSearchOutlined } from '@ant-design/icons';
 
 import { dealUrlHash } from '@/common/Utlis';
 
@@ -49,17 +49,45 @@ const ActivitieInfo = () => {
           <div>{info.adarts}</div>
         </div>
       </div>
-      <div className='activitieInfoTitle'>{t(206)}</div>
-      <div className='activitieInfo'>
-        <div>
-          <div>{t(207)}</div>
-          <div>{t(208)}</div>
-          <div>{t(209)}</div>
+      <div style={{ border: '1px solid #eee' }}>
+        <div className='activitieInfoContent'>
+          <div><FileTextOutlined /></div>
+          <div>
+            <div>{t(211)}</div>
+            <div>{`${t(207)}：aaaaaaaaaaaaaaaaaa`}</div>
+            <div>{`${t(208)}：aaaaaaaaaaaaaaaaaa`}</div>
+            <div>{`${t(209)}：aaaaaaaaaaaaaaaaaa`}</div>
+          </div>
         </div>
-        <div>
-          <div>{info.shop}</div>
-          <div>{info.date}</div>
-          <div>{info.adarts}</div>
+        <div className='activitieInfoContent'>
+          <div><FileSearchOutlined /></div>
+          <div>
+            <div>{t(210)}</div>
+            <div>{`${t(207)}：aaaaaaaaaaaaaaaaaa`}</div>
+            <div>{`${t(208)}：aaaaaaaaaaaaaaaaaa`}</div>
+            <div>{`${t(209)}：aaaaaaaaaaaaaaaaaa`}</div>
+          </div>
+        </div>
+        <div className='activitieInfoContent'>
+          <div><DollarCircleOutlined /></div>
+          <div>
+            <div>{t(212)}</div>
+            <div>{`${t(213)}：aaaaaaaaaaaaaaaaaa`}</div>
+          </div>
+        </div>
+        <div className='activitieInfoContent'>
+          <div><TrophyOutlined /></div>
+          <div>
+            <div>{t(214)}</div>
+            <div>{`aaaaaaaaaaaaaaaaaa`}</div>
+          </div>
+        </div>
+        <div className='activitieInfoContent'>
+          <div><ExceptionOutlined /></div>
+          <div>
+            <div>{t(215)}</div>
+            <div>{`aaaaaaaaaaaaaaaaaa`}</div>
+          </div>
         </div>
       </div>
     </div>
