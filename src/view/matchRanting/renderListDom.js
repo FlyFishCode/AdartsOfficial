@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Row, Col } from 'antd';
 import NoData from '@/common/components/NoData';
 
 const RenderDom = (prop) => {
   const { thisMonth, lastMonth } = prop;
+  const history = useHistory();
+  const handleClick = (id) => {
+    history.push({
+      pathname: '/AdartsShop/ShopInfo',
+      search: `?id=${id}`
+    })
+  }
   useEffect(() => {
 
   }, [])
@@ -19,8 +27,8 @@ const RenderDom = (prop) => {
                 <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{i.id}</div>
                 <div className='renderImgBox'><img src={i.img} alt="" /></div>
                 <div>
-                  <div>{i.teamName}</div>
-                  <div className='renderLink'>{i.name}</div>
+                  <div className='textOverFlow' title={i.teamName}>{i.teamName}</div>
+                  <div className='renderLink textOverFlow' title={i.name} onClick={() => handleClick(i.id)}>{i.name}</div>
                 </div>
                 <div className='renderScore'>{i.count}</div>
                 <div className='renderImgBox'><img src={i.country} alt="" /></div>
@@ -36,8 +44,8 @@ const RenderDom = (prop) => {
                 <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{i.id}</div>
                 <div className='renderImgBox'><img src={i.img} alt="" /></div>
                 <div>
-                  <div>{i.teamName}</div>
-                  <div className='renderLink'>{i.name}</div>
+                  <div className='textOverFlow' title={i.teamName}>{i.teamName}</div>
+                  <div className='renderLink textOverFlow' title={i.name} onClick={() => handleClick(i.id)}>{i.name}</div>
                 </div>
                 <div className='renderScore'>{i.count}</div>
                 <div className='renderImgBox'><img src={i.country} alt="" /></div>

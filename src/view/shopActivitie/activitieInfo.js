@@ -20,7 +20,7 @@ const ActivitieInfo = () => {
       title: 'aaaaaaaaaaaaaaaaa',
       imgList: [a, a, a, a]
     })
-  }
+  };
   useEffect(() => {
     getData()
     console.log(dealUrlHash(location));
