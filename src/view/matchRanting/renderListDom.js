@@ -12,7 +12,7 @@ const RenderDom = (prop) => {
       pathname: '/AdartsShop/ShopInfo',
       search: `?id=${id}`
     })
-  }
+  };
   useEffect(() => {
 
   }, [])
