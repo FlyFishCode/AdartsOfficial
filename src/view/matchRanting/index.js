@@ -13,8 +13,8 @@ const MatchRanting = () => {
   const [activeClass, setActiveClass] = useState('1');
   const handleClick = (e) => {
     if (e.target.getAttribute('path')) {
-      history.push(e.target.getAttribute('path'))
-      setActiveClass(e.target.getAttribute('active'))
+      history.push(e.target.getAttribute('path'));
+      setActiveClass(e.target.getAttribute('active'));
     }
     // try {
     //   history.push(e.target.getAttribute('path'))
@@ -25,7 +25,7 @@ const MatchRanting = () => {
   }
   useEffect(() => {
 
-  }, [])
+  }, []);
   return (
     <div className="containerBox">
       <Row>
