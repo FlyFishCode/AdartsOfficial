@@ -19,13 +19,13 @@ const AwardRanting = () => {
     { value: 4, label: 'HIGH TON' },
     { value: 5, label: 'HAT TRICK' },
     { value: 6, label: '3 IN A BED' },
-  ]
+  ];
   const getData = () => {
     setThisMonthList([]);
     setLastMonthList([]);
-  }
+  };
   useEffect(() => {
-    getData()
+    getData();
   }, [value])
   return (
     <div>

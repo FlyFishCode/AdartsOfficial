@@ -137,6 +137,8 @@ const ItemBuy = () => {
         { id: 1, img: a, title: 'AAAAAAAAAAAAAAAAAA', price: 100, time: new Date().getTime() },
         { id: 2, img: a, title: 'BBBBBBBBBBBBBBBBBB', price: 200, time: new Date().getTime() },
         { id: 3, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 300, time: new Date().getTime() },
+        { id: 4, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 400, time: new Date().getTime() },
+        { id: 5, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 500, time: new Date().getTime() },
       ])
     } else {
       setAllList([])
@@ -174,8 +176,8 @@ const ItemBuy = () => {
         {typeList.map(i => {
           return (
             <TabPane tab={i.title} key={i.id}>
-              {info ? <InfoDom /> : <div className='myListBG'>
-                {allList.map(i => {
+              {info ? <InfoDom /> : <div className={allList.length ? 'myListBG' : ''}>
+                {allList.length ? allList.map(i => {
                   return (
                     <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
                       <div className='myListBoxImg'><img src={i.img} alt="" /></div>
@@ -183,7 +185,7 @@ const ItemBuy = () => {
                       <div>{i.time}</div>
                     </div>
                   )
-                })}
+                }) : <NoData />}
               </div>}
             </TabPane>
           )
