@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { Carousel, Badge, Button, Calendar } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
-import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp } from './api/index.ts';
+import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp, activityListHttp } from './api/index.ts';
 import { setCountryIconPosition } from '@/common/Utlis';
 
 import A1 from '@/assets/img/A1.png';
@@ -429,45 +429,45 @@ const Product = () => {
 }
 const Activity = () => {
     const { t } = useTranslation();
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
     const getDate = () => {
-        // indexNewsListHttp().then(res => {
-        //     console.log((res));
-        // })
-        setList(
-            [
-                {
-                    id: 1, count: 99, date: '2021-6-3', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 2, count: 4, date: '2021-6-4', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 3, count: 5, date: '2021-6-5', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-                {
-                    id: 6, count: 5, date: '2021-6-17', matchList: [
-                        { type: 1, count: 2 },
-                        { type: 2, count: 5 }
-                    ]
-                },
-            ]
-        )
+        const obj = {
+            type: null,
+            title: '',
+            year: new Date().getFullYear(),
+            month: '08',
+        };
+        activityListHttp(obj).then(res => {
+            const temp1 = res.data.data.activityList.map(i => {
+                return {
+                    type: 1,
+                    count: i.amount,
+                    id: i.activityId,
+                    date: i.date
+                }
+            })
+            const temp2 = res.data.data.matchList.map(i => {
+                return {
+                    type: 2,
+                    count: i.amount,
+                    id: i.activityId,
+                    date: i.date
+                }
+            })
+            setList(temp1.concat(temp2));
+        });
     }
     useEffect(() => {
-        getDate()
+        getDate();
     }, [])
     const getListData = (date) => {
-        const [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
+        let [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
+        if (month <= 9) {
+            month = '0' + month
+        }
+        if (day <= 9) {
+            day = '0' + day
+        }
         const today = `${year}-${month}-${day}`;
         return list.filter(i => i.date === today)
     }
@@ -482,26 +482,16 @@ const Activity = () => {
         console.log(obj);
     }
     const dateCellRender = (value) => {
-        const list = getListData(value)
-        return (
-            <div>
-                {list.map((item, index) => {
-                    return (
-                        <div key={index} className='badgeBox'>
-                            {item.matchList.map((ele, jndex) => {
-                                return (
-                                    <div key={jndex} onClick={() => handleDayClick(item.count)}>
-                                        <Badge count={item.count} >
-                                            {ele.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
-                                        </Badge>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
-            </div>
-        )
+        const currentList = getListData(value);
+        return currentList.map((item, index) => {
+            return (
+                <div onClick={() => handleDayClick(item.date)}>
+                    <Badge count={item.count} >
+                        {item.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
+                    </Badge>
+                </div>
+            )
+        })
     }
     return (
         <div className='activity'>

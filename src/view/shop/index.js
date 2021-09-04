@@ -8,7 +8,7 @@ import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
 import MyPropList from './MyPropList';
-import RedeemProp from './RedeemProp';
+// import RedeemProp from './RedeemProp';
 import ItemBuy from './ItemBuy';
 import ShopIntroduce from './ShopIntroduce';
 
@@ -83,7 +83,7 @@ const ShopProp = () => {
           <SubMenu key="2" title={t(163)}>
             <Menu.Item key="/ShopProp/MySetting">{t(166)}</Menu.Item>
             <Menu.Item key="/ShopProp/MyPropList">{t(167)}</Menu.Item>
-            <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item>
+            {/* <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item> */}
           </SubMenu>
           <Menu.Item key="/ShopProp/ItemBuy">{t(164)}</Menu.Item>
           <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
@@ -109,9 +109,9 @@ const ShopProp = () => {
           <Route path='/ShopProp/MyPropList'>
             <MyPropList />
           </Route>
-          <Route path='/ShopProp/RedeemProp'>
+          {/* <Route path='/ShopProp/RedeemProp'>
             <RedeemProp />
-          </Route>
+          </Route> */}
           <Route path='/ShopProp/ItemBuy'>
             <ItemBuy />
           </Route>

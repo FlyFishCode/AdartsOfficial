@@ -33,7 +33,8 @@ import { newShopList,shopInfo } from './adartsShop'
 import { playerList,playerInfo } from './player';
 // 飞镖
 import { dartsList,dartsInfo } from './darts';
-
+// 活动
+import { activityList } from './activity';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
@@ -203,6 +204,12 @@ const dartsInfoHttp = (data:any) =>{
 	return axios.post(getNewUrl(`${baseWebsite}${dartsInfo}`, data))
 }
 
+// 活动
+const activityListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${activityList}`, data)
+}
+
+
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
 		// let flag = false
@@ -284,5 +291,6 @@ export {
 		handleFriendsHttp,
 		friendsListHttp,
 		starSettingHttp,
-		addFriendsHttp
+		addFriendsHttp,
+		activityListHttp
 }

@@ -153,13 +153,13 @@ const ItemBuy = () => {
     setFriends([
       { id: 1, name: '段狂胤', img: a, type: 1 },
       { id: 2, name: '白莲花', img: a, type: 2 },
-      { id: 3, name: '小庄子', img: a, type: 1 },
+      { id: 3, name: '小庄子', img: a, type: 1 }
     ])
     setMatchPlayer([
       { id: 1, name: '张自然', img: a, type: 1 },
       { id: 2, name: '李逍遥', img: a, type: 2 },
       { id: 3, name: '刘长安', img: a, type: 1 },
-      { id: 4, name: '王富贵', img: a, type: 1 },
+      { id: 4, name: '王富贵', img: a, type: 1 }
     ])
   }
   useEffect(() => {
@@ -176,17 +176,19 @@ const ItemBuy = () => {
         {typeList.map(i => {
           return (
             <TabPane tab={i.title} key={i.id}>
-              {info ? <InfoDom /> : <div className={allList.length ? 'myListBG' : ''}>
-                {allList.length ? allList.map(i => {
-                  return (
-                    <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
-                      <div className='myListBoxImg'><img src={i.img} alt="" /></div>
-                      <div>{i.title}</div>
-                      <div>{i.time}</div>
-                    </div>
-                  )
-                }) : <NoData />}
-              </div>}
+              {info ?
+                <InfoDom /> :
+                <div className={allList.length ? 'myListBG' : ''}>
+                  {allList.length ? allList.map(i => {
+                    return (
+                      <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
+                        <div className='myListBoxImg'><img src={i.img} alt="" /></div>
+                        <div>{i.title}</div>
+                        <div>{i.time}</div>
+                      </div>
+                    )
+                  }) : <NoData />}
+                </div>}
             </TabPane>
           )
         })}

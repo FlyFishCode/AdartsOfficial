@@ -534,17 +534,9 @@
     font-size: 12px;
 }
 
-.badgeBox {
+.ant-picker-calendar-date-content {
     display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.badgeBox div {
-    width: 80px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
