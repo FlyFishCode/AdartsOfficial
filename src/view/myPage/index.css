@@ -500,6 +500,7 @@
 }
 
 .noDataBox {
+    width: 100%;
     color: #000;
     height: 200px;
     display: flex;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
 import { Carousel, Badge, Button, Calendar } from 'antd';
 import { GlobalOutlined, VideoCameraOutlined, BankOutlined, DesktopOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
-import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp, activityListHttp } from './api/index.ts';
+import { indexNewsListHttp, indexShopListHttp, indexBannerListHttp, activityDateListHttp } from './api/index.ts';
 import { setCountryIconPosition } from '@/common/Utlis';
 
 import A1 from '@/assets/img/A1.png';
@@ -437,7 +437,7 @@ const Activity = () => {
             year: new Date().getFullYear(),
             month: '08',
         };
-        activityListHttp(obj).then(res => {
+        activityDateListHttp(obj).then(res => {
             const temp1 = res.data.data.activityList.map(i => {
                 return {
                     type: 1,
@@ -485,7 +485,7 @@ const Activity = () => {
         const currentList = getListData(value);
         return currentList.map((item, index) => {
             return (
-                <div onClick={() => handleDayClick(item.date)}>
+                <div key={index} onClick={() => handleDayClick(item.date)}>
                     <Badge count={item.count} >
                         {item.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
                     </Badge>

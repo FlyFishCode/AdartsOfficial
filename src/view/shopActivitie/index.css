@@ -95,11 +95,11 @@
     border-bottom: 1px solid #999;
 }
 
-.activitieInfo>div:nth-child(2) div {
+.activitieInfo>div:nth-child(2)>div {
     padding: 5px;
 }
 
-.activitieInfo>div:nth-child(2) div:nth-child(2) {
+.activitieInfo>div:nth-child(2)>div:nth-child(2) {
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
 }
@@ -128,4 +128,22 @@
 .activitieInfoContent>div:nth-child(2)>div:nth-child(1) {
     font-size: 16px;
     font-weight: bold;
+}
+
+.shopBox {
+    display: flex;
+}
+
+.shopBox div {
+    margin: 0 10px 0 0;
+}
+
+.machineBox {
+    height: 30px;
+    width: 30px;
+}
+
+.machineBox img {
+    width: 100%;
+    height: 100%;
 }

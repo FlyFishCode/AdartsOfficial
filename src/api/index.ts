@@ -34,7 +34,7 @@ import { playerList,playerInfo } from './player';
 // 飞镖
 import { dartsList,dartsInfo } from './darts';
 // 活动
-import { activityList } from './activity';
+import { activityDateList,activityList,activityInfo } from './activity';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
@@ -204,9 +204,17 @@ const dartsInfoHttp = (data:any) =>{
 	return axios.post(getNewUrl(`${baseWebsite}${dartsInfo}`, data))
 }
 
-// 活动
+// 活动日历列表
+const activityDateListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${activityDateList}`, data)
+}
+// 活动列表
 const activityListHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${activityList}`, data)
+}
+// 活动详情
+const activityInfoHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${activityInfo}`, data))
 }
 
 
@@ -292,5 +300,7 @@ export {
 		friendsListHttp,
 		starSettingHttp,
 		addFriendsHttp,
-		activityListHttp
+		activityDateListHttp,
+		activityListHttp,
+		activityInfoHttp
 }
