@@ -65,14 +65,14 @@ const FriendsList = () => {
       }
     })
   }
-  const handleClick = () => {
-    const ele = document.getElementById('AddFriends');
-    ele && ele.scrollIntoView({
-      behavior: "smooth", // 默认 auto
-      block: "start", // 默认 center
-      inline: "nearest", // 默认 nearest
-    })
-  }
+  // const handleClick = () => {
+  //   const ele = document.getElementById('AddFriends');
+  //   ele && ele.scrollIntoView({
+  //     behavior: "smooth", // 默认 auto
+  //     block: "start", // 默认 center
+  //     inline: "nearest", // 默认 nearest
+  //   })
+  // }
   const getData = (pageNum) => {
     const obj = {
       type: selectValue,
@@ -104,7 +104,7 @@ const FriendsList = () => {
             <Option value={2}>{t(94)}</Option>
           </Select>
           <Search placeholder="input search text" onChange={(e) => setSearchValue(e.target.value)} onSearch={() => getData()} style={{ width: 200 }} allowClear />
-          <Button type="primary" onClick={handleClick}>{t(68)}</Button>
+          {/* <Button type="primary" onClick={handleClick}>{t(68)}</Button> */}
         </Col>
       </Row>
       <div>

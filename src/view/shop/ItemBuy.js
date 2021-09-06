@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs, Radio, Row, Col, Button, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import { shopPropsInfoHttp, shopPropsTypeListHttp } from '@/api';
+import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp } from '@/api';
 
 import a from '@/assets/img/a.jpg';
 
@@ -56,8 +56,8 @@ const ItemBuy = () => {
             return (
               <div key={i.id} className='friendStyle'>
                 <div className='friendImgBox'>
-                  <div><img src={i.img} alt="" /></div>
-                  <div>{i.name}</div>
+                  <div><img src={i.friendPortrait} alt="" /></div>
+                  <div>{i.friendName}</div>
                 </div>
                 <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.id)}>{t(186)}</Button></div>
               </div>
@@ -152,17 +152,19 @@ const ItemBuy = () => {
     getInfoData(id)
   }
   const getFriends = (itemId) => {
-    setFriends([
-      { id: 1, name: '段狂胤', img: a, type: 1 },
-      { id: 2, name: '白莲花', img: a, type: 2 },
-      { id: 3, name: '小庄子', img: a, type: 1 }
-    ])
-    setMatchPlayer([
-      { id: 1, name: '张自然', img: a, type: 1 },
-      { id: 2, name: '李逍遥', img: a, type: 2 },
-      { id: 3, name: '刘长安', img: a, type: 1 },
-      { id: 4, name: '王富贵', img: a, type: 1 }
-    ])
+    const obj = {
+      memberId: sessionStorage.getItem('websiteMemberId'),
+      type: 0,
+      status: 0,
+      pageNum: 1,
+      pageSize: 999,
+    }
+    friendsListHttp(obj).then(res => {
+      if (res.data.code === 100) {
+        setFriends(res.data.data.list)
+      }
+    })
+    setMatchPlayer([])
   }
   const getInfoData = (itemId) => {
     shopPropsInfoHttp({ itemId }).then(res => {
