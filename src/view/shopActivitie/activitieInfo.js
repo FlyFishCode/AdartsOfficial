@@ -22,7 +22,7 @@ const ActivitieInfo = () => {
   };
   useEffect(() => {
     getData(dealUrlHash(location))
-  }, [location])
+  }, [location]);
   return (
     <div className='activitieInfoBox'>
       <div className='myPageTitle'>{t(13)}</div>

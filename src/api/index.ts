@@ -35,6 +35,8 @@ import { playerList,playerInfo } from './player';
 import { dartsList,dartsInfo } from './darts';
 // 活动
 import { activityDateList,activityList,activityInfo } from './activity';
+// 道具
+import { shopPropsList,shopPropsInfo,shopPropsTypeList } from './shop';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
@@ -217,6 +219,19 @@ const activityInfoHttp = (data:any) =>{
 	return axios.post(getNewUrl(`${baseWebsite}${activityInfo}`, data))
 }
 
+// 道具首页列表
+const shopPropsListHttp = (data:any) =>{
+	return axios.get(`${baseWebsite}${shopPropsList}`, data)
+}
+// 道具首页列表
+const shopPropsInfoHttp = (data:any) =>{
+	return axios.get(getNewUrl(`${baseWebsite}${shopPropsInfo}`, data))
+}
+// 道具首页列表
+const shopPropsTypeListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropsTypeList}`, data)
+}
+
 
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
@@ -302,5 +317,8 @@ export {
 		addFriendsHttp,
 		activityDateListHttp,
 		activityListHttp,
-		activityInfoHttp
+		activityInfoHttp,
+		shopPropsListHttp,
+		shopPropsInfoHttp,
+		shopPropsTypeListHttp
 }

@@ -59,7 +59,7 @@ const MyPropList = () => {
     tabClick('1')
   }, [])
   return (
-    <div>
+    <div id='MyPropList'>
       <div className='Title'>{t(167)}</div>
       <Tabs defaultActiveKey="1" size='large'>
         <TabPane tab={t(176)} key="1">

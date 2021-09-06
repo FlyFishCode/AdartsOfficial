@@ -80,11 +80,14 @@
     grid-row-gap: 10px;
 }
 
-.ant-tabs-nav-list {
-    width: 100%;
-    font-weight: bold;
+#MyPropList .ant-tabs-nav-list {
     display: flex;
+    width: 100%;
     justify-content: space-around;
+}
+
+.ant-tabs-nav-list {
+    font-weight: bold;
 }
 
 .myListBG {
@@ -92,7 +95,7 @@
     grid-template-columns: repeat(4, 22%);
     grid-column-gap: 4%;
     grid-row-gap: 20px;
-    min-height: 200px;
+    min-height: 300px;
 }
 
 .myListBox {

@@ -4,21 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col, Button } from 'antd';
 // import NoData from '@/common/components/NoData';
 
-// const { Option } = Select;
+import { shopPropsListHttp } from '@/api';
 
-import a from '@/assets/img/a.jpg'
+// const { Option } = Select;
 
 const ShopPropIndex = () => {
   const history = useHistory();
   const { t } = useTranslation();
-  const [recommendList, setRecommendList] = useState([]);
+  const [recommendList, setRecommendList] = useState({ newItems: [], rankingItems: [], recommendItems: [] });
   const getData = () => {
-    setRecommendList([
-      { id: 1, img: a, title: 'AAA' },
-      { id: 2, img: a, title: 'BBB' },
-      { id: 3, img: a, title: 'CCC' },
-      { id: 4, img: a, title: 'DDD' },
-    ])
+    shopPropsListHttp({ number: 4 }).then(res => {
+      setRecommendList(res.data.data)
+    })
   }
   const handleClick = (type, id) => {
     history.push({
@@ -34,10 +31,10 @@ const ShopPropIndex = () => {
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(169)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.map(i => {
+          {recommendList.recommendItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(1, i.id)}>
-                <div><img src={i.img} alt="" /></div>
+                <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
@@ -48,10 +45,10 @@ const ShopPropIndex = () => {
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(170)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.map(i => {
+          {recommendList.newItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(2, i.id)}>
-                <div><img src={i.img} alt="" /></div>
+                <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
@@ -62,10 +59,10 @@ const ShopPropIndex = () => {
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(171)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.map(i => {
+          {recommendList.rankingItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(3, i.id)}>
-                <div><img src={i.img} alt="" /></div>
+                <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )

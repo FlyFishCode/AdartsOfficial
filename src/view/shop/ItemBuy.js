@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Tabs, Radio, Row, Col, Button, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+import { shopPropsInfoHttp, shopPropsTypeListHttp } from '@/api';
+
 import a from '@/assets/img/a.jpg';
 
 import { dealUrlHash } from '@/common/Utlis';
@@ -17,30 +19,32 @@ const ItemBuy = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [info, setInfo] = useState(false);
-  const [infoId, setInfoId] = useState(0);
+  const [infoObj, setInfoObj] = useState(0);
   const [value, setValue] = useState(1);
   const [allList, setAllList] = useState([]);
   const [friends, setFriends] = useState([]);
   const [matchPlayer, setMatchPlayer] = useState([]);
   const typeList = [
-    { id: 1, title: '全部' },
-    { id: 2, title: 'Set' },
-    { id: 3, title: 'Style' },
-    { id: 4, title: 'Mark Award' },
-    { id: 5, title: 'Dart Throw' },
-    { id: 6, title: 'Frame' },
-    { id: 7, title: 'Dynamic Frame' },
-    { id: 8, title: 'Sound' },
-    { id: 9, title: 'Bull Sound' },
-    { id: 10, title: 'Effect' },
-    { id: 11, title: 'Bull' },
-    { id: 12, title: 'Award' },
+    { id: '', title: '全部' },
+    { id: 1, title: 'Style' },
+    { id: 2, title: 'Mark Award' },
+    { id: 3, title: 'Effect' },
+    { id: 4, title: 'Sound' },
+    { id: 5, title: 'Bull' },
+    { id: 6, title: 'Bull Sound' },
+    { id: 71, title: 'LOW TON' },
+    { id: 72, title: 'HIGH TON' },
+    { id: 73, title: 'HAT TRICK' },
+    { id: 74, title: 'THREE IN A BED' },
+    { id: 75, title: 'THREE IN THE BLACK' },
+    { id: 76, title: 'TON 80' },
+    { id: 77, title: 'WHITE HORSE' },
+    { id: 78, title: '9 MARK' },
   ];
   const InfoDom = () => {
     const [buyVisible, setBuyVisible] = useState(false);
     const [sendVisible, setSendVisible] = useState(false);
     const [askVisible, setAskVisible] = useState(false);
-    const obj = allList.find(i => i.id === infoId);
 
     const FriendListDom = (type, list) => {
       const handleGiftClick = (id) => {
@@ -70,20 +74,20 @@ const ItemBuy = () => {
     }
     return (
       <div style={{ padding: '50px' }}>
-        <div className='InfoDomGold'>{t(185)}  |  {100}</div>
+        <div className='InfoDomGold'>{t(185)}  |  {infoObj.coin}</div>
         <div className='InfoDomInfo'>
           <div>{t(184)}</div>
-          <div><img src={obj.img} alt="" /></div>
-          <div>{obj.title}</div>
+          <div><img src={infoObj ? infoObj.url.split(',')[0] : ''} alt="" /></div>
+          <div>{infoObj ? infoObj.title : ''}</div>
           <div>
             <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
               <Radio value={1}>90 日</Radio>
-              <Radio value={2}>180 日</Radio>
+              {/* <Radio value={2}>180 日</Radio> */}
             </Radio.Group>
           </div>
           <div>
-            <div>GOLD : {100 * value}</div>
-            <div>GOLD : {200 * value}</div>
+            {/* <div>GOLD : {100 * value}</div> */}
+            <div>GOLD : {infoObj.price}</div>
           </div>
           <Row style={{ width: '800px', textAlign: 'center' }}>
             <Col span='8'><Button danger onClick={() => setBuyVisible(true)}>{t(178)}</Button></Col>
@@ -94,7 +98,7 @@ const ItemBuy = () => {
         {/* 购买Dialog */}
         <Modal title={t(164)} visible={buyVisible} footer={null} width='40%' centered onCancel={() => setBuyVisible(false)}>
           <div style={{ fontSize: '80px', textAlign: 'center' }}><InfoCircleOutlined /></div>
-          <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{obj.title}]</span>?</div>
+          <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{infoObj ? infoObj.title : ''}]</span>?</div>
           <Row style={{ textAlign: 'center', margin: '30px 0' }}>
             <Col span='12'><Button danger onClick={onBuyAndSetting}>{t(189)}</Button></Col>
             <Col span='12'><Button danger onClick={onBuyConfirm}>{t(190)}</Button></Col>
@@ -102,7 +106,7 @@ const ItemBuy = () => {
         </Modal>
         {/* 赠送Dialog */}
         <Modal title={t(186)} visible={sendVisible} footer={null} width='40%' centered onCancel={() => setSendVisible(false)}>
-          <Tabs defaultActiveKey="1" size='large'>
+          <Tabs id='MyPropList' defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
               {friends.length ? FriendListDom(1, friends) : <NoData />}
             </TabPane>
@@ -116,7 +120,7 @@ const ItemBuy = () => {
         </Modal>
         {/* 索要Dialog */}
         <Modal title={t(187)} visible={askVisible} footer={null} width='40%' centered onCancel={() => setAskVisible(false)}>
-          <Tabs defaultActiveKey="1" size='large'>
+          <Tabs id='MyPropList' defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
               {friends.length ? FriendListDom(2, friends) : <NoData />}
             </TabPane>
@@ -131,25 +135,23 @@ const ItemBuy = () => {
       </div>
     )
   }
-  const tabClick = (value) => {
-    if (value === '1') {
-      setAllList([
-        { id: 1, img: a, title: 'AAAAAAAAAAAAAAAAAA', price: 100, time: new Date().getTime() },
-        { id: 2, img: a, title: 'BBBBBBBBBBBBBBBBBB', price: 200, time: new Date().getTime() },
-        { id: 3, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 300, time: new Date().getTime() },
-        { id: 4, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 400, time: new Date().getTime() },
-        { id: 5, img: a, title: 'VVVVVVVVVVVVVVVVVV', price: 500, time: new Date().getTime() },
-      ])
-    } else {
-      setAllList([])
+  const getTypeData = (infoId) => {
+    const obj = {
+      itemType: infoId,
+      queryType: 1,
+      pageIndex: 1,
+      pageSize: 5
     }
-    setInfo(false);
-  }
+    shopPropsTypeListHttp(obj).then(res => {
+      setInfo(false);
+      setAllList(res.data.data.list)
+    })
+  };
   const handleClick = (id) => {
     setInfo(true);
-    setInfoId(Number(id));
+    getInfoData(id)
   }
-  const getData = () => {
+  const getFriends = (itemId) => {
     setFriends([
       { id: 1, name: '段狂胤', img: a, type: 1 },
       { id: 2, name: '白莲花', img: a, type: 2 },
@@ -162,29 +164,35 @@ const ItemBuy = () => {
       { id: 4, name: '王富贵', img: a, type: 1 }
     ])
   }
+  const getInfoData = (itemId) => {
+    shopPropsInfoHttp({ itemId }).then(res => {
+      setInfoObj(res.data.data)
+    })
+  }
   useEffect(() => {
-    tabClick('1');
-    getData()
-    if (location?.search) {
-      handleClick(dealUrlHash(location))
+    if (dealUrlHash(location)) {
+      setInfo(true);
+      getInfoData(dealUrlHash(location));
     }
+    getTypeData('');
+    getFriends();
   }, [location])
   return (
     <div>
       <div className='Title'>{t(164)}</div>
-      <Tabs defaultActiveKey='全部' onTabClick={tabClick}>
+      <Tabs defaultActiveKey='' onTabClick={getTypeData}>
         {typeList.map(i => {
           return (
             <TabPane tab={i.title} key={i.id}>
               {info ?
                 <InfoDom /> :
                 <div className={allList.length ? 'myListBG' : ''}>
-                  {allList.length ? allList.map(i => {
+                  {allList.length ? allList.map(item => {
                     return (
-                      <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
-                        <div className='myListBoxImg'><img src={i.img} alt="" /></div>
-                        <div>{i.title}</div>
-                        <div>{i.time}</div>
+                      <div key={item.id} className='myListBox' onClick={() => handleClick(item.id)}>
+                        <div className='myListBoxImg'><img src={item.url.split(',')[0]} alt="" /></div>
+                        <div>{item.title}</div>
+                        <div>{item.time}</div>
                       </div>
                     )
                   }) : <NoData />}
