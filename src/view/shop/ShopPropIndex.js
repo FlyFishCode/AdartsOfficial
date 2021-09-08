@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Row, Col, Button } from 'antd';
-// import NoData from '@/common/components/NoData';
+import NoData from '@/common/components/NoData';
 
 import { shopPropsListHttp } from '@/api';
 
@@ -31,42 +31,42 @@ const ShopPropIndex = () => {
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(169)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.recommendItems.map(i => {
+          {recommendList.recommendItems.length ? recommendList.recommendItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(1, i.id)}>
                 <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
-          })}
+          }) : <NoData />}
         </div>
         <Row justify="center"><Col span='3' className='recommendBtn'><Button>More</Button></Col></Row>
       </div>
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(170)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.newItems.map(i => {
+          {recommendList.newItems.length ? recommendList.newItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(2, i.id)}>
                 <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
-          })}
+          }) : <NoData />}
         </div>
         <Row justify="center"><Col span='3' className='recommendBtn'><Button>More</Button></Col></Row>
       </div>
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(171)} ——————————————————————————————</div>
         <div className='recommendBox'>
-          {recommendList.rankingItems.map(i => {
+          {recommendList.rankingItems.length ? recommendList.rankingItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(3, i.id)}>
                 <div><img src={i.url.split(',')[0]} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
-          })}
+          }) : <NoData />}
         </div>
         <Row justify="center"><Col span='3' className='recommendBtn'><Button>More</Button></Col></Row>
       </div>

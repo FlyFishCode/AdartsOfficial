@@ -129,7 +129,13 @@ const ShopProp = () => {
                     </div>
                   )
                 }) : <NoData />}
-                <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                {myGift.length ?
+                  <div>
+                    <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                    <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
+                  </div>
+                  : null
+                }
               </TabPane>
               <TabPane tab={`VSX(${myGiftAsk.length})`} key="2">
                 {VSX.length ? VSX.map(i => {
@@ -152,6 +158,13 @@ const ShopProp = () => {
                   )
                 }) : <NoData />}
                 {VSX.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
+                {VSX.length ?
+                  <div>
+                    <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                    <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
+                  </div>
+                  : null
+                }
               </TabPane>
             </Tabs>
           </TabPane>
@@ -176,6 +189,13 @@ const ShopProp = () => {
               )
             }) : <NoData />}
             {myGiftAsk.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
+            {myGiftAsk.length ?
+              <div>
+                <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
+              </div>
+              : null
+            }
           </TabPane>
         </Tabs>
       </Modal>

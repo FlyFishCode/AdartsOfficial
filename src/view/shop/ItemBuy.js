@@ -19,7 +19,7 @@ const ItemBuy = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [info, setInfo] = useState(false);
-  const [infoObj, setInfoObj] = useState(0);
+  const [infoObj, setInfoObj] = useState({});
   const [value, setValue] = useState(1);
   const [allList, setAllList] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -54,12 +54,12 @@ const ItemBuy = () => {
         <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
           {list.length && list.map(i => {
             return (
-              <div key={i.id} className='friendStyle'>
+              <div key={i.friendId} className='friendStyle'>
                 <div className='friendImgBox'>
                   <div><img src={i.friendPortrait} alt="" /></div>
                   <div>{i.friendName}</div>
                 </div>
-                <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.id)}>{t(186)}</Button></div>
+                <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.friendId)}>{t(186)}</Button></div>
               </div>
             )
           })}
@@ -77,7 +77,7 @@ const ItemBuy = () => {
         <div className='InfoDomGold'>{t(185)}  |  {infoObj.coin}</div>
         <div className='InfoDomInfo'>
           <div>{t(184)}</div>
-          <div><img src={infoObj ? infoObj.url.split(',')[0] : ''} alt="" /></div>
+          <div><img src={infoObj.url ? infoObj.url.split(',')[0] : ''} alt="" /></div>
           <div>{infoObj ? infoObj.title : ''}</div>
           <div>
             <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
@@ -168,15 +168,18 @@ const ItemBuy = () => {
   }
   const getInfoData = (itemId) => {
     shopPropsInfoHttp({ itemId }).then(res => {
-      setInfoObj(res.data.data)
+      if (res.data.data) {
+        setInfoObj(res.data.data)
+      }
     })
   }
   useEffect(() => {
-    if (dealUrlHash(location)) {
+    if (location.search) {
       setInfo(true);
       getInfoData(dealUrlHash(location));
+    } else {
+      getTypeData('');
     }
-    getTypeData('');
     getFriends();
   }, [location])
   return (
