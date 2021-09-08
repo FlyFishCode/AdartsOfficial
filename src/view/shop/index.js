@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, Carousel } from 'antd';
+import { Menu, Carousel, Row, Col, Modal, Tabs, Button, Pagination } from 'antd';
 import { indexBannerListHttp } from '@/api';
-import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
+import { LeftCircleOutlined, RightCircleOutlined, GiftOutlined } from '@ant-design/icons';
 
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
@@ -11,16 +11,47 @@ import MyPropList from './MyPropList';
 // import RedeemProp from './RedeemProp';
 import ItemBuy from './ItemBuy';
 import ShopIntroduce from './ShopIntroduce';
+import NoData from '@/common/components/NoData';
 
 import './index.css';
+import a from '@/assets/img/a.jpg';
 
 const { SubMenu } = Menu;
+const { TabPane } = Tabs;
 
 const ShopProp = () => {
   const history = useHistory();
   const { t } = useTranslation();
+  const [visible, setVisible] = useState(false);
   const [bannerList, setBannerList] = useState([]);
   const [current, setCurrent] = useState('ShopProp');
+  const getTypeStr = (type) => {
+    let str = '';
+    switch (type) {
+      case 1:
+        str = 'Style'
+        break;
+      case 2:
+        str = 'Mark Award'
+        break;
+      case 3:
+        str = 'Effect'
+        break;
+      case 4:
+        str = 'Sound'
+        break;
+      case 5:
+        str = 'Bull'
+        break;
+      case 6:
+        str = 'Bull Sound'
+        break;
+      default:
+        str = 'Award'
+        break;
+    }
+    return str;
+  }
   const handleClick = ({ key }) => {
     setCurrent(key)
     history.push(key)
@@ -47,6 +78,107 @@ const ShopProp = () => {
       >
         <RightCircleOutlined />
       </div>
+    )
+  }
+  const ModelBox = () => {
+    const [VSX, setVSX] = useState([]);
+    const [itemTotal, setItemTotal] = useState(1);
+    const [myGift, setMyGift] = useState([]);
+    const [myGiftAsk, setMyGiftAsk] = useState([]);
+    useEffect(() => {
+      setMyGift([
+        { id: 1, img: a, gold: 100, type: 2, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
+        { id: 2, img: a, gold: 100, type: 3, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
+        { id: 3, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
+        { id: 4, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
+        { id: 5, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
+      ]);
+      setMyGiftAsk([]);
+      setVSX([]);
+    }, [])
+    return (
+      <Modal title={t(217)}
+        centered
+        visible={visible}
+        footer={null}
+        width='50%'
+        className='GiftBox'
+        onOk={() => setVisible(true)}
+        onCancel={() => setVisible(false)}
+      >
+        <Tabs defaultActiveKey="1">
+          <TabPane tab={`${t(218)}(${myGift.length})`} key="1">
+            <Tabs defaultActiveKey="1">
+              <TabPane tab={`ITEM(${myGift.length})`} key="1">
+                {myGift.length ? myGift.map(i => {
+                  return (
+                    <div key={i.id} className='GiftItemBox'>
+                      <div><img src={i.img} alt="" /></div>
+                      <div>
+                        <div className='GiftTitle'>
+                          <div>[{i.gold}G]</div>
+                          <div>[{getTypeStr(i.type)}]</div>
+                          <div>{i.title}</div>
+                        </div>
+                        <div>
+                          <div>{t(220)} | {i.friend}</div>
+                          <div>{t(221)} | {i.date}</div>
+                        </div>
+                        <div><Button type="primary" size='small'>{t(124)}</Button></div>
+                      </div>
+                    </div>
+                  )
+                }) : <NoData />}
+                <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+              </TabPane>
+              <TabPane tab={`VSX(${myGiftAsk.length})`} key="2">
+                {VSX.length ? VSX.map(i => {
+                  return (
+                    <div key={i.id} className='GiftItemBox'>
+                      <div><img src={i.img} alt="" /></div>
+                      <div>
+                        <div className='GiftTitle'>
+                          <div>[{i.gold}G]</div>
+                          <div>[{getTypeStr(i.type)}]</div>
+                          <div>{i.title}</div>
+                        </div>
+                        <div>
+                          <div>{t(220)} | {i.friend}</div>
+                          <div>{t(221)} | {i.date}</div>
+                        </div>
+                        <div><Button type="primary" size='small'>{t(124)}</Button></div>
+                      </div>
+                    </div>
+                  )
+                }) : <NoData />}
+                {VSX.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
+              </TabPane>
+            </Tabs>
+          </TabPane>
+          <TabPane tab={`${t(219)}(${myGiftAsk.length})`} key="2">
+            {myGiftAsk.length ? myGiftAsk.map(i => {
+              return (
+                <div key={i.id} className='GiftItemBox'>
+                  <div><img src={i.img} alt="" /></div>
+                  <div>
+                    <div className='GiftTitle'>
+                      <div>[{i.gold}G]</div>
+                      <div>[{getTypeStr(i.type)}]</div>
+                      <div>{i.title}</div>
+                    </div>
+                    <div>
+                      <div>{t(220)} | {i.friend}</div>
+                      <div>{t(221)} | {i.date}</div>
+                    </div>
+                    <div><Button type="primary" size='small'>{t(124)}</Button></div>
+                  </div>
+                </div>
+              )
+            }) : <NoData />}
+            {myGiftAsk.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
+          </TabPane>
+        </Tabs>
+      </Modal>
     )
   }
   const getData = () => {
@@ -77,18 +209,24 @@ const ShopProp = () => {
   }, [])
   return (
     <div>
-      <div className="shopMenuBox containerBox">
-        <Menu onClick={(e) => handleClick(e)} selectedKeys={[current]} mode="horizontal">
-          <Menu.Item key="/ShopProp">{t(162)}</Menu.Item>
-          <SubMenu key="2" title={t(163)}>
-            <Menu.Item key="/ShopProp/MySetting">{t(166)}</Menu.Item>
-            <Menu.Item key="/ShopProp/MyPropList">{t(167)}</Menu.Item>
-            {/* <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item> */}
-          </SubMenu>
-          <Menu.Item key="/ShopProp/ItemBuy">{t(164)}</Menu.Item>
-          <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
-        </Menu>
-      </div>
+      <Row className='containerBox'>
+        <Col span='22' className="shopMenuBox">
+          <Menu onClick={(e) => handleClick(e)} selectedKeys={[current]} mode="horizontal">
+            <Menu.Item key="/ShopProp">{t(162)}</Menu.Item>
+            <SubMenu key="2" title={t(163)}>
+              <Menu.Item key="/ShopProp/MySetting">{t(166)}</Menu.Item>
+              <Menu.Item key="/ShopProp/MyPropList">{t(167)}</Menu.Item>
+              {/* <Menu.Item key="/ShopProp/RedeemProp">{t(168)}</Menu.Item> */}
+            </SubMenu>
+            <Menu.Item key="/ShopProp/ItemBuy">{t(164)}</Menu.Item>
+            <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
+          </Menu>
+        </Col>
+        <Col span='2'>
+          <div className='giftBox' onClick={() => setVisible(true)}><GiftOutlined /></div>
+        </Col>
+      </Row>
+      <ModelBox />
       <Carousel {...setting}>
         {bannerList.map((item, index) => {
           return (

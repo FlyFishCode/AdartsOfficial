@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Input, Button, Select, Row, Col, Table, Rate } from 'antd';
+import { Input, Select, Row, Col, Table, Rate } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { friendsListHttp, starSettingHttp } from '@/api';

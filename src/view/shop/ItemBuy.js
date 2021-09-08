@@ -7,7 +7,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 
 import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp } from '@/api';
 
-import a from '@/assets/img/a.jpg';
+// import a from '@/assets/img/a.jpg';
 
 import { dealUrlHash } from '@/common/Utlis';
 import NoData from '@/common/components/NoData';

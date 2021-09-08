@@ -18,7 +18,6 @@ const ShopActivitie = () => {
     }
   }
   useEffect(() => {
-    console.log(1);
   }, [])
   return (
     <div className="containerBox">

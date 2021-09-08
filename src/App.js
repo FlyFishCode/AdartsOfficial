@@ -429,13 +429,18 @@ const Product = () => {
 }
 const Activity = () => {
     const { t } = useTranslation();
+    const history = useHistory();
     const [list, setList] = useState([]);
     const getDate = () => {
+        let month = new Date().getMonth() + 1;
+        if (month <= 9) {
+            month = '0' + month
+        }
         const obj = {
             type: null,
             title: '',
             year: new Date().getFullYear(),
-            month: '08',
+            month,
         };
         activityDateListHttp(obj).then(res => {
             const temp1 = res.data.data.activityList.map(i => {
@@ -471,8 +476,11 @@ const Activity = () => {
         const today = `${year}-${month}-${day}`;
         return list.filter(i => i.date === today)
     }
-    const handleDayClick = (count) => {
-        console.log(count);
+    const handleClick = (id) => {
+        history.push({
+            pathname: '/ShopActivitie/ActivitieInfo',
+            search: `?id=${id}`
+        })
     }
     const dateChange = (date) => {
         const obj = {
@@ -485,12 +493,18 @@ const Activity = () => {
         const currentList = getListData(value);
         return currentList.map((item, index) => {
             return (
-                <div key={index} onClick={() => handleDayClick(item.date)}>
+                <div key={index} onClick={() => handleClick(item.id)}>
                     <Badge count={item.count} >
                         {item.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
                     </Badge>
                 </div>
             )
+        })
+    }
+    const handleBtnClick = (type) => {
+        history.push({
+            pathname: '/ShopActivitie',
+            search: `?type=${type}`
         })
     }
     return (
@@ -500,11 +514,11 @@ const Activity = () => {
                 <div className='activityOtherBox'>
                     <div className='iconBtnBox'>
                         <img src={icon1} alt="" />
-                        <div className='activityBtnBox'><Button type="primary" block>{t(7)}</Button></div>
+                        <div className='activityBtnBox'><Button type="primary" onClick={() => handleBtnClick(0)} block>{t(7)}</Button></div>
                     </div>
                     <div className='iconBtnBox'>
                         <img src={icon2} alt="" />
-                        <div className='activityBtnBox'><Button type="primary" block>{t(8)}</Button></div>
+                        <div className='activityBtnBox'><Button type="primary" onClick={() => handleBtnClick(1)} block>{t(8)}</Button></div>
                     </div>
                 </div>
                 <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { Col, Row, Select, Input, Button, Calendar, Badge, Pagination } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 import { activityDateListHttp, activityListHttp } from '@/api';
+
+import { dealUrlHash } from '@/common/Utlis';
 
 import icon1 from '@/assets/img/icon1.jpeg';
 import icon2 from '@/assets/img/icon2.jpeg';
@@ -18,10 +20,18 @@ const { Option } = Select;
 const Activities = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const location = useLocation();
+  const renderMonth = () => {
+    let initMonth = new Date().getMonth() + 1;
+    if (initMonth <= 9) {
+      initMonth = '0' + initMonth
+    }
+    return initMonth;
+  }
   const [list, setList] = useState([]);
-  const [searchValue, setSearchValue] = useState();
-  const [year, setYear] = useState(2020);
-  const [month, setMonth] = useState('01');
+  const [title, setTtitle] = useState('');
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(renderMonth());
   const [type, setType] = useState('');
   const [activitieList, setActivitieList] = useState([]);
   const [pageNum, setPageNum] = useState(1);
@@ -45,14 +55,20 @@ const Activities = () => {
     { value: 12, label: 12 }
   ];
   const handleYearChange = (value) => {
-    setYear(value)
+    setYear(value);
+    getDataList(value, month, type, title);
   };
   const handleMonthChange = (value) => {
-    setMonth(value)
+    setMonth(value);
+    getDataList(year, value, type, title);
   };
   const handleTypeChange = (value) => {
-    setType(value)
+    setType(value);
+    getDataList(year, month, value, title);
   };
+  const handleTypeClick = () => {
+    getDataList(year, month, type, title);
+  }
   const dateChange = (date) => {
     const obj = {
       year: date._d.getFullYear(),
@@ -71,14 +87,11 @@ const Activities = () => {
     const today = `${year}-${month}-${day}`;
     return list.filter(i => i.date === today)
   }
-  const handleDayClick = (count) => {
-    console.log(count);
-  }
   const dateCellRender = (value) => {
     const currentList = getListData(value);
     return currentList.map((item, index) => {
       return (
-        <div key={index} onClick={() => handleDayClick(item.date)}>
+        <div key={index} onClick={() => handleClick(item.id)}>
           <Badge count={item.count} >
             {item.type === 1 ? <img className='activityImg' src={icon1} alt="" /> : <img className='activityImg' src={icon2} alt="" />}
           </Badge>
@@ -109,7 +122,7 @@ const Activities = () => {
     const obj = {
       type: null,
       title: '',
-      year: new Date().getFullYear(),
+      year,
       month,
     };
     activityDateListHttp(obj).then(res => {
@@ -130,18 +143,15 @@ const Activities = () => {
         }
       })
       setList(temp1.concat(temp2));
-      setTotal(38);
+      setTotal(1);
     });
-    activityListHttp(obj).then(res => {
-      setActivitieList(res.data.data)
-    })
   }
-  const getDataList = () => {
+  const getDataList = (year, month, type, title) => {
     const obj = {
-      type,
-      title: searchValue,
+      title,
       year,
       month,
+      type,
     };
     activityListHttp(obj).then(res => {
       setActivitieList(res.data.data)
@@ -154,11 +164,17 @@ const Activities = () => {
     })
   }
   useEffect(() => {
-    getDataList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [year, type, month])
-  useEffect(() => {
     getDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  useEffect(() => {
+    if (location.search) {
+      handleTypeChange(Number(dealUrlHash(location)))
+    } else {
+      const date = new Date();
+      getDataList(date.getFullYear(), date.getMonth() + 1, null, '');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
@@ -191,8 +207,8 @@ const Activities = () => {
         </Col>
       </Row>
       <Row className='RowBox'>
-        <Col span='20'><Input placeholder="Please enter a search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} allowClear /></Col>
-        <Col span='3' offset='1'><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={getDataList}>Search</Button></Col>
+        <Col span='20'><Input placeholder="Please enter a search" value={title} onChange={(e) => setTtitle(e.target.value)} allowClear /></Col>
+        <Col span='3' offset='1'><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={() => handleTypeClick()}>Search</Button></Col>
       </Row>
       <Row className='RowBox' style={{ position: 'relative' }}>
         <div className='shopActivitie'>
@@ -207,7 +223,7 @@ const Activities = () => {
               <div className='activitieImgBox'><img src={i.thumbnail} alt="" /></div>
               <div className='activitieTitle'>
                 <div className='activitieTitleFirst'>
-                  <div>{i.type === 1 ? t(7) : t(8)}</div>
+                  <div>{i.type === 0 ? t(7) : t(8)}</div>
                   <div>{returnResultStr(i.state)}</div>
                   <div className='textOverFlow' title={i.title}>{i.title}</div>
                 </div>
