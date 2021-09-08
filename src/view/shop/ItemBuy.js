@@ -24,6 +24,25 @@ const ItemBuy = () => {
   const [allList, setAllList] = useState([]);
   const [friends, setFriends] = useState([]);
   const [matchPlayer, setMatchPlayer] = useState([]);
+  const [type, setType] = useState('');
+  const getTypeTitle = (type) => {
+    let str = '';
+    switch (type) {
+      case 1:
+        str = t(169)
+        break;
+      case 2:
+        str = t(170)
+        break;
+      case 3:
+        str = t(171)
+        break;
+      default:
+        str = t(164)
+        break;
+    }
+    return str;
+  }
   const typeList = [
     { id: '', title: '全部' },
     { id: 1, title: 'Style' },
@@ -135,23 +154,26 @@ const ItemBuy = () => {
       </div>
     )
   }
-  const getTypeData = (infoId) => {
+
+  const getTypeData = (infoId, type) => {
     const obj = {
       itemType: infoId,
-      queryType: 1,
+      queryType: type,
       pageIndex: 1,
       pageSize: 5
     }
     shopPropsTypeListHttp(obj).then(res => {
-      setInfo(false);
-      setAllList(res.data.data.list)
+      if (res.data.data.list) {
+        setInfo(false);
+        setAllList(res.data.data.list)
+      }
     })
   };
   const handleClick = (id) => {
     setInfo(true);
     getInfoData(id)
   }
-  const getFriends = (itemId) => {
+  const getFriends = () => {
     const obj = {
       memberId: sessionStorage.getItem('websiteMemberId'),
       type: 0,
@@ -173,19 +195,26 @@ const ItemBuy = () => {
       }
     })
   }
+  const tabClick = (value) => {
+    getTypeData(value, type)
+  }
   useEffect(() => {
-    if (location.search) {
+    if (location.search.includes('type')) {
+      setType(Number(dealUrlHash(location)));
+      getTypeData('', dealUrlHash(location));
+    } else if (location.search.includes('id')) {
       setInfo(true);
       getInfoData(dealUrlHash(location));
     } else {
       getTypeData('');
     }
     getFriends();
-  }, [location])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div>
-      <div className='Title'>{t(164)}</div>
-      <Tabs defaultActiveKey='' onTabClick={getTypeData}>
+      <div className='Title'>{getTypeTitle(type)}</div>
+      <Tabs defaultActiveKey='' onTabClick={tabClick}>
         {typeList.map(i => {
           return (
             <TabPane tab={i.title} key={i.id}>
