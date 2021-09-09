@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Tabs, Select, Row, Col } from 'antd';
 
-import { myItemAllListHttp } from '@/api';
+import { myItemAllListHttp, shopPropUsingListHttp } from '@/api';
 
 import NoData from '@/common/components/NoData';
 
@@ -47,7 +47,12 @@ const MyPropList = () => {
     })
   }
   const getData = () => {
-    setMyList([]);
+    shopPropUsingListHttp().then(res => {
+      debugger;
+      if (res.data.code === 100) {
+        setMyList(res.data.data);
+      }
+    })
     tabClick();
   }
   const handleClick = (id) => {

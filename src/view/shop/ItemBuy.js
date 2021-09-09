@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { Tabs, Radio, Row, Col, Button, Modal } from 'antd';
+import { Tabs, Radio, Row, Col, Button, Modal, message } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp } from '@/api';
+import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuyHttp, shopPropSetHttp } from '@/api';
 
 // import a from '@/assets/img/a.jpg';
 
@@ -86,10 +86,29 @@ const ItemBuy = () => {
       )
     }
     const onBuyAndSetting = () => {
-      console.log('onBuyAndSetting');
+      const propId = Number(dealUrlHash(location))
+      shopPropsBuyHttp({ itemId: propId }).then(res => {
+        if (res.data.code === 100) {
+          shopPropSetHttp({ itemId: propId, type: infoObj.type }).then(response => {
+            if (response.data.code === 100) {
+              message.info(res.data.msg);
+              setBuyVisible(false)
+            }
+          })
+        } else {
+          message.warning(res.data.msg);
+        }
+      })
     }
     const onBuyConfirm = () => {
-      console.log('onBuyConfirm');
+      shopPropsBuyHttp({ itemId: Number(dealUrlHash(location)) }).then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg);
+          setBuyVisible(false)
+        } else {
+          message.warning(res.data.msg);
+        }
+      })
     }
     return (
       <div style={{ padding: '50px' }}>

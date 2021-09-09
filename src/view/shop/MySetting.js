@@ -18,7 +18,7 @@ const MySetting = () => {
     }
     const handleDelete = (e, id) => {
         e.stopPropagation();
-        console.log(id);
+        setTemplate(template.filter(i => i.id !== id))
     }
     const handleSave = () => {
         console.log('SAVE');
@@ -32,7 +32,7 @@ const MySetting = () => {
         ])
     }
     useEffect(() => {
-        getTemplate()
+        getTemplate();
     }, [])
     return (
         <div>

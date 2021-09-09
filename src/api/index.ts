@@ -36,7 +36,7 @@ import { dartsList,dartsInfo } from './darts';
 // 活动
 import { activityDateList,activityList,activityInfo } from './activity';
 // 道具
-import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList } from './shop';
+import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList,shopPropsBuy,shopPropSet,shopPropUsingList } from './shop';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
@@ -235,6 +235,18 @@ const shopPropsTypeListHttp = (data:any) =>{
 const myItemAllListHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${myItemAllList}`, data)
 }
+// 道具购买
+const shopPropsBuyHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${shopPropsBuy}`, data))
+}
+// 道具设定
+const shopPropSetHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropSet}`, data)
+}
+// 道具设定
+const shopPropUsingListHttp = (data:any) =>{
+	return axios.get(`${baseWebsite}${shopPropUsingList}`, data)
+}
 
 
 axios.interceptors.request.use(function(config) {
@@ -325,5 +337,8 @@ export {
 		shopPropsListHttp,
 		shopPropsInfoHttp,
 		shopPropsTypeListHttp,
-		myItemAllListHttp
+		myItemAllListHttp,
+		shopPropsBuyHttp,
+		shopPropSetHttp,
+		shopPropUsingListHttp
 }
