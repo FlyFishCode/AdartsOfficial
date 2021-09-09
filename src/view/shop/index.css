@@ -80,7 +80,7 @@
     grid-row-gap: 10px;
 }
 
-#MyPropList .ant-tabs-nav-list {
+#MyPropList>.ant-tabs-nav>.ant-tabs-nav-wrap>.ant-tabs-nav-list {
     display: flex;
     width: 100%;
     justify-content: space-around;

@@ -4,8 +4,11 @@ const shopPropsList = 'item/home';
 const shopPropsInfo = 'item/details';
 // 所有道具
 const shopPropsTypeList = 'item/list';
+// 我的Item List All
+const myItemAllList = 'item/my/list';
 export {
   shopPropsList,
   shopPropsInfo,
-  shopPropsTypeList
+  shopPropsTypeList,
+  myItemAllList
 }
