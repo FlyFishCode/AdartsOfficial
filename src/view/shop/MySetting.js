@@ -1,38 +1,256 @@
 // import { useState,useEffect } from 'react';
-import { Col, Row, Select, Button, Input, Collapse } from 'antd';
-import { FieldTimeOutlined } from '@ant-design/icons';
+import { Col, Row, Select, Button, Input, Collapse, Modal, message } from 'antd';
+import { FieldTimeOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 // import NoData from '@/common/components/NoData';
-import a from '@/assets/img/a.jpg';
+
+import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp } from '@/api';
 
 const { Option } = Select;
 const { Panel } = Collapse;
 
 const MySetting = () => {
     const { t } = useTranslation();
+    const [visible, setVisible] = useState(false);
     const [template, setTemplate] = useState([]);
-    const handleChange = (value) => {
-        console.log(value);
+    const [dialogTemplate, setDialogTemplate] = useState([]);
+    const [templateVisible, setTemplateVisible] = useState('');
+    const [propObj, setPropObj] = useState({});
+    const [renewalId, setRenewalId] = useState();
+
+    const [style, setStyle] = useState([]);
+    const [markAward, setMarkAward] = useState([]);
+    const [effect, setEffect] = useState([]);
+    const [sound, setSound] = useState([]);
+    const [bull, setBull] = useState([]);
+    const [bullSound, setBullSound] = useState([]);
+    const [therrInBlack, setTherrInBlack] = useState([]);
+    const [therrInBed, setTherrInBed] = useState([]);
+    const [hatTrick, setHatTrick] = useState([]);
+    const [ton80, setTon80] = useState([]);
+    const [higtTon, setHigtTon] = useState([]);
+    const [lowTon, setLowTon] = useState([]);
+    const [whiteHorse, setWhiteHorse] = useState([]);
+    const [nineMark, setNineMark] = useState([]);
+
+    const [styleValue, setStyleValue] = useState(0);
+    const [markAwardValue, setMarkAwardValue] = useState(0);
+    const [effectValue, setEffectValue] = useState(0);
+    const [soundValue, setSoundValue] = useState(0);
+    const [bullSoundValue, setBullSoundValue] = useState(0);
+    const [bullValue, setBullValue] = useState(0);
+    const [threeBlackValue, setThreeBlackValue] = useState(0);
+    const [hatTrickValue, setHatTrickValue] = useState(0);
+    const [ton80Value, setTon80Value] = useState(0);
+    const [higtTonValue, setHigtTonValue] = useState(0);
+    const [lowTonValue, setLowTonValue] = useState(0);
+    const [threeBenValue, setThreeBenValue] = useState(0);
+    const [whiteHorseValue, setWhiteHorseValue] = useState(0);
+    const [nineMarkValue, setNineMarkValue] = useState(0);
+    const RenderPropItenDom = ({ list, value }) => {
+        let obj = {};
+        if (list.filter(i => i.id === value).length) {
+            obj = list.filter(i => i.id === value)[0];
+        }
+        const handleRenewal = (id) => {
+            if (id) {
+                shopPropsInfoHttp({ itemId: id }).then(res => {
+                    if (res.data.code === 100) {
+                        setRenewalId(id);
+                        setPropObj(res.data.data);
+                        setVisible(true);
+                    }
+                })
+            }
+        }
+        return (
+            <div>
+                <div className='ShopPropSettingImg'><img src={obj && obj.url} alt="" /></div>
+                <div className='ShopPropShopName'>{obj && obj.titlt}</div>
+                <div style={{ display: 'grid', justifyItems: 'center' }}>
+                    <div className='ShopProp'><FieldTimeOutlined />-{obj && obj.validDays} Day <Button danger size='small' onClick={() => handleRenewal(obj.id)}>{t(178)}</Button></div>
+                </div>
+            </div>
+        )
     }
-    const handleDelete = (e, id) => {
-        e.stopPropagation();
-        setTemplate(template.filter(i => i.id !== id))
+    const handleOk = () => {
+        shopPropsBuyHttp({ itemId: renewalId }).then(res => {
+            if (res.data.code === 100) {
+                message.info(res.data.msg);
+                setVisible(false);
+            }
+        })
     }
-    const handleSave = () => {
-        console.log('SAVE');
+    const handleChange = (value, type) => {
+        let list = [];
+        switch (type) {
+            case 1:
+                setStyleValue(value);
+                list = style;
+                break;
+            case 2:
+                setMarkAwardValue(value);
+                list = markAward;
+                break;
+            case 3:
+                setEffectValue(value);
+                list = effect;
+                break;
+            case 4:
+                setSoundValue(value);
+                list = sound;
+                break;
+            case 5:
+                setBullValue(value);
+                list = bull;
+                break;
+            case 6:
+                setBullSoundValue(value);
+                list = bullSound;
+                break;
+            case 71:
+                setLowTonValue(value);
+                list = lowTon;
+                break;
+            case 72:
+                setHigtTonValue(value);
+                list = higtTon;
+                break;
+            case 73:
+                setHatTrickValue(value);
+                list = hatTrick;
+                break;
+            case 74:
+                setThreeBenValue(value);
+                list = therrInBed;
+                break;
+            case 75:
+                setThreeBlackValue(value);
+                list = therrInBlack;
+                break;
+            case 76:
+                setTon80Value(value);
+                list = ton80;
+                break;
+            case 77:
+                setWhiteHorseValue(value);
+                list = whiteHorse;
+                break;
+            default:
+                setNineMarkValue(value);
+                list = nineMark;
+                break;
+        }
+        shopPropSetHttp({ itemId: value, type })
+        RenderPropItenDom({ list, value })
+    }
+    const handleDelete = (id) => {
+        templateDeleteHttp([id]).then(res => {
+            if (res.data.code === 100) {
+                message.info(res.data.msg);
+                getTemplate();
+            }
+        })
+    }
+    const handleSave = (name, id) => {
+        const obj = {
+            name,
+            itemIds: [
+                styleValue,
+                markAwardValue,
+                effectValue,
+                soundValue,
+                bullValue,
+                bullSoundValue,
+                lowTonValue,
+                higtTonValue,
+                hatTrickValue,
+                threeBenValue,
+                threeBlackValue,
+                ton80Value,
+                whiteHorseValue,
+                nineMarkValue
+            ]
+        }
+        if (id) {
+            obj.id = id;
+            templateUpdateHttp(obj).then(res => {
+                if (res.data.code === 100) {
+                    message.info(res.data.msg);
+                    getTemplate();
+                }
+            })
+        } else {
+            templateAddHttp(obj).then(res => {
+                if (res.data.code === 100) {
+                    message.info(res.data.msg);
+                    getTemplate();
+                }
+            })
+        }
     }
     const getTemplate = () => {
-        setTemplate([
-            { id: 1, value: 'CHINA', name: 'CHINA (中国)' },
-            { id: 2, value: 'USA', name: 'USA (美国)' },
-            { id: 3, value: 'Japan', name: 'Japan (日本)' },
-            { id: 4, value: 'Korea', name: 'Korea (韩国)' },
-        ])
+        templateListHttp().then(res => {
+            if (res.data.code === 100) {
+                const tempList = res.data.data;
+                tempList.unshift({ id: 0, name: t(230) })
+                setTemplate(tempList)
+                const list = []
+                for (let i = res.data.data.length; i < 10; i++) {
+                    list.push({ id: '', name: '' })
+                }
+                setDialogTemplate([...res.data.data, ...list])
+            }
+        })
+    }
+    const handleDialogTemplateChange = (value, index) => {
+        const list = [...dialogTemplate]
+        list[index].name = value
+        setDialogTemplate(list)
+    }
+    const handleTypeList = (list, id) => {
+        const tempList = list.filter(i => i.type === id)
+        tempList.unshift({ id: 0, title: 'Please Select!' })
+        return tempList;
+    }
+    const templateChange = (id) => {
+        if (Number(id)) {
+            console.log(template.find(i => i.id === Number(id)))
+        }
+        // handleChange()
+    }
+    const getMyAllPropList = () => {
+        const obj = {
+            type: '',
+            pageIndex: 1,
+            pageSize: 999,
+        }
+        myItemAllListHttp(obj).then(res => {
+            if (res.data.code === 100) {
+                const list = res.data.data.list;
+                setStyle(handleTypeList(list, 1));
+                setMarkAward(handleTypeList(list, 2));
+                setEffect(handleTypeList(list, 3));
+                setSound(handleTypeList(list, 4));
+                setBull(handleTypeList(list, 5));
+                setBullSound(handleTypeList(list, 6));
+                setTherrInBlack(handleTypeList(list, 75));
+                setTherrInBed(handleTypeList(list, 74));
+                setHatTrick(handleTypeList(list, 73));
+                setTon80(handleTypeList(list, 76));
+                setHigtTon(handleTypeList(list, 72));
+                setLowTon(handleTypeList(list, 71));
+                setWhiteHorse(handleTypeList(list, 77));
+                setNineMark(handleTypeList(list, 78));
+            }
+        })
     }
     useEffect(() => {
         getTemplate();
+        getMyAllPropList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <div>
@@ -43,7 +261,7 @@ const MySetting = () => {
                     <Col span='10'>
                         <Select
                             style={{ width: '100%' }}
-                            onChange={handleChange}
+                            onChange={templateChange}
                             optionLabelProp="label"
                         >
                             {template.map(i => {
@@ -51,19 +269,19 @@ const MySetting = () => {
                                     <Option key={i.id} value={i.value} label={i.name}>
                                         <div className="optionLabel">
                                             <div>{i.name}</div>
-                                            <Button type='danger' size='small' onClick={(e) => handleDelete(e, i.id)}>Delete</Button>
+                                            {/* <Button type='danger' size='small' onClick={(e) => handleDelete(e, i.id)}>Delete</Button> */}
                                         </div>
                                     </Option>
                                 )
                             })}
                         </Select>
                     </Col>
-                    <Col span='8' offset='2'><Input placeholder="请输入模板名称" /></Col>
-                    <Col span='2'><Button onClick={handleSave}>{t(174)}</Button></Col>
+                    {/* <Col span='8' offset='2'><Input placeholder={t(229)} value={templateValue} onChange={(e) => setTemplateValue(e.target.value)} allowClear /></Col> */}
+                    <Col span='2'><Button onClick={() => setTemplateVisible(true)}>{t(174)}</Button></Col>
                 </Row>
                 <div>
-                    <div>*  最多储存10个模板</div>
-                    <div>*  若您想要保存另外模板時，請在模板选择中，刪除不必要的模板</div>
+                    <div>*  {t(227)}</div>
+                    <div>*  {t(228)}</div>
                 </div>
             </div>
             <div className='RowBox'>
@@ -71,88 +289,64 @@ const MySetting = () => {
                     <Panel header={t(175)} key="1">
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Style ({1})</div>
+                                <div className='ShopPropSettingTitle'>Style ({style.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={styleValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 1)}>
+                                        {style.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={style} value={styleValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Mark Award ({1})</div>
+                                <div className='ShopPropSettingTitle'>Mark Award ({markAward.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={markAwardValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 2)}>
+                                        {markAward.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={markAward} value={markAwardValue} />
                             </div>
                         </div>
 
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Effect ({1})</div>
+                                <div className='ShopPropSettingTitle'>Effect ({effect.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={effectValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 3)}>
+                                        {effect.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={effect} value={effectValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Sound ({1})</div>
+                                <div className='ShopPropSettingTitle'>Sound ({sound.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={soundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 4)}>
+                                        {sound.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={sound} value={soundValue} />
                             </div>
                         </div>
 
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Bull Sound ({1})</div>
+                                <div className='ShopPropSettingTitle'>Bull Sound ({bullSound.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={bullSoundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 6)}>
+                                        {bullSound.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={bullSound} value={bullSoundValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>Bull ({1})</div>
+                                <div className='ShopPropSettingTitle'>Bull ({bull.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={bullValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 5)}>
+                                        {bull.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={bull} value={bullValue} />
                             </div>
                         </div>
                     </Panel>
@@ -163,122 +357,129 @@ const MySetting = () => {
                     <Panel header={t(177)} key="1">
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>THREE IN THE BLACK ({1})</div>
+                                <div className='ShopPropSettingTitle'>THREE IN THE BLACK ({therrInBlack.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={threeBlackValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 75)}>
+                                        {therrInBlack.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={therrInBlack} value={threeBlackValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>HAT TRICK ({1})</div>
+                                <div className='ShopPropSettingTitle'>HAT TRICK ({hatTrick.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={hatTrickValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 73)}>
+                                        {hatTrick.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={hatTrick} value={hatTrickValue} />
                             </div>
                         </div>
 
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>TON 80  ({1})</div>
+                                <div className='ShopPropSettingTitle'>TON 80  ({ton80.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={ton80Value} style={{ width: '100%' }} onChange={(value) => handleChange(value, 76)}>
+                                        {ton80.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={ton80} value={ton80Value} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>HIGT TON ({1})</div>
+                                <div className='ShopPropSettingTitle'>HIGT TON ({higtTon.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={higtTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 72)}>
+                                        {higtTon.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={higtTon} value={higtTonValue} />
                             </div>
                         </div>
 
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>LOW TON ({1})</div>
+                                <div className='ShopPropSettingTitle'>LOW TON ({lowTon.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={lowTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 71)}>
+                                        {lowTon.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={lowTon} value={lowTonValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>THREE IN A BEN ({1})</div>
+                                <div className='ShopPropSettingTitle'>THREE IN A BEN ({therrInBed.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={threeBenValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 74)}>
+                                        {therrInBed.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={therrInBed} value={threeBenValue} />
                             </div>
                         </div>
 
                         <div className='ShopPropSettingBox'>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>WHITE HORSE ({1})</div>
+                                <div className='ShopPropSettingTitle'>WHITE HORSE ({whiteHorse.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={whiteHorseValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 77)}>
+                                        {whiteHorse.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={whiteHorse} value={whiteHorseValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>NINE MARK ({1})</div>
+                                <div className='ShopPropSettingTitle'>NINE MARK ({nineMark.length - 1})</div>
                                 <div>
-                                    <Select value="lucy" style={{ width: '100%' }} onChange={handleChange}>
-                                        <Option value="jack">Jack</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                    <Select value={nineMarkValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 78)}>
+                                        {nineMark.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
-                                <div className='ShopPropSettingImg'><img src={a} alt="" /></div>
-                                <div className='ShopPropShopName'>{11111111111111}</div>
-                                <div className='ShopPropShopName'><FieldTimeOutlined />-{'asdasdasdsa'}日<Button danger size='small'>{t(178)}</Button></div>
+                                <RenderPropItenDom list={nineMark} value={nineMarkValue} />
                             </div>
                         </div>
                     </Panel>
                 </Collapse>
             </div>
+            <Modal title={t(179)} visible={visible} centered footer={null} width='50%' onCancel={() => setVisible(false)}>
+                <div className='RowBox' style={{ fontWeight: 'bold', fontSize: '30px', textAlign: 'center' }}>{propObj.title}</div>
+                <div className='renewalImgBox'><img src={propObj.url} alt="" /></div>
+                <div className='myListRedeemBox'>
+                    <div>
+                        <div>{t(182)}</div>
+                        <div>{propObj.coin}</div>
+                    </div>
+                    <div>
+                        <div>{t(226)}</div>
+                        <div>{propObj.price}</div>
+                    </div>
+                    <div>
+                        <div>{t(183)}</div>
+                        <div>{propObj.coin - propObj.price}</div>
+                    </div>
+                </div>
+                <div className='myListTipsBox'><InfoCircleOutlined />{t(180)}</div>
+                <Row justify="center">
+                    <Col span='6' style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        <Button type="primary" onClick={handleOk}>{t(19)}</Button>
+                        <Button type="primary" onClick={() => setVisible(false)}>{t(127)}</Button>
+                    </Col>
+                </Row>
+            </Modal>
+            {/* 模板弹框 */}
+            <Modal title={t(173)} visible={templateVisible} centered footer={null} width='50%' onCancel={() => setTemplateVisible(false)}>
+                {dialogTemplate.map((i, index) => {
+                    return (
+                        <div key={index}>
+                            <div className='TemplateBox'>
+                                <Input placeholder="Place Input Template Name" value={i.name} onChange={(e) => handleDialogTemplateChange(e.target.value, index)} />
+                                <Button danger onClick={() => handleDelete(i.id)}>{t(97)}</Button>
+                                <Button type="primary" onClick={() => handleSave(i.name, i.id)}>{t(174)}</Button>
+                            </div>
+                        </div>
+                    )
+                })}
+            </Modal>
         </div>
     )
 }

@@ -48,7 +48,6 @@ const MyPropList = () => {
   }
   const getData = () => {
     shopPropUsingListHttp().then(res => {
-      debugger;
       if (res.data.code === 100) {
         setMyList(res.data.data);
       }

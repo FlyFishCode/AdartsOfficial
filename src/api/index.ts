@@ -36,7 +36,7 @@ import { dartsList,dartsInfo } from './darts';
 // 活动
 import { activityDateList,activityList,activityInfo } from './activity';
 // 道具
-import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList,shopPropsBuy,shopPropSet,shopPropUsingList } from './shop';
+import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList,shopPropsBuy,shopPropSet,shopPropUsingList,templateList,templateAdd,templateUpdate,templateDelete } from './shop';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
@@ -243,9 +243,25 @@ const shopPropsBuyHttp = (data:any) =>{
 const shopPropSetHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${shopPropSet}`, data)
 }
-// 道具设定
+// 道具设定列表
 const shopPropUsingListHttp = (data:any) =>{
 	return axios.get(`${baseWebsite}${shopPropUsingList}`, data)
+}
+// 模板列表
+const templateListHttp = (data:any) =>{
+	return axios.get(`${baseWebsite}${templateList}`, data)
+}
+// 模板添加
+const templateAddHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${templateAdd}`, data)
+}
+// 模板修改
+const templateUpdateHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${templateUpdate}`, data)
+}
+// 模板删除
+const templateDeleteHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${templateDelete}`, data)
 }
 
 
@@ -340,5 +356,9 @@ export {
 		myItemAllListHttp,
 		shopPropsBuyHttp,
 		shopPropSetHttp,
-		shopPropUsingListHttp
+		shopPropUsingListHttp,
+		templateListHttp,
+		templateAddHttp,
+		templateUpdateHttp,
+		templateDeleteHttp
 }

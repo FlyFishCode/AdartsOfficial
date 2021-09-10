@@ -12,6 +12,16 @@ const shopPropsBuy = 'item/my/buy';
 const shopPropSet = 'item/my/set';
 // 应用中得道具
 const shopPropUsingList = 'item/my/setting';
+
+// 模板列表
+const templateList = 'itemtemplate/list';
+// 添加模板
+const templateAdd = 'itemtemplate/insert';
+// 修改模板
+const templateUpdate = 'itemtemplate/update';
+// 删除模板
+const templateDelete = 'itemtemplate/delete';
+
 export {
   shopPropsList,
   shopPropsInfo,
@@ -19,5 +29,9 @@ export {
   myItemAllList,
   shopPropsBuy,
   shopPropSet,
-  shopPropUsingList
+  shopPropUsingList,
+  templateList,
+  templateAdd,
+  templateUpdate,
+  templateDelete
 }

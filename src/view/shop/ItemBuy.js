@@ -25,6 +25,7 @@ const ItemBuy = () => {
   const [friends, setFriends] = useState([]);
   const [matchPlayer, setMatchPlayer] = useState([]);
   const [type, setType] = useState('');
+  const [propId, setPropId] = useState();
   const getTypeTitle = (type) => {
     let str = '';
     switch (type) {
@@ -86,7 +87,6 @@ const ItemBuy = () => {
       )
     }
     const onBuyAndSetting = () => {
-      const propId = Number(dealUrlHash(location))
       shopPropsBuyHttp({ itemId: propId }).then(res => {
         if (res.data.code === 100) {
           shopPropSetHttp({ itemId: propId, type: infoObj.type }).then(response => {
@@ -101,7 +101,7 @@ const ItemBuy = () => {
       })
     }
     const onBuyConfirm = () => {
-      shopPropsBuyHttp({ itemId: Number(dealUrlHash(location)) }).then(res => {
+      shopPropsBuyHttp({ itemId: propId }).then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg);
           setBuyVisible(false)
@@ -190,6 +190,7 @@ const ItemBuy = () => {
   };
   const handleClick = (id) => {
     setInfo(true);
+    setPropId(id);
     getInfoData(id)
   }
   const getFriends = () => {
@@ -223,6 +224,7 @@ const ItemBuy = () => {
       getTypeData('', dealUrlHash(location));
     } else if (location.search.includes('id')) {
       setInfo(true);
+      setPropId(dealUrlHash(location))
       getInfoData(dealUrlHash(location));
     } else {
       getTypeData('');
