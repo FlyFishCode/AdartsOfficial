@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import NoData from '@/common/components/NoData';
 import RenderUrlDom from '@/common/components/RenderUrlDom';
 
-import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp } from '@/api';
+import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp, shopPropUsingListHttp } from '@/api';
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -85,7 +85,7 @@ const MySetting = () => {
             }
         })
     }
-    const handleChange = (value, type) => {
+    const handleChange = (value, type, isSet) => {
         let list = [];
         switch (type) {
             case 1:
@@ -145,7 +145,9 @@ const MySetting = () => {
                 list = nineMark;
                 break;
         }
-        shopPropSetHttp({ itemId: value, type });
+        if (isSet) {
+            shopPropSetHttp({ itemId: value, type });
+        }
         RenderPropItenDom({ list, value });
     }
     const handleDelete = (id) => {
@@ -223,6 +225,15 @@ const MySetting = () => {
         }
         // handleChange()
     }
+    const getUsingPropList = () => {
+        shopPropUsingListHttp().then(res => {
+            if (res.data.code === 100) {
+                res.data.data.forEach(i => {
+                    handleChange(i.id, i.type, false)
+                })
+            }
+        })
+    }
     const getMyAllPropList = () => {
         const obj = {
             type: '',
@@ -252,6 +263,7 @@ const MySetting = () => {
     useEffect(() => {
         getTemplate();
         getMyAllPropList();
+        getUsingPropList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
@@ -293,7 +305,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Style ({style.length - 1})</div>
                                 <div>
-                                    <Select value={styleValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 1)}>
+                                    <Select value={styleValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 1, true)}>
                                         {style.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -302,7 +314,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Mark Award ({markAward.length - 1})</div>
                                 <div>
-                                    <Select value={markAwardValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 2)}>
+                                    <Select value={markAwardValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 2, true)}>
                                         {markAward.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -314,7 +326,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Effect ({effect.length - 1})</div>
                                 <div>
-                                    <Select value={effectValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 3)}>
+                                    <Select value={effectValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 3, true)}>
                                         {effect.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -323,7 +335,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Sound ({sound.length - 1})</div>
                                 <div>
-                                    <Select value={soundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 4)}>
+                                    <Select value={soundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 4, true)}>
                                         {sound.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -335,7 +347,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Bull Sound ({bullSound.length - 1})</div>
                                 <div>
-                                    <Select value={bullSoundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 6)}>
+                                    <Select value={bullSoundValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 6, true)}>
                                         {bullSound.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -344,7 +356,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>Bull ({bull.length - 1})</div>
                                 <div>
-                                    <Select value={bullValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 5)}>
+                                    <Select value={bullValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 5, true)}>
                                         {bull.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -362,7 +374,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>THREE IN THE BLACK ({therrInBlack.length - 1})</div>
                                 <div>
-                                    <Select value={threeBlackValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 75)}>
+                                    <Select value={threeBlackValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 75, true)}>
                                         {therrInBlack.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -371,7 +383,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>HAT TRICK ({hatTrick.length - 1})</div>
                                 <div>
-                                    <Select value={hatTrickValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 73)}>
+                                    <Select value={hatTrickValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 73, true)}>
                                         {hatTrick.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -383,7 +395,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>TON 80  ({ton80.length - 1})</div>
                                 <div>
-                                    <Select value={ton80Value} style={{ width: '100%' }} onChange={(value) => handleChange(value, 76)}>
+                                    <Select value={ton80Value} style={{ width: '100%' }} onChange={(value) => handleChange(value, 76, true)}>
                                         {ton80.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -392,7 +404,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>HIGT TON ({higtTon.length - 1})</div>
                                 <div>
-                                    <Select value={higtTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 72)}>
+                                    <Select value={higtTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 72, true)}>
                                         {higtTon.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -404,7 +416,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>LOW TON ({lowTon.length - 1})</div>
                                 <div>
-                                    <Select value={lowTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 71)}>
+                                    <Select value={lowTonValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 71, true)}>
                                         {lowTon.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -413,7 +425,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>THREE IN A BEN ({therrInBed.length - 1})</div>
                                 <div>
-                                    <Select value={threeBenValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 74)}>
+                                    <Select value={threeBenValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 74, true)}>
                                         {therrInBed.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -425,7 +437,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>WHITE HORSE ({whiteHorse.length - 1})</div>
                                 <div>
-                                    <Select value={whiteHorseValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 77)}>
+                                    <Select value={whiteHorseValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 77, true)}>
                                         {whiteHorse.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>
@@ -434,7 +446,7 @@ const MySetting = () => {
                             <div className='everyShopPropSettingBox'>
                                 <div className='ShopPropSettingTitle'>NINE MARK ({nineMark.length - 1})</div>
                                 <div>
-                                    <Select value={nineMarkValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 78)}>
+                                    <Select value={nineMarkValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 78, true)}>
                                         {nineMark.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}
                                     </Select>
                                 </div>

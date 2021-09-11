@@ -1,10 +1,9 @@
 import axios from 'axios';
-// import { message } from 'antd'
+import { message } from 'antd'
 // import { useHistory } from 'react-router-dom';
 
 // 公共
 import { sendEmail,sendPhone,upLoadImg,shopList } from './common/index';
-
 
 // 我的页面
 import {
@@ -41,8 +40,7 @@ import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList,shopPropsBu
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
 
-const qs = require('qs')
-
+const qs = require('qs');
 
 // 登录
 const indexLogin = `${baseWeb}login`
@@ -291,6 +289,10 @@ axios.interceptors.response.use(function(response) {
 	// 	const history  = useHistory();
 	// 	history.push('/')
 	// }
+	if(response.data.code === 198){
+		window.location.href = window.location.origin;
+		message.warning('未登录');
+	}
     return response;
 }, function(error) {
 
