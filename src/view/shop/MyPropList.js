@@ -7,6 +7,7 @@ import { Tabs, Select, Row, Col } from 'antd';
 import { myItemAllListHttp, shopPropUsingListHttp } from '@/api';
 
 import NoData from '@/common/components/NoData';
+import RenderUrlDom from '@/common/components/RenderUrlDom';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -125,7 +126,7 @@ const MyPropList = () => {
             {myList.length ? myList.map(i => {
               return (
                 <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
-                  <div className='myListBoxImg'><img src={i.url} alt="" /></div>
+                  <div className='myListBoxImg'><RenderUrlDom url={i.url} /></div>
                   <div>{i.title}</div>
                   <div>{i.buyTime}</div>
                 </div>
@@ -151,7 +152,7 @@ const MyPropList = () => {
                     {allList.length ? allList.map(i => {
                       return (
                         <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
-                          <div className='myListBoxImg'><img src={i.url && i.url.split(',')[0]} alt="" /></div>
+                          <div className='myListBoxImg'><RenderUrlDom url={i.url} /></div>
                           <div>{`[${getTypeStr(i.type)}]${i.title}`}</div>
                           <div>{i.buyTime}</div>
                         </div>

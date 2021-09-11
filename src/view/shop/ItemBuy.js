@@ -11,6 +11,7 @@ import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuy
 
 import { dealUrlHash } from '@/common/Utlis';
 import NoData from '@/common/components/NoData';
+import RenderUrlDom from '@/common/components/RenderUrlDom';
 
 const { TabPane } = Tabs;
 
@@ -115,7 +116,7 @@ const ItemBuy = () => {
         <div className='InfoDomGold'>{t(185)}  |  {infoObj.coin}</div>
         <div className='InfoDomInfo'>
           <div>{t(184)}</div>
-          <div><img src={infoObj.url ? infoObj.url.split(',')[0] : ''} alt="" /></div>
+          <div><RenderUrlDom url={infoObj.url && infoObj.url} /></div>
           <div>{infoObj ? infoObj.title : ''}</div>
           <div>
             <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
@@ -188,7 +189,8 @@ const ItemBuy = () => {
       }
     })
   };
-  const handleClick = (id) => {
+  const handleClick = (e, id) => {
+    e.preventDefault();
     setInfo(true);
     setPropId(id);
     getInfoData(id)
@@ -244,8 +246,8 @@ const ItemBuy = () => {
                 <div className={allList.length ? 'myListBG' : ''}>
                   {allList.length ? allList.map(item => {
                     return (
-                      <div key={item.id} className='myListBox' onClick={() => handleClick(item.id)}>
-                        <div className='myListBoxImg'><img src={item.url.split(',')[0]} alt="" /></div>
+                      <div key={item.id} className='myListBox' onClick={(e) => handleClick(e, item.id)}>
+                        <div className='myListBoxImg'><RenderUrlDom url={item.url} /></div>
                         <div>{item.title}</div>
                         <div>{item.time}</div>
                       </div>

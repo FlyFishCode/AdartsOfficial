@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NoData from '@/common/components/NoData';
+import RenderUrlDom from '@/common/components/RenderUrlDom';
 
 import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp } from '@/api';
 
@@ -49,6 +50,7 @@ const MySetting = () => {
     const [threeBenValue, setThreeBenValue] = useState(0);
     const [whiteHorseValue, setWhiteHorseValue] = useState(0);
     const [nineMarkValue, setNineMarkValue] = useState(0);
+
     const RenderPropItenDom = ({ list, value }) => {
         let obj = {};
         if (list.filter(i => i.id === value).length) {
@@ -67,7 +69,7 @@ const MySetting = () => {
         }
         return (
             <div>
-                <div className='ShopPropSettingImg'><img src={obj.url && obj.url.split(',')[0]} alt="" /></div>
+                <div className='ShopPropSettingImg'><RenderUrlDom url={obj.url} /></div>
                 <div className='ShopPropShopName'>{obj && obj.titlt}</div>
                 <div style={{ display: 'grid', justifyItems: 'center' }}>
                     <div className='ShopProp'><FieldTimeOutlined />-{obj && obj.validDays} Day <Button danger size='small' onClick={() => handleRenewal(obj.id)}>{t(178)}</Button></div>
