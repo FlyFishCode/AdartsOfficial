@@ -119,7 +119,7 @@ const ItemBuy = () => {
           <div>{infoObj ? infoObj.title : ''}</div>
           <div>
             <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
-              <Radio value={1}>90 日</Radio>
+              <Radio value={1}>90 Day</Radio>
               {/* <Radio value={2}>180 日</Radio> */}
             </Radio.Group>
           </div>

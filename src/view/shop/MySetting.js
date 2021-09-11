@@ -4,7 +4,7 @@ import { FieldTimeOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// import NoData from '@/common/components/NoData';
+import NoData from '@/common/components/NoData';
 
 import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp } from '@/api';
 
@@ -67,7 +67,7 @@ const MySetting = () => {
         }
         return (
             <div>
-                <div className='ShopPropSettingImg'><img src={obj && obj.url} alt="" /></div>
+                <div className='ShopPropSettingImg'><img src={obj.url && obj.url.split(',')[0]} alt="" /></div>
                 <div className='ShopPropShopName'>{obj && obj.titlt}</div>
                 <div style={{ display: 'grid', justifyItems: 'center' }}>
                     <div className='ShopProp'><FieldTimeOutlined />-{obj && obj.validDays} Day <Button danger size='small' onClick={() => handleRenewal(obj.id)}>{t(178)}</Button></div>
@@ -143,8 +143,8 @@ const MySetting = () => {
                 list = nineMark;
                 break;
         }
-        shopPropSetHttp({ itemId: value, type })
-        RenderPropItenDom({ list, value })
+        shopPropSetHttp({ itemId: value, type });
+        RenderPropItenDom({ list, value });
     }
     const handleDelete = (id) => {
         templateDeleteHttp([id]).then(res => {
@@ -194,21 +194,21 @@ const MySetting = () => {
     const getTemplate = () => {
         templateListHttp().then(res => {
             if (res.data.code === 100) {
+                const list = [];
                 const tempList = res.data.data;
-                tempList.unshift({ id: 0, name: t(230) })
-                setTemplate(tempList)
-                const list = []
+                tempList.unshift({ id: 0, name: t(230) });
+                setTemplate(tempList);
                 for (let i = res.data.data.length; i < 10; i++) {
-                    list.push({ id: '', name: '' })
+                    list.push({ id: '', name: '' });
                 }
-                setDialogTemplate([...res.data.data, ...list])
+                setDialogTemplate([...res.data.data, ...list]);
             }
         })
     }
     const handleDialogTemplateChange = (value, index) => {
-        const list = [...dialogTemplate]
-        list[index].name = value
-        setDialogTemplate(list)
+        const list = [...dialogTemplate];
+        list[index].name = value;
+        setDialogTemplate(list);
     }
     const handleTypeList = (list, id) => {
         const tempList = list.filter(i => i.type === id)
@@ -352,6 +352,7 @@ const MySetting = () => {
                     </Panel>
                 </Collapse>
             </div>
+
             <div className='RowBox'>
                 <Collapse bordered={false} defaultActiveKey={['1']}>
                     <Panel header={t(177)} key="1">
@@ -443,7 +444,7 @@ const MySetting = () => {
             </div>
             <Modal title={t(179)} visible={visible} centered footer={null} width='50%' onCancel={() => setVisible(false)}>
                 <div className='RowBox' style={{ fontWeight: 'bold', fontSize: '30px', textAlign: 'center' }}>{propObj.title}</div>
-                <div className='renewalImgBox'><img src={propObj.url} alt="" /></div>
+                <div className='renewalImgBox'><img src={propObj.url && propObj.url.split(',')[0]} alt="" /></div>
                 <div className='myListRedeemBox'>
                     <div>
                         <div>{t(182)}</div>
@@ -468,7 +469,7 @@ const MySetting = () => {
             </Modal>
             {/* 模板弹框 */}
             <Modal title={t(173)} visible={templateVisible} centered footer={null} width='50%' onCancel={() => setTemplateVisible(false)}>
-                {dialogTemplate.map((i, index) => {
+                {dialogTemplate.length ? dialogTemplate.map((i, index) => {
                     return (
                         <div key={index}>
                             <div className='TemplateBox'>
@@ -478,7 +479,7 @@ const MySetting = () => {
                             </div>
                         </div>
                     )
-                })}
+                }) : <NoData />}
             </Modal>
         </div>
     )

@@ -151,7 +151,7 @@ const MyPropList = () => {
                     {allList.length ? allList.map(i => {
                       return (
                         <div key={i.id} className='myListBox' onClick={() => handleClick(i.id)}>
-                          <div className='myListBoxImg'><img src={i.url} alt="" /></div>
+                          <div className='myListBoxImg'><img src={i.url && i.url.split(',')[0]} alt="" /></div>
                           <div>{`[${getTypeStr(i.type)}]${i.title}`}</div>
                           <div>{i.buyTime}</div>
                         </div>
