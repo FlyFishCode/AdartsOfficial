@@ -28,6 +28,7 @@ const LoginBox = (props) => {
                 changeUserName(data.username)
                 sessionStorage.setItem('websiteUserName', data.username);
                 sessionStorage.setItem('websiteMemberId', data.memberId);
+                sessionStorage.setItem('websiteCardId', data.mainCardId || '');
                 sessionStorage.setItem('websiteToken', data.token);
                 sessionStorage.setItem('websiteCountryId', 17829);
                 history.push('/');

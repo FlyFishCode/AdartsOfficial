@@ -86,7 +86,9 @@ const About30Game = (props) => {
     }
     const getDataList = (cardId) => {
         about30GameListHttp({ cardId }).then(res => {
-            setDataList(res.data.data)
+            if (res.data.code === 100) {
+                setDataList(res.data.data)
+            }
         })
     }
     useEffect(() => {
