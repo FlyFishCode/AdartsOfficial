@@ -143,7 +143,6 @@ const Activities = () => {
         }
       })
       setList(temp1.concat(temp2));
-      setTotal(1);
     });
   }
   const getDataList = (year, month, type, title) => {
@@ -154,7 +153,10 @@ const Activities = () => {
       type,
     };
     activityListHttp(obj).then(res => {
-      setActivitieList(res.data.data)
+      if (res.data.code === 100) {
+        setActivitieList(res.data.data.list);
+        setTotal(res.data.data.total);
+      }
     })
   };
   const handleClick = (id) => {

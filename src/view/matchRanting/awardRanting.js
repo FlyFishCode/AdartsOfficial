@@ -19,6 +19,7 @@ const AwardRanting = () => {
     { value: 4, label: 'HIGH TON' },
     { value: 5, label: 'HAT TRICK' },
     { value: 6, label: '3 IN A BED' },
+    { value: 7, label: '3 IN THE BLACK' },
   ];
   const getData = () => {
     setThisMonthList([]);

@@ -21,7 +21,7 @@ const AwardMsgSetting = () => {
           <Col span='12'><Input placeholder="Input Message" allowClear /></Col>
         </Row>
         <Row className='rowBox'>
-          <Col span='12' className='AccountInfoLabel'>HAT TON</Col>
+          <Col span='12' className='AccountInfoLabel'>HAT TRICK</Col>
           <Col span='12'><Input placeholder="Input Message" allowClear /></Col>
         </Row>
         <Row className='rowBox'>

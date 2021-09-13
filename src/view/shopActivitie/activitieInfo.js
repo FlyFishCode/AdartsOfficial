@@ -17,7 +17,9 @@ const ActivitieInfo = () => {
   const [info, setInfo] = useState({});
   const getData = (activityId) => {
     activityInfoHttp({ activityId }).then(res => {
-      setInfo(res.data.data)
+      if (res.data.code === 100) {
+        setInfo(res.data.data)
+      }
     })
   };
   useEffect(() => {
@@ -35,22 +37,24 @@ const ActivitieInfo = () => {
         })}
       </div>
       <div className='activitieInfoTitle'>{info.title}</div>
-      <div className='activitieInfo'>
-        <div>
+      <div>
+        <div className='activitieInfo'>
           <div>{t(203)}</div>
-          <div>{t(204)}</div>
-          <div>{t(205)}</div>
+          <div>
+            {info.shopList ?
+              <div>
+                <div>{info.shopList[0].shopName}</div>
+                <div>{info.shopList[0].shopAddress}</div>
+              </div>
+              : ''}
+          </div>
         </div>
-        <div>
-          {/* <div className='shopBox'>
-            {info.shopList.map(i => {
-              return (
-                <div key={i.shopId}>{i.shopName}</div>
-              )
-            })}
-          </div> */}
-          <div>{info.shopList ? info.shopList[0].shopName : ''}</div>
+        <div className='activitieInfo'>
+          <div>{t(204)}</div>
           <div>{info.startDate} - {info.endDate}</div>
+        </div>
+        <div className='activitieInfo'>
+          <div>{t(205)}</div>
           <div className='machineBox'>{info.machineType && info.machineType.includes('A1') ? <img src={a} alt="" /> : ''}{info.machineType && info.machineType.includes('W1') ? <img src={w} alt="" /> : ''}</div>
         </div>
       </div>
@@ -59,37 +63,35 @@ const ActivitieInfo = () => {
           <div><FileTextOutlined /></div>
           <div>
             <div>{t(211)}</div>
-            <div>{`${t(211)}：${info.joinMethod}`}</div>
-            <div>{`${t(207)}：${info.startDate} / ${info.endDate}`}</div>
-            <div>{`${t(209)}：${info.shopList ? info.shopList[0].shopAddress : ''}`}</div>
+            <textarea disabled className='textareaStyle' value={info.joinMethod}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
           <div><FileSearchOutlined /></div>
           <div>
             <div>{t(210)}</div>
-            <div>{info.content}</div>
+            <textarea disabled className='textareaStyle' value={info.content}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
           <div><DollarCircleOutlined /></div>
           <div>
             <div>{t(212)}</div>
-            <div>{info.cost}</div>
+            <textarea disabled className='textareaStyle' value={info.cost}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
           <div><TrophyOutlined /></div>
           <div>
             <div>{t(214)}</div>
-            <div>{info.reward}</div>
+            <textarea disabled className='textareaStyle' value={info.reward}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
           <div><ExceptionOutlined /></div>
           <div>
             <div>{t(215)}</div>
-            <div>{info.other}</div>
+            <textarea disabled className='textareaStyle' value={info.other}></textarea>
           </div>
         </div>
       </div>

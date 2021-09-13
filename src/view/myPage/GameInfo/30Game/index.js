@@ -118,6 +118,7 @@ const About30Game = (props) => {
                                     <div>{`3 IN A BED：${i.threeInABed}`}</div>
                                     <div>{`3 IN THE BLACK：${i.threeInABlack}`}</div>
                                     <div>{`TON80：${i.ton80}`}</div>
+                                    <div>{`HIGH TON：${i.highTon}`}</div>
                                     <div>{`5MARKS：${i.fiveMark}`}</div>
                                     <div>{`6MARKS：${i.sixMark}`}</div>
                                     <div>{`7MARKS：${i.sevenMark}`}</div>

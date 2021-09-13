@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'antd';
 
 import MyPageIndex from './MyPageIndex';
-import AnyWhere from './AnyWhere';
+// import AnyWhere from './AnyWhere';
 // import GameInfo from './GameInfo';
 // import OtherSetting from './OtherSetting';
 
@@ -63,7 +63,7 @@ const MyPage = () => {
       <Row className='myPage'>
         <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
-          <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AnyWhere'>AnyWhere</div>
+          {/* <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AnyWhere'>AnyWhere</div> */}
           <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/AllGameData'>{t(21)}</div>
           <div className={activeClass === '4' ? 'activeClass' : null} active='4' path='/MyPageIndex/About30Game'>{t(64)}</div>
           <div className={activeClass === '5' ? 'activeClass' : null} active='5' path='/MyPageIndex/AwardHistory'>{t(65)}</div>
@@ -82,9 +82,9 @@ const MyPage = () => {
             <Route path='/MyPageIndex/AllGameData'>
               <AllGameData />
             </Route>
-            <Route path='/MyPageIndex/AnyWhere'>
+            {/* <Route path='/MyPageIndex/AnyWhere'>
               <AnyWhere />
-            </Route>
+            </Route> */}
             <Route path='/MyPageIndex/About30Game'>
               <About30Game />
             </Route>

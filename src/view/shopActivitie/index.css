@@ -76,32 +76,27 @@
 .activitieInfo {
     display: grid;
     grid-template-columns: 20% 80%;
-}
-
-.activitieInfo>div:nth-child(1) {
-    background: #eee;
-}
-
-.activitieInfo>div {
+    grid-template-rows: 45px;
     border: 1px solid #999;
 }
 
-.activitieInfo>div:nth-child(1) div {
-    padding: 5px;
+.activitieInfo:nth-child(2) {
+    border-top: none;
+    border-bottom: none;
 }
 
-.activitieInfo>div:nth-child(1) div:nth-child(2) {
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
+.activitieInfo>div:nth-child(1) {
+    border-right: 1px solid #999;
+    background: #eee;
+    display: grid;
+    justify-items: center;
+    align-items: center;
 }
 
-.activitieInfo>div:nth-child(2)>div {
-    padding: 5px;
-}
-
-.activitieInfo>div:nth-child(2)>div:nth-child(2) {
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
+.activitieInfo>div:nth-child(2) {
+    display: grid;
+    text-indent: 10px;
+    align-items: center;
 }
 
 .activitieInfoContent {
@@ -146,4 +141,13 @@
 .machineBox img {
     width: 100%;
     height: 100%;
+}
+
+.textareaStyle {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    background: #fff;
+    overflow: hidden;
 }

@@ -458,7 +458,7 @@ const MySetting = () => {
                                 <RenderPropItenDom list={lowTon} value={lowTonValue} />
                             </div>
                             <div className='everyShopPropSettingBox'>
-                                <div className='ShopPropSettingTitle'>THREE IN A BEN ({therrInBed.length - 1})</div>
+                                <div className='ShopPropSettingTitle'>THREE IN A BED ({therrInBed.length - 1})</div>
                                 <div>
                                     <Select value={threeBenValue} style={{ width: '100%' }} onChange={(value) => handleChange(value, 74, true)}>
                                         {therrInBed.map(i => <Option key={i.id} value={i.id}>{i.title}</Option>)}

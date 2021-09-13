@@ -7,6 +7,10 @@
     text-align: center;
 }
 
+.Ranting .ant-tabs-nav-list {
+    width: 100%;
+}
+
 .Ranting .ant-tabs-tab>div {
     margin: 0 auto;
 }
