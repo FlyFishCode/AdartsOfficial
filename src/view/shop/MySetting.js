@@ -7,7 +7,19 @@ import { useTranslation } from 'react-i18next';
 import NoData from '@/common/components/NoData';
 import RenderUrlDom from '@/common/components/RenderUrlDom';
 
-import { myItemAllListHttp, shopPropSetHttp, shopPropsInfoHttp, shopPropsBuyHttp, templateListHttp, templateAddHttp, templateUpdateHttp, templateDeleteHttp, shopPropUsingListHttp } from '@/api';
+import {
+    myItemAllListHttp,
+    shopPropSetHttp,
+    shopPropUsingListHttp,
+    shopPropsInfoHttp,
+    shopPropsBuyHttp,
+    templateListHttp,
+    templateAddHttp,
+    templateUpdateHttp,
+    templateDeleteHttp,
+    templateChangeHttp
+} from '@/api';
+
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -16,6 +28,7 @@ const MySetting = () => {
     const { t } = useTranslation();
     const [visible, setVisible] = useState(false);
     const [template, setTemplate] = useState([]);
+    const [templateId, setTemplateId] = useState('-1');
     const [dialogTemplate, setDialogTemplate] = useState([]);
     const [templateVisible, setTemplateVisible] = useState('');
     const [propObj, setPropObj] = useState({});
@@ -72,7 +85,7 @@ const MySetting = () => {
                 <div className='ShopPropSettingImg'><RenderUrlDom url={obj.url} /></div>
                 <div className='ShopPropShopName'>{obj && obj.titlt}</div>
                 <div style={{ display: 'grid', justifyItems: 'center' }}>
-                    <div className='ShopProp'><FieldTimeOutlined />-{obj && obj.validDays} Day <Button danger size='small' onClick={() => handleRenewal(obj.id)}>{t(178)}</Button></div>
+                    <div className='ShopProp'><FieldTimeOutlined />{obj && obj.validDays} Day <Button danger size='small' onClick={() => handleRenewal(obj.id)}>{t(178)}</Button></div>
                 </div>
             </div>
         )
@@ -84,6 +97,22 @@ const MySetting = () => {
                 setVisible(false);
             }
         })
+    }
+    const clearPropsSetting = () => {
+        setStyleValue(0);
+        setMarkAwardValue(0);
+        setEffectValue(0);
+        setSoundValue(0);
+        setBullSoundValue(0);
+        setBullValue(0);
+        setThreeBlackValue(0);
+        setHatTrickValue(0);
+        setTon80Value(0);
+        setHigtTonValue(0);
+        setLowTonValue(0);
+        setThreeBenValue(0);
+        setWhiteHorseValue(0);
+        setNineMarkValue(0);
     }
     const handleChange = (value, type, isSet) => {
         let list = [];
@@ -199,8 +228,8 @@ const MySetting = () => {
         templateListHttp().then(res => {
             if (res.data.code === 100) {
                 const list = [];
-                const tempList = res.data.data;
-                tempList.unshift({ id: 0, name: t(230) });
+                const tempList = [...res.data.data];
+                tempList.unshift({ id: -1, name: t(230) });
                 setTemplate(tempList);
                 for (let i = res.data.data.length; i < 10; i++) {
                     list.push({ id: '', name: '' });
@@ -220,15 +249,20 @@ const MySetting = () => {
         return tempList;
     }
     const templateChange = (id) => {
-        if (Number(id)) {
-            console.log(template.find(i => i.id === Number(id)))
-        }
-        // handleChange()
+        setTemplateId(id);
+        clearPropsSetting();
+        templateChangeHttp({ templateId: id }).then(res => {
+            if (res.data.code === 100) {
+                getUsingPropList()
+            }
+
+        })
     }
     const getUsingPropList = () => {
         shopPropUsingListHttp().then(res => {
             if (res.data.code === 100) {
-                res.data.data.forEach(i => {
+                setTemplateId(String(res.data.data.id));
+                res.data.data.list.forEach(i => {
                     handleChange(i.id, i.type, false)
                 })
             }
@@ -274,6 +308,7 @@ const MySetting = () => {
                     <Col span='2' className='labelTitle'>{t(173)}</Col>
                     <Col span='10'>
                         <Select
+                            value={templateId}
                             style={{ width: '100%' }}
                             onChange={templateChange}
                             optionLabelProp="label"

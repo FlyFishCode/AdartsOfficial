@@ -14,7 +14,6 @@ import ShopIntroduce from './ShopIntroduce';
 import NoData from '@/common/components/NoData';
 
 import './index.css';
-import a from '@/assets/img/a.jpg';
 
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
@@ -86,13 +85,7 @@ const ShopProp = () => {
     const [myGift, setMyGift] = useState([]);
     const [myGiftAsk, setMyGiftAsk] = useState([]);
     useEffect(() => {
-      setMyGift([
-        { id: 1, img: a, gold: 100, type: 2, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
-        { id: 2, img: a, gold: 100, type: 3, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
-        { id: 3, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
-        { id: 4, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
-        { id: 5, img: a, gold: 100, type: 5, title: '赠送得礼品', friend: 'Alven', date: '2021-8-6' },
-      ]);
+      setMyGift([]);
       setMyGiftAsk([]);
       setVSX([]);
     }, [])

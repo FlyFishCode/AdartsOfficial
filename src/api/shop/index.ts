@@ -21,6 +21,8 @@ const templateAdd = 'itemtemplate/insert';
 const templateUpdate = 'itemtemplate/update';
 // 删除模板
 const templateDelete = 'itemtemplate/delete';
+// 切换模板
+const templateChange = 'itemtemplate/change';
 
 export {
   shopPropsList,
@@ -33,5 +35,6 @@ export {
   templateList,
   templateAdd,
   templateUpdate,
-  templateDelete
+  templateDelete,
+  templateChange
 }

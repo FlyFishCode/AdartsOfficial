@@ -1,8 +1,9 @@
-import md5 from 'blueimp-md5'
+import md5 from 'blueimp-md5';
 // 正则 手机号
 const REG_PHONE = /^(?:(?:\+|00)86)?1\d{10}$/;
 // 正则 邮箱
 const REG_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 
 const MD5 = (value) => {
         return md5(value + 'kitekey').toUpperCase();

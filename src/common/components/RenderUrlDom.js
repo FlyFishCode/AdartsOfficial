@@ -1,3 +1,5 @@
+import NoProp from '@/assets/img/NoProp.jpg';
+
 const RenderUrlDom = ({ url }) => {
   if (url) {
     const type = url.split(',')[0].substr(-10).split('.')[1];
@@ -5,7 +7,7 @@ const RenderUrlDom = ({ url }) => {
     const videoList = ['mp4'];
     const audioList = ['mp3', 'ogg', 'mpeg'];
     if (imgList.includes(type)) {
-      return <img src={url && url.split(',')[0]} alt="" />
+      return <img src={(url && url.split(',')[0])} alt="" />
     }
     if (videoList.includes(type)) {
       return (
@@ -23,7 +25,8 @@ const RenderUrlDom = ({ url }) => {
         </audio>
       )
     }
+  } else {
+    return <img src={NoProp} alt="" />
   }
-  return null
 }
 export default RenderUrlDom;

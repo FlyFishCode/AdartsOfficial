@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { message } from 'antd'
+import { message } from 'antd';
 // import { useHistory } from 'react-router-dom';
 
 // 公共
@@ -35,12 +35,26 @@ import { dartsList,dartsInfo } from './darts';
 // 活动
 import { activityDateList,activityList,activityInfo } from './activity';
 // 道具
-import { shopPropsList,shopPropsInfo,shopPropsTypeList,myItemAllList,shopPropsBuy,shopPropSet,shopPropUsingList,templateList,templateAdd,templateUpdate,templateDelete } from './shop';
+import {
+	shopPropsList,
+	shopPropsInfo,
+	shopPropsTypeList,
+	myItemAllList,
+	shopPropsBuy,
+	shopPropSet,
+	shopPropUsingList,
+	templateList,
+	templateAdd,
+	templateUpdate,
+	templateDelete,
+	templateChange
+} from './shop';
 
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
 
 const qs = require('qs');
+
 
 // 登录
 const indexLogin = `${baseWeb}login`
@@ -219,7 +233,7 @@ const activityInfoHttp = (data:any) =>{
 
 // 道具首页列表
 const shopPropsListHttp = (data:any) =>{
-	return axios.get(`${baseWebsite}${shopPropsList}`, data)
+	return axios.get(getNewUrl(`${baseWebsite}${shopPropsList}`, data))
 }
 // 道具首页列表
 const shopPropsInfoHttp = (data:any) =>{
@@ -261,7 +275,12 @@ const templateUpdateHttp = (data:any) =>{
 const templateDeleteHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${templateDelete}`, data)
 }
+// 模板切换
+const templateChangeHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${templateChange}`, data))
+}
 
+let index = 0;
 
 axios.interceptors.request.use(function(config) {
     const token = sessionStorage.getItem('websiteToken');
@@ -290,8 +309,11 @@ axios.interceptors.response.use(function(response) {
 	// 	history.push('/')
 	// }
 	if(response.data.code === 198){
-		window.location.href = window.location.origin;
-		message.warning('未登录');
+		if(!index){
+			index = 1;
+			message.warning('请登录之后查看！');
+		}
+		window.location.href = window.location.origin + '/login';
 	}
     return response;
 }, function(error) {
@@ -362,5 +384,6 @@ export {
 		templateListHttp,
 		templateAddHttp,
 		templateUpdateHttp,
-		templateDeleteHttp
+		templateDeleteHttp,
+		templateChangeHttp
 }
