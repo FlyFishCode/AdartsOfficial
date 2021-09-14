@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Button, Table, Input, message } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { aboutSevenPlayerListHttp, handleFriendsHttp, addFriendsHttp, friendsListHttp } from '@/api';
 
 const { Search } = Input;
@@ -51,9 +50,7 @@ const AddFriends = () => {
       key: 'value',
       render: (text, row, index) => {
         return (
-          <div className='handleBox'>
-            <div><Button type='primary' size='small' onClick={() => handleAgreeClick(row)} icon={<CheckOutlined />} /></div>
-          </div>
+          <Button size='small' type="primary" onClick={() => handleAgreeClick(row)} >{t(231)}</Button>
         )
       }
     }
@@ -61,7 +58,7 @@ const AddFriends = () => {
   const columns2 = [
     {
       title: t(102),
-      dataIndex: 'portrait',
+      dataIndex: 'friendPortrait',
       render: (text, row, index) => {
         return (
           <div key={index} style={{ height: '50px', width: '50px' }}>
@@ -93,8 +90,8 @@ const AddFriends = () => {
       render: (text, row, index) => {
         return (
           <div className='handleBox'>
-            <div><Button type='primary' size='small' onClick={() => handleClick(row, true)} icon={<CheckOutlined />} /></div>
-            <div><Button danger size='small' onClick={() => handleClick(row, false)} icon={<CloseOutlined />} /></div>
+            <Button size='small' type="primary" onClick={() => handleClick(row, true)} >{t(231)}</Button>
+            <Button danger size='small' onClick={() => handleClick(row, false)}>{t(232)}</Button>
           </div>
         )
       }

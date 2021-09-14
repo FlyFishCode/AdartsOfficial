@@ -129,11 +129,6 @@
     align-items: center;
 }
 
-.handleBox div {
-    height: 31px;
-    line-height: 33px;
-}
-
 .AdartsCardBox {
     border: 1px solid #999;
     margin: 10px 0;
