@@ -491,6 +491,7 @@ const MySetting = () => {
                     </Panel>
                 </Collapse>
             </div>
+            {/* 道具详情弹框 */}
             <Modal title={t(179)} visible={visible} centered footer={null} width='50%' onCancel={() => setVisible(false)}>
                 <div className='RowBox' style={{ fontWeight: 'bold', fontSize: '30px', textAlign: 'center' }}>{propObj.title}</div>
                 <div className='renewalImgBox'><img src={propObj.url && propObj.url.split(',')[0]} alt="" /></div>

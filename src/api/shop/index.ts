@@ -24,6 +24,13 @@ const templateDelete = 'itemtemplate/delete';
 // 切换模板
 const templateChange = 'itemtemplate/change';
 
+// 获取赠送道具列表
+const shopPropGiftList = 'itemgift/present/list';
+// 接受别人赠送礼品
+const shopPropAccept = 'itemgift/receive';
+// 赠送别人礼品
+const shopPropSend = 'itemgift/send';
+
 export {
   shopPropsList,
   shopPropsInfo,
@@ -36,5 +43,8 @@ export {
   templateAdd,
   templateUpdate,
   templateDelete,
-  templateChange
+  templateChange,
+  shopPropGiftList,
+  shopPropAccept,
+  shopPropSend
 }

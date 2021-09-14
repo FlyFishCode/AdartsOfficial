@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, Carousel, Row, Col, Modal, Tabs, Button, Pagination } from 'antd';
+import { Menu, Carousel, Row, Col, Modal, Tabs, Button, Pagination, message } from 'antd';
 import { indexBannerListHttp } from '@/api';
 import { LeftCircleOutlined, RightCircleOutlined, GiftOutlined } from '@ant-design/icons';
+
+import { shopPropGiftListHttp, shopPropAcceptHttp } from '@/api';
 
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
@@ -81,13 +83,45 @@ const ShopProp = () => {
   }
   const ModelBox = () => {
     const [VSX, setVSX] = useState([]);
-    const [itemTotal, setItemTotal] = useState(1);
     const [myGift, setMyGift] = useState([]);
     const [myGiftAsk, setMyGiftAsk] = useState([]);
+
+    const [itemTotal, setItemTotal] = useState(1);
+
+    const [vsxTotal, setVsxTotal] = useState(0);
+
+    // const [itemTotal, setItemTotal] = useState(1);
+
+    const getItemData = (pageIndex) => {
+      shopPropGiftListHttp({ pageIndex: pageIndex, pageSize: 5 }).then(res => {
+        if (res.data.code === 100) {
+          setMyGift(res.data.data.list);
+          setItemTotal(res.data.data.totalCount);
+        }
+      })
+    }
+    const getVsxData = (pageIndex) => {
+      console.log(pageIndex)
+      setVsxTotal(1)
+    }
+    const handleAccept = (giftId) => {
+      shopPropAcceptHttp({ giftId }).then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg);
+          getItemData();
+        } else {
+          message.warning(res.data.msg);
+        }
+      })
+    }
     useEffect(() => {
-      setMyGift([]);
+      getItemData()
       setMyGiftAsk([]);
       setVSX([]);
+      return () => {
+        setMyGift([]);
+        setItemTotal(1);
+      }
     }, [])
     return (
       <Modal title={t(217)}
@@ -100,37 +134,37 @@ const ShopProp = () => {
         onCancel={() => setVisible(false)}
       >
         <Tabs defaultActiveKey="1">
-          <TabPane tab={`${t(218)}(${myGift.length})`} key="1">
+          <TabPane tab={`${t(218)}(${itemTotal})`} key="1">
             <Tabs defaultActiveKey="1">
-              <TabPane tab={`ITEM(${myGift.length})`} key="1">
+              <TabPane tab={`ITEM(${itemTotal})`} key="1">
                 {myGift.length ? myGift.map(i => {
                   return (
                     <div key={i.id} className='GiftItemBox'>
-                      <div><img src={i.img} alt="" /></div>
+                      <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
                       <div>
                         <div className='GiftTitle'>
-                          <div>[{i.gold}G]</div>
+                          <div>[{0}G]</div>
                           <div>[{getTypeStr(i.type)}]</div>
-                          <div>{i.title}</div>
+                          <div>{i.itemTitle}</div>
                         </div>
                         <div>
-                          <div>{t(220)} | {i.friend}</div>
-                          <div>{t(221)} | {i.date}</div>
+                          <div>{t(220)} | {i.sndMemberName}</div>
+                          <div>{t(221)} | {i.sndTime}</div>
                         </div>
-                        <div><Button type="primary" size='small'>{t(124)}</Button></div>
+                        <div><Button type="primary" size='small' onClick={() => handleAccept(i.id)}>{t(124)}</Button></div>
                       </div>
                     </div>
                   )
                 }) : <NoData />}
                 {myGift.length ?
                   <div>
-                    <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                    <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' defaultCurrent='1' total={itemTotal} showSizeChanger={false} onChange={(value) => getItemData(value)} /></Row>
                     <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
                   </div>
                   : null
                 }
               </TabPane>
-              <TabPane tab={`VSX(${myGiftAsk.length})`} key="2">
+              <TabPane tab={`VSX(${vsxTotal})`} key="2">
                 {VSX.length ? VSX.map(i => {
                   return (
                     <div key={i.id} className='GiftItemBox'>
@@ -150,10 +184,9 @@ const ShopProp = () => {
                     </div>
                   )
                 }) : <NoData />}
-                {VSX.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
                 {VSX.length ?
                   <div>
-                    <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                    <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' total={vsxTotal} showSizeChanger={false} onChange={(value) => getVsxData(value)} /></Row>
                     <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
                   </div>
                   : null
@@ -181,10 +214,9 @@ const ShopProp = () => {
                 </div>
               )
             }) : <NoData />}
-            {myGiftAsk.length ? <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row> : null}
             {myGiftAsk.length ?
               <div>
-                <Row className='RowBox' justify="center"><Pagination pageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
+                <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
                 <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
               </div>
               : null
