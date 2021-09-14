@@ -50,10 +50,9 @@ const MyPropList = () => {
   const getData = () => {
     shopPropUsingListHttp().then(res => {
       if (res.data.code === 100) {
-        setMyList(res.data.data);
+        setMyList(res.data.data.list);
       }
     })
-    tabClick();
   }
   const handleClick = (id) => {
     history.push({
