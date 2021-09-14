@@ -136,7 +136,7 @@ const MyPageIndex = (props) => {
       cardId: cardId,
       memberId: sessionStorage.getItem('websiteMemberId')
     }).then(res => {
-      if (res.data.data) {
+      if (res.data.code === 100) {
         setCard(res.data.data)
         render(res.data.data.rating)
         // changeCardId(res.data.data.cardId)
@@ -147,15 +147,15 @@ const MyPageIndex = (props) => {
   const getGameInfoData = (cardId) => {
     myPageIndexGameInfoHttp({ cardId: cardId }).then(res => {
       if (res.data.code === 100) {
-        setGaneInfo(res.data.data)
+        setGaneInfo(res.data.data);
       }
     })
   }
   useEffect(() => {
     const cardId = Number(sessionStorage.getItem('websiteCardId'));
     if (cardId) {
-      getData(cardId)
-      getGameInfoData(cardId)
+      getData(cardId);
+      getGameInfoData(cardId);
     }
     return () => {
       setCard({});

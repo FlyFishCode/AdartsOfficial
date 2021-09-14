@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { activityInfoHttp } from '@/api';
 
-import { ExceptionOutlined, TrophyOutlined, DollarCircleOutlined, FileTextOutlined, FileSearchOutlined } from '@ant-design/icons';
+import { ExceptionOutlined, TrophyOutlined, DollarCircleOutlined, FileTextOutlined, FileSearchOutlined, PhoneOutlined } from '@ant-design/icons';
 
 import { dealUrlHash } from '@/common/Utlis';
 
@@ -41,12 +41,14 @@ const ActivitieInfo = () => {
         <div className='activitieInfo'>
           <div>{t(203)}</div>
           <div>
-            {info.shopList ?
-              <div>
-                <div>{info.shopList[0].shopName}</div>
-                <div>{info.shopList[0].shopAddress}</div>
-              </div>
-              : ''}
+            {info.shopList ? info.shopList.map(i => {
+              return (
+                <div key={i.shopId}>
+                  <div>{i.shopName}</div>
+                  <div className='linkStyle'>{i.shopAddress}</div>
+                </div>
+              )
+            }) : ''}
           </div>
         </div>
         <div className='activitieInfo'>
@@ -60,17 +62,17 @@ const ActivitieInfo = () => {
       </div>
       <div style={{ border: '1px solid #eee' }}>
         <div className='activitieInfoContent'>
-          <div><FileTextOutlined /></div>
-          <div>
-            <div>{t(211)}</div>
-            <textarea disabled className='textareaStyle' value={info.joinMethod}></textarea>
-          </div>
-        </div>
-        <div className='activitieInfoContent'>
           <div><FileSearchOutlined /></div>
           <div>
             <div>{t(210)}</div>
             <textarea disabled className='textareaStyle' value={info.content}></textarea>
+          </div>
+        </div>
+        <div className='activitieInfoContent'>
+          <div><FileTextOutlined /></div>
+          <div>
+            <div>{t(211)}</div>
+            <textarea disabled className='textareaStyle' value={info.joinMethod}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
@@ -85,6 +87,13 @@ const ActivitieInfo = () => {
           <div>
             <div>{t(214)}</div>
             <textarea disabled className='textareaStyle' value={info.reward}></textarea>
+          </div>
+        </div>
+        <div className='activitieInfoContent'>
+          <div><PhoneOutlined /></div>
+          <div>
+            <div>{t(207)}</div>
+            <textarea disabled className='textareaStyle' value={info.contact}></textarea>
           </div>
         </div>
         <div className='activitieInfoContent'>
