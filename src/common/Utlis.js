@@ -33,6 +33,9 @@ const COUNTRYICONS = [
 
 const setCountryIconPosition = (code) => {
     if (code) {
+        if (code === 'HK') {
+            code = 'CN'
+        }
         return `${COUNTRYICONS.indexOf(code) % 14 / 13 * 100 + '%'} ${Math.floor(COUNTRYICONS.indexOf(code) / 14) / 13 * 100 + '%'}`
     } else {
         return `${0}% ${0}%`

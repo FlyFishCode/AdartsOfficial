@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
 import { CaretUpOutlined } from '@ant-design/icons';
 
+import { rankListHttp } from '@/api';
+
 import './index.css';
-import a from '@/assets/img/a.jpg';
 import RenderDom from './renderListDom';
 
 const { TabPane } = Tabs;
@@ -24,56 +25,59 @@ const Ranting = () => {
 
   const [ratingThisList, setRatingThisList] = useState([]);
   const [ratingLastList, setRatingLastList] = useState([]);
-  const getData = () => {
-    setOneGameThisList([
-      { id: 1, img: a, teamName: 'aaa temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 2, img: a, teamName: 'sss temaoseing', name: 'Lisa', count: 2052, country: a },
-      { id: 3, img: a, teamName: 'ccc temaoseing', name: 'Lisa', count: 3052, country: a },
-      { id: 4, img: a, teamName: 'eee temaoseing', name: 'Lisa', count: 1452, country: a },
-      { id: 5, img: a, teamName: 'sss temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 6, img: a, teamName: 'qqq temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 7, img: a, teamName: 'vvv temaoseing', name: 'Lisa', count: 1052, country: a }
-    ]);
-    setOneGameLastList([
-      { id: 1, img: a, teamName: 'ggg temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 2, img: a, teamName: 'hhh temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 3, img: a, teamName: 'bbb temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 4, img: a, teamName: 'fff temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 5, img: a, teamName: 'ttt temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 6, img: a, teamName: 'rrr temaoseing', name: 'Lisa', count: 1052, country: a },
-      { id: 7, img: a, teamName: 'mmm temaoseing', name: 'Lisa', count: 1052, country: a }
-    ]);
 
-    setCricketThisList([]);
-    setCricketLastList([]);
-
-    setCountUpThisList([]);
-    setCountUpLastList([]);
-
-    setRatingThisList([]);
-    setRatingLastList([]);
+  const [ratingUpThisList, setRatingUpThisList] = useState([]);
+  const [ratingUpLastList, setRatingUpLastList] = useState([]);
+  const getData = (key) => {
+    rankListHttp({ gameType: key }).then(res => {
+      if (res.data.code === 100) {
+        const { thisMonth, lastMonth } = res.data.data;
+        switch (key) {
+          case 100:
+            setOneGameThisList(thisMonth);
+            setOneGameLastList(lastMonth);
+            break;
+          case 200:
+            setCricketThisList(thisMonth);
+            setCricketLastList(lastMonth);
+            break;
+          case 300:
+            setCountUpThisList(thisMonth);
+            setCountUpLastList(lastMonth);
+            break;
+          case 400:
+            setRatingThisList(thisMonth);
+            setRatingLastList(lastMonth);
+            break;
+          default:
+            setRatingUpThisList(thisMonth);
+            setRatingUpLastList(lastMonth);
+            break;
+        }
+      }
+    })
   }
   useEffect(() => {
-    getData();
+    getData(100, true);
   }, [])
   return (
     <div className='Ranting'>
       <div className='myPageTitle'>{t(119)}</div>
-      <Tabs defaultActiveKey="1" type="card">
-        <TabPane tab="01 GAME" key="1">
+      <Tabs defaultActiveKey="1" type="card" onChange={(value) => getData(Number(value))}>
+        <TabPane tab="01 GAME" key="100">
           <RenderDom thisMonth={oneGameThisList} lastMonth={oneGameLastList} />
         </TabPane>
-        <TabPane tab="CRICKET" key="2">
+        <TabPane tab="CRICKET" key="200">
           <RenderDom thisMonth={cricketThisList} lastMonth={cricketLastList} />
         </TabPane>
-        <TabPane tab="COUNT UP" key="3">
+        <TabPane tab="COUNT UP" key="300">
           <RenderDom thisMonth={countUpThisList} lastMonth={countUpLastList} />
         </TabPane>
-        <TabPane tab="RATING" key="4">
+        <TabPane tab="RATING" key="400">
           <RenderDom thisMonth={ratingThisList} lastMonth={ratingLastList} />
         </TabPane>
-        <TabPane tab={<span>RATING<CaretUpOutlined /></span>} key="5">
-          <RenderDom thisMonth={oneGameThisList} lastMonth={oneGameLastList} />
+        <TabPane tab={<span>RATING<CaretUpOutlined /></span>} key="500">
+          <RenderDom thisMonth={ratingUpThisList} lastMonth={ratingUpLastList} />
         </TabPane>
       </Tabs>
     </div>

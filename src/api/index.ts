@@ -50,6 +50,9 @@ import {
 	templateChange
 } from './shop';
 
+// 排名
+import {rankList,awardRankList} from './ranking'
+
 const baseWeb = '/rps/';
 const baseWebsite = '/rpi/';
 
@@ -280,6 +283,14 @@ const templateChangeHttp = (data:any) =>{
 	return axios.post(getNewUrl(`${baseWebsite}${templateChange}`, data))
 }
 
+// 排名
+const rankListHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${rankList}`, data))
+}
+const awardRankListHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${awardRankList}`, data))
+}
+
 let index = 0;
 
 axios.interceptors.request.use(function(config) {
@@ -385,5 +396,7 @@ export {
 		templateAddHttp,
 		templateUpdateHttp,
 		templateDeleteHttp,
-		templateChangeHttp
+		templateChangeHttp,
+		rankListHttp,
+		awardRankListHttp
 }

@@ -5,6 +5,8 @@ import { Select } from 'antd';
 
 import RenderDom from './renderListDom';
 
+import { awardRankListHttp } from '@/api';
+
 const { Option } = Select;
 
 const AwardRanting = () => {
@@ -13,20 +15,25 @@ const AwardRanting = () => {
   const [thisMonthList, setThisMonthList] = useState([]);
   const [lastMonthList, setLastMonthList] = useState([]);
   const optionsList = [
-    { value: 1, label: '9 MARK' },
-    { value: 2, label: 'TON 80' },
-    { value: 3, label: 'LOW TON' },
+    { value: 2, label: '9 MARK' },
+    { value: 5, label: 'TON 80' },
+    { value: 1, label: 'LOW TON' },
     { value: 4, label: 'HIGH TON' },
-    { value: 5, label: 'HAT TRICK' },
-    { value: 6, label: '3 IN A BED' },
-    { value: 7, label: '3 IN THE BLACK' },
+    { value: 0, label: 'HAT TRICK' },
+    { value: 3, label: '3 IN A BED' },
   ];
   const getData = () => {
-    setThisMonthList([]);
-    setLastMonthList([]);
+    awardRankListHttp({ awardType: value }).then(res => {
+      if (res.data.code === 100) {
+        const { thisMonth, lastMonth } = res.data.data;
+        setThisMonthList(thisMonth);
+        setLastMonthList(lastMonth);
+      }
+    })
   };
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
   return (
     <div>

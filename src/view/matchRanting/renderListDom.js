@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Row, Col } from 'antd';
 import NoData from '@/common/components/NoData';
+import { setCountryIconPosition } from '@/common/Utlis';
 
 const RenderDom = (prop) => {
   const { thisMonth, lastMonth } = prop;
@@ -23,15 +24,15 @@ const RenderDom = (prop) => {
           <div className='renderTitle renderTitleThis'>This Month</div>
           {thisMonth.length ? thisMonth.map((i, index) => {
             return (
-              <div key={i.id} className='renderDomBox'>
-                <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{i.id}</div>
-                <div className='renderImgBox'><img src={i.img} alt="" /></div>
+              <div key={index} className='renderDomBox'>
+                <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{index + 1}</div>
+                <div className='renderImgBox'><img src={i.portrait} alt="" /></div>
                 <div>
-                  <div className='textOverFlow' title={i.teamName}>{i.teamName}</div>
-                  <div className='renderLink textOverFlow' title={i.name} onClick={() => handleClick(i.id)}>{i.name}</div>
+                  <div className='textOverFlow' title={i.memberName}>{i.memberName}</div>
+                  <div className='renderLink textOverFlow' title={i.homeShopName} onClick={() => handleClick(i.homeShopId)}>{i.homeShopName}</div>
                 </div>
-                <div className='renderScore'>{i.count}</div>
-                <div className='renderImgBox'><img src={i.country} alt="" /></div>
+                <div className='renderScore'>{i.awardAmount}</div>
+                <div className='renderCountryIcon' style={{ backgroundPosition: setCountryIconPosition(i.countryCode) }}></div>
               </div>
             )
           }) : <NoData />}
@@ -40,15 +41,15 @@ const RenderDom = (prop) => {
           <div className='renderTitle renderTitleLast'>Last Month</div>
           {thisMonth.length ? lastMonth.map((i, index) => {
             return (
-              <div key={i.id} className='renderDomBox'>
-                <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{i.id}</div>
-                <div className='renderImgBox'><img src={i.img} alt="" /></div>
+              <div key={index} className='renderDomBox'>
+                <div className={index <= 2 ? `oderBg${index} renderImgBox` : 'renderImgBox'}>{index + 1}</div>
+                <div className='renderImgBox'><img src={i.portrait} alt="" /></div>
                 <div>
-                  <div className='textOverFlow' title={i.teamName}>{i.teamName}</div>
-                  <div className='renderLink textOverFlow' title={i.name} onClick={() => handleClick(i.id)}>{i.name}</div>
+                  <div className='textOverFlow' title={i.memberName}>{i.memberName}</div>
+                  <div className='renderLink textOverFlow' title={i.name} onClick={() => handleClick(i.homeShopId)}>{i.homeShopName}</div>
                 </div>
-                <div className='renderScore'>{i.count}</div>
-                <div className='renderImgBox'><img src={i.country} alt="" /></div>
+                <div className='renderScore'>{i.awardAmount}</div>
+                <div className='renderCountryIcon' style={{ backgroundPosition: setCountryIconPosition(i.countryCode) }}></div>
               </div>
             )
           }) : <NoData />}
