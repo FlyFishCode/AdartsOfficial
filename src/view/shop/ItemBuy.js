@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs, Radio, Row, Col, Button, Modal, message } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuyHttp, shopPropSetHttp, shopPropSendHttp } from '@/api';
+import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuyHttp, shopPropSetHttp, shopPropSendHttp, shopPropAskHttp } from '@/api';
 
 // import a from '@/assets/img/a.jpg';
 
@@ -67,13 +67,25 @@ const ItemBuy = () => {
     const [sendVisible, setSendVisible] = useState(false);
     const [askVisible, setAskVisible] = useState(false);
 
-    const FriendListDom = (list) => {
+    const FriendListDom = (type, list) => {
       const handleGiftClick = (id) => {
-        shopPropSendHttp({ itemId: propId, revMemberId: id }).then(res => {
-          if (res.data.code === 100) {
-            message.info(res.data.msg);
-          }
-        })
+        if (type === 1) {
+          shopPropSendHttp({ itemId: propId, revMemberId: id }).then(res => {
+            if (res.data.code === 100) {
+              message.info(res.data.msg);
+            } else {
+              message.warning(res.data.msg)
+            }
+          })
+        } else {
+          shopPropAskHttp({ itemId: propId, sndMemberId: id }).then(res => {
+            if (res.data.code === 100) {
+              message.info(res.data.msg);
+            } else {
+              message.warning(res.data.msg)
+            }
+          })
+        }
       }
       return (
         <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
@@ -84,7 +96,7 @@ const ItemBuy = () => {
                   <div><img src={i.friendPortrait} alt="" /></div>
                   <div>{i.friendName}</div>
                 </div>
-                <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.friendId)}>{t(186)}</Button></div>
+                <div><Button type="primary" size='small' onClick={() => handleGiftClick(i.friendId)}>{type === 1 ? t(186) : t(187)}</Button></div>
               </div>
             )
           })}
@@ -151,10 +163,10 @@ const ItemBuy = () => {
         <Modal title={t(186)} visible={sendVisible} footer={null} width='40%' centered onCancel={() => setSendVisible(false)}>
           <Tabs id='MyPropList' defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
-              {friends.length ? FriendListDom(friends) : <NoData />}
+              {friends.length ? FriendListDom(1, friends) : <NoData />}
             </TabPane>
             <TabPane tab={t(196)} key="2">
-              {matchPlayer.length ? FriendListDom(matchPlayer) : <NoData />}
+              {matchPlayer.length ? FriendListDom(1, matchPlayer) : <NoData />}
             </TabPane>
           </Tabs>
           <Row justify='center' className='RowBox'>
@@ -165,10 +177,10 @@ const ItemBuy = () => {
         <Modal title={t(187)} visible={askVisible} footer={null} width='40%' centered onCancel={() => setAskVisible(false)}>
           <Tabs id='MyPropList' defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
-              {friends.length ? FriendListDom(friends) : <NoData />}
+              {friends.length ? FriendListDom(2, friends) : <NoData />}
             </TabPane>
             <TabPane tab={t(196)} key="2">
-              {matchPlayer.length ? FriendListDom(matchPlayer) : <NoData />}
+              {matchPlayer.length ? FriendListDom(2, matchPlayer) : <NoData />}
             </TabPane>
           </Tabs>
           <Row justify='center' className='RowBox'>

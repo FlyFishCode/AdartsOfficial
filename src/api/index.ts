@@ -50,7 +50,9 @@ import {
 	templateChange,
 	shopPropGiftList,
 	shopPropAccept,
-	shopPropSend
+	shopPropAcceptAll,
+	shopPropSend,
+	shopPropAsk
 } from './shop';
 
 // 排名
@@ -293,9 +295,17 @@ const shopPropGiftListHttp = (data:any) =>{
 const shopPropAcceptHttp = (data:any) =>{
 	return axios.post(getNewUrl(`${baseWebsite}${shopPropAccept}`, data))
 }
+// 接受所有礼品
+const shopPropAcceptAllHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropAcceptAll}`, data)
+}
 // 赠送礼品
 const shopPropSendHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${shopPropSend}`, data)
+}
+// 索要礼品
+const shopPropAskHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropAsk}`, data)
 }
 
 // 排名
@@ -416,5 +426,7 @@ export {
 		awardRankListHttp,
 		shopPropGiftListHttp,
 		shopPropAcceptHttp,
-		shopPropSendHttp
+		shopPropAcceptAllHttp,
+		shopPropSendHttp,
+		shopPropAskHttp
 }

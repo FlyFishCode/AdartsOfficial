@@ -5,7 +5,7 @@ import { Menu, Carousel, Row, Col, Modal, Tabs, Button, Pagination, message } fr
 import { indexBannerListHttp } from '@/api';
 import { LeftCircleOutlined, RightCircleOutlined, GiftOutlined } from '@ant-design/icons';
 
-import { shopPropGiftListHttp, shopPropAcceptHttp } from '@/api';
+import { shopPropGiftListHttp, shopPropAcceptHttp, shopPropAcceptAllHttp } from '@/api';
 
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
@@ -114,6 +114,14 @@ const ShopProp = () => {
         }
       })
     }
+    const handleAllClick = () => {
+      shopPropAcceptAllHttp().then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg);
+          getItemData();
+        }
+      })
+    }
     useEffect(() => {
       getItemData()
       setMyGiftAsk([]);
@@ -159,7 +167,7 @@ const ShopProp = () => {
                 {myGift.length ?
                   <div>
                     <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' defaultCurrent='1' total={itemTotal} showSizeChanger={false} onChange={(value) => getItemData(value)} /></Row>
-                    <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
+                    <Row className='RowBox' justify="center"><Button type="primary" size='small' onClick={handleAllClick}>{t(222)}</Button></Row>
                   </div>
                   : null
                 }

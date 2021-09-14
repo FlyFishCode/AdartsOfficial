@@ -25,12 +25,15 @@ const templateDelete = 'itemtemplate/delete';
 const templateChange = 'itemtemplate/change';
 
 // 获取赠送道具列表
-const shopPropGiftList = 'itemgift/present/list';
+const shopPropGiftList = 'itemgift/presentlist';
 // 接受别人赠送礼品
 const shopPropAccept = 'itemgift/receive';
+// 接受所有礼品
+const shopPropAcceptAll = 'itemgift/receiveall';
 // 赠送别人礼品
 const shopPropSend = 'itemgift/send';
-
+// 索要礼品
+const shopPropAsk = 'itemgift/ask';
 export {
   shopPropsList,
   shopPropsInfo,
@@ -46,5 +49,7 @@ export {
   templateChange,
   shopPropGiftList,
   shopPropAccept,
-  shopPropSend
+  shopPropAcceptAll,
+  shopPropSend,
+  shopPropAsk
 }
