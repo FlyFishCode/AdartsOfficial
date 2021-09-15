@@ -306,6 +306,22 @@
     align-items: center;
     justify-items: center;
     cursor: pointer;
+    position: relative;
+}
+
+.giftBox div {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    line-height: 23px;
+    right: 0px;
+    top: 0px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background: red;
+    color: #fff;
+    overflow: hidden;
 }
 
 .GiftBox .ant-tabs-nav-list {

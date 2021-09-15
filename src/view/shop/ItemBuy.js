@@ -196,7 +196,7 @@ const ItemBuy = () => {
       itemType: infoId,
       queryType: type,
       pageIndex: 1,
-      pageSize: 5
+      pageSize: 999
     }
     shopPropsTypeListHttp(obj).then(res => {
       if (res.data.data.list) {
@@ -228,7 +228,7 @@ const ItemBuy = () => {
   }
   const getInfoData = (itemId) => {
     shopPropsInfoHttp({ itemId }).then(res => {
-      if (res.data.data) {
+      if (res.data.code === 100) {
         setInfoObj(res.data.data)
       }
     })

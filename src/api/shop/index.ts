@@ -34,6 +34,13 @@ const shopPropAcceptAll = 'itemgift/receiveall';
 const shopPropSend = 'itemgift/send';
 // 索要礼品
 const shopPropAsk = 'itemgift/ask';
+// 获取别人向你索要礼品列表
+const shopPropAskList = 'itemgift/asklist';
+// 拒绝或者接受别人索要
+const shopPropHandleAsk = 'itemgift/handleask';
+// 获取所有礼品操作得数量
+const shopPropGiftCount = 'itemgift/count';
+
 export {
   shopPropsList,
   shopPropsInfo,
@@ -51,5 +58,8 @@ export {
   shopPropAccept,
   shopPropAcceptAll,
   shopPropSend,
-  shopPropAsk
+  shopPropAsk,
+  shopPropAskList,
+  shopPropHandleAsk,
+  shopPropGiftCount
 }

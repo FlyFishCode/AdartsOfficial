@@ -111,7 +111,7 @@ const AddFriends = () => {
   }
   const handleClick = (row, bool) => {
     const obj = {
-      memberRelationshipId: row.friendId,
+      memberRelationshipId: row.memberRelationshipId,
       status: 0
     }
     if (bool) {
@@ -190,7 +190,7 @@ const AddFriends = () => {
       /> : <Table
         dataSource={pendingPlayerList}
         columns={columns2}
-        rowKey='friendId'
+        rowKey='memberRelationshipId'
         pagination={false}
         scroll={{ y: 650 }}
       />}

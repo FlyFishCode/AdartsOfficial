@@ -3,7 +3,7 @@ import NoProp from '@/assets/img/NoProp.jpg';
 const RenderUrlDom = ({ url }) => {
   if (url) {
     const type = url.split(',')[0].substr(-10).split('.')[1];
-    const imgList = ['jpg', 'png', 'jpeg'];
+    const imgList = ['jpg', 'png', 'jpeg', 'gif'];
     const videoList = ['mp4'];
     const audioList = ['mp3', 'ogg', 'mpeg'];
     if (imgList.includes(type)) {

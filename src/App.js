@@ -439,8 +439,9 @@ const Activity = () => {
         const obj = {
             type: null,
             title: '',
-            year: new Date().getFullYear(),
             month,
+            year: new Date().getFullYear(),
+            countryId: sessionStorage.getItem('websiteCountryId')
         };
         activityDateListHttp(obj).then(res => {
             const temp1 = res.data.data.activityList.map(i => {
@@ -477,10 +478,7 @@ const Activity = () => {
         return list.filter(i => i.date === today)
     }
     const handleClick = (id) => {
-        history.push({
-            pathname: '/ShopActivitie/ActivitieInfo',
-            search: `?id=${id}`
-        })
+        history.push('/ShopActivitie')
     }
     const dateChange = (date) => {
         const obj = {

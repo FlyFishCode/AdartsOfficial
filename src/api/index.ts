@@ -52,7 +52,10 @@ import {
 	shopPropAccept,
 	shopPropAcceptAll,
 	shopPropSend,
-	shopPropAsk
+	shopPropAsk,
+	shopPropAskList,
+	shopPropHandleAsk,
+	shopPropGiftCount
 } from './shop';
 
 // 排名
@@ -307,6 +310,18 @@ const shopPropSendHttp = (data:any) =>{
 const shopPropAskHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${shopPropAsk}`, data)
 }
+// 别人向你索要礼品列表
+const shopPropAskListHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropAskList}`, data)
+}
+// 拒绝或者接受别人索要礼品
+const shopPropHandleAskHttp = (data:any) =>{
+	return axios.post(getNewUrl(`${baseWebsite}${shopPropHandleAsk}`, data))
+}
+// 礼品数量
+const shopPropGiftCountHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${shopPropGiftCount}`, data)
+}
 
 // 排名
 const rankListHttp = (data:any) =>{
@@ -428,5 +443,8 @@ export {
 		shopPropAcceptHttp,
 		shopPropAcceptAllHttp,
 		shopPropSendHttp,
-		shopPropAskHttp
+		shopPropAskHttp,
+		shopPropAskListHttp,
+		shopPropHandleAskHttp,
+		shopPropGiftCountHttp
 }

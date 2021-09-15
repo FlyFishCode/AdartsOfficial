@@ -5,7 +5,7 @@ import { Menu, Carousel, Row, Col, Modal, Tabs, Button, Pagination, message } fr
 import { indexBannerListHttp } from '@/api';
 import { LeftCircleOutlined, RightCircleOutlined, GiftOutlined } from '@ant-design/icons';
 
-import { shopPropGiftListHttp, shopPropAcceptHttp, shopPropAcceptAllHttp } from '@/api';
+import { shopPropGiftListHttp, shopPropAcceptHttp, shopPropAcceptAllHttp, shopPropAskListHttp, shopPropHandleAskHttp, shopPropGiftCountHttp } from '@/api';
 
 import ShopPropIndex from './ShopPropIndex';
 import MySetting from './MySetting';
@@ -26,6 +26,7 @@ const ShopProp = () => {
   const [visible, setVisible] = useState(false);
   const [bannerList, setBannerList] = useState([]);
   const [current, setCurrent] = useState('ShopProp');
+  const [count, setCount] = useState(0);
   const getTypeStr = (type) => {
     let str = '';
     switch (type) {
@@ -86,11 +87,10 @@ const ShopProp = () => {
     const [myGift, setMyGift] = useState([]);
     const [myGiftAsk, setMyGiftAsk] = useState([]);
 
-    const [itemTotal, setItemTotal] = useState(1);
-
+    const [itemTotal, setItemTotal] = useState(0);
     const [vsxTotal, setVsxTotal] = useState(0);
 
-    // const [itemTotal, setItemTotal] = useState(1);
+    const [askTotal, setAskTotal] = useState(0);
 
     const getItemData = (pageIndex) => {
       shopPropGiftListHttp({ pageIndex: pageIndex, pageSize: 5 }).then(res => {
@@ -102,13 +102,21 @@ const ShopProp = () => {
     }
     const getVsxData = (pageIndex) => {
       console.log(pageIndex)
-      setVsxTotal(1)
+      setVsxTotal(0)
+    }
+    const getAskList = (pageIndex) => {
+      shopPropAskListHttp({ pageIndex: pageIndex, pageSize: 5 }).then(res => {
+        if (res.data.code === 100) {
+          setMyGiftAsk(res.data.data.list);
+          setAskTotal(res.data.data.totalCount);
+        }
+      })
     }
     const handleAccept = (giftId) => {
       shopPropAcceptHttp({ giftId }).then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg);
-          getItemData();
+          getItemData(1);
         } else {
           message.warning(res.data.msg);
         }
@@ -118,13 +126,23 @@ const ShopProp = () => {
       shopPropAcceptAllHttp().then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg);
-          getItemData();
+          getItemData(1);
+        }
+      })
+    }
+    const handleAskClick = (askId, status) => {
+      shopPropHandleAskHttp({ askId, status }).then(res => {
+        if (res.data.code === 100) {
+          message.info(res.data.msg);
+          getAskList(1)
+        } else {
+          message.warning(res.data.msg);
         }
       })
     }
     useEffect(() => {
-      getItemData()
-      setMyGiftAsk([]);
+      getItemData(1)
+      getAskList(1);
       setVSX([]);
       return () => {
         setMyGift([]);
@@ -176,7 +194,7 @@ const ShopProp = () => {
                 {VSX.length ? VSX.map(i => {
                   return (
                     <div key={i.id} className='GiftItemBox'>
-                      <div><img src={i.img} alt="" /></div>
+                      <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
                       <div>
                         <div className='GiftTitle'>
                           <div>[{i.gold}G]</div>
@@ -202,30 +220,32 @@ const ShopProp = () => {
               </TabPane>
             </Tabs>
           </TabPane>
-          <TabPane tab={`${t(219)}(${myGiftAsk.length})`} key="2">
+          <TabPane tab={`${t(219)}(${askTotal})`} key="2">
             {myGiftAsk.length ? myGiftAsk.map(i => {
               return (
                 <div key={i.id} className='GiftItemBox'>
-                  <div><img src={i.img} alt="" /></div>
+                  <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
                   <div>
                     <div className='GiftTitle'>
-                      <div>[{i.gold}G]</div>
+                      <div>[{0}G]</div>
                       <div>[{getTypeStr(i.type)}]</div>
                       <div>{i.title}</div>
                     </div>
                     <div>
-                      <div>{t(220)} | {i.friend}</div>
-                      <div>{t(221)} | {i.date}</div>
+                      <div>[{i.askMemberName}] {t(209)}</div>
+                      <div>{t(233)} | {i.askTime}</div>
                     </div>
-                    <div><Button type="primary" size='small'>{t(124)}</Button></div>
+                    <Row>
+                      <Col span='3'><Button type="primary" size='small' onClick={() => handleAskClick(i.id, true)}>{t(231)}</Button></Col>
+                      <Col span='3'><Button danger size='small' onClick={() => handleAskClick(i.id, false)}>{t(232)}</Button></Col>
+                    </Row>
                   </div>
                 </div>
               )
             }) : <NoData />}
             {myGiftAsk.length ?
               <div>
-                <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' total={itemTotal} showSizeChanger={false} onChange={(value) => setItemTotal(value)} /></Row>
-                <Row className='RowBox' justify="center"><Button type="primary" size='small'>{t(222)}</Button></Row>
+                <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' total={askTotal} showSizeChanger={false} onChange={(value) => getAskList(value)} /></Row>
               </div>
               : null
             }
@@ -241,8 +261,17 @@ const ShopProp = () => {
       type: 1
     }
     indexBannerListHttp(obj).then(res => {
-      setBannerList(res.data.data)
+      if (res.data.code === 100) {
+        setBannerList(res.data.data);
+      }
     });
+  }
+  const getCount = () => {
+    shopPropGiftCountHttp().then(res => {
+      if (res.data.code === 100) {
+        setCount(res.data.data)
+      }
+    })
   }
   const setting = {
     autoplay: true,
@@ -258,7 +287,8 @@ const ShopProp = () => {
     nextArrow: <NextIcon />
   }
   useEffect(() => {
-    getData()
+    getData();
+    getCount();
   }, [])
   return (
     <div>
@@ -275,8 +305,10 @@ const ShopProp = () => {
             <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
           </Menu>
         </Col>
-        <Col span='2'>
-          <div className='giftBox' onClick={() => setVisible(true)}><GiftOutlined /></div>
+        <Col span='1'>
+          <div className='giftBox' onClick={() => setVisible(true)}><GiftOutlined />
+            <div>{count}</div>
+          </div>
         </Col>
       </Row>
       <ModelBox />
