@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs, Radio, Row, Col, Button, Modal, message } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuyHttp, shopPropSetHttp, shopPropSendHttp, shopPropAskHttp } from '@/api';
+import { shopPropsInfoHttp, shopPropsTypeListHttp, friendsListHttp, shopPropsBuyHttp, shopPropSetHttp, shopPropSendHttp, shopPropAskHttp, aboutSevenPlayerListHttp } from '@/api';
 
 // import a from '@/assets/img/a.jpg';
 
@@ -89,9 +89,9 @@ const ItemBuy = () => {
       }
       return (
         <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-          {list.length && list.map(i => {
+          {list.length && list.map((i, index) => {
             return (
-              <div key={i.friendId} className='friendStyle'>
+              <div key={index} className='friendStyle'>
                 <div className='friendImgBox'>
                   <div><img src={i.friendPortrait} alt="" /></div>
                   <div>{i.friendName}</div>
@@ -215,7 +215,7 @@ const ItemBuy = () => {
     const obj = {
       memberId: sessionStorage.getItem('websiteMemberId'),
       type: 0,
-      status: 0,
+      status: 1,
       pageNum: 1,
       pageSize: 999,
     }
@@ -224,7 +224,11 @@ const ItemBuy = () => {
         setFriends(res.data.data.list)
       }
     })
-    setMatchPlayer([])
+    aboutSevenPlayerListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
+      if (res.data.code === 100) {
+        setMatchPlayer(res.data.data.list)
+      }
+    })
   }
   const getInfoData = (itemId) => {
     shopPropsInfoHttp({ itemId }).then(res => {

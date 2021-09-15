@@ -144,9 +144,10 @@ const ShopProp = () => {
       getItemData(1)
       getAskList(1);
       setVSX([]);
+      getCount();
       return () => {
         setMyGift([]);
-        setItemTotal(1);
+        setMyGiftAsk([])
       }
     }, [])
     return (
@@ -227,7 +228,7 @@ const ShopProp = () => {
                   <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
                   <div>
                     <div className='GiftTitle'>
-                      <div>[{0}G]</div>
+                      <div>[{i.itemPrice}G]</div>
                       <div>[{getTypeStr(i.type)}]</div>
                       <div>{i.title}</div>
                     </div>
@@ -288,7 +289,6 @@ const ShopProp = () => {
   }
   useEffect(() => {
     getData();
-    getCount();
   }, [])
   return (
     <div>
