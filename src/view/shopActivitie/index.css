@@ -161,3 +161,7 @@
     background: #fff;
     overflow: hidden;
 }
+
+.activeInfoBox .ant-picker-calendar-header {
+    display: none;
+}

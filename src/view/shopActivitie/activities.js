@@ -32,7 +32,7 @@ const Activities = () => {
   const [title, setTtitle] = useState('');
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(renderMonth());
-  const [type, setType] = useState('');
+  const [type, setType] = useState(null);
   const [activitieList, setActivitieList] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(1);
@@ -54,28 +54,6 @@ const Activities = () => {
     { value: 11, label: 11 },
     { value: 12, label: 12 }
   ];
-  const handleYearChange = (value) => {
-    setYear(value);
-    getDataList(value, month, type, title);
-  };
-  const handleMonthChange = (value) => {
-    setMonth(value);
-    getDataList(year, value, type, title);
-  };
-  const handleTypeChange = (value) => {
-    setType(value);
-    getDataList(year, month, value, title);
-  };
-  const handleTypeClick = () => {
-    getDataList(year, month, type, title);
-  }
-  const dateChange = (date) => {
-    const obj = {
-      year: date._d.getFullYear(),
-      month: date._d.getMonth() + 1
-    };
-    console.log(obj);
-  }
   const getListData = (date) => {
     let [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
     if (month <= 9) {
@@ -114,45 +92,38 @@ const Activities = () => {
     }
     return srt
   }
-  const getDate = () => {
-    let month = new Date().getMonth() + 1;
-    if (month <= 9) {
-      month = '0' + month
-    }
-    const obj = {
-      type: null,
-      title: '',
-      year,
-      month,
-      countryId: sessionStorage.getItem('websiteCountryId')
-    };
+  const getDate = (obj) => {
     activityDateListHttp(obj).then(res => {
-      const temp1 = res.data.data.activityList.map(i => {
+      const temp1 = res.data.data.activityList ? res.data.data.activityList.map(i => {
         return {
           type: 1,
           count: i.amount,
           id: i.activityId,
           date: i.date
         }
-      })
-      const temp2 = res.data.data.matchList.map(i => {
+      }) : []
+      const temp2 = res.data.data.matchList ? res.data.data.matchList.map(i => {
         return {
           type: 2,
           count: i.amount,
           id: i.activityId,
           date: i.date
         }
-      })
+      }) : []
       setList(temp1.concat(temp2));
     });
   }
-  const getDataList = (year, month, type, title) => {
+  const getDataList = () => {
     const obj = {
       title,
       year,
       month,
       type,
+      countryId: sessionStorage.getItem('websiteCountryId'),
+      pageNum,
+      pageSize: 5
     };
+    getDate(obj);
     activityListHttp(obj).then(res => {
       if (res.data.code === 100) {
         setActivitieList(res.data.data.list);
@@ -167,24 +138,19 @@ const Activities = () => {
     })
   }
   useEffect(() => {
-    getDate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  useEffect(() => {
     if (location.search) {
-      handleTypeChange(Number(dealUrlHash(location)))
+      setType(Number(dealUrlHash(location)));
     } else {
-      const date = new Date();
-      getDataList(date.getFullYear(), date.getMonth() + 1, null, '');
+      getDataList();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [year, month, type, pageNum])
   return (
     <div>
       <div className='myPageTitle'>{t(13)}</div>
       <Row>
         <Col span='8'>
-          <Select value={year} style={{ width: '100%' }} onChange={handleYearChange}>
+          <Select value={year} style={{ width: '100%' }} onChange={(value) => setYear(value)}>
             {yearList.map(i => {
               return (
                 <Option key={i.value} value={i.value}>{i.label}</Option>
@@ -193,7 +159,7 @@ const Activities = () => {
           </Select>
         </Col>
         <Col span='7' offset='1'>
-          <Select value={month} style={{ width: '100%' }} onChange={handleMonthChange}>
+          <Select value={month} style={{ width: '100%' }} onChange={(value) => setMonth(value)}>
             {monthList.map(i => {
               return (
                 <Option key={i.value} value={i.value}>{i.label}</Option>
@@ -202,8 +168,8 @@ const Activities = () => {
           </Select>
         </Col>
         <Col span='7' offset='1'>
-          <Select value={type} style={{ width: '100%' }} onChange={handleTypeChange}>
-            <Option value=''>All</Option>
+          <Select value={type} style={{ width: '100%' }} onChange={(value) => setType(value)}>
+            <Option value={null}>All</Option>
             <Option value={0}>{t(7)}</Option>
             <Option value={1}>{t(8)}</Option>
           </Select>
@@ -211,11 +177,11 @@ const Activities = () => {
       </Row>
       <Row className='RowBox'>
         <Col span='20'><Input placeholder="Please enter a search" value={title} onChange={(e) => setTtitle(e.target.value)} allowClear /></Col>
-        <Col span='3' offset='1'><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={() => handleTypeClick()}>Search</Button></Col>
+        <Col span='3' offset='1'><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={() => getDataList()}>Search</Button></Col>
       </Row>
       <Row className='RowBox' style={{ position: 'relative' }}>
-        <div className='shopActivitie'>
-          <Calendar dateCellRender={dateCellRender} onPanelChange={dateChange} />
+        <div className='activeInfoBox'>
+          <Calendar dateCellRender={dateCellRender} />
         </div>
       </Row>
       <Row className='RowBox'>
@@ -245,7 +211,7 @@ const Activities = () => {
           )
         }) : <NoData />}
       </Row>
-      <Row justify='center'><Pagination current={pageNum} total={total} pageSize={10} showSizeChanger={false} onChange={(value) => setPageNum(value)} /></Row>
+      <Row justify='center'><Pagination current={pageNum} total={total} defaultPageSize='5' showSizeChanger={false} onChange={(value) => setPageNum(value)} /></Row>
     </div>
   )
 }

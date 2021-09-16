@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { activityInfoHttp } from '@/api';
 
+import { Image } from 'antd';
 import { ExceptionOutlined, TrophyOutlined, DollarCircleOutlined, FileTextOutlined, FileSearchOutlined, PhoneOutlined } from '@ant-design/icons';
 
 import { dealUrlHash } from '@/common/Utlis';
@@ -32,7 +33,7 @@ const ActivitieInfo = () => {
       <div className='activitieInfoimgListBox'>
         {info.picture && info.picture.split(',').map((i, index) => {
           return (
-            <div key={index}><img src={i} alt="" /></div>
+            <div key={index}><Image height='100%' src={i} /></div>
           )
         })}
       </div>
