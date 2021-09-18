@@ -74,7 +74,7 @@ const ItemBuy = () => {
             if (res.data.code === 100) {
               message.info(res.data.msg);
             } else {
-              message.warning(res.data.msg)
+              message.warning(res.data.msg);
             }
           })
         } else {
@@ -82,7 +82,7 @@ const ItemBuy = () => {
             if (res.data.code === 100) {
               message.info(res.data.msg);
             } else {
-              message.warning(res.data.msg)
+              message.warning(res.data.msg);
             }
           })
         }
@@ -109,7 +109,7 @@ const ItemBuy = () => {
           shopPropSetHttp({ itemId: propId, type: infoObj.type }).then(response => {
             if (response.data.code === 100) {
               message.info(res.data.msg);
-              setBuyVisible(false)
+              setBuyVisible(false);
             }
           })
         } else {
@@ -121,7 +121,7 @@ const ItemBuy = () => {
       shopPropsBuyHttp({ itemId: propId }).then(res => {
         if (res.data.code === 100) {
           message.info(res.data.msg);
-          setBuyVisible(false)
+          setBuyVisible(false);
         } else {
           message.warning(res.data.msg);
         }
