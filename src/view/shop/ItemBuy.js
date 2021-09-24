@@ -145,7 +145,7 @@ const ItemBuy = () => {
             <div>GOLD : {infoObj.price}</div>
           </div>
           <Row style={{ width: '800px', textAlign: 'center' }}>
-            <Col span='8'><Button danger onClick={() => setBuyVisible(true)}>{t(178)}</Button></Col>
+            <Col span='8'><Button danger onClick={() => setBuyVisible(true)}>{t(190)}</Button></Col>
             <Col span='8'><Button danger onClick={() => setSendVisible(true)}>{t(186)}</Button></Col>
             <Col span='8'><Button danger onClick={() => setAskVisible(true)}>{t(187)}</Button></Col>
           </Row>

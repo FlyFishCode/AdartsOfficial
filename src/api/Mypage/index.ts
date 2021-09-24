@@ -32,6 +32,10 @@ const adartsBind = 'websitsMember/cardBundling';
 const adartsCardDelete = 'websitsMember/cardUnbundling';
 // 设置主卡
 const adartsMainCard = 'websitsMember/masterCard';
+// AdartsAward 消息获取
+const adartsMegGet = 'websitsMember/getAwardMessage';
+// Adarts 信息设定
+const adartsMegSet = 'websitsMember/setUpAwardMessage';
 
 // 好友列表
 // 近七日对战玩家
@@ -58,6 +62,8 @@ export {
   adartsCardDelete,
   adartsBind,
   adartsMainCard,
+  adartsMegGet,
+  adartsMegSet,
   aboutSevenPlayerList,
   handleFriends,
   friendsList,

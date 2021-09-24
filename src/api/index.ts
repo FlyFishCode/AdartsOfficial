@@ -19,6 +19,8 @@ import {
 	adartsCardDelete,
 	adartsBind,
 	adartsMainCard,
+	adartsMegGet,
+	adartsMegSet,
 	aboutSevenPlayerList,
 	handleFriends,
 	friendsList,
@@ -200,6 +202,14 @@ const adartsCardDeleteHttp = (data:any) =>{
 // adarts 设置主卡
 const adartsMainCardHttp = (data:any) =>{
 	return axios.post(`${baseWebsite}${adartsMainCard}`, qs.stringify(data));
+}
+// adartsAward消息获取
+const adartsMegGetHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${adartsMegGet}`, qs.stringify(data))
+}
+// adartsAward消息设置
+const adartsMegSetHttp = (data:any) =>{
+	return axios.post(`${baseWebsite}${adartsMegSet}`, qs.stringify(data));
 }
 
 // adarts店铺
@@ -416,6 +426,8 @@ export {
 		dartsListHttp,
 		dartsInfoHttp,
 		adartsMainCardHttp,
+		adartsMegGetHttp,
+		adartsMegSetHttp,
 		shopInfoHttp,
 		aboutSevenPlayerListHttp,
 		handleFriendsHttp,

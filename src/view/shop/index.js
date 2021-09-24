@@ -259,7 +259,7 @@ const ShopProp = () => {
     const obj = {
       countryId: sessionStorage.getItem('websiteCountryId'),
       status: 1,
-      type: 1
+      type: 2
     }
     indexBannerListHttp(obj).then(res => {
       if (res.data.code === 100) {
