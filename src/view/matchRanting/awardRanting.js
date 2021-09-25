@@ -21,7 +21,7 @@ const AwardRanting = () => {
     { value: 4, label: 'HIGH TON' },
     { value: 0, label: 'HAT TRICK' },
     { value: 3, label: '3 IN A BED' },
-    { value: 6, label: '3 IN A BLACK' },
+    { value: 6, label: '3 IN THE BLACK' },
   ];
   const getData = () => {
     awardRankListHttp({ awardType: value }).then(res => {

@@ -24,7 +24,7 @@ const Activities = () => {
   const renderMonth = () => {
     let initMonth = new Date().getMonth() + 1;
     if (initMonth <= 9) {
-      initMonth = '0' + initMonth
+      initMonth = '0' + initMonth;
     }
     return initMonth;
   }
@@ -201,7 +201,7 @@ const Activities = () => {
                   <div className='shopBox'>
                     {i.shopList.map(i => {
                       return (
-                        <div key={i.shopId}>{i.shopName}</div>
+                        <div key={i.shopId}>{i.shopName} |</div>
                       )
                     })}
                   </div>

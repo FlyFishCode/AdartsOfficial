@@ -19,7 +19,7 @@ const ActivitieInfo = () => {
   const getData = (activityId) => {
     activityInfoHttp({ activityId }).then(res => {
       if (res.data.code === 100) {
-        setInfo(res.data.data)
+        setInfo(res.data.data);
       }
     })
   };

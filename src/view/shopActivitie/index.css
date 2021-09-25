@@ -75,14 +75,14 @@
 
 .activitieInfo {
     display: grid;
+    align-items: center;
     grid-template-columns: 20% 80%;
-    grid-template-rows: 45px;
+    grid-template-rows: auto;
     border: 1px solid #999;
 }
 
-.activitieInfo:nth-child(2) {
-    border-top: none;
-    border-bottom: none;
+.activitieInfo>div:nth-child(2) {
+    align-items: center;
 }
 
 .activitieInfo:nth-child(2)>div:nth-child(2) {
@@ -101,12 +101,11 @@
     display: grid;
     justify-items: center;
     align-items: center;
+    height: 100%;
 }
 
 .activitieInfo>div:nth-child(2) {
-    display: flex;
     text-indent: 10px;
-    overflow: hidden;
 }
 
 .activitieInfoContent {

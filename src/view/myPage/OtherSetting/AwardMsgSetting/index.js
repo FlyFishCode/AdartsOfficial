@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Input, Button } from 'antd';
+import { Row, Col, Input, Button, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { adartsMegGetHttp, adartsMegSetHttp } from '@/api';
@@ -14,30 +14,46 @@ const AwardMsgSetting = () => {
   const [ton80, setTon80] = useState('');
   const [thereInABlack, setThereInABlack] = useState('');
   const [nineMark, setNineMark] = useState('');
+  const memberId = sessionStorage.getItem('websiteMemberId');
   const getData = () => {
-    adartsMegGetHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
-      console.log(res.data.msg);
+    adartsMegGetHttp({ memberId }).then(res => {
+      if (res.data.code === 100) {
+        const ParseData = JSON.parse(res.data.data.awardMessage)
+        setLowTon(ParseData.lowTon);
+        setHighTon(ParseData.highTon);
+        setHatTrick(ParseData.hatTrick);
+        setThereInABed(ParseData.thereInABed);
+        setWhiteHorse(ParseData.whiteHorse);
+        setTon80(ParseData.ton80);
+        setThereInABlack(ParseData.thereInABlack);
+        setNineMark(ParseData.nineMark);
+      }
     })
   };
   const setData = () => {
     const obj = {
-      lowTon,
-      hatTrick,
-      highTon,
-      ton80,
-      thereInABed,
-      whiteHorse,
-      thereInABlack,
-      nineMark
+      memberId,
+      message: JSON.stringify(
+        {
+          lowTon,
+          hatTrick,
+          highTon,
+          ton80,
+          thereInABed,
+          whiteHorse,
+          thereInABlack,
+          nineMark
+        })
     }
     adartsMegSetHttp(obj).then(res => {
       if (res.data.code === 100) {
-        console.log(res.data.msg)
+        message.info(res.data.msg)
       }
     })
   }
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
