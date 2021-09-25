@@ -41,7 +41,7 @@ const ActivitieInfo = () => {
       <div>
         <div className='activitieInfo'>
           <div>{t(203)}</div>
-          <div>
+          <div style={{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
             {info.shopList ? info.shopList.map(i => {
               return (
                 <div key={i.shopId}>

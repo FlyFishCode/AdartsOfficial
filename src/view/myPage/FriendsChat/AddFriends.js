@@ -42,6 +42,7 @@ const AddFriends = () => {
     },
     {
       title: t(198),
+      width: 150,
       dataIndex: 'playDate',
     },
     {
