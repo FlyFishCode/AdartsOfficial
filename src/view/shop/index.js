@@ -83,12 +83,12 @@ const ShopProp = () => {
     )
   }
   const ModelBox = () => {
-    const [VSX, setVSX] = useState([]);
+    // const [VSX, setVSX] = useState([]);
     const [myGift, setMyGift] = useState([]);
     const [myGiftAsk, setMyGiftAsk] = useState([]);
 
     const [itemTotal, setItemTotal] = useState(0);
-    const [vsxTotal, setVsxTotal] = useState(0);
+    // const [vsxTotal, setVsxTotal] = useState(0);
 
     const [askTotal, setAskTotal] = useState(0);
 
@@ -100,10 +100,9 @@ const ShopProp = () => {
         }
       })
     }
-    const getVsxData = (pageIndex) => {
-      console.log(pageIndex)
-      setVsxTotal(0)
-    }
+    // const getVsxData = (pageIndex) => {
+    //   setVsxTotal(0)
+    // }
     const getAskList = (pageIndex) => {
       shopPropAskListHttp({ pageIndex: pageIndex, pageSize: 5 }).then(res => {
         if (res.data.code === 100) {
@@ -143,7 +142,7 @@ const ShopProp = () => {
     useEffect(() => {
       getItemData(1)
       getAskList(1);
-      setVSX([]);
+      // setVSX([]);
       getCount();
       return () => {
         setMyGift([]);
@@ -162,36 +161,36 @@ const ShopProp = () => {
       >
         <Tabs defaultActiveKey="1">
           <TabPane tab={`${t(218)}(${itemTotal})`} key="1">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab={`ITEM(${itemTotal})`} key="1">
-                {myGift.length ? myGift.map(i => {
-                  return (
-                    <div key={i.id} className='GiftItemBox'>
-                      <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
-                      <div>
-                        <div className='GiftTitle'>
-                          <div>[{0}G]</div>
-                          <div>[{getTypeStr(i.type)}]</div>
-                          <div>{i.itemTitle}</div>
-                        </div>
-                        <div>
-                          <div>{t(220)} | {i.sndMemberName}</div>
-                          <div>{t(221)} | {i.sndTime}</div>
-                        </div>
-                        <div><Button type="primary" size='small' onClick={() => handleAccept(i.id)}>{t(124)}</Button></div>
-                      </div>
-                    </div>
-                  )
-                }) : <NoData />}
-                {myGift.length ?
+            {/* <Tabs defaultActiveKey="1"> */}
+            {/* <TabPane tab={`ITEM(${itemTotal})`} key="1"> */}
+            {myGift.length ? myGift.map(i => {
+              return (
+                <div key={i.id} className='GiftItemBox'>
+                  <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
                   <div>
-                    <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' defaultCurrent='1' total={itemTotal} showSizeChanger={false} onChange={(value) => getItemData(value)} /></Row>
-                    <Row className='RowBox' justify="center"><Button type="primary" size='small' onClick={handleAllClick}>{t(222)}</Button></Row>
+                    <div className='GiftTitle'>
+                      <div>[{0}G]</div>
+                      <div>[{getTypeStr(i.type)}]</div>
+                      <div>{i.itemTitle}</div>
+                    </div>
+                    <div>
+                      <div>{t(220)} | {i.sndMemberName}</div>
+                      <div>{t(221)} | {i.sndTime}</div>
+                    </div>
+                    <div><Button type="primary" size='small' onClick={() => handleAccept(i.id)}>{t(124)}</Button></div>
                   </div>
-                  : null
-                }
-              </TabPane>
-              <TabPane tab={`VSX(${vsxTotal})`} key="2">
+                </div>
+              )
+            }) : <NoData />}
+            {myGift.length ?
+              <div>
+                <Row className='RowBox' justify="center"><Pagination defaultPageSize='5' defaultCurrent='1' total={itemTotal} showSizeChanger={false} onChange={(value) => getItemData(value)} /></Row>
+                <Row className='RowBox' justify="center"><Button type="primary" size='small' onClick={handleAllClick}>{t(222)}</Button></Row>
+              </div>
+              : null
+            }
+            {/* </TabPane> */}
+            {/* <TabPane tab={`VSX(${vsxTotal})`} key="2">
                 {VSX.length ? VSX.map(i => {
                   return (
                     <div key={i.id} className='GiftItemBox'>
@@ -218,8 +217,8 @@ const ShopProp = () => {
                   </div>
                   : null
                 }
-              </TabPane>
-            </Tabs>
+              </TabPane> */}
+            {/* </Tabs> */}
           </TabPane>
           <TabPane tab={`${t(219)}(${askTotal})`} key="2">
             {myGiftAsk.length ? myGiftAsk.map(i => {

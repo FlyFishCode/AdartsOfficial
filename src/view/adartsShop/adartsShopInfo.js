@@ -58,8 +58,6 @@ const AdartsShopInfo = () => {
           <div>{t(160)}</div>
           <div>
             <div>--------------------</div>
-            <div>--------------------</div>
-            <div>--------------------</div>
           </div>
         </Col>
       </Row>
@@ -68,6 +66,10 @@ const AdartsShopInfo = () => {
           <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
         <Col span='18' className='shopInfoLabelBox'>
+          <div>
+            <div className='shopInfoLabel'>{t(234)}</div>
+            <div>{shopInfo.type}</div>
+          </div>
           <div>
             <div className='shopInfoLabel'>{t(149)}</div>
             <div>{shopInfo.openingTime}</div>

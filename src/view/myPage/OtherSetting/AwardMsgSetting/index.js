@@ -78,7 +78,7 @@ const AwardMsgSetting = () => {
           <Col span='12'><Input placeholder="Input Message" value={hatTrick} onChange={(e) => setHatTrick(e.target.value)} allowClear /></Col>
         </Row>
         <Row className='rowBox'>
-          <Col span='12' className='AccountInfoLabel'>THERE IN A BED</Col>
+          <Col span='12' className='AccountInfoLabel'>THREE IN A BED</Col>
           <Col span='12'><Input placeholder="Input Message" value={thereInABed} onChange={(e) => setThereInABed(e.target.value)} allowClear /></Col>
         </Row>
         <Row className='rowBox'>
@@ -90,7 +90,7 @@ const AwardMsgSetting = () => {
           <Col span='12'><Input placeholder="Input Message" value={ton80} onChange={(e) => setTon80(e.target.value)} allowClear /></Col>
         </Row>
         <Row className='rowBox'>
-          <Col span='12' className='AccountInfoLabel'>THERE IN THE BLACK</Col>
+          <Col span='12' className='AccountInfoLabel'>THREE IN THE BLACK</Col>
           <Col span='12'><Input placeholder="Input Message" value={thereInABlack} onChange={(e) => setThereInABlack(e.target.value)} allowClear /></Col>
         </Row>
         <Row className='rowBox'>

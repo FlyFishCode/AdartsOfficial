@@ -226,7 +226,7 @@ const ItemBuy = () => {
     })
     aboutSevenPlayerListHttp({ memberId: sessionStorage.getItem('websiteMemberId') }).then(res => {
       if (res.data.code === 100) {
-        setMatchPlayer(res.data.data.list)
+        setMatchPlayer(res.data.data)
       }
     })
   }
