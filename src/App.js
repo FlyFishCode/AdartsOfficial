@@ -540,12 +540,10 @@ const Video = () => {
     return (
         <div className='video'>
             <div className='videoBG'>
-
                 <div className='tvBox'>
                     <div><VideoCameraOutlined /><div className='tvBoxInnerText'>Adarts.TV</div></div>
                     {/* <div>MORE</div> */}
                 </div>
-
                 <div className='videoContainer'>
                     <video src={TVData.src} controls></video>
                 </div>

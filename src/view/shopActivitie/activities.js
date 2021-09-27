@@ -137,6 +137,20 @@ const Activities = () => {
       search: `?id=${id}`
     })
   }
+  const handleChange = (value, type) => {
+    switch (type) {
+      case 1:
+        setYear(value)
+        break;
+      case 2:
+        setMonth(value)
+        break;
+      default:
+        setType(value)
+        break;
+    }
+    setList(item => item)
+  }
   useEffect(() => {
     if (location.search) {
       setType(Number(dealUrlHash(location)));
@@ -150,7 +164,7 @@ const Activities = () => {
       <div className='myPageTitle'>{t(13)}</div>
       <Row>
         <Col span='8'>
-          <Select value={year} style={{ width: '100%' }} onChange={(value) => setYear(value)}>
+          <Select value={year} style={{ width: '100%' }} onChange={(value) => handleChange(value, 1)}>
             {yearList.map(i => {
               return (
                 <Option key={i.value} value={i.value}>{i.label}</Option>
@@ -159,7 +173,7 @@ const Activities = () => {
           </Select>
         </Col>
         <Col span='7' offset='1'>
-          <Select value={month} style={{ width: '100%' }} onChange={(value) => setMonth(value)}>
+          <Select value={month} style={{ width: '100%' }} onChange={(value) => handleChange(value, 2)}>
             {monthList.map(i => {
               return (
                 <Option key={i.value} value={i.value}>{i.label}</Option>
@@ -168,7 +182,7 @@ const Activities = () => {
           </Select>
         </Col>
         <Col span='7' offset='1'>
-          <Select value={type} style={{ width: '100%' }} onChange={(value) => setType(value)}>
+          <Select value={type} style={{ width: '100%' }} onChange={(value) => handleChange(value, 3)}>
             <Option value={null}>All</Option>
             <Option value={0}>{t(7)}</Option>
             <Option value={1}>{t(8)}</Option>
