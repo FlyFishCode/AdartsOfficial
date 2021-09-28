@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import JT from './locales/zh-jt'
-import FT from './locales/zh-ft'
-import EN from './locales/zh-en'
+import JT from './locales/zh-jt';
+import FT from './locales/zh-ft';
+import EN from './locales/zh-en';
 import JP from './locales/zh-jp';
 
 const Language = {
