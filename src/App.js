@@ -191,7 +191,7 @@ const Banner = () => {
     }, [])
     return (
         <div onClick={handleClick} className='CarouselBox'>
-            <Carousel {...setting}>
+            {bannerList.length > 1 ? <Carousel {...setting}>
                 {bannerList.map(item => {
                     return (
                         <div className='contentStyle' data-item={item.link} key={item.id} onClick={() => window.open(item.link)}>
@@ -199,7 +199,15 @@ const Banner = () => {
                         </div>
                     )
                 })}
-            </Carousel>
+            </Carousel> :
+                bannerList.map((item, index) => {
+                    return (
+                        <div className='contentStyle' style={{ margin: '0 auto' }} data-item={item.link} key={index} onClick={() => window.open(item.link)}>
+                            <img src={item.image} alt="" />
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

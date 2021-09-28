@@ -142,7 +142,6 @@ const ShopProp = () => {
     useEffect(() => {
       getItemData(1)
       getAskList(1);
-      // setVSX([]);
       getCount();
       return () => {
         setMyGift([]);
@@ -311,15 +310,24 @@ const ShopProp = () => {
         </Col>
       </Row>
       <ModelBox />
-      <Carousel {...setting}>
+      {bannerList.length > 1 ? <Carousel {...setting}>
         {bannerList.map((item, index) => {
           return (
             <div className='contentStyle' data-item={item.link} key={index} onClick={() => window.open(item.link)}>
               <img src={item.image} alt="" />
             </div>
           )
-        })}
-      </Carousel>
+        })
+        }
+      </Carousel> :
+        bannerList.map((item, index) => {
+          return (
+            <div className='contentStyle' style={{ margin: '0 auto' }} data-item={item.link} key={index} onClick={() => window.open(item.link)}>
+              <img src={item.image} alt="" />
+            </div>
+          )
+        })
+      }
       <div className="containerBox">
         <Switch>
           <Route path='/ShopProp' exact>

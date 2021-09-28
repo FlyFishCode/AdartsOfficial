@@ -57,7 +57,7 @@ const AdartsShopInfo = () => {
         <Col span='18' className='shopInfoOther'>
           <div>{t(160)}</div>
           <div>
-            <div>--------------------</div>
+            <div>{shopInfo.shopInfo}</div>
           </div>
         </Col>
       </Row>
@@ -76,11 +76,11 @@ const AdartsShopInfo = () => {
           </div>
           <div>
             <div className='shopInfoLabel'>{t(150)}</div>
-            <div>{shopInfo.offTime || '-'}</div>
+            <div>{shopInfo.restDay}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(151)}</div>
-            <div>{shopInfo.shopAddress || '-'}</div>
+            <div>{shopInfo.shopAddress}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>TEL</div>
@@ -88,23 +88,23 @@ const AdartsShopInfo = () => {
           </div>
           <div>
             <div className='shopInfoLabel'>{t(152)}</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.trafficInfo}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(153)}</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.budget}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(154)}</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.theme}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(155)}</div>
-            <div>{'-'}</div>
+            <div>{shopInfo.service}</div>
           </div>
           <div>
             <div className='shopInfoLabel'>{t(156)}</div>
-            <div>{shopInfo.url || '-'}</div>
+            <div>{shopInfo.url}</div>
           </div>
         </Col>
       </Row>
