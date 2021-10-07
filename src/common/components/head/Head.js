@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined } from '@ant-design/icons';
 import { Col, Menu, message, Row, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
+import AMapLoader from '@amap/amap-jsapi-loader';
+import { countryListHttp } from '@/api';
+
 
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -12,7 +15,7 @@ const { Option } = Select;
 
 const Head = (prop) => {
   const { userName, loginOut } = prop;
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('jt');
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const handleLoginOut = () => {
@@ -32,6 +35,51 @@ const Head = (prop) => {
     setLanguage(value);
     i18n.changeLanguage(value);
   }
+  const initMap = () => {
+    AMapLoader.load({
+      "key": "8396072fe2f7969398aaea1c97e71e47",// 申请好的Web端开发者Key，首次调用 load 时必填
+      "version": "1.4.15",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+      "plugins": ['AMap.Geolocation'],           // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+    }).then((AMap) => {
+      const mapObj = new AMap.Map('container');
+      mapObj.plugin('AMap.Geolocation', function () {
+        const geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        });
+        mapObj.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, 'complete', (data) => {
+          console.log('IP定位地址为：', data.addressComponent.country);
+          countryListHttp().then(res => {
+            const country = res.data.data.find(country => country.countryName === data.addressComponent.country);
+            sessionStorage.setItem('websiteCountryId', country.countryId);
+            switch (country.countryCode) {
+              case "CN":
+                setLanguage('jt');
+                break;
+              case "HK":
+                setLanguage('ft');
+                break;
+              case "JP":
+                setLanguage('jp');
+                break;
+              default:
+                setLanguage('en');
+                break;
+            }
+          })
+        });//返回定位信息
+        AMap.event.addListener(geolocation, 'error', (err) => {
+          console.log(err) //返回定位出错信息
+        });
+      });
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+  useEffect(() => {
+    initMap()
+  }, [])
   return (
     <Row className='headBox'>
       <Col span='4' className='iconMenu'>
@@ -100,6 +148,7 @@ const Head = (prop) => {
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
         {/* <div className='globalBox'><GlobalOutlined /></div> */}
       </Col>
+      <div id="container" style={{ height: '100px', width: '100px', visibility: 'hidden' }}></div>
     </Row >
   )
 }

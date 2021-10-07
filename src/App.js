@@ -43,8 +43,6 @@ import Download from './view/other/download.js'
 
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
-sessionStorage.setItem('websiteCountryId', 17829);
-
 const App = () => {
     const [userName, setUserName] = useState('');
     const currentUserName = sessionStorage.getItem('websiteUserName');
