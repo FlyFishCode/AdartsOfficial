@@ -49,22 +49,24 @@ const Head = (prop) => {
         mapObj.addControl(geolocation);
         geolocation.getCurrentPosition();
         AMap.event.addListener(geolocation, 'complete', (data) => {
-          console.log('IP定位地址为：', data.addressComponent.country);
           countryListHttp().then(res => {
             const country = res.data.data.find(country => country.countryName === data.addressComponent.country);
             sessionStorage.setItem('websiteCountryId', country.countryId);
+            console.log('当前位置为：', data.formattedAddress);
+            console.log('当前国家/地区CODE：', country.countryCode);
+            console.log('IP定位地址为：', data.addressComponent.country);
             switch (country.countryCode) {
               case "CN":
-                setLanguage('jt');
+                handleChange('jt')
                 break;
               case "HK":
-                setLanguage('ft');
+                handleChange('ft')
                 break;
               case "JP":
-                setLanguage('jp');
+                handleChange('jp')
                 break;
               default:
-                setLanguage('en');
+                handleChange('en')
                 break;
             }
           })
@@ -79,6 +81,7 @@ const Head = (prop) => {
   }
   useEffect(() => {
     initMap()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Row className='headBox'>
