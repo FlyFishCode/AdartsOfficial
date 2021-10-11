@@ -35,6 +35,22 @@ const Head = (prop) => {
     setLanguage(value);
     i18n.changeLanguage(value);
   }
+  // const useBrowserPosition = () => {
+  //   const options = {
+  //     timeout: Infinity,
+  //     maximumAge: 0
+  //   };
+  //   const success = (pos) => {
+  //     const { latitude, longitude, accuracy } = pos.coords;
+  //     console.log('Latitude : ' + latitude);
+  //     console.log('Longitude: ' + longitude);
+  //     console.log('More or less ' + accuracy + ' meters.');
+  //   };
+  //   const error = (err) => {
+  //     console.warn('ERROR(' + err.code + '): ' + err.message);
+  //   };
+  //   navigator.geolocation.getCurrentPosition(success, error, options);
+  // }
   const initMap = () => {
     AMapLoader.load({
       "key": "8396072fe2f7969398aaea1c97e71e47",// 申请好的Web端开发者Key，首次调用 load 时必填
@@ -72,7 +88,7 @@ const Head = (prop) => {
           })
         });//返回定位信息
         AMap.event.addListener(geolocation, 'error', (err) => {
-          console.log(err) //返回定位出错信息
+          console.log(err);
         });
       });
     }).catch(e => {
@@ -80,6 +96,7 @@ const Head = (prop) => {
     })
   }
   useEffect(() => {
+    // useBrowserPosition()
     initMap()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
