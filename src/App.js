@@ -49,6 +49,18 @@ const App = () => {
     const handleUserName = (value) => {
         setUserName(value)
     }
+    var checkIfExist = function (arr) {
+        let ans = false;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] && arr.includes(arr[i] * 2)) {
+                ans = true
+            }
+        }
+        return ans;
+    };
+    useEffect(() => {
+        console.log(checkIfExist([-2, 0, 10, -19, 4, 6, -8]))
+    }, [])
     useEffect(() => {
         if (currentUserName) {
             setUserName(currentUserName)

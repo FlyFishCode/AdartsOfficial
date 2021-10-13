@@ -248,6 +248,7 @@
 .AllRightBox {
     width: 100%;
     display: flex;
+    align-items: center;
     cursor: pointer;
     padding: 5px;
     overflow: hidden;
@@ -306,6 +307,7 @@
 .iconImg img {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 .AllImgContent {
@@ -1169,14 +1171,19 @@
     font-weight: bold
 }
 
-.Download {
+.PcDownload {
     width: 1200px;
     height: 100%;
     margin: 0 auto;
 }
 
+.MoDownload {
+    width: 100%;
+}
+
 .Download img {
     width: 100%;
+    height: 100%;
 }
 
 .shopMenuBox {
