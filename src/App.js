@@ -39,12 +39,13 @@ import LoginBox from './common/components/head/loginBox/login.js';
 import ForgetID from './common/components/head/loginBox/forgetID.js';
 import ForgetPW from './common/components/head/loginBox/forgetPW.js';
 import AddUser from './common/components/head/loginBox/addUser.js';
-import DartsInfo from './view/darts/dartsInfo.js'
-import Download from './view/other/download.js'
+import DartsInfo from './view/darts/dartsInfo.js';
+import Download from './view/other/download.js';
 
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
 sessionStorage.setItem('websiteCountryId', 17829);
+
 
 const App = () => {
     const [userName, setUserName] = useState('');
@@ -180,7 +181,17 @@ const Banner = () => {
         centerPadding: 0,
         autoplaySpeed: 2000,
         prevArrow: <PrevIcon />,
-        nextArrow: <NextIcon />
+        nextArrow: <NextIcon />,
+        appendDots: dots => (
+            <div
+                style={{
+                    borderRadius: "10px",
+                    bottom: 0
+                }}
+            >
+                <ul style={{ display: 'flex', alignItems: 'center', height: '20px', margin: 0, padding: 0 }}> {dots} </ul>
+            </div>
+        )
     }
     const handleClick = (e) => {
         if (e.target.children[2]) {
@@ -268,7 +279,7 @@ const News = () => {
     };
     const moreClick = (type) => {
         if (type === 1) {
-            history.push('/News')
+            history.push('/News');
         }
         if (type === 2) {
             history.push({

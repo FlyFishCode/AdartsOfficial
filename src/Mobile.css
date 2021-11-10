@@ -34,4 +34,67 @@
     .InMobileDisplay {
         display: none;
     }
+    .new {
+        display: none;
+    }
+    .newsOther {
+        width: 100%;
+    }
+    .All {
+        display: block;
+    }
+    .AllLeft,
+    .AllRight {
+        width: auto;
+    }
+    .newsActiveClass,
+    .newsDefaultClass {
+        width: 25%;
+    }
+    .Allcontainer {
+        min-height: auto !important;
+    }
+    .AllLeft .Allcontainer .container {
+        width: 100%;
+        height: auto;
+    }
+    .newsImgBox {
+        height: auto;
+    }
+    .container {
+        display: grid !important;
+        grid-template-columns: 100px 200px;
+        grid-template-rows: 100px;
+    }
+    .AllRight .Allcontainer {
+        height: auto;
+    }
+    .activity {
+        width: auto;
+    }
+    .activityOtherBox {
+        display: none;
+    }
+    .ant-picker-calendar {
+        position: relative;
+        margin-top: 30px;
+    }
+    .activity .ant-picker-calendar-header {
+        top: -40px;
+    }
+    .ant-picker-calendar-header .ant-picker-calendar-month-select {
+        margin: 0;
+    }
+    .activity .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+        height: 30px;
+    }
+    .videoBG {
+        padding: 0;
+    }
+    .videoContainer video {
+        width: 100%;
+    }
+    .footer {
+        padding: 0;
+    }
 }
