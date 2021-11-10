@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { UnorderedListOutlined } from '@ant-design/icons';
-import { Col, Menu, message, Row, Select } from 'antd';
+import { Col, Menu, message, Row, Select, Drawer, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
@@ -15,7 +15,8 @@ const { Option } = Select;
 
 const Head = (prop) => {
   const { userName, loginOut } = prop;
-  const [language, setLanguage] = useState('jt');
+  const [language, setLanguage] = useState('en');
+  const [visible, setVisible] = useState(false);
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const handleLoginOut = () => {
@@ -35,6 +36,10 @@ const Head = (prop) => {
     setLanguage(value);
     i18n.changeLanguage(value);
   }
+  const handleMobileLoginClick = () => {
+    setVisible(false);
+    history.push('/login');
+  }
   // const useBrowserPosition = () => {
   //   const options = {
   //     timeout: Infinity,
@@ -51,6 +56,7 @@ const Head = (prop) => {
   //   };
   //   navigator.geolocation.getCurrentPosition(success, error, options);
   // }
+
   const initMap = () => {
     AMapLoader.load({
       "key": "8396072fe2f7969398aaea1c97e71e47",// 申请好的Web端开发者Key，首次调用 load 时必填
@@ -95,26 +101,28 @@ const Head = (prop) => {
       console.log(e);
     })
   }
+
   useEffect(() => {
     // useBrowserPosition()
     initMap()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <Row className='headBox'>
-      <Col span='4' className='iconMenu'>
-        <Menu mode="horizontal">
-          <SubMenu key="1" icon={<UnorderedListOutlined />}>
-            <Menu.Item key="/MyPageIndex">
-              <div onClick={() => handlePushClick('/MyPageIndex')}>{t(135)}</div>
-            </Menu.Item>
-            <Menu.Item key="/News" disabled>
-              <Link to='/News'>{t(136)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/AdartsShop">
-              <Link to='/AdartsShop'>{t(137)}</Link>
-            </Menu.Item>
-            {/* <SubMenu key="2" title="Adarts店铺">
+    <Row className='headBox Mobile'>
+      <Col lg={4} xs={0}>
+        <div className='iconMenu'>
+          <Menu mode="horizontal">
+            <SubMenu key="1" icon={<UnorderedListOutlined />}>
+              <Menu.Item key="/MyPageIndex">
+                <div onClick={() => handlePushClick('/MyPageIndex')}>{t(135)}</div>
+              </Menu.Item>
+              <Menu.Item key="/News" disabled>
+                <Link to='/News'>{t(136)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/AdartsShop">
+                <Link to='/AdartsShop'>{t(137)}</Link>
+              </Menu.Item>
+              {/* <SubMenu key="2" title="Adarts店铺">
               <Menu.Item key="/GameTalks">
                 <Link to='/GameTalks'>游戏交流</Link>
               </Menu.Item>
@@ -122,53 +130,80 @@ const Head = (prop) => {
                 <Link to='/GameRanking'>游戏排名</Link>
               </Menu.Item>
             </SubMenu> */}
-            <Menu.Item key="/ShopActivitie">
-              <Link to='/ShopActivitie'>{t(13)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/TaskReward" disabled>
-              <Link to='/TaskReward'>{t(138)}</Link>
-            </Menu.Item>
-            {/* </SubMenu> */}
-            <Menu.Item key="/MatchRanting">
-              <Link to='/MatchRanting'>{t(157)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/ShopProp" >
-              <Link to='/ShopProp'>{t(158)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/Darts">
-              <Link to='/Darts'>{t(159)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/Players">
-              <Link to='/Players'>{t(139)}</Link>
-            </Menu.Item>
-            <Menu.Item key="/ServiceEr" disabled>
-              <Link to='/ServiceEr'>{t(121)}</Link>
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
-      </Col>
-      <Col span='13'>
-        <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
-      </Col>
-      <Col span='4'>
-        <div className='languageBox'>
-          <div style={{ width: '20%' }}>{t(32)}</div>
-          <Select value={language} style={{ width: '50%' }} size='small' onChange={handleChange}>
-            {/* <Option value="jt">{t(1)}</Option>
-            <Option value="ft">{t(2)}</Option>
-            <Option value="en">{t(3)}</Option> */}
-            <Option value="jt">简体中文</Option>
-            <Option value="ft">繁体中文</Option>
-            <Option value="en">英文</Option>
-            <Option value="jp">日语</Option>
-          </Select>
+              <Menu.Item key="/ShopActivitie">
+                <Link to='/ShopActivitie'>{t(13)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/TaskReward" disabled>
+                <Link to='/TaskReward'>{t(138)}</Link>
+              </Menu.Item>
+              {/* </SubMenu> */}
+              <Menu.Item key="/MatchRanting">
+                <Link to='/MatchRanting'>{t(157)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/ShopProp" >
+                <Link to='/ShopProp'>{t(158)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/Darts">
+                <Link to='/Darts'>{t(159)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/Players">
+                <Link to='/Players'>{t(139)}</Link>
+              </Menu.Item>
+              <Menu.Item key="/ServiceEr" disabled>
+                <Link to='/ServiceEr'>{t(121)}</Link>
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
         </div>
       </Col>
-      <Col span='3' className='loginAndGlobalBox'>
+      <Col lg={0} xs={4} className='MobileIcon'>
+        <Button icon={<UnorderedListOutlined />} onClick={() => setVisible(true)}></Button>
+      </Col>
+      <Col lg={13} xs={13}>
+        <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
+      </Col>
+      <Col lg={2} xs={0}>{t(32)}</Col>
+      <Col lg={2} xs={6} className='languageBox'>
+        <Select value={language} size='small' style={{ width: '100%' }} onChange={handleChange}>
+          {/* <Option value="jt">{t(1)}</Option>
+            <Option value="ft">{t(2)}</Option>
+            <Option value="en">{t(3)}</Option> */}
+          <Option value="jt">简体中文</Option>
+          <Option value="ft">繁体中文</Option>
+          <Option value="en">英文</Option>
+          <Option value="jp">日语</Option>
+        </Select>
+      </Col>
+      <Col lg={2} xs={0}>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
         {/* <div className='globalBox'><GlobalOutlined /></div> */}
       </Col>
-      <div id="container" style={{ height: '100px', width: '100px', visibility: 'hidden' }}></div>
+      {/* 定位DOM节点 */}
+      <div id="container" style={{ height: '10px', width: '1px', visibility: 'hidden' }}></div>
+      {/* 移动端抽屉组件 */}
+      <Drawer
+        placement='left'
+        closable={false}
+        onClose={() => setVisible(false)}
+        visible={visible}
+        key='left'
+      >
+        <div className='Mobile-Login-Box'>
+          <div className='Mobile-Login' onClick={handleMobileLoginClick}>{t(4)}</div>
+          <div className='Mobile-Menus'>
+            <div>{t(135)}</div>
+            <div>{t(136)}</div>
+            <div>{t(137)}</div>
+            <div>{t(13)}</div>
+            <div>{t(138)}</div>
+            <div>{t(157)}</div>
+            <div>{t(158)}</div>
+            <div>{t(159)}</div>
+            <div>{t(139)}</div>
+            <div>{t(121)}</div>
+          </div>
+        </div>
+      </Drawer>
     </Row >
   )
 }

@@ -15,6 +15,7 @@ import icon2 from '@/assets/img/icon2.jpeg';
 
 import 'antd/dist/antd.css';
 import './App.css';
+import './Mobile.css';
 
 // 引入国际化
 import '@/i18n/i18n';
@@ -43,24 +44,14 @@ import Download from './view/other/download.js'
 
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
+sessionStorage.setItem('websiteCountryId', 17829);
+
 const App = () => {
     const [userName, setUserName] = useState('');
     const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
     }
-    var checkIfExist = function (arr) {
-        let ans = false;
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i] && arr.includes(arr[i] * 2)) {
-                ans = true
-            }
-        }
-        return ans;
-    };
-    useEffect(() => {
-        console.log(checkIfExist([-2, 0, 10, -19, 4, 6, -8]))
-    }, [])
     useEffect(() => {
         if (currentUserName) {
             setUserName(currentUserName)

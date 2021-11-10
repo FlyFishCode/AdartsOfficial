@@ -111,11 +111,11 @@ const ForgetPW = () => {
     }, [disabled])
     return (
         <div className='loginBox containerBox'>
-            <div className='loginTitle'>
-                <div onClick={() => history.go(-1)} > <LeftOutlined /> </div>
-                <div> {t(29)} </div>
-            </div>
-            <Row className='RowBox'>
+            <Row className='loginTitle' >
+                <Col span='6' onClick={() => history.go(-1)} > < LeftOutlined /> {t(29)}</Col>
+                <Col span='18'></Col>
+            </Row>
+            <Row className='RowBox InMobileDisplay'>
                 <Col className='labelTitle' span='4'> {t(131)} </Col>
                 <Col span='13'>
                     <Input.Group compact>
@@ -137,9 +137,37 @@ const ForgetPW = () => {
                     <Input placeholder="Please input your code!" value={code} onChange={(e) => setCode(e.target.value)} allowClear />
                 </Col>
             </Row>
+
+            {/* 移动端展示 */}
+            <div className='InWebDisplay'>
+                <Row className='RowBox'>
+                    <Col className='labelTitle' span='4'> {t(131)} </Col>
+                    <Col span='20'>
+                        <Input.Group compact>
+                            <Select defaultValue={type} style={{ width: '30%' }} onChange={(value) => handleTypeChange(value)}>
+                                <Option value="email">{t(39)}</Option>
+                                <Option value="phone">{t(48)}</Option>
+                            </Select>
+                            <Select defaultValue={countryCode} style={{ width: '25%', display: display }} onChange={(value) => setCountryCode(value)}>
+                                <Option value="+86">+86</Option>
+                                <Option value="+87">+87</Option>
+                            </Select>
+                            <Input style={{ width: '45%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
+                        </Input.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span='6'>
+                        < Button type="primary" block onClick={handleSend} disabled={disabled} > {disabled ? downNum : t(59)} </Button>
+                    </Col>
+                    <Col span='18'>
+                        <Input placeholder="Please input your code!" value={code} onChange={(e) => setCode(e.target.value)} allowClear />
+                    </Col>
+                </Row>
+            </div>
             <Row className='RowBox'>
                 <Col className='labelTitle' span='4'> {t(109)} </Col>
-                <Col span='10'>
+                <Col span='20'>
                     <Input.Password placeholder="Please input your new password" onChange={(e) => setNewPassword(e.target.value)} allowClear />
                 </Col>
             </Row>

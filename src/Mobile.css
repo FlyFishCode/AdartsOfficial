@@ -1,0 +1,37 @@
+@media screen and (max-width: 700px) {
+    .headBox {
+        width: auto !important;
+    }
+    .MobileIcon {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .Mobile .ant-menu-submenu-title {
+        width: auto;
+    }
+    .Mobile-Login-Box .Mobile-Login {
+        background: #2a2c3e;
+        padding: 9px 15px;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .Mobile-Login-Box .Mobile-Menus div {
+        padding: 10px;
+        font-size: 16px;
+        border-bottom: 1px solid #dfdede;
+    }
+    .containerBox {
+        width: auto;
+    }
+    .loginBox {
+        width: auto !important;
+    }
+    .InWebDisplay {
+        display: block;
+    }
+    .InMobileDisplay {
+        display: none;
+    }
+}

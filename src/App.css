@@ -1234,3 +1234,10 @@
     background: #e7e7e7;
     text-align: center;
 }
+
+
+/* 所有移动端样式 */
+
+.InWebDisplay {
+    display: none;
+}

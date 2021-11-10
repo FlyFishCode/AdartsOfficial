@@ -71,48 +71,27 @@ const ForgetID = () => {
             }
         })
     }
-    // useEffect(() => {
-    //     let timer = null;
-    //     if (disabled) {
-    //         timer = setInterval(() => {
-    //             setDownNum(n => {
-    //                 if (n === 1) {
-    //                     setDisabled(false)
-    //                     setDownNum(59)
-    //                 }
-    //                 return n - 1
-    //             })
-    //         }, 1000);
-    //     }
-    //     return () => clearInterval(timer)
-    // }, [disabled])
     return (
         <div className='loginBox containerBox'>
-            <div className='loginTitle' >
-                <div onClick={() => history.go(-1)} > < LeftOutlined /> </div>
-                <div> {t(28)} </div>
-            </div>
+            <Row className='loginTitle' >
+                <Col span='6' onClick={() => history.go(-1)} > < LeftOutlined /> {t(28)}</Col>
+                <Col span='18'></Col>
+            </Row>
             <Row className='RowBox' >
                 <Col className='labelTitle' span='4'> {t(131)} </Col>
-                <Col span='13'>
+                <Col span='20'>
                     <Input.Group compact>
-                        <Select defaultValue={type} style={{ width: '20%' }} onChange={(value) => handleTypeChange(value)}>
+                        <Select defaultValue={type} style={{ width: '30%' }} onChange={(value) => handleTypeChange(value)}>
                             <Option value="email">{t(39)}</Option>
                             <Option value="phone">{t(48)}</Option>
                         </Select>
-                        <Select defaultValue={countryCode} style={{ width: '15%', display: display }} onChange={(value) => setCountryCode(value)}>
+                        <Select defaultValue={countryCode} style={{ width: '25%', display: display }} onChange={(value) => setCountryCode(value)}>
                             <Option value="+86">+86</Option>
                             <Option value="+87">+87</Option>
                         </Select>
-                        <Input style={{ width: '65%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
+                        <Input style={{ width: '45%' }} value={inputValue} onChange={(e) => setInputValue(e.target.value)} allowClear />
                     </Input.Group>
                 </Col>
-                {/* <Col span='2'>
-                    < Button type="primary" block onClick={handleSend} disabled={disabled} > {disabled ? downNum : t(59)} </Button>
-                </Col>
-                <Col span='4' offset='1'>
-                    <Input placeholder="Please input your code!" value={code} onChange={(e) => setCode(e.target.value)} />
-                </Col> */}
             </Row>
             <Row className='RowBox' >
                 <Button type="primary" size='large' block onClick={handleOK} > {t(19)} </Button>

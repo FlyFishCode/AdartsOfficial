@@ -128,11 +128,11 @@ const AddUser = () => {
     }, [])
     return (
         <div className='loginBox'>
-            <div className='loginTitle'>
-                <div onClick={() => history.go(-1)}><LeftOutlined /></div>
-                <div>{t(30)}</div>
-            </div>
-            <Row className='registerHead RowBox'>
+            <Row className='loginTitle' >
+                <Col span='8' onClick={() => history.go(-1)} > < LeftOutlined /> {t(30)}</Col>
+                <Col span='16'></Col>
+            </Row>
+            <Row className='registerHead RowBox InMobileDisplay'>
                 <Col span='2' className='labelTitle'>{t(31)}</Col>
                 <Col span='10' className='selectBox'>
                     <Select onChange={(value) => setCountryId(value)}>
@@ -152,6 +152,31 @@ const AddUser = () => {
                     </Select>
                 </Col>
             </Row>
+            {/* 移动端展示 */}
+            <div className='registerHead RowBox InWebDisplay'>
+                <Row className='registerHead RowBox'>
+                    <Col span='6' className='labelTitle'>{t(31)}</Col>
+                    <Col span='18' className='selectBox'>
+                        <Select onChange={(value) => setCountryId(value)}>
+                            {countryList.map(i => {
+                                return (
+                                    <Option value={i.countryId} key={i.countryId}>{i.countryName}</Option>
+                                )
+                            })}
+                        </Select>
+                    </Col>
+                </Row>
+                <Row className='registerHead RowBox'>
+                    <Col span='6' className='labelTitle'>{t(32)}</Col>
+                    <Col span='18' className='selectBox'>
+                        <Select defaultValue="1" onChange={(value) => setLanguage(value)}>
+                            <Option value="1">{t(1)}</Option>
+                            <Option value="2">{t(2)}</Option>
+                            <Option value="3">{t(3)}</Option>
+                        </Select>
+                    </Col>
+                </Row>
+            </div>
             <Row>
                 <Col span='10' className='registerTitle'>{t(33)}</Col>
             </Row>
@@ -263,10 +288,10 @@ const AddUser = () => {
                     } style={{ width: '100%' }} />
                 </Form.Item>
                 <Form.Item colon={false} label=" " style={{ marginBottom: 0 }}>
-                    <Form.Item style={{ display: 'inline-block', width: 200 }}>
+                    <Form.Item style={{ display: 'inline-block' }}>
                         <Button type="primary" disabled={btnDisabled} onClick={sendCode}>{btnDisabled ? `${t(133)}${countDown}` : t(59)}</Button>
                     </Form.Item>
-                    <Form.Item style={{ display: 'inline-block', width: 200, margin: '0 8px' }} >
+                    <Form.Item style={{ display: 'inline-block', margin: '0 8px' }} >
                         <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} />
                     </Form.Item>
                 </Form.Item>
