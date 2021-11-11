@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import { UnorderedListOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined, LoginOutlined } from '@ant-design/icons';
 import { Col, Menu, message, Row, Select, Drawer, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
@@ -14,13 +14,15 @@ const { Option } = Select;
 
 
 const Head = (prop) => {
-  const { userName, loginOut } = prop;
+  const { userName, loginOut, setVisibleTrue, setVisibleFalse } = prop;
   const [language, setLanguage] = useState('en');
   const [visible, setVisible] = useState(false);
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const handleLoginOut = () => {
+    setVisible(false);
     history.push('/');
+    setVisibleFalse();
     loginOut();
   }
   const handlePushClick = (value) => {
@@ -31,6 +33,13 @@ const Head = (prop) => {
       message.info(t(130));
       history.push('/login');
     }
+    setVisibleTrue();
+    setVisible(false);
+  }
+  const handleMobilePush = (value) => {
+    history.push(value);
+    setVisibleTrue();
+    setVisible(false);
   }
   const handleChange = (value) => {
     setLanguage(value);
@@ -39,6 +48,10 @@ const Head = (prop) => {
   const handleMobileLoginClick = () => {
     setVisible(false);
     history.push('/login');
+  }
+  const handlImgClick = () => {
+    setVisibleFalse();
+    history.push('/')
   }
   // const useBrowserPosition = () => {
   //   const options = {
@@ -160,7 +173,7 @@ const Head = (prop) => {
         <Button icon={<UnorderedListOutlined />} onClick={() => setVisible(true)}></Button>
       </Col>
       <Col lg={13} xs={13}>
-        <div className='logoBox' onClick={() => history.push('/')}><img src={logo} alt="logo" /></div>
+        <div className='logoBox' onClick={handlImgClick}><img src={logo} alt="logo" /></div>
       </Col>
       <Col lg={2} xs={0}>{t(32)}</Col>
       <Col lg={2} xs={6} className='languageBox'>
@@ -189,19 +202,28 @@ const Head = (prop) => {
         key='left'
       >
         <div className='Mobile-Login-Box'>
-          <div className='Mobile-Login' onClick={handleMobileLoginClick}>{t(4)}</div>
+          {userName ?
+            <div className='Mobile-Login'>{userName}</div> :
+            <div className='Mobile-Login' onClick={handleMobileLoginClick}>{t(4)}</div>
+          }
           <div className='Mobile-Menus'>
-            <div>{t(135)}</div>
-            <div>{t(136)}</div>
-            <div>{t(137)}</div>
-            <div>{t(13)}</div>
-            <div>{t(138)}</div>
-            <div>{t(157)}</div>
-            <div>{t(158)}</div>
-            <div>{t(159)}</div>
-            <div>{t(139)}</div>
-            <div>{t(121)}</div>
+            <div onClick={() => handlePushClick('/MyPageIndex')}>{t(135)}</div>
+            <div onClick={() => handleMobilePush('/News')}>{t(136)}</div>
+            <div onClick={() => handleMobilePush('/AdartsShop')}>{t(137)}</div>
+            <div onClick={() => handleMobilePush('/ShopActivitie')}>{t(13)}</div>
+            <div onClick={() => handleMobilePush('/TaskReward')}>{t(138)}</div>
+            <div onClick={() => handleMobilePush('/MatchRanting')}>{t(157)}</div>
+            <div onClick={() => handleMobilePush('/ShopProp')}>{t(158)}</div>
+            <div onClick={() => handleMobilePush('/Darts')}>{t(159)}</div>
+            <div onClick={() => handleMobilePush('/Players')}>{t(139)}</div>
+            <div onClick={() => handleMobilePush('/ServiceEr')}>{t(121)}</div>
           </div>
+          {userName ?
+            <div style={{ margin: '10px 0', display: 'flex', justifyContent: 'end' }}>
+              <Button style={{ background: '#2a2c3e', color: '#fff' }} icon={<LoginOutlined />} onClick={handleLoginOut}>{t(18)}</Button>
+            </div> :
+            null
+          }
         </div>
       </Drawer>
     </Row >

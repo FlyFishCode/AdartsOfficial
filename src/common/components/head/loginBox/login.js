@@ -6,7 +6,7 @@ import { indexLoginHttp } from '@/api/index';
 import { MD5 } from '@/common/Utlis'
 
 const LoginBox = (props) => {
-    const { changeUserName } = props;
+    const { changeUserName, setVisibleFalse } = props;
     const { t } = useTranslation();
     const history = useHistory();
     const [username, setUserName] = useState('');
@@ -30,6 +30,7 @@ const LoginBox = (props) => {
                 sessionStorage.setItem('websiteCardId', data.mainCardId || '');
                 sessionStorage.setItem('websiteToken', data.token);
                 history.push('/');
+                setVisibleFalse();
             } else {
                 message.warning(res.data.msg)
             }

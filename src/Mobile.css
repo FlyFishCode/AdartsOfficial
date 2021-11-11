@@ -97,4 +97,44 @@
     .footer {
         padding: 0;
     }
+    .userName {
+        width: auto;
+    }
+    .editorBox {
+        width: 140px;
+        height: 140px;
+    }
+    .userCard {
+        width: auto;
+    }
+    .cardStyleBox {
+        width: auto;
+    }
+    .myPage {
+        width: auto;
+    }
+    .AdartsCardImg {
+        display: none;
+    }
+    .AdartsCardInfo {
+        justify-content: center;
+    }
+    .AdartsCardBtnBox :first-child {
+        padding: 0;
+    }
+    .AdartsCardBox {
+        grid-template-columns: 80% 20% !important;
+        grid-column-gap: 0% !important;
+    }
+    .news .newsImgBox {
+        width: 150px !important;
+        height: 120px !important;
+    }
+    .Mobile-Tab {
+        height: 40px;
+        line-height: 40px;
+        background: #eee;
+        text-indent: 5px;
+        font-size: 25px;
+    }
 }

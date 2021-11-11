@@ -176,8 +176,8 @@ const AccountInfoSetting = () => {
     <div>
       <div className='myPageTitle' id='AccountInfoSetting'>{t(70)}</div>
       <Row className='rowBox'>
-        <Col span='6' className='AccountInfoLabel'>{t(99)}</Col>
-        <Col span='5' className='selectBox'>
+        <Col lg={6} xs={10} className='AccountInfoLabel'>{t(99)}</Col>
+        <Col lg={6} xs={10} className='selectBox'>
           <Select
             showSearch
             placeholder="Select country"
@@ -271,7 +271,7 @@ const AccountInfoSetting = () => {
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(48)}</Col>
-        <Col span='6'>
+        <Col lg={6} xs={18}>
           <Input.Group compact>
             <Select defaultValue={phoneCode} style={{ width: '40%' }} onChange={(value) => setPhoneCode(value)} >
               <Option value="+86">+86</Option>
@@ -280,18 +280,18 @@ const AccountInfoSetting = () => {
             <Input style={{ width: '60%' }} value={phone} onChange={(e) => setPhone(e.target.value)} allowClear />
           </Input.Group>
         </Col>
-        <Col span='5'>
+        <Col lg={{ span: 3, offset: 2 }} xs={{ span: 7, offset: 6 }}>
           <Button type="primary" onClick={handlePhoneBtnClick} disabled={phoneBtnDisabled}>{phoneBtnDisabled ? phoneCountDown : t(59)}</Button>
         </Col>
-        <Col span='7'>
+        <Col lg={7} xs={11}>
           <Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear />
         </Col>
       </Row>
       <Row className='rowBox'>
         <Col span='6' className='AccountInfoLabel'>{t(39)}</Col>
-        <Col span='6'><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
-        <Col span='5'><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
-        <Col span='7'><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
+        <Col lg={6} xs={18}><Input placeholder="Basic usage" value={email} onChange={(e) => setEmail(e.target.value)} allowClear /></Col>
+        <Col lg={{ span: 3, offset: 2 }} xs={{ span: 7, offset: 6 }}><Button type="primary" onClick={handleEmailBtnClick} disabled={emailBtnDisabled}>{emailBtnDisabled ? emailCountDown : t(59)}</Button></Col>
+        <Col lg={7} xs={11}><Input placeholder={t(89)} onChange={(e) => setCode(e.target.value)} allowClear /></Col>
       </Row>
       {/* <Row type="flex" justify="center" style={{ marginBottom: "10px" }}>
         <Radio.Group onChange={(e) => setAcceptMail(e.target.value)} value={acceptMail}>

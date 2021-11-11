@@ -80,7 +80,7 @@ const NewsPage = () => {
           )
         })}
         <Row className='RowBox'>
-          <Col span='3'>
+          <Col lg={3} xs={6}>
             <Select value={type} style={{ width: '100%' }} onChange={(value) => setType(value)}>
               <Option value={0}>All</Option>
               <Option value={4}>{t(7)}</Option>
@@ -88,7 +88,7 @@ const NewsPage = () => {
               <Option value={6}>{t(9)}</Option>
             </Select>
           </Col>
-          <Col span='21'>
+          <Col lg={21} xs={18}>
             <Input.Search allowClear style={{ width: '100%' }} onSearch={(value) => setInputValue(value)} /></Col>
         </Row>
         <Row className='RowBox newsFirst'>

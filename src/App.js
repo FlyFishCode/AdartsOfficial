@@ -42,6 +42,8 @@ import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js';
 import Download from './view/other/download.js';
 
+import MobileTab from './common/components/MobileTbs';
+
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
 sessionStorage.setItem('websiteCountryId', 17829);
@@ -49,9 +51,16 @@ sessionStorage.setItem('websiteCountryId', 17829);
 
 const App = () => {
     const [userName, setUserName] = useState('');
+    const [visible, setVisible] = useState(true);
     const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
+    }
+    const setVisibleTrue = () => {
+        setVisible(true);
+    }
+    const setVisibleFalse = () => {
+        setVisible(false);
     }
     useEffect(() => {
         if (currentUserName) {
@@ -61,7 +70,8 @@ const App = () => {
     return (
         <BrowserRouter >
             {/* <div className='containerBox'> */}
-            <Head userName={userName} loginOut={handleUserName} />
+            <Head userName={userName} loginOut={handleUserName} setVisibleTrue={setVisibleTrue} setVisibleFalse={setVisibleFalse} />
+            {visible ? <div className='InWebDisplay'><MobileTab setVisibleFalse={setVisibleFalse} /></div> : null}
             <Switch>
                 <Route path='/' exact>
                     <Container userName={userName} />
@@ -103,7 +113,7 @@ const App = () => {
                     <Download />
                 </Route>
                 <Route path='/Login'>
-                    <LoginBox changeUserName={handleUserName} />
+                    <LoginBox changeUserName={handleUserName} setVisibleFalse={setVisibleFalse} />
                 </Route>
                 <Route path='/ForgetID'>
                     <ForgetID />

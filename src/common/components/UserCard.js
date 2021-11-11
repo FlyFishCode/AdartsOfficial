@@ -31,73 +31,77 @@ const UserCard = (props) => {
     const [positionIndex, setPositionIndex] = useState(0);
     const num = userCard && userCard.length;
     const handleUserCardClick = (direction) => {
+        const domWith = document.querySelector('.userCard').offsetWidth;
         if (direction === 'left') {
             if (positionIndex > 0) {
                 setPositionIndex(positionIndex - 1)
-                setPosition(position + 450)
+                setPosition(position + domWith)
             }
         } else {
             if (positionIndex < num - 1) {
                 setPositionIndex(positionIndex + 1)
-                setPosition(position - 450)
+                setPosition(position - domWith)
             }
         }
     }
     const render = (list) => {
         list.length && list.forEach((i, index) => {
-            const dom = echarts.init(document.querySelector(`.Editor${index}`));
-            dom.setOption({
-                series: [{
-                    type: 'gauge',
-                    startAngle: 90,
-                    endAngle: -270,
-                    max: 30,
-                    color: 'red',
-                    pointer: {
-                        show: false
-                    },
-                    progress: {
-                        show: true,
-                        overlap: false,
-                        roundCap: true,
-                        clip: false,
-                        itemStyle: {
-                            borderWidth: 1,
-                            borderColor: '#464646'
-                        }
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            width: 5
-                        }
-                    },
-                    splitLine: {
-                        show: false,
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        show: false,
-                    },
-                    data: [{
-                        value: i.rating,
-                        name: 'RATING',
-                        title: {
-                            color: 'red',
-                            fontSize: 15,
-                            fontWeight: 'bold',
-                            offsetCenter: ['0%', '10%']
+            const domTree = document.querySelector(`.Editor${index}`)
+            if (domTree) {
+                const dom = echarts.init(domTree);
+                dom.setOption({
+                    series: [{
+                        type: 'gauge',
+                        startAngle: 90,
+                        endAngle: -270,
+                        max: 30,
+                        color: 'red',
+                        pointer: {
+                            show: false
                         },
-                        detail: {
-                            fontSize: 15,
-                            color: 'red',
-                            offsetCenter: ['0%', '-10%']
+                        progress: {
+                            show: true,
+                            overlap: false,
+                            roundCap: true,
+                            clip: false,
+                            itemStyle: {
+                                borderWidth: 1,
+                                borderColor: '#464646'
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                width: 5
+                            }
+                        },
+                        splitLine: {
+                            show: false,
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: false,
+                        },
+                        data: [{
+                            value: i.rating,
+                            name: 'RATING',
+                            title: {
+                                color: 'red',
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                                offsetCenter: ['0%', '10%']
+                            },
+                            detail: {
+                                fontSize: 15,
+                                color: 'red',
+                                offsetCenter: ['0%', '-20%']
+                            }
                         }
-                    }
-                    ],
-                }]
-            })
+                        ],
+                    }]
+                })
+            }
         })
     }
     const getUserCardList = () => {
@@ -131,8 +135,8 @@ const UserCard = (props) => {
     }, [position])
     return (
         <Row className='userCardBox'>
-            {userCard.length > 1 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col> : null}
-            <Col span='9' className='userCardListBg'>
+            {userCard.length > 1 ? <Col lg={1} xs={2} className='iconBox' onClick={() => handleUserCardClick('left')}><LeftOutlined /></Col> : null}
+            <Col lg={9} xs={20} className='userCardListBg'>
                 <div className='userCardListBox animate__animated animate__fadeInRight'>
                     {userCard && userCard.map((i, index) => {
                         return (
@@ -151,7 +155,7 @@ const UserCard = (props) => {
                                             </div>
                                         </div>
                                         <div className='userInfoGameBox'>
-                                            <div className={`Editor${index}`} style={{ height: 200, width: 200 }}></div>
+                                            <div className={`Editor${index} editorBox`}></div>
                                             <div className='userInfoGame'>
                                                 <div>
                                                     <div className='userCardFont'>{i.ppd}</div>
@@ -206,7 +210,7 @@ const UserCard = (props) => {
                     })}
                 </div>
             </Col>
-            {userCard.length > 1 ? <Col span='1' className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col> : null}
+            {userCard.length > 1 ? <Col lg={1} xs={2} className='iconBox' onClick={() => handleUserCardClick('right')}><RightOutlined /></Col> : null}
             {/* <Col span='8' offset='1' className='userCardOther'>
         <div className='otherMoreBox'>
           <Button block onClick={() => handleBtnPush('About30Game')}>{t(16)}<RightOutlined /></Button>

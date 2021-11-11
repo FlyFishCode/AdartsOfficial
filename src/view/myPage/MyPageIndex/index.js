@@ -77,59 +77,62 @@ const MyPageIndex = (props) => {
   // })
 
   const render = (rating) => {
-    const dom = echarts.init(document.querySelector('.Editor'));
-    dom.setOption({
-      series: [{
-        type: 'gauge',
-        startAngle: 90,
-        endAngle: -270,
-        max: 30,
-        color: 'red',
-        pointer: {
-          show: false
-        },
-        progress: {
-          show: true,
-          overlap: false,
-          roundCap: true,
-          clip: false,
-          itemStyle: {
-            borderWidth: 1,
-            borderColor: '#464646'
-          }
-        },
-        axisLine: {
-          lineStyle: {
-            width: 5
-          }
-        },
-        splitLine: {
-          show: false,
-        },
-        axisTick: {
-          show: false
-        },
-        axisLabel: {
-          show: false,
-        },
-        data: [{
-          value: rating,
-          name: 'RATING',
-          title: {
-            color: 'red',
-            fontSize: 15,
-            fontWeight: 'bold',
-            offsetCenter: ['0%', '10%']
+    const domTree = document.querySelector('.Editor');
+    if (domTree) {
+      const dom = echarts.init(domTree);
+      dom.setOption({
+        series: [{
+          type: 'gauge',
+          startAngle: 90,
+          endAngle: -270,
+          max: 30,
+          color: 'red',
+          pointer: {
+            show: false
           },
-          detail: {
-            fontSize: 15,
-            color: 'red',
-            offsetCenter: ['0%', '-10%']
+          progress: {
+            show: true,
+            overlap: false,
+            roundCap: true,
+            clip: false,
+            itemStyle: {
+              borderWidth: 1,
+              borderColor: '#464646'
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              width: 5
+            }
+          },
+          splitLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            show: false,
+          },
+          data: [{
+            value: rating,
+            name: 'RATING',
+            title: {
+              color: 'red',
+              fontSize: 15,
+              fontWeight: 'bold',
+              offsetCenter: ['0%', '10%']
+            },
+            detail: {
+              fontSize: 15,
+              color: 'red',
+              offsetCenter: ['0%', '-10%']
+            }
           }
-        }
-        ],
-      }]
-    })
+          ],
+        }]
+      })
+    }
   }
   const getData = (cardId) => {
     myPageIndexUserCardInfoHttp({

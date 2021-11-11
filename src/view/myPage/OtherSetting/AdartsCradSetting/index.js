@@ -77,7 +77,7 @@ const AdartsCardSetting = () => {
       {cardList.map(i => {
         return (
           <div key={i.cardId} className='AdartsCardBox'>
-            <div>
+            <div className='AdartsCardImg'>
               <div className='AdartsCardImgBox'><img src={adartsCard} alt="" /></div>
               <div className='AdartsCardUserName'>{i.name}</div>
             </div>

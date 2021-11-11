@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Switch, Route, useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { Row, Col } from 'antd';
+import { Row, Col, Tabs } from 'antd';
 
 import MyPageIndex from './MyPageIndex';
 // import AnyWhere from './AnyWhere';
@@ -24,6 +24,7 @@ import PasswordSetting from './OtherSetting/PasswordSetting';
 
 import './index.css';
 
+const { TabPane } = Tabs;
 
 const MyPage = () => {
   const { t } = useTranslation();
@@ -50,6 +51,9 @@ const MyPage = () => {
       console.log('History Api：', error);
     }
   }
+  const handleTabsChange = (e) => {
+    history.push(e)
+  }
   useEffect(() => {
     if (Location?.state?.name) {
       handleLinkClick(Location.state.name)
@@ -60,8 +64,22 @@ const MyPage = () => {
   }, [cardId])
   return (
     <div className="boxContent containerBox">
+      <Row className='InWebDisplay'>
+        <Tabs defaultActiveKey="1" type="card" onChange={handleTabsChange}>
+          <TabPane tab={t(20)} key="/MyPageIndex"></TabPane>
+          <TabPane tab={t(21)} key="/MyPageIndex/AllGameData"></TabPane>
+          <TabPane tab={t(64)} key="/MyPageIndex/About30Game"></TabPane>
+          <TabPane tab={t(65)} key="/MyPageIndex/AwardHistory"></TabPane>
+          <TabPane tab={t(67)} key="/MyPageIndex/FriendsList"></TabPane>
+          <TabPane tab={t(68)} key="/MyPageIndex/AddFriends"></TabPane>
+          <TabPane tab={t(69)} key="/MyPageIndex/AdartsCardSetting"></TabPane>
+          <TabPane tab={t(70)} key="/MyPageIndex/AccountInfoSetting"></TabPane>
+          <TabPane tab={t(71)} key="/MyPageIndex/AdartsMsgSetting"></TabPane>
+          <TabPane tab={t(73)} key="/MyPageIndex/PasswordSetting"></TabPane>
+        </Tabs>
+      </Row>
       <Row className='myPage'>
-        <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
+        <Col lg={4} xs={0} className='linkBox' onClick={(e) => handleClick(e)}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MyPageIndex' >{t(20)}</div>
           {/* <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MyPageIndex/AnyWhere'>AnyWhere</div> */}
           <div className={activeClass === '3' ? 'activeClass' : null} active='3' path='/MyPageIndex/AllGameData'>{t(21)}</div>
@@ -74,7 +92,7 @@ const MyPage = () => {
           <div className={activeClass === '10' ? 'activeClass' : null} active='10' path='/MyPageIndex/AdartsMsgSetting'>{t(71)}</div>
           <div className={activeClass === '11' ? 'activeClass' : null} active='11' path='/MyPageIndex/PasswordSetting'>{t(73)}</div>
         </Col>
-        <Col span='19' offset='1'>
+        <Col lg={{ span: 19, offset: 1 }} xs={{ span: 24, offset: 0 }}>
           <Switch>
             <Route path='/MyPageIndex' exact>
               <MyPageIndex changeCardId={handleChangeCardId} />

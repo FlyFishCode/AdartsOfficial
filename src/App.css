@@ -760,6 +760,11 @@
     color: #fff;
 }
 
+.editorBox {
+    height: 200px;
+    width: 200px
+}
+
 .ant-progress-circle.ant-progress-status-exception .ant-progress-text {
     color: #fff;
 }
@@ -828,12 +833,6 @@
 
 .selectBox div {
     width: 100%;
-}
-
-.AddFriendLabel {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
 }
 
 .AddFriendBtn button {
