@@ -190,8 +190,8 @@ const Activities = () => {
         </Col>
       </Row>
       <Row className='RowBox'>
-        <Col span='20'><Input placeholder="Please enter a search" value={title} onChange={(e) => setTtitle(e.target.value)} allowClear /></Col>
-        <Col span='3' offset='1'><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={() => getDataList()}>Search</Button></Col>
+        <Col lg={20} xs={17}><Input placeholder="Please enter a search" value={title} onChange={(e) => setTtitle(e.target.value)} allowClear /></Col>
+        <Col lg={{ span: 3, offset: 1 }} xs={{ span: 6, offset: 1 }}><Button style={{ width: '100%' }} type='primary' icon={<SearchOutlined />} onClick={() => getDataList()}>Search</Button></Col>
       </Row>
       <Row className='RowBox' style={{ position: 'relative' }}>
         <div className='activeInfoBox'>

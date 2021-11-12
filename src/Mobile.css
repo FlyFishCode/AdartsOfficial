@@ -155,4 +155,10 @@
         height: auto !important;
         margin: 0;
     }
+    .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+        height: 30px;
+    }
+    .Ranting .ant-tabs-nav-list {
+        width: auto !important;
+    }
 }

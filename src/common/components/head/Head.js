@@ -210,7 +210,6 @@ const Head = (prop) => {
             <div onClick={() => handlePushClick('/MyPageIndex')}>{t(135)}</div>
             <div onClick={() => handleMobilePush('/AdartsShop')}>{t(137)}</div>
             <div onClick={() => handleMobilePush('/ShopActivitie')}>{t(13)}</div>
-            <div onClick={() => handleMobilePush('/TaskReward')}>{t(138)}</div>
             <div onClick={() => handleMobilePush('/MatchRanting')}>{t(157)}</div>
             <div onClick={() => handleMobilePush('/ShopProp')}>{t(158)}</div>
             <div onClick={() => handleMobilePush('/Darts')}>{t(159)}</div>

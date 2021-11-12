@@ -22,10 +22,10 @@ const ShopActivitie = () => {
   return (
     <div className="containerBox">
       <Row>
-        <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
+        <Col lg={4} xs={0} className='linkBox' onClick={(e) => handleClick(e)}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/ShopActivitie' >{t(13)}</div>
         </Col>
-        <Col span='19' offset='1'>
+        <Col lg={{ span: 19, offset: 1 }} xs={{ span: 24, offset: 0 }}>
           <Switch>
             <Route path='/ShopActivitie' exact>
               <Activities />

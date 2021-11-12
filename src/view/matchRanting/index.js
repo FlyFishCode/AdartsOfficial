@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react';
 import { useHistory, Route, Switch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { Row, Col } from 'antd';
+import { Row, Col, Tabs } from 'antd';
 
 import Ranting from './ranting';
 import AwardRanting from './awardRanting';
+
+
+const { TabPane } = Tabs;
+
 
 const MatchRanting = () => {
   const history = useHistory();
@@ -23,17 +27,26 @@ const MatchRanting = () => {
     //   console.log('History Api：', error);
     // }
   }
+  const handleTabsChange = (e) => {
+    history.push(e)
+  }
   useEffect(() => {
 
   }, []);
   return (
     <div className="containerBox">
+      <Row className='InWebDisplay'>
+        <Tabs defaultActiveKey="1" type="card" onChange={handleTabsChange}>
+          <TabPane tab={t(119)} key="/MatchRanting"></TabPane>
+          <TabPane tab={t(200)} key="/MatchRanting/AwardRanting"></TabPane>
+        </Tabs>
+      </Row>
       <Row>
-        <Col span='4' className='linkBox' onClick={(e) => handleClick(e)}>
+        <Col lg={4} xs={0} className='linkBox' onClick={(e) => handleClick(e)}>
           <div className={activeClass === '1' ? 'activeClass' : null} active='1' path='/MatchRanting' >{t(119)}</div>
           <div className={activeClass === '2' ? 'activeClass' : null} active='2' path='/MatchRanting/AwardRanting'>{t(200)}</div>
         </Col>
-        <Col span='19' offset='1'>
+        <Col lg={{ span: 19, offset: 1 }} xs={{ span: 24, offset: 0 }}>
           <Switch>
             <Route path='/MatchRanting' exact>
               <Ranting />

@@ -20,7 +20,7 @@ const RenderDom = (prop) => {
   return (
     <div>
       <Row justify='space-around'>
-        <Col span='11'>
+        <Col lg={11} xs={24}>
           <div className='renderTitle renderTitleThis'>This Month</div>
           {thisMonth.length ? thisMonth.map((i, index) => {
             return (
@@ -37,7 +37,7 @@ const RenderDom = (prop) => {
             )
           }) : <NoData />}
         </Col>
-        <Col span='11'>
+        <Col lg={11} xs={24}>
           <div className='renderTitle renderTitleLast'>Last Month</div>
           {thisMonth.length ? lastMonth.map((i, index) => {
             return (
