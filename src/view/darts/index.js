@@ -49,8 +49,8 @@ const Content = () => {
   return (
     <div className='darts'>
       <Row justify="space-between" className='dartsTitleBox'>
-        <Col span='2'>飞镖 Darts</Col>
-        <Col span='2' style={{ cursor: 'pointer' }} onClick={() => history.push('/Darts/DartsList')}>更多<PlusCircleOutlined /></Col>
+        <Col lg={2} xs={8}>飞镖 Darts</Col>
+        <Col lg={2} xs={5} style={{ cursor: 'pointer' }} onClick={() => history.push('/Darts/DartsList')}>更多<PlusCircleOutlined /></Col>
       </Row>
       <Row className='dartsContentBox'>
         {dartsList.map(i => {
@@ -59,7 +59,7 @@ const Content = () => {
               <div><img src={i.thumbnail} alt="" /></div>
               <div title={i.title}>{i.title}</div>
               <div>{i.cdateInt}</div>
-              <div className={`dartsInfoContent${i.id}`}>{render(i.id, i.contents)}</div>
+              <div className={`dartsInfoContent${i.id} dartsInfo`}>{render(i.id, i.contents)}</div>
             </div>
           )
         })}

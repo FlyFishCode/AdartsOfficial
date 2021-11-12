@@ -214,7 +214,7 @@ const Head = (prop) => {
             <div onClick={() => handleMobilePush('/ShopProp')}>{t(158)}</div>
             <div onClick={() => handleMobilePush('/Darts')}>{t(159)}</div>
             <div onClick={() => handleMobilePush('/Players')}>{t(139)}</div>
-            <div onClick={() => handleMobilePush('/ServiceEr')}>{t(121)}</div>
+            {/* <div onClick={() => handleMobilePush('/ServiceEr')}>{t(121)}</div> */}
           </div>
           {userName ?
             <div style={{ margin: '10px 0', display: 'flex', justifyContent: 'end' }}>

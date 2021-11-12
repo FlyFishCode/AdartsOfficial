@@ -198,4 +198,26 @@
         width: auto;
         height: auto;
     }
+    .dartsContentBox {
+        grid-template-columns: 48% 50% !important;
+        grid-column-gap: 2%;
+    }
+    .dartsInfo {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .dartsContent,
+    .dartsInfoTitle {
+        word-break: break-all;
+    }
+    .worldImgBox {
+        height: 150px;
+    }
+    .playerDes {
+        width: auto;
+    }
+    .playerBox div:nth-child(1) {
+        height: 130px;
+    }
 }

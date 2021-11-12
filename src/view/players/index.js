@@ -31,7 +31,7 @@ const PlayerDes = () => {
         <Row className='playerDesBox' justify="space-between">
           {playerList.map(i => {
             return (
-              <Col key={i.id} span='5' className='playerBg' onClick={() => handlePlayerClick(i.id)}>
+              <Col key={i.id} lg={5} xs={12} className='playerBg' onClick={() => handlePlayerClick(i.id)}>
                 <div className='playerBox'>
                   <div><img src={i.picture[0] ? i.picture[0].url : ''} alt="" /></div>
                   <div className='playerDesName'>{i.name}</div>

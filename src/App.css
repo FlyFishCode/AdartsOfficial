@@ -1236,6 +1236,12 @@
     text-align: center;
 }
 
+.dartsInfo {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+}
+
 
 /* 移动端样式 */
 
