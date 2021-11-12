@@ -135,13 +135,13 @@ const MyPropList = () => {
         </TabPane>
         <TabPane tab={'ALL'} key="2">
           <Row>
-            <Col span='6'>
+            <Col lg={6}>
               <Select value={sortValue} style={{ width: '100%' }} onChange={(value) => setSortValue(value)}>
                 <Option value={1}>{t(223)}</Option>
                 <Option value={2}>{t(224)}</Option>
               </Select>
             </Col>
-            <Col span='6' offset='10' style={{ display: 'flex', alignItems: 'center' }}>{t(225)}</Col>
+            <Col lg={{ span: 6, offset: 10 }} style={{ display: 'flex', alignItems: 'center' }}>{t(225)}</Col>
           </Row>
           <Tabs defaultActiveKey='全部' onTabClick={(value) => setType(value)}>
             {typeList.map(i => {

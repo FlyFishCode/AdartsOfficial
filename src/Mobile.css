@@ -24,6 +24,7 @@
     }
     .containerBox {
         width: auto;
+        position: relative;
     }
     .loginBox {
         width: auto !important;
@@ -160,5 +161,41 @@
     }
     .Ranting .ant-tabs-nav-list {
         width: auto !important;
+    }
+    .recommendBox {
+        grid-template-columns: 48% 48% !important;
+    }
+    .recommendBox img {
+        height: 50% !important;
+    }
+    .Mobile-Gift {
+        position: absolute;
+        right: 0px;
+        top: -35px;
+    }
+    .giftBox div {
+        height: 20px !important;
+        width: 20px !important;
+        line-height: 20px !important;
+        font-size: 14px!important;
+    }
+    .templateBox {
+        padding: 10px;
+    }
+    .ShopPropSettingImg {
+        height: 150px !important;
+    }
+    .TemplateBox {
+        grid-template-columns: 45% 20% 30% !important;
+    }
+    .ShopProp {
+        width: 100% !important;
+    }
+    .myListBG {
+        grid-template-columns: 48% 48% !important;
+    }
+    .InfoDomInfo>div:nth-child(2) {
+        width: auto;
+        height: auto;
     }
 }

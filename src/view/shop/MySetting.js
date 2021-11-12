@@ -213,6 +213,8 @@ const MySetting = () => {
                 if (res.data.code === 100) {
                     message.info(res.data.msg);
                     getTemplate();
+                } else {
+                    message.info(res.data.data);
                 }
             })
         } else {
@@ -220,6 +222,8 @@ const MySetting = () => {
                 if (res.data.code === 100) {
                     message.info(res.data.msg);
                     getTemplate();
+                } else {
+                    message.info(res.data.data);
                 }
             })
         }
@@ -305,8 +309,8 @@ const MySetting = () => {
             <div className='Title'>{t(166)}</div>
             <div className='templateBox'>
                 <Row>
-                    <Col span='2' className='labelTitle'>{t(173)}</Col>
-                    <Col span='10'>
+                    <Col lg={2} xs={5} className='labelTitle'>{t(173)}</Col>
+                    <Col lg={10} xs={13}>
                         <Select
                             value={templateId}
                             style={{ width: '100%' }}
@@ -326,7 +330,7 @@ const MySetting = () => {
                         </Select>
                     </Col>
                     {/* <Col span='8' offset='2'><Input placeholder={t(229)} value={templateValue} onChange={(e) => setTemplateValue(e.target.value)} allowClear /></Col> */}
-                    <Col span='2'><Button onClick={() => setTemplateVisible(true)}>{t(174)}</Button></Col>
+                    <Col lg={2} xs={6}><Button onClick={() => setTemplateVisible(true)}>{t(174)}</Button></Col>
                 </Row>
                 <div>
                     <div>*  {t(227)}</div>
@@ -518,7 +522,7 @@ const MySetting = () => {
                 </Row>
             </Modal>
             {/* 模板弹框 */}
-            <Modal title={t(173)} visible={templateVisible} centered footer={null} width='50%' onCancel={() => setTemplateVisible(false)}>
+            <Modal title={t(173)} visible={templateVisible} centered footer={null} onCancel={() => setTemplateVisible(false)}>
                 {dialogTemplate.length ? dialogTemplate.map((i, index) => {
                     return (
                         <div key={index}>

@@ -151,7 +151,7 @@ const ItemBuy = () => {
           </Row>
         </div>
         {/* 购买Dialog */}
-        <Modal title={t(164)} visible={buyVisible} footer={null} width='40%' centered onCancel={() => setBuyVisible(false)}>
+        <Modal title={t(164)} visible={buyVisible} footer={null} centered onCancel={() => setBuyVisible(false)}>
           <div style={{ fontSize: '80px', textAlign: 'center' }}><InfoCircleOutlined /></div>
           <div style={{ fontSize: '16px', textAlign: 'center', height: '40px', lineHeight: '40px' }}>{t(188)}<span style={{ fontWeight: 'bold' }}>[{infoObj ? infoObj.title : ''}]</span>?</div>
           <Row style={{ textAlign: 'center', margin: '30px 0' }}>
@@ -160,7 +160,7 @@ const ItemBuy = () => {
           </Row>
         </Modal>
         {/* 赠送Dialog */}
-        <Modal title={t(186)} visible={sendVisible} footer={null} width='40%' centered onCancel={() => setSendVisible(false)}>
+        <Modal title={t(186)} visible={sendVisible} footer={null} centered onCancel={() => setSendVisible(false)}>
           <Tabs id='MyPropList' defaultActiveKey="1" size='large'>
             <TabPane tab={t(93)} key="1">
               {friends.length ? FriendListDom(1, friends) : <NoData />}

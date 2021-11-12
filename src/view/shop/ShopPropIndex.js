@@ -46,7 +46,7 @@ const ShopPropIndex = () => {
             )
           }) : <NoData />}
         </div>
-        <Row justify="center"><Col span='3' className='recommendBtn'><Button onClick={() => handleBrnClick(1)}>More</Button></Col></Row>
+        <Row justify="center"><Col lg={3} xs={4} className='recommendBtn'><Button onClick={() => handleBrnClick(1)}>More</Button></Col></Row>
       </div>
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(170)} ——————————————————————————————</div>
@@ -60,7 +60,7 @@ const ShopPropIndex = () => {
             )
           }) : <NoData />}
         </div>
-        <Row justify="center"><Col span='3' className='recommendBtn'><Button onClick={() => handleBrnClick(2)}>More</Button></Col></Row>
+        <Row justify="center"><Col lg={3} xs={4} className='recommendBtn'><Button onClick={() => handleBrnClick(2)}>More</Button></Col></Row>
       </div>
       <div className='shopPropBox'>
         <div className='shopItemRow'>—————————————————————————————— {t(171)} ——————————————————————————————</div>
@@ -74,7 +74,7 @@ const ShopPropIndex = () => {
             )
           }) : <NoData />}
         </div>
-        <Row justify="center"><Col span='3' className='recommendBtn'><Button onClick={() => handleBrnClick(3)}>More</Button></Col></Row>
+        <Row justify="center"><Col lg={3} xs={4} className='recommendBtn'><Button onClick={() => handleBrnClick(3)}>More</Button></Col></Row>
       </div>
     </div>
   )

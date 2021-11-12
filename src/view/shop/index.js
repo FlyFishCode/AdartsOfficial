@@ -153,7 +153,6 @@ const ShopProp = () => {
         centered
         visible={visible}
         footer={null}
-        width='50%'
         className='GiftBox'
         onOk={() => setVisible(true)}
         onCancel={() => setVisible(false)}
@@ -253,6 +252,19 @@ const ShopProp = () => {
       </Modal>
     )
   }
+  const setting = {
+    autoplay: true,
+    variableWidth: true,
+    arrows: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerPadding: 0,
+    autoplaySpeed: 2000,
+    prevArrow: <PrevIcon />,
+    nextArrow: <NextIcon />
+  }
   const getData = () => {
     const obj = {
       countryId: sessionStorage.getItem('websiteCountryId'),
@@ -272,18 +284,8 @@ const ShopProp = () => {
       }
     })
   }
-  const setting = {
-    autoplay: true,
-    variableWidth: true,
-    arrows: true,
-    infinite: true,
-    centerMode: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    centerPadding: 0,
-    autoplaySpeed: 2000,
-    prevArrow: <PrevIcon />,
-    nextArrow: <NextIcon />
+  const handleTabsChange = (e) => {
+    history.push(e)
   }
   useEffect(() => {
     getData();
@@ -291,7 +293,7 @@ const ShopProp = () => {
   return (
     <div>
       <Row className='containerBox'>
-        <Col span='22' className="shopMenuBox">
+        <Col lg={22} className="shopMenuBox InMobileDisplay">
           <Menu onClick={(e) => handleClick(e)} selectedKeys={[current]} mode="horizontal">
             <Menu.Item key="/ShopProp">{t(162)}</Menu.Item>
             <SubMenu key="2" title={t(163)}>
@@ -303,7 +305,16 @@ const ShopProp = () => {
             <Menu.Item key="/ShopProp/ShopIntroduce">{t(165)}</Menu.Item>
           </Menu>
         </Col>
-        <Col span='1'>
+        <Col xs={24} className='InWebDisplay'>
+          <Tabs defaultActiveKey="1" type="card" onChange={handleTabsChange}>
+            <TabPane tab={t(162)} key="/ShopProp"></TabPane>
+            <TabPane tab={t(166)} key="/ShopProp/MySetting"></TabPane>
+            <TabPane tab={t(167)} key="/ShopProp/MyPropList"></TabPane>
+            <TabPane tab={t(164)} key="/ShopProp/ItemBuy"></TabPane>
+            <TabPane tab={t(165)} key="/ShopProp/ShopIntroduce"></TabPane>
+          </Tabs>
+        </Col>
+        <Col lg={1} xs={4} className='Mobile-Gift'>
           <div className='giftBox' onClick={() => setVisible(true)}><GiftOutlined />
             <div>{count}</div>
           </div>
