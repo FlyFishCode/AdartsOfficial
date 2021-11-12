@@ -208,7 +208,6 @@ const Head = (prop) => {
           }
           <div className='Mobile-Menus'>
             <div onClick={() => handlePushClick('/MyPageIndex')}>{t(135)}</div>
-            <div onClick={() => handleMobilePush('/News')}>{t(136)}</div>
             <div onClick={() => handleMobilePush('/AdartsShop')}>{t(137)}</div>
             <div onClick={() => handleMobilePush('/ShopActivitie')}>{t(13)}</div>
             <div onClick={() => handleMobilePush('/TaskReward')}>{t(138)}</div>

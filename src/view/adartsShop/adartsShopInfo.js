@@ -27,10 +27,10 @@ const AdartsShopInfo = () => {
   return (
     <div className='shopInfoBox'>
       <Row>
-        <Col span='3'>
+        <Col lg={3} xs={8}>
           <div className='shopInfoImgBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
-        <Col span='12' className='shopInfoContent'>
+        <Col lg={12} xs={14} className='shopInfoContent'>
           <div>{shopInfo.shopName}</div>
           <div>
             <div></div>
@@ -44,17 +44,17 @@ const AdartsShopInfo = () => {
             }
           </div>
         </Col>
-        <Col span='5' >
+        <Col lg={5} xs={{ span: 10, offset: 8 }}>
           {shopInfo.shopPhone ? <div className='shopInfoPhoneBox'><PhoneOutlined />{shopInfo.shopPhone}</div> : null}
         </Col>
         {/* <Col span='4' style={{ textAlign: 'center' }}> <Button icon={<EnvironmentOutlined />} type="primary" >{t(147)}</Button></Col> */}
       </Row>
       {/* <Row className='RowBox shopInfoTitle'>{t(148)}</Row> */}
       <Row>
-        <Col span='6'>
+        <Col lg={6} xs={8}>
           <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
-        <Col span='18' className='shopInfoOther'>
+        <Col lg={18} xs={16} className='shopInfoOther'>
           <div>{t(160)}</div>
           <div>
             <div>{shopInfo.shopInfo}</div>
@@ -62,10 +62,10 @@ const AdartsShopInfo = () => {
         </Col>
       </Row>
       <Row className='RowBox'>
-        <Col span='6'>
+        <Col lg={6} xs={0}>
           <div className='shopInfoOtherBox'><img src={shopInfo.shopImg ? shopInfo.shopImg : shopImg} onError={(e) => e.target.src = shopImg} alt="" /></div>
         </Col>
-        <Col span='18' className='shopInfoLabelBox'>
+        <Col lg={18} xs={24} className='shopInfoLabelBox'>
           <div>
             <div className='shopInfoLabel'>{t(234)}</div>
             <div>{shopInfo.type}</div>

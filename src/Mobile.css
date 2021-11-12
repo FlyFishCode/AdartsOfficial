@@ -137,4 +137,22 @@
         text-indent: 5px;
         font-size: 25px;
     }
+    .PlayInfoBox {
+        width: auto;
+        padding: 0;
+    }
+    .AllImgBox img {
+        width: 80px;
+        height: 80px;
+    }
+    .shopInfoContent div:nth-child(1) {
+        font-size: 14px !important;
+    }
+    .shopInfoLabelBox>div {
+        grid-template-columns: 30% 70% !important;
+    }
+    .shopInfoOtherBox {
+        height: auto !important;
+        margin: 0;
+    }
 }

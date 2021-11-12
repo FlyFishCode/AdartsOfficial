@@ -20,10 +20,6 @@ const AdartsShopIndex = (prop) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [newShop, setNewShop] = useState([]);
-  // const [shopActivity, setShopActivity] = useState([]);
-  // const handleChange = (value) => {
-  //   console.log(value);
-  // }
   const onSearch = (value) => {
     history.push({
       pathname: "/AdartsShop/ShopSearch",
@@ -43,110 +39,6 @@ const AdartsShopIndex = (prop) => {
       }
     })
   }
-  // const getShopActivityList = () => {
-  //   setShopActivity([
-  //     {
-  //       icon: m,
-  //       shopId: 1,
-  //       shopImg: m,
-  //       shopName: 'Adarts Shop',
-  //       shopAddress: '上海市黄浦区西藏中路160号',
-  //       date: '2021 / 8 / 9',
-  //       machineList: [
-  //         {
-  //           machineType: 'VSS',
-  //           machineNum: 1,
-  //           img: m
-  //         },
-  //         {
-  //           machineType: 'A1',
-  //           machineNum: 3,
-  //           img: m
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       icon: m,
-  //       shopId: 2,
-  //       shopImg: m,
-  //       shopName: 'Adarts Shop',
-  //       shopAddress: '上海市黄浦区西藏中路160号',
-  //       date: '2021 / 8 / 9',
-  //       machineList: [
-  //         {
-  //           machineType: 'VSS',
-  //           machineNum: 1,
-  //           img: m
-  //         },
-  //         {
-  //           machineType: 'A1',
-  //           machineNum: 3,
-  //           img: m
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       icon: m,
-  //       shopId: 3,
-  //       shopImg: m,
-  //       shopName: 'Adarts Shop',
-  //       shopAddress: '上海市黄浦区西藏中路160号',
-  //       date: '2021 / 8 / 9',
-  //       machineList: [
-  //         {
-  //           machineType: 'VSS',
-  //           machineNum: 1,
-  //           img: m
-  //         },
-  //         {
-  //           machineType: 'A1',
-  //           machineNum: 3,
-  //           img: m
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       icon: m,
-  //       shopId: 4,
-  //       shopImg: m,
-  //       shopName: 'Adarts Shop',
-  //       shopAddress: '上海市黄浦区西藏中路160号',
-  //       date: '2021 / 8 / 9',
-  //       machineList: [
-  //         {
-  //           machineType: 'VSS',
-  //           machineNum: 1,
-  //           img: m
-  //         },
-  //         {
-  //           machineType: 'A1',
-  //           machineNum: 3,
-  //           img: m
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       icon: m,
-  //       shopId: 5,
-  //       shopImg: m,
-  //       shopName: 'Adarts Shop',
-  //       shopAddress: '上海市黄浦区西藏中路160号',
-  //       date: '2021 / 8 / 9',
-  //       machineList: [
-  //         {
-  //           machineType: 'VSS',
-  //           machineNum: 1,
-  //           img: m
-  //         },
-  //         {
-  //           machineType: 'A1',
-  //           machineNum: 3,
-  //           img: m
-  //         }
-  //       ]
-  //     }
-  //   ])
-  // }
   const handleShopClick = (id) => {
     history.push({
       pathname: '/AdartsShop/ShopInfo',
@@ -214,33 +106,6 @@ const AdartsShopIndex = (prop) => {
             })}
           </div>
         </Col>
-        {/* <Col span='11' offset='1'>
-          <div className='adartsShopIndexTitleBox'>
-            <div>{t(13)}</div>
-            <div>MORE<RightOutlined /></div>
-          </div>
-          <div className='shopActivityBox'>
-            {shopActivity.map((item, index) => {
-              return (
-                <div className='AllRightBox' key={index}>
-                  <div className='AllImgBox'>
-                    <img src={item.shopImg} alt="" />
-                  </div>
-                  <div className='AllImgContent'>
-                    <div className='shopBox'>
-                      <div className='shopIconBox'>
-                        <img src={item.icon} alt="" />
-                      </div>
-                      <div style={{ color: 'red', fontWeight: 'bold' }}> {item.shopName}</div>
-                    </div>
-                    <div>{item.shopAddress}</div>
-                    <div>{item.date}</div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </Col> */}
       </Row>
     </div>
   )
