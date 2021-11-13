@@ -105,6 +105,10 @@
         width: 140px;
         height: 140px;
     }
+    .editorBox canvas {
+        width: 140px !important;
+        height: 140px !important;
+    }
     .userCard {
         width: auto;
     }
@@ -216,8 +220,25 @@
     }
     .playerDes {
         width: auto;
+        padding: 10px;
     }
     .playerBox div:nth-child(1) {
         height: 130px;
+    }
+    .playerImgBox {
+        grid-template-columns: repeat(3, 33%);
+        grid-template-rows: auto;
+    }
+    .playerImgBox div:nth-child(1) {
+        grid-column-end: auto;
+    }
+    .dartsBox {
+        height: auto;
+    }
+    .datrtsTitleBox div {
+        font-size: 14px;
+    }
+    .playerProductBox {
+        grid-template-rows: auto;
     }
 }
