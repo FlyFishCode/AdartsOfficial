@@ -74,8 +74,8 @@ const ForgetID = () => {
     return (
         <div className='loginBox containerBox'>
             <Row className='loginTitle' >
-                <Col span='6' onClick={() => history.go(-1)} > < LeftOutlined /> {t(28)}</Col>
-                <Col span='18'></Col>
+                <Col span='8' onClick={() => history.go(-1)} > < LeftOutlined /> {t(28)}</Col>
+                <Col span='16'></Col>
             </Row>
             <Row className='RowBox' >
                 <Col className='labelTitle' span='4'> {t(131)} </Col>
