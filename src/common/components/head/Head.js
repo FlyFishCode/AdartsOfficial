@@ -14,7 +14,7 @@ const { Option } = Select;
 
 
 const Head = (prop) => {
-  const { userName, loginOut, setVisibleTrue, setVisibleFalse } = prop;
+  const { userName, loginOut } = prop;
   const [language, setLanguage] = useState('en');
   const [visible, setVisible] = useState(false);
   const history = useHistory();
@@ -22,7 +22,7 @@ const Head = (prop) => {
   const handleLoginOut = () => {
     setVisible(false);
     history.push('/');
-    setVisibleFalse();
+    // setVisibleFalse();
     loginOut();
   }
   const handlePushClick = (value) => {
@@ -33,12 +33,12 @@ const Head = (prop) => {
       message.info(t(130));
       history.push('/login');
     }
-    setVisibleTrue();
+    // setVisibleTrue();
     setVisible(false);
   }
   const handleMobilePush = (value) => {
     history.push(value);
-    setVisibleTrue();
+    // setVisibleTrue();
     setVisible(false);
   }
   const handleChange = (value) => {
@@ -50,7 +50,7 @@ const Head = (prop) => {
     history.push('/login');
   }
   const handlImgClick = () => {
-    setVisibleFalse();
+    // setVisibleFalse();
     history.push('/')
   }
   // const useBrowserPosition = () => {

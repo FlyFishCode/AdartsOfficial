@@ -42,7 +42,7 @@ import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js';
 import Download from './view/other/download.js';
 
-import MobileTab from './common/components/MobileTbs';
+// import MobileTab from './common/components/MobileTbs';
 
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
@@ -51,17 +51,42 @@ sessionStorage.setItem('websiteCountryId', 17829);
 
 const App = () => {
     const [userName, setUserName] = useState('');
-    const [visible, setVisible] = useState(true);
+    // const [visible, setVisible] = useState(true);
     const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
     }
-    const setVisibleTrue = () => {
-        setVisible(true);
-    }
-    const setVisibleFalse = () => {
-        setVisible(false);
-    }
+    // const setVisibleTrue = () => {
+    //     setVisible(true);
+    // }
+    // const setVisibleFalse = () => {
+    //     setVisible(false);
+    // }
+    // var searchMatrix = function (matrix, target) {
+    //     const list = matrix.flat(Infinity);
+    //     let left = 0;
+    //     let right = list.length - 1;
+    //     let ans = false;
+    //     while (left <= right) {
+    //         let middle = Math.ceil((left + right) / 2);
+    //         if (list[middle] < target) {
+    //             left++;
+    //             continue;
+    //         }
+    //         if (list[middle] > target) {
+    //             right--;
+    //             continue;
+    //         }
+    //         if (list[middle] === target) {
+    //             ans = true;
+    //             break
+    //         }
+    //     }
+    //     return ans;
+    // };
+    // useEffect(() => {
+    //     console.log(searchMatrix([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3));
+    // }, [])
     useEffect(() => {
         if (currentUserName) {
             setUserName(currentUserName)
@@ -70,8 +95,8 @@ const App = () => {
     return (
         <BrowserRouter >
             {/* <div className='containerBox'> */}
-            <Head userName={userName} loginOut={handleUserName} setVisibleTrue={setVisibleTrue} setVisibleFalse={setVisibleFalse} />
-            {visible ? <div className='InWebDisplay'><MobileTab setVisibleFalse={setVisibleFalse} /></div> : null}
+            <Head userName={userName} loginOut={handleUserName} />
+            {/* {visible ? <div className='InWebDisplay'><MobileTab setVisibleFalse={setVisibleFalse} /></div> : null} */}
             <Switch>
                 <Route path='/' exact>
                     <Container userName={userName} />
@@ -113,7 +138,7 @@ const App = () => {
                     <Download />
                 </Route>
                 <Route path='/Login'>
-                    <LoginBox changeUserName={handleUserName} setVisibleFalse={setVisibleFalse} />
+                    <LoginBox changeUserName={handleUserName} />
                 </Route>
                 <Route path='/ForgetID'>
                     <ForgetID />
