@@ -241,4 +241,21 @@
     .playerProductBox {
         grid-template-rows: auto;
     }
+    .activityImg {
+        width: 15px;
+        height: 15px;
+    }
+    .ant-badge-count {
+        min-width: 10px;
+        height: 10px;
+        line-height: 10px;
+        padding: 0px;
+        right: 9px;
+    }
+    .activitieBox {
+        grid-template-columns: 25% 75% !important;
+    }
+    .activitieTitleFirst {
+        grid-template-columns: 35% 25% 40% !important;
+    }
 }

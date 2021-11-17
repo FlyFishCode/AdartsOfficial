@@ -12,6 +12,7 @@ import productW from '@/assets/img/productW.jpg';
 import shopImg from '@/assets/img/shop.png';
 import icon1 from '@/assets/img/icon1.jpeg';
 import icon2 from '@/assets/img/icon2.jpeg';
+import VideoImg from '@/assets/img/defaultVideoImg.png';
 
 import 'antd/dist/antd.css';
 import './App.css';
@@ -600,7 +601,7 @@ const Video = () => {
                     {/* <div>MORE</div> */}
                 </div>
                 <div className='videoContainer'>
-                    <video src={TVData.src} controls></video>
+                    <video src={TVData.src} poster={VideoImg} controls></video>
                 </div>
                 <div className='videoBox'>
                     <div className='title'>{TVData.title}</div>
