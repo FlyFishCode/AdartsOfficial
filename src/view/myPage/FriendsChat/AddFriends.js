@@ -5,6 +5,12 @@ import { aboutSevenPlayerListHttp, handleFriendsHttp, addFriendsHttp, friendsLis
 
 const { Search } = Input;
 
+window.onload = () => {
+  const width = window.innerWidth;
+  if (width < 600) {
+    console.log(1)
+  }
+}
 
 const AddFriends = () => {
   const { t } = useTranslation();
@@ -12,7 +18,7 @@ const AddFriends = () => {
   const [searchValue, setSearchValue] = useState('');
   const [pendingPlayerList, setPendingPlayerList] = useState([]);
   const [flag, setFlag] = useState(true);
-  const columns1 = [
+  let columns1 = [
     {
       title: t(102),
       dataIndex: 'portrait',
@@ -172,7 +178,7 @@ const AddFriends = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div>
+    <div className='Mobile-Fiends'>
       <div className='myPageTitle' id='AddFriends'>{t(68)}</div>
       <Row>
         <Col lg={6} xs={0} className='AddFriendLabel'>{t(122)}</Col>
@@ -187,13 +193,13 @@ const AddFriends = () => {
         columns={columns1}
         rowKey='friendId'
         pagination={false}
-        scroll={{ y: 650 }}
+        scroll={{ x: 500, y: 650 }}
       /> : <Table
         dataSource={pendingPlayerList}
         columns={columns2}
         rowKey='memberRelationshipId'
         pagination={false}
-        scroll={{ y: 650 }}
+        scroll={{ x: 500, y: 650 }}
       />}
     </div>
   )

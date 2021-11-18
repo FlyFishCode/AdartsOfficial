@@ -87,7 +87,7 @@ const EN = {
     "86": "Please enter the username!",
     "87": "Please enter the password!",
     "88": "Verification code",
-    "89": "Please enter the verification code!",
+    "89": "enter the verification code!",
     "90": "Please enter the email address!",
     "91": "Please enter the account number!",
     "92": "All",

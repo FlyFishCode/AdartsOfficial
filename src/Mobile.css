@@ -128,7 +128,7 @@
         padding: 0;
     }
     .AdartsCardBox {
-        grid-template-columns: 80% 20% !important;
+        grid-template-columns: 64% 36% !important;
         grid-column-gap: 0% !important;
     }
     .news .newsImgBox {
@@ -257,5 +257,8 @@
     }
     .activitieTitleFirst {
         grid-template-columns: 35% 25% 40% !important;
+    }
+    .ant-input-suffix {
+        display: none;
     }
 }

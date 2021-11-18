@@ -112,6 +112,7 @@ const FriendsList = () => {
           dataSource={dataList}
           columns={columns}
           rowKey='friendId'
+          scroll={{ x: 350 }}
           pagination={{
             current: pageNum,
             pageSize: 10,
