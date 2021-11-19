@@ -261,4 +261,7 @@
     .ant-input-suffix {
         display: none;
     }
+    .NewsBox div:first-child {
+        padding-left: 0px !important;
+    }
 }
