@@ -217,7 +217,7 @@ const MyPageIndex = (props) => {
               <div>{card.lose}</div>
             </div>
             <div className='userGameTotal'>
-              <div className='fontStyle'>最高连胜记录</div>
+              <div className='fontStyle'>{t(235)}</div>
               <div>{card.winContinued}</div>
             </div>
             <div>

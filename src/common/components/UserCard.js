@@ -10,7 +10,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 
 
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 // import { useHistory } from 'react-router-dom'
 
 import { setCountryIconPosition } from '@/common/Utlis';
@@ -23,7 +23,7 @@ import defaultPlayer from '@/assets/img/defalutPlayer.png';
 const UserCard = (props) => {
     echarts.use([TitleComponent, TooltipComponent, GridComponent, CanvasRenderer, PieChart, GaugeChart]);
     // const history = useHistory();
-    // const { t } = useTranslation();
+    const { t } = useTranslation();
     // const [friend, setFriend] = useState(0);
     // const [gift, setGift] = useState(0);
     const [userCard, setUserCard] = useState([]);
@@ -187,7 +187,7 @@ const UserCard = (props) => {
                                         <div className='userCardFont'>{i.lose}</div>
                                     </div>
                                     <div className='userGameTotal'>
-                                        <div className='fontStyle'>最高连胜记录</div>
+                                        <div className='fontStyle'>{t(235)}</div>
                                         <div className='userCardFont'>{i.winContinued}</div>
                                     </div>
                                     <div>

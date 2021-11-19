@@ -264,4 +264,9 @@
     .NewsBox div:first-child {
         padding-left: 0px !important;
     }
+    .userInfoGame {
+        width: 150% !important;
+        position: relative;
+        left: -40px;
+    }
 }

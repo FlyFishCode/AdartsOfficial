@@ -233,5 +233,6 @@ const EN = {
     "232": 'Decline',
     "233": 'Request Time',
     "234": 'Shop Type',
+    "235": 'Highest winning streak',
 };
 export default EN;
