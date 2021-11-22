@@ -21,6 +21,7 @@ const AddFriends = () => {
   let columns1 = [
     {
       title: t(102),
+      width: 80,
       dataIndex: 'portrait',
       render: (text, row, index) => {
         return (
@@ -32,18 +33,22 @@ const AddFriends = () => {
     },
     {
       title: t(38),
+      width: 100,
       dataIndex: 'friendName',
     },
     {
       title: 'RT',
+      width: 80,
       dataIndex: 'rating',
     },
     {
       title: 'PPD',
+      width: 80,
       dataIndex: 'ppd',
     },
     {
       title: 'MPR',
+      width: 80,
       dataIndex: 'mpr',
     },
     {
@@ -53,8 +58,8 @@ const AddFriends = () => {
     },
     {
       title: t(95),
+      width: 80,
       dataIndex: 'value',
-      key: 'value',
       render: (text, row, index) => {
         return (
           <Button size='small' type="primary" onClick={() => handleAgreeClick(row)} >{t(231)}</Button>
@@ -76,18 +81,22 @@ const AddFriends = () => {
     },
     {
       title: t(38),
+      width: 100,
       dataIndex: 'friendName',
     },
     {
       title: 'RT',
+      width: 80,
       dataIndex: 'rating',
     },
     {
       title: 'PPD',
+      width: 80,
       dataIndex: 'ppd',
     },
     {
       title: 'MPR',
+      width: 80,
       dataIndex: 'mpr',
     },
     {
@@ -193,7 +202,7 @@ const AddFriends = () => {
         columns={columns1}
         rowKey='friendId'
         pagination={false}
-        scroll={{ x: 500, y: 650 }}
+        scroll={{ y: 650 }}
       /> : <Table
         dataSource={pendingPlayerList}
         columns={columns2}

@@ -101,6 +101,9 @@
     .userName {
         width: auto;
     }
+    .userCardBox {
+        height: 240px;
+    }
     .editorBox {
         width: 140px;
         height: 140px;
@@ -114,6 +117,7 @@
     }
     .cardStyleBox {
         width: auto;
+        height: 100%;
     }
     .myPage {
         width: auto;
@@ -123,6 +127,12 @@
     }
     .AdartsCardInfo {
         justify-content: center;
+    }
+    .AdartsCardBtnBox {
+        text-align: center;
+    }
+    .AdartsCardResultBox {
+        text-align: center;
     }
     .AdartsCardBtnBox :first-child {
         padding: 0;
@@ -268,5 +278,9 @@
         width: 150% !important;
         position: relative;
         left: -40px;
+    }
+    .AdartsCardAddBox {
+        display: grid;
+        grid-template-columns: 30% 70%;
     }
 }

@@ -42,7 +42,7 @@ const AdartsCardSetting = () => {
       if (res.data.code === 100) {
         message.info(res.data.msg)
         sessionStorage.setItem('websiteCardId', cardId)
-        getCardList()
+        getCardList();
       }
     })
   }
@@ -88,9 +88,9 @@ const AdartsCardSetting = () => {
               </div>
               <div className='AdartsCardLine'></div>
               <div className='AdartsCardResultBox'>
-                <div>{`Rating | ${i.rating}`}</div>
-                <div>{`PPD | ${i.ppd}`}</div>
-                <div>{`MPR | ${i.mpr}`}</div>
+                <div>{`Rating  ${i.rating}`}</div>
+                <div>{`PPD  ${i.ppd}`}</div>
+                <div>{`MPR  ${i.mpr}`}</div>
               </div>
             </div>
             <div className='AdartsCardBtnBox'>
@@ -102,7 +102,7 @@ const AdartsCardSetting = () => {
         )
       })}
       {cardList.length < 3 ?
-        <div className='AdartsCardBox'>
+        <div className='AdartsCardAddBox'>
           <div className='AdartsCardName'>{t(35)}：</div>
           <div className='AdartsCardAddCard'><Input onChange={(e) => setCardNo(e.target.value)} /></div>
           <div className='AdartsCardBtnBox'><Button type="primary" onClick={handleAddCrad}>{t(98)}</Button></div>
