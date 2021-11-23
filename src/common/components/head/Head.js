@@ -187,7 +187,7 @@ const Head = (prop) => {
           <Option value="jp">日语</Option>
         </Select>
       </Col>
-      <Col lg={2} xs={0}>
+      <Col lg={3} xs={0}>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
         {/* <div className='globalBox'><GlobalOutlined /></div> */}
       </Col>
