@@ -164,7 +164,7 @@ const ShopProp = () => {
             {myGift.length ? myGift.map(i => {
               return (
                 <div key={i.id} className='GiftItemBox'>
-                  <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
+                  <div><img src={i.itemPreviewImg} alt="" /></div>
                   <div>
                     <div className='GiftTitle'>
                       <div>[{0}G]</div>
@@ -192,7 +192,7 @@ const ShopProp = () => {
                 {VSX.length ? VSX.map(i => {
                   return (
                     <div key={i.id} className='GiftItemBox'>
-                      <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
+                      <div><img src={i.itemPreviewImg} alt="" /></div>
                       <div>
                         <div className='GiftTitle'>
                           <div>[{i.gold}G]</div>
@@ -222,7 +222,7 @@ const ShopProp = () => {
             {myGiftAsk.length ? myGiftAsk.map(i => {
               return (
                 <div key={i.id} className='GiftItemBox'>
-                  <div><img src={i.itemUrl.split(',')[0]} alt="" /></div>
+                  <div><img src={i.itemPreviewImg} alt="" /></div>
                   <div>
                     <div className='GiftTitle'>
                       <div>[{i.itemPrice}G]</div>

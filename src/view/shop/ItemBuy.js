@@ -132,7 +132,7 @@ const ItemBuy = () => {
         <div className='InfoDomGold'>{t(185)}  |  {infoObj.coin}</div>
         <div className='InfoDomInfo'>
           <div>{t(184)}</div>
-          <div><RenderUrlDom url={infoObj.url && infoObj.url} /></div>
+          <div><RenderUrlDom url={infoObj.previewImg && infoObj.previewImg} /></div>
           <div>{infoObj ? infoObj.title : ''}</div>
           <div>
             <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
@@ -267,7 +267,7 @@ const ItemBuy = () => {
                   {allList.length ? allList.map(item => {
                     return (
                       <div key={item.id} className='myListBox' onClick={(e) => handleClick(e, item.id)}>
-                        <div className='myListBoxImg'><RenderUrlDom url={item.url} /></div>
+                        <div className='myListBoxImg'><RenderUrlDom url={item.previewImg} /></div>
                         <div>{item.title}</div>
                         <div>{item.time}</div>
                       </div>

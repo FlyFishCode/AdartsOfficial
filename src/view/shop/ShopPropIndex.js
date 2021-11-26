@@ -40,7 +40,7 @@ const ShopPropIndex = () => {
           {recommendList.recommendItems.length ? recommendList.recommendItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(i.id)}>
-                <div><img src={i.url.split(',')[0]} alt="" /></div>
+                <div><img src={i.previewImg} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
@@ -54,7 +54,7 @@ const ShopPropIndex = () => {
           {recommendList.newItems.length ? recommendList.newItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(i.id)}>
-                <div><img src={i.url.split(',')[0]} alt="" /></div>
+                <div><img src={i.previewImg} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
@@ -68,7 +68,7 @@ const ShopPropIndex = () => {
           {recommendList.rankingItems.length ? recommendList.rankingItems.map(i => {
             return (
               <div key={i.id} onClick={() => handleClick(i.id)}>
-                <div><img src={i.url.split(',')[0]} alt="" /></div>
+                <div><img src={i.previewImg} alt="" /></div>
                 <div className='recommendBoxTitle'>{i.title}</div>
               </div>
             )
