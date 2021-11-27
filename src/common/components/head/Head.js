@@ -5,7 +5,7 @@ import { Col, Menu, message, Row, Select, Drawer, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
-import AMapLoader from '@amap/amap-jsapi-loader';
+// import AMapLoader from '@amap/amap-jsapi-loader';
 import { countryListHttp } from '@/api';
 
 
@@ -55,7 +55,7 @@ const Head = (prop) => {
   }
   // const useBrowserPosition = () => {
   //   const options = {
-  //     timeout: Infinity,
+  //     timeout: 3000,
   //     maximumAge: 0
   //   };
   //   const success = (pos) => {
@@ -70,55 +70,76 @@ const Head = (prop) => {
   //   navigator.geolocation.getCurrentPosition(success, error, options);
   // }
 
-  const initMap = () => {
-    AMapLoader.load({
-      "key": "8396072fe2f7969398aaea1c97e71e47",// 申请好的Web端开发者Key，首次调用 load 时必填
-      "version": "1.4.15",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
-      "plugins": ['AMap.Geolocation'],           // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-    }).then((AMap) => {
-      const mapObj = new AMap.Map('container');
-      mapObj.plugin('AMap.Geolocation', function () {
-        const geolocation = new AMap.Geolocation({
-          enableHighAccuracy: true,//是否使用高精度定位，默认:true
-        });
-        mapObj.addControl(geolocation);
-        geolocation.getCurrentPosition();
-        AMap.event.addListener(geolocation, 'complete', (data) => {
-          countryListHttp().then(res => {
-            const country = res.data.data.find(country => country.countryName === data.addressComponent.country);
-            sessionStorage.setItem('websiteCountryId', country.countryId);
-            console.log('当前位置为：', data.formattedAddress);
-            console.log('当前国家/地区CODE：', country.countryCode);
-            console.log('IP定位地址为：', data.addressComponent.country);
-            switch (country.countryCode) {
-              case "CN":
-                handleChange('jt')
-                break;
-              case "HK":
-                handleChange('ft')
-                break;
-              case "JP":
-                handleChange('jp')
-                break;
-              default:
-                handleChange('en')
-                break;
-            }
-          })
-        });//返回定位信息
-        AMap.event.addListener(geolocation, 'error', (err) => {
-          console.log(err);
-        });
-      });
-    }).catch(e => {
-      console.log(e);
+  // const initMap = () => {
+  //   AMapLoader.load({
+  //     "key": "8396072fe2f7969398aaea1c97e71e47",// 申请好的Web端开发者Key，首次调用 load 时必填
+  //     "version": "1.4.15",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+  //     "plugins": ['AMap.Geolocation'],           // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+  //   }).then((AMap) => {
+  //     const mapObj = new AMap.Map('container');
+  //     mapObj.plugin('AMap.Geolocation', function () {
+  //       const geolocation = new AMap.Geolocation({
+  //         enableHighAccuracy: true,//是否使用高精度定位，默认:true
+  //       });
+  //       mapObj.addControl(geolocation);
+  //       geolocation.getCurrentPosition();
+  //       AMap.event.addListener(geolocation, 'complete', (data) => {
+  //         countryListHttp().then(res => {
+  //           const country = res.data.data.find(country => country.countryName === data.addressComponent.country);
+  //           sessionStorage.setItem('websiteCountryId', country.countryId);
+  //           console.log('当前位置为：', data.formattedAddress);
+  //           console.log('当前国家/地区CODE：', country.countryCode);
+  //           console.log('IP定位地址为：', data.addressComponent.country);
+  //           switch (country.countryCode) {
+  //             case "CN":
+  //               handleChange('jt')
+  //               break;
+  //             case "HK":
+  //               handleChange('ft')
+  //               break;
+  //             case "JP":
+  //               handleChange('jp')
+  //               break;
+  //             default:
+  //               handleChange('en')
+  //               break;
+  //           }
+  //         })
+  //       });//返回定位信息
+  //       AMap.event.addListener(geolocation, 'error', (err) => {
+  //         console.log(err);
+  //       });
+  //     });
+  //   }).catch(e => {
+  //     console.log(e);
+  //   })
+  // }
+  const setCountry = () => {
+    const query = window.location.search.split('=')[1] || '';
+    countryListHttp().then(res => {
+      console.log(res.data.data);
+      let countryId = 0;
+      switch (query) {
+        case 'cn':
+          countryId = 208;
+          break;
+        case 'hk':
+          countryId = 19464;
+          break;
+        case 'en':
+          countryId = 617;
+          break;
+        default:
+          countryId = 17829;
+          break;
+      }
+      sessionStorage.setItem('websiteCountryId', countryId);
     })
   }
-
   useEffect(() => {
+    setCountry()
     // useBrowserPosition()
-    initMap()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // initMap()
   }, [])
   return (
     <Row className='headBox Mobile'>

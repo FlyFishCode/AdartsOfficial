@@ -23,7 +23,7 @@ const Language = {
 i18n
     .use(initReactI18next)
     .init({
-        fallbackLng: 'zh',
+        fallbackLng: 'en',
         lng: 'en',
         debug: true,
         resources: Language,
