@@ -96,7 +96,7 @@ const AddUser = () => {
                 data.email = data.inputValue;
                 data.emailCode = code
             } else {
-                data.phone = data.inputValue;
+                data.phone = `${countryCode}-${data.inputValue}`;
                 data.phoneCode = code
             }
             delete data.inputValue;

@@ -53,7 +53,7 @@ const Content = () => {
         <Col lg={2} xs={5} style={{ cursor: 'pointer' }} onClick={() => history.push('/Darts/DartsList')}>更多<PlusCircleOutlined /></Col>
       </Row>
       <Row className='dartsContentBox'>
-        {dartsList.map(i => {
+        {dartsList.length ? dartsList.map(i => {
           return (
             <div key={i.id} className='dartsContent' onClick={() => handleClick(i.id)}>
               <div><img src={i.thumbnail} alt="" /></div>
@@ -62,7 +62,9 @@ const Content = () => {
               <div className={`dartsInfoContent${i.id} dartsInfo`}>{render(i.id, i.contents)}</div>
             </div>
           )
-        })}
+        }) :
+          <div style={{ minHeight: '650px' }}></div>
+        }
       </Row>
     </div>
   )

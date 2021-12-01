@@ -57,10 +57,6 @@ const App = () => {
     const handleUserName = (value) => {
         setUserName(value)
     }
-    const getCount = () => {
-        const list = [2, 2, 2, 3, 3, 4, 5, 5, 5, 5, 5, 1];
-        return list[Math.floor(Math.random() * list.length)]
-    }
     const setCountry = () => {
         const query = window.location.search.split('=')[1] || '';
         countryListHttp().then(res => {
