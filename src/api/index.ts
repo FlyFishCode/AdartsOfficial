@@ -121,6 +121,7 @@ const indexUserCardListHttp = (data:any) =>{
 	return axios.post(getNewUrl(indexUserCardList, data))
 }
 const upLoadImgHttp = (data:any) =>{
+	data.append('path',1)
 	return axios.post(`${baseWebsite}${upLoadImg}`, data);
 }
 // 发送邮箱验证

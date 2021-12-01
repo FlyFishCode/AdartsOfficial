@@ -43,22 +43,51 @@ import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js';
 import Download from './view/other/download.js';
 
+import { countryListHttp } from '@/api';
+
+
 // import MobileTab from './common/components/MobileTbs';
 
 //hash nginx地址配置问题 https://www.cnblogs.com/BlueBerryCode/p/12358140.html  BrowserRouter -》HashRouter #
 
-
-
 const App = () => {
     const [userName, setUserName] = useState('');
+    // const [visible, setVisible] = useState(true);
     const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
     }
+    const getCount = () => {
+        const list = [2, 2, 2, 3, 3, 4, 5, 5, 5, 5, 5, 1];
+        return list[Math.floor(Math.random() * list.length)]
+    }
+    const setCountry = () => {
+        const query = window.location.search.split('=')[1] || '';
+        countryListHttp().then(res => {
+            let countryId = 0;
+            switch (query) {
+                case 'cn':
+                    countryId = 208;
+                    break;
+                case 'hk':
+                    countryId = 19464;
+                    break;
+                case 'en':
+                    countryId = 617;
+                    break;
+                default:
+                    countryId = 17829;
+                    break;
+            }
+            sessionStorage.setItem('websiteCountryId', countryId);
+        })
+    }
     useEffect(() => {
+        setCountry();
         if (currentUserName) {
             setUserName(currentUserName)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUserName])
     return (
         <BrowserRouter >

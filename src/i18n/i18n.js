@@ -6,7 +6,7 @@ import EN from './locales/zh-en';
 import JP from './locales/zh-jp';
 
 const Language = {
-    zh: {
+    jt: {
         translation: JT
     },
     ft: {
@@ -23,7 +23,7 @@ const Language = {
 i18n
     .use(initReactI18next)
     .init({
-        fallbackLng: 'en',
+        fallbackLng: 'jt',
         lng: 'en',
         debug: true,
         resources: Language,

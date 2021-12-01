@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
 // import AMapLoader from '@amap/amap-jsapi-loader';
-import { countryListHttp } from '@/api';
 
 
 const { SubMenu } = Menu;
@@ -114,32 +113,28 @@ const Head = (prop) => {
   //     console.log(e);
   //   })
   // }
-  const setCountry = () => {
+  const getLanguage = () => {
     const query = window.location.search.split('=')[1] || '';
-    countryListHttp().then(res => {
-      console.log(res.data.data);
-      let countryId = 0;
-      switch (query) {
-        case 'cn':
-          countryId = 208;
-          break;
-        case 'hk':
-          countryId = 19464;
-          break;
-        case 'en':
-          countryId = 617;
-          break;
-        default:
-          countryId = 17829;
-          break;
-      }
-      sessionStorage.setItem('websiteCountryId', countryId);
-    })
+    switch (query) {
+      case 'cn':
+        handleChange('jt');
+        break;
+      case 'hk':
+        handleChange('ft');
+        break;
+      case 'en':
+        handleChange('en');
+        break;
+      default:
+        handleChange('jp');
+        break;
+    }
   }
   useEffect(() => {
-    setCountry()
+    getLanguage()
     // useBrowserPosition()
     // initMap()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Row className='headBox Mobile'>

@@ -6,6 +6,10 @@
     font-weight: bold;
 }
 
+.dartsContentBox {
+    min-height: 650px;
+}
+
 .newsFirst {
     min-height: 150px;
 }
