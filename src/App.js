@@ -43,8 +43,6 @@ import AddUser from './common/components/head/loginBox/addUser.js';
 import DartsInfo from './view/darts/dartsInfo.js';
 import Download from './view/other/download.js';
 
-import { countryListHttp } from '@/api';
-
 
 // import MobileTab from './common/components/MobileTbs';
 
@@ -52,34 +50,15 @@ import { countryListHttp } from '@/api';
 
 const App = () => {
     const [userName, setUserName] = useState('');
-    // const [visible, setVisible] = useState(true);
+    const [countryId, setCountryId] = useState('');
     const currentUserName = sessionStorage.getItem('websiteUserName');
     const handleUserName = (value) => {
         setUserName(value)
     }
-    const setCountry = () => {
-        const query = window.location.search.split('=')[1] || '';
-        countryListHttp().then(res => {
-            let countryId = 0;
-            switch (query) {
-                case 'cn':
-                    countryId = 208;
-                    break;
-                case 'hk':
-                    countryId = 19464;
-                    break;
-                case 'en':
-                    countryId = 617;
-                    break;
-                default:
-                    countryId = 17829;
-                    break;
-            }
-            sessionStorage.setItem('websiteCountryId', countryId);
-        })
+    const handleChangeCountry = (id) => {
+        setCountryId(id);
     }
     useEffect(() => {
-        setCountry();
         if (currentUserName) {
             setUserName(currentUserName)
         }
@@ -88,11 +67,11 @@ const App = () => {
     return (
         <BrowserRouter >
             {/* <div className='containerBox'> */}
-            <Head userName={userName} loginOut={handleUserName} />
+            <Head userName={userName} handleCounty={handleChangeCountry} loginOut={handleUserName} />
             {/* {visible ? <div className='InWebDisplay'><MobileTab setVisibleFalse={setVisibleFalse} /></div> : null} */}
             <Switch>
                 <Route path='/' exact>
-                    <Container userName={userName} />
+                    <Container userName={userName} countryId={countryId} />
                 </Route>
                 <Route path='/News'>
                     <NewsPage />
@@ -152,26 +131,28 @@ const App = () => {
     );
 }
 
-const Container = ({ userName }) => {
+const Container = ({ userName, countryId }) => {
     return (
         <div>
-            <div><Banner /></div>
+            <div><Banner countryId={countryId} /></div>
             <div className='containerBox'>
                 {userName ? <UserCard /> : ''}
-                <News />
+                <News countryId={countryId} />
                 {/* <PlayerDes /> */}
-                <Activity />
+                <Activity countryId={countryId} />
                 <Video />
                 <Product />
             </div>
         </div>
     )
 }
-const Banner = () => {
+const Banner = ({ countryId }) => {
     let [bannerList, setBannerList] = useState([]);
     const getData = () => {
-        indexBannerListHttp({ countryId: sessionStorage.getItem('websiteCountryId') }).then(res => {
-            setBannerList(res.data.data);
+        indexBannerListHttp({ countryId }).then(res => {
+            if (res.data.code === 100) {
+                setBannerList(res.data.data);
+            }
         })
     }
     const PrevIcon = (props) => {
@@ -227,8 +208,11 @@ const Banner = () => {
         }
     }
     useEffect(() => {
-        getData();
-    }, [])
+        if (countryId) {
+            getData();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [countryId])
     return (
         <div onClick={handleClick} className='CarouselBox'>
             {bannerList.length > 1 ? <Carousel {...setting}>
@@ -251,7 +235,7 @@ const Banner = () => {
         </div>
     )
 }
-const News = () => {
+const News = ({ countryId }) => {
     const [newsList, setNewsList] = useState([]);
     const [shopList, setshopList] = useState([]);
     const [type, setType] = useState(0);
@@ -259,23 +243,27 @@ const News = () => {
     const history = useHistory();
     const getShopList = () => {
         const ShopData = {
-            countryId: sessionStorage.getItem('websiteCountryId'),
+            countryId,
             pageNum: 1,
             pageSize: 5
         }
         indexShopListHttp(ShopData).then(res => {
-            setshopList(res.data.data.list)
+            if (res.data.code === 100) {
+                setshopList(res.data.data.list)
+            }
         })
     }
     const getNewsList = (type) => {
         const NewsData = {
             category: type,
-            countryId: sessionStorage.getItem('websiteCountryId'),
+            countryId,
             pageNum: 1,
             pageSize: 4
         }
         indexNewsListHttp(NewsData).then(res => {
-            setNewsList(res.data.data.list)
+            if (res.data.code === 100) {
+                setNewsList(res.data.data.list);
+            }
         })
     };
     const handleNewsClick = (id) => {
@@ -317,13 +305,19 @@ const News = () => {
         }
     }
     useEffect(() => {
-        getShopList();
+        if (countryId) {
+            getShopList();
+        }
         return () => setshopList([]);
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [countryId])
     useEffect(() => {
-        getNewsList(type);
+        if (countryId) {
+            getNewsList(type);
+        }
         return () => setNewsList([]);
-    }, [type]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [type, countryId]);
     return (
         <div className='All'>
             <div className='AllLeft'>
@@ -475,7 +469,7 @@ const Product = () => {
         </div>
     )
 }
-const Activity = () => {
+const Activity = ({ countryId }) => {
     const { t } = useTranslation();
     const history = useHistory();
     const [list, setList] = useState([]);
@@ -489,7 +483,7 @@ const Activity = () => {
             title: '',
             month,
             year: new Date().getFullYear(),
-            countryId: sessionStorage.getItem('websiteCountryId')
+            countryId,
         };
         activityDateListHttp(obj).then(res => {
             const temp1 = res.data.data.activityList.map(i => {
@@ -512,8 +506,11 @@ const Activity = () => {
         });
     }
     useEffect(() => {
-        getDate();
-    }, [])
+        if (countryId) {
+            getDate();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [countryId])
     const getListData = (date) => {
         let [year, month, day] = [new Date(date._d).getFullYear(), new Date(date._d).getMonth() + 1, new Date(date._d).getDate()];
         if (month <= 9) {

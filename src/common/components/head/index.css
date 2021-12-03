@@ -100,3 +100,28 @@
 .MobileIcon {
     display: none;
 }
+
+.countryLanguageBox {
+    display: grid;
+    font-size: 18px;
+    grid-template-columns: repeat(5, 15%);
+    grid-column-gap: 6%;
+    grid-row-gap: 30px;
+    margin: 20px 0;
+}
+
+.countryLanguage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.currentSelect {
+    color: #fff;
+    background: red;
+}
+
+.countryLanguageModal {
+    width: 1000px;
+}

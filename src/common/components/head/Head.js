@@ -1,27 +1,26 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import { UnorderedListOutlined, LoginOutlined } from '@ant-design/icons';
-import { Col, Menu, message, Row, Select, Drawer, Button } from 'antd';
+import { UnorderedListOutlined, LoginOutlined, GlobalOutlined } from '@ant-design/icons';
+import { Col, Menu, message, Row, Drawer, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import logo from '@/assets/img/logo.png';
 import LoginBtn from './LoginBtn';
+import CountryLanguage from '../Country&Language'
 // import AMapLoader from '@amap/amap-jsapi-loader';
 
 
 const { SubMenu } = Menu;
-const { Option } = Select;
 
 
 const Head = (prop) => {
-  const { userName, loginOut } = prop;
-  const [language, setLanguage] = useState('en');
+  const { userName, loginOut, handleCounty } = prop;
   const [visible, setVisible] = useState(false);
+  const [CLVisible, setCLVisible] = useState(false);
   const history = useHistory();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const handleLoginOut = () => {
     setVisible(false);
     history.push('/');
-    // setVisibleFalse();
     loginOut();
   }
   const handlePushClick = (value) => {
@@ -32,24 +31,17 @@ const Head = (prop) => {
       message.info(t(130));
       history.push('/login');
     }
-    // setVisibleTrue();
     setVisible(false);
   }
   const handleMobilePush = (value) => {
     history.push(value);
-    // setVisibleTrue();
     setVisible(false);
-  }
-  const handleChange = (value) => {
-    setLanguage(value);
-    i18n.changeLanguage(value);
   }
   const handleMobileLoginClick = () => {
     setVisible(false);
     history.push('/login');
   }
   const handlImgClick = () => {
-    // setVisibleFalse();
     history.push('/')
   }
   // const useBrowserPosition = () => {
@@ -113,28 +105,9 @@ const Head = (prop) => {
   //     console.log(e);
   //   })
   // }
-  const getLanguage = () => {
-    const query = window.location.search.split('=')[1] || '';
-    switch (query) {
-      case 'cn':
-        handleChange('jt');
-        break;
-      case 'hk':
-        handleChange('ft');
-        break;
-      case 'en':
-        handleChange('en');
-        break;
-      default:
-        handleChange('jp');
-        break;
-    }
-  }
   useEffect(() => {
-    getLanguage()
     // useBrowserPosition()
     // initMap()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Row className='headBox Mobile'>
@@ -191,22 +164,11 @@ const Head = (prop) => {
       <Col lg={13} xs={13}>
         <div className='logoBox' onClick={handlImgClick}><img src={logo} alt="logo" /></div>
       </Col>
-      <Col lg={2} xs={0}>{t(32)}</Col>
-      <Col lg={2} xs={6} className='languageBox'>
-        <Select value={language} size='small' style={{ width: '100%' }} onChange={handleChange}>
-          {/* <Option value="jt">{t(1)}</Option>
-            <Option value="ft">{t(2)}</Option>
-            <Option value="en">{t(3)}</Option> */}
-          <Option value="jt">简体中文</Option>
-          <Option value="ft">繁体中文</Option>
-          <Option value="en">英文</Option>
-          <Option value="jp">日语</Option>
-        </Select>
-      </Col>
+      <Col lg={2} xs={6}><div className='globalBox' onClick={() => setCLVisible(true)}><GlobalOutlined /></div></Col>
       <Col lg={3} xs={0}>
         <LoginBtn userName={userName} loginOut={handleLoginOut} />
-        {/* <div className='globalBox'><GlobalOutlined /></div> */}
       </Col>
+      <CountryLanguage visible={CLVisible} handleCounty={(id) => handleCounty(id)} onClick={() => setCLVisible(false)} />
       {/* 定位DOM节点 */}
       <div id="container" style={{ height: '10px', width: '1px', visibility: 'hidden' }}></div>
       {/* 移动端抽屉组件 */}

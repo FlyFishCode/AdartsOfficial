@@ -283,4 +283,11 @@
         display: grid;
         grid-template-columns: 30% 70%;
     }
+    .countryLanguageModal {
+        width: 100% !important;
+    }
+    .countryLanguageBox {
+        grid-template-columns: repeat(2, 48%) !important;
+        grid-column-gap: 4% !important;
+    }
 }
