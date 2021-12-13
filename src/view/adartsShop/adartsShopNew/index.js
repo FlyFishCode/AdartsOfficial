@@ -22,7 +22,7 @@ const AdartsShopNew = () => {
   const getCountryList = () => {
     countryListHttp().then(res => {
       setCountryList(res.data.data)
-      setCountryId(res.data.data[0].countryId)
+      setCountryId(Number(sessionStorage.getItem('websiteCountryId')))
     })
   }
   const getNewShopList = (countryId, pageNum) => {

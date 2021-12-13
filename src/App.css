@@ -219,7 +219,7 @@
 .AllRight .Allcontainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 600px;
     border: 1px solid #eee;
     padding: 10px;
